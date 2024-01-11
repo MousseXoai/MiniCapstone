@@ -16,16 +16,18 @@ public class Shop {
     private String avatar;
     private Date dateThamGia;
     private String address;
+    private String proof;
 
     public Shop() {
     }
 
-    public Shop(int shopId, String shopName, String avatar, Date dateThamGia, String address) {
+    public Shop(int shopId, String shopName, String avatar, Date dateThamGia, String address, String proof) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.avatar = avatar;
         this.dateThamGia = dateThamGia;
         this.address = address;
+        this.proof = proof;
     }
 
     public int getShopId() {
@@ -68,6 +70,13 @@ public class Shop {
         this.address = address;
     }
 
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
     
-    
+
 }
