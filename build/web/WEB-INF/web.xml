@@ -60,6 +60,10 @@
         <servlet-name>AddWishListControl</servlet-name>
         <servlet-class>controller.AddWishListControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartControl</servlet-name>
+        <servlet-class>controller.CartControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
         <url-pattern>/blog</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>AddWishListControl</servlet-name>
         <url-pattern>/addWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartControl</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
