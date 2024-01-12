@@ -3,6 +3,7 @@
     Created on : Jan 12, 2024, 3:42:19 PM
     Author     : Tosaka
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -147,30 +148,36 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>                               
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img src="img/shop-cart/cp-4.jpg" alt="">
+                            <tbody>                                     
+                                <c:forEach items="${listcart}" var="itemC">    
+                                    <c:forEach items="${listsanpham}" var="itemSP">
+                                        <c:if test="${itemC.getProductID() == itemSP.getId()}">
+                                        <tr>
+                                        <td class="cart__product__item d-flex align-items-center">
+                                        <img src="${itemSP.getImage()}" alt="" style="max-width: 25%; height: auto;">
                                         <div class="cart__product__item__title">
-                                            <h6>Cotton Shirt</h6>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                            <h6>${itemSP.getName()}</h6>                                        
                                         </div>
-                                    </td>
-                                    <td class="cart__price">$ 55.0</td>
-                                    <td class="cart__quantity">
+                                        </td>
+                                        <td class="cart__price">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </td>
+                                        <td class="cart__quantity">                                               
                                         <div class="pro-qty">
-                                            <input type="text" value="1">
+                                            <input type="text" value="${itemC.getAmount()}">
                                         </div>
-                                    </td>
-                                    <td class="cart__total">$ 110.0</td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
+                                        </td>
+                                        <td class="cart__total">
+                                        <!-- Format the total using fmt:formatNumber -->
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </td>
+                                        <td class="cart__close"><span class="icon_close"></span></td>
+                                        </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -186,8 +193,19 @@
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 750.0</span></li>
-                            <li>Total <span>$ 750.0</span></li>
+                            <li>Subtotal
+                                <span>
+                                    <fmt:setLocale value="vi_VN"/>
+                                    <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>
+                                </span>
+                            </li>
+                            <li>Shipping <span>Freeship</span></li>
+                            <li>Total
+                                <span>
+                                    <fmt:setLocale value="vi_VN"/>
+                                    <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>
+                                </span>
+                            </li>
                         </ul>
                         <a href="#" class="primary-btn">Proceed to checkout</a>
                     </div>

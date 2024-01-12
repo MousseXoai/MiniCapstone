@@ -43,12 +43,6 @@
             <b>Profile Photo</b>
             </div>
         </div>
-        <div class="d-flex align-items-start py-3 border-bottom">
-        <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt="">
-            <div class="pl-sm-4 pl-2" id="img-section">
-            <b>Profile Photo</b>
-            </div>
-        </div>
     </div>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

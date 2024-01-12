@@ -804,4 +804,75 @@ public class DAO extends DBContext{
         }
     }
     
+    //get product in cart by account
+    public ArrayList<Cart> getProductInCartByAccId(int accountID){
+        ArrayList<Cart> list = new ArrayList<Cart>();
+        try {
+            String strSQL = "select * from Cart where accountID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int accountid = rs.getInt(1);
+                int productid = rs.getInt(2);
+                int amount = rs.getInt(3);
+
+                Cart p = new Cart(accountid, productid, amount);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getProductInCartById: " + e.getMessage());
+        }
+        return list;
+    }
+    
+    //get all product
+    public ArrayList<SanPham> getAllProduct(){
+        ArrayList<SanPham> list = new ArrayList<SanPham>();
+        try {
+            String strSQL = "select * from SanPham ";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String image = rs.getString(3);
+                double price = rs.getDouble(4);
+                int quantity = rs.getInt(5);  
+                String title = rs.getString(6);
+                String description = rs.getString(7);
+                int cateID = rs.getInt(8);
+                int branID = rs.getInt(9);
+                String color = rs.getString(10);
+                String image2 = rs.getString(11);
+                String image3 = rs.getString(12);
+                String image4 = rs.getString(13);
+                int shopID = rs.getInt(14);
+                int sale = rs.getInt(15);
+                int trangthai = rs.getInt(16);
+
+                SanPham p = new SanPham(id, name, image, price, quantity, title, description, cateID, branID, color, image2, image3, image4, shopID, sale, trangthai);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllProduct: " + e.getMessage());
+        }
+        return list;
+    }
+    
+    public double getTotalPrice(int accountID){
+        double total = 0;
+        try {
+            String strSQL = "select SUM(price*amount) as total from Cart as c join SanPham as sp on sp.id = c.productID where c.accountID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               total = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getTotalPrice: " + e.getMessage());
+        }      
+        return total;
+    }
 }

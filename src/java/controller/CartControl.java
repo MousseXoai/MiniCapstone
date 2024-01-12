@@ -5,12 +5,16 @@
 
 package controller;
 
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Cart;
+import model.SanPham;
 
 /**
  *
@@ -53,7 +57,17 @@ public class CartControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("Cart.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            DAO dao = new DAO();
+            ArrayList<Cart> list = dao.getProductInCartByAccId(2);
+            ArrayList<SanPham> listSP = dao.getAllProduct();
+            Double totalPrice = dao.getTotalPrice(2);
+            request.setAttribute("listcart", list);
+            request.setAttribute("listsanpham", listSP);
+            request.setAttribute("totalprice", totalPrice);
+            request.getRequestDispatcher("Cart.jsp").forward(request, response);
+        }
     } 
 
     /** 
