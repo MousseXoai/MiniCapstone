@@ -12,6 +12,7 @@ public class Account {
     private int uID;
     private String user;
     private String pass;
+    private String email;
     private int isSell;
     private int isAdmin;
     private int isCheck;
