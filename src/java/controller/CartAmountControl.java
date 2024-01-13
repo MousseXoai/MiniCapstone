@@ -65,8 +65,6 @@ public class CartAmountControl extends HttpServlet {
         DAO dao = new DAO();
 
         Cart c = dao.getAmountProductIdInCart(productid);
-        
-        System.out.println(c.getAmount());
 
         if (num == -1) {
             if (c.getAmount() <= 1) {
@@ -78,10 +76,13 @@ public class CartAmountControl extends HttpServlet {
 
         if (num == 1) {
             SanPham sp = dao.getProductByID(String.valueOf(productid));
-            System.out.println(sp.getQuantity());
             if (c.getAmount() < sp.getQuantity()) {
                 dao.updateIncrease(productid, 2);
             }
+        }
+        
+        if(num == 0){
+            dao.removeProductIdInCart(productid, 2);
         }
 
         response.sendRedirect("cart");

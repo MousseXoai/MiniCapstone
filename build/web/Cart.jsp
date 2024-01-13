@@ -166,16 +166,16 @@
                                         </td>
                                         <td class="cart__quantity">                                               
                                         <div class="quantity-control-cart">
-                                        <button><a href="cartamount?num=-1&productID=${itemC.getProductID()}">-</a></button>
+                                        <a href="cartamount?num=-1&productID=${itemC.getProductID()}"><button>-</button></a>
                                         <input type="text" class="quantityInput-cart" value="${itemC.getAmount()}" readonly>
-                                        <button><a href="cartamount?num=1&productID=${itemC.getProductID()}">+</a></button>
+                                        <a href="cartamount?num=1&productID=${itemC.getProductID()}"><button>+</button></a>
                                         </div>
                                         </td>
                                         <td class="cart__total">
                                         <fmt:setLocale value="vi_VN"/>
                                         <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()}" currencySymbol="₫"/>
                                         </td>
-                                        <td class="cart__close"><span class="icon_close"></span></td>
+                                        <td class="cart__close"><a href="cartamount?num=0&productID=${itemC.getProductID()}"><span class="icon_close"></span></a></td>
                                         </tr>
                                         </c:if>
                                     </c:forEach>
