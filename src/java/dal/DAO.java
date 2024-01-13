@@ -826,6 +826,27 @@ public class DAO extends DBContext{
         return list;
     }
     
+    //get a cart by productid
+    public Cart getAmountProductIdInCart(int productID){
+        try {
+            String strSQL = "select * from Cart where productID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, productID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int accountid = rs.getInt(1);
+                int productid = rs.getInt(2);
+                int amount = rs.getInt(3);
+
+                Cart p = new Cart(accountid, productid, amount);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getProductInCartById: " + e.getMessage());
+        }
+        return null;
+    }
+    
     //get all product
     public ArrayList<SanPham> getAllProduct(){
         ArrayList<SanPham> list = new ArrayList<SanPham>();
@@ -860,6 +881,7 @@ public class DAO extends DBContext{
         return list;
     }
     
+    //get total price in cart by accountID
     public double getTotalPrice(int accountID){
         double total = 0;
         try {
@@ -874,5 +896,38 @@ public class DAO extends DBContext{
             System.out.println("getTotalPrice: " + e.getMessage());
         }      
         return total;
+    }
+    
+    public void removeProductIdInCart(int productID, int accountID){
+        String query = "delete from Cart where productID = ? and accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productID);
+            ps.setInt(2, accountID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void updateDecrease(int productID, int accountID) {
+        String query = "update Cart set amount = amount - 1 where productID = ? and accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productID);     
+            ps.setInt(2, accountID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    } 
+    
+    public void updateIncrease(int productID, int accountID) {
+        String query = "update Cart set amount = amount + 1 where productID = ? and accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productID);     
+            ps.setInt(2, accountID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 }

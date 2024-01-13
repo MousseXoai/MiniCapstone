@@ -12,7 +12,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import model.Cart;
 import model.SanPham;
 
@@ -20,7 +19,7 @@ import model.SanPham;
  *
  * @author Tosaka
  */
-public class CartControl extends HttpServlet {
+public class CartAmountControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +36,10 @@ public class CartControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartControl</title>");  
+            out.println("<title>Servlet CartAmountControl</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartControl at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CartAmountControl at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,16 +58,34 @@ public class CartControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            
-            DAO dao = new DAO();           
-          
-            ArrayList<Cart> list = dao.getProductInCartByAccId(2);
-            ArrayList<SanPham> listSP = dao.getAllProduct();
-            Double totalPrice = dao.getTotalPrice(2);
-            request.setAttribute("listcart", list);
-            request.setAttribute("listsanpham", listSP);
-            request.setAttribute("totalprice", totalPrice);
-            request.getRequestDispatcher("Cart.jsp").forward(request, response);
+        int productid = Integer.parseInt(request.getParameter("productID"));
+        int num = Integer.parseInt(request.getParameter("num"));
+        System.out.println(productid);
+        System.out.println(num);
+        DAO dao = new DAO();
+
+        Cart c = dao.getAmountProductIdInCart(productid);
+        
+        System.out.println(c.getAmount());
+
+        if (num == -1) {
+            if (c.getAmount() <= 1) {
+                dao.removeProductIdInCart(productid, 2);
+            } else {
+                dao.updateDecrease(productid, 2);
+            }
+        }
+
+        if (num == 1) {
+            SanPham sp = dao.getProductByID(String.valueOf(productid));
+            System.out.println(sp.getQuantity());
+            if (c.getAmount() < sp.getQuantity()) {
+                dao.updateIncrease(productid, 2);
+            }
+        }
+
+        response.sendRedirect("cart");
+        
         }
     } 
 
@@ -82,7 +99,7 @@ public class CartControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 
