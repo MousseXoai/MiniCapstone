@@ -21,15 +21,18 @@ public class Account {
     public Account() {
     }
 
-    public Account(int uID, String user, String pass, int isSell, int isAdmin, int isCheck, int isShip) {
+    public Account(int uID, String user, String pass, String email, int isSell, int isAdmin, int isCheck, int isShip) {
         this.uID = uID;
         this.user = user;
         this.pass = pass;
+        this.email = email;
         this.isSell = isSell;
         this.isAdmin = isAdmin;
         this.isCheck = isCheck;
         this.isShip = isShip;
     }
+
+    
 
     public int getuID() {
         return uID;
@@ -55,6 +58,14 @@ public class Account {
         this.pass = pass;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public int getIsSell() {
         return isSell;
     }

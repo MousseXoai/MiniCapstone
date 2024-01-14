@@ -72,18 +72,18 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String u = request.getParameter("username");
+        String u = request.getParameter("user");
         String p = request.getParameter("pass");
         DAO d = new DAO();
         Account a = d.check(u, p);
         if (a == null) {
-            request.setAttribute("ms", "username or password invalid!!! ");
+            request.setAttribute("errorMessage", "username or password invalid! ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
 //co roi
             HttpSession session = request.getSession();
             session.setAttribute("account", a);
-            response.sendRedirect("list");
+            response.sendRedirect("home");
             
         }
     }

@@ -6,6 +6,7 @@
 package controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Constants;
 import model.UserGoogleDto;
 import org.apache.http.client.ClientProtocolException;
@@ -38,9 +40,12 @@ public class LoginGoogleHandler extends HttpServlet {
 		String code = request.getParameter("code");
 		String accessToken = getToken(code);
 		UserGoogleDto user = getUserInfo(accessToken);
-                System.out.println(user.name);
-                PrintWriter out = response.getWriter();
-                out.println(user.name);
+                HttpSession session = request.getSession();
+                DAO d = new DAO();
+                d.addGoogleAccount(user);
+                System.out.println(user);
+                session.setAttribute("account", user);
+                response.sendRedirect("home");
 	}
 
 	public static String getToken(String code) throws ClientProtocolException, IOException {
