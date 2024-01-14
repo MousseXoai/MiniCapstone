@@ -68,6 +68,14 @@
         <servlet-name>CartAmountControl</servlet-name>
         <servlet-class>controller.CartAmountControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerInfoControl</servlet-name>
+        <servlet-class>controller.CustomerInfoControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomerInfoControl</servlet-name>
+        <servlet-class>controller.EditCustomerInfoControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
         <url-pattern>/blog</url-pattern>
@@ -135,6 +143,14 @@
     <servlet-mapping>
         <servlet-name>CartAmountControl</servlet-name>
         <url-pattern>/cartamount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerInfoControl</servlet-name>
+        <url-pattern>/customerinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomerInfoControl</servlet-name>
+        <url-pattern>/editcustomerinfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

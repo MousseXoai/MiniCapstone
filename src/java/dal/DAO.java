@@ -930,4 +930,41 @@ public class DAO extends DBContext{
         } catch (Exception e) {
         }
     }
+    
+    public AccInfo getAccInfo(int uID){
+        try {
+            String strSQL = "select * from AccInfo where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, uID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int uid = rs.getInt(1);
+                String name = rs.getString(2);
+                String avatar = rs.getString(3);
+                String address = rs.getString(4);
+                String phonenumber = rs.getString(5);
+                String email = rs.getString(6);
+                Double tongchitieu = rs.getDouble(7);
+                AccInfo p = new AccInfo(uid, name, avatar, address, phonenumber,email, tongchitieu);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+    public void editAccInfo(String name, String address, String phonenumber, String email, int uID){
+        try {
+            String strSQL = "update AccInfo set name = ?, address = ?, phonenumber = ?, email = ? where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, phonenumber);
+            ps.setString(4, email);
+            ps.setInt(5, uID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("editAccInfo: " + e.getMessage());
+        }
+    }
 }
