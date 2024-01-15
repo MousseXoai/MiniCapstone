@@ -38,12 +38,14 @@ public class LoginGoogleHandler extends HttpServlet {
 			throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
 		String code = request.getParameter("code");
+                DAO d = new DAO();
+                HttpSession session = request.getSession();
 		String accessToken = getToken(code);
 		UserGoogleDto user = getUserInfo(accessToken);
-                HttpSession session = request.getSession();
-                DAO d = new DAO();
+                
                 d.addGoogleAccount(user);
-                System.out.println(user);
+                //System.out.println(user);
+                System.out.println(user.name);
                 session.setAttribute("account", user);
                 response.sendRedirect("home");
 	}

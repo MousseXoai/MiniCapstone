@@ -76,6 +76,7 @@ public class Login extends HttpServlet {
         String p = request.getParameter("pass");
         DAO d = new DAO();
         Account a = d.check(u, p);
+        
         if (a == null) {
             request.setAttribute("errorMessage", "username or password invalid! ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
