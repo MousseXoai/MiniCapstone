@@ -4,16 +4,18 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="description" content="Ashion Template">
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ashion | Template</title>
+    <title>Shop</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -21,6 +23,7 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
+    
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -31,88 +34,12 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
-
+<body onload="loadAmountCart(); loadAmountWishList()">
+    
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Men</a></li>
-                            <li class="active"><a href="shop">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    
+        <jsp:include page="Menu.jsp"></jsp:include>
+    
     <!-- Header Section End -->
 
     <!-- Breadcrumb Begin -->
@@ -167,7 +94,7 @@
                                     <div class="accordion" id="accordionExample">
                                         <div class="card">
                                             
-                                            <a style="color: black; font-weight: bolder" href="searchCate?cid=${c.cid}">${c.cname}</a>
+                                            <a style="color: black; font-family: serif; font-size: 18px; "  href="searchCate?cid=${c.cid}">${c.cname}</a>
                                             
                                             
                                         </div>
@@ -184,7 +111,7 @@
                                     <div class="accordion" id="accordionExample">
                                         <div class="card">
                                             
-                                            <a style="color: black; font-weight: bolder" href="searchBran?bid=${b.bid}">${b.bname}</a>
+                                            <a style="color: black; font-family: serif; font-size: 18px; " href="searchBran?bid=${b.bid}">${b.bname}</a>
                                             
                                             
                                         </div>
@@ -196,17 +123,15 @@
                                 <h4>Shop by price</h4>
                             </div>
                             <div>
-                                 <a style="color: black; font-weight: bolder" href="searchPriceUnder100">Under
-                                        1000000 VND</a>
+                                 <a style="color: black; font-family: serif; font-size: 18px; " href="searchPriceUnder100">Under 10 Milions</a>
                             </div>
                             <br>
                             <div>
-                                 <a style="color: black; font-weight: bolder" href="searchPrice100To200">1000000 VND to
-                                        2000000 VND</a>
+                                 <a style="color: black; font-family: serif; font-size: 18px; " href="searchPrice100To200">10 Milions to 20 Milions</a>
                             </div>
                             <br>
                             <div>
-                                 <a style="color: black; font-weight: bolder" href="searchPriceAbove200">Above 2000000 VND 
+                                 <a style="color: black; font-family: serif; font-size: 18px; " href="searchPriceAbove200">Above 20 Milions
                                         </a>
                             </div>
                                 
@@ -220,12 +145,12 @@
                                     <div class="d-flex align-items-center mt-4 pb-1">
                                         <div class="md-form md-outline my-0">
                                             <input  name="priceMin" type="text" class="form-control mb-0">
-                                            <label for="priceMin">VND Min</label>
+                                            <label for="priceMin"> Min</label>
                                         </div>
                                         <p class="px-2 mb-0 text-muted"> - </p>
                                         <div class="md-form md-outline my-0">
                                             <input  name="priceMax" type="text" class="form-control mb-0">
-                                            <label for="priceMax">VND Max</label>
+                                            <label for="priceMax"> Max</label>
                                         </div>
                                     </div>
                                     <input type="submit" value="Search">
@@ -240,7 +165,7 @@
                             <div class="size__list color__list">
                                 <c:forEach items="${listColor}" var="co">
                                     <div>
-                                        <a style="color: black; font-weight: bolder" href="searchColor?color=${co.color}">${co.color}</a>
+                                        <a style="color: black; font-family: serif; font-size: 18px; " href="searchColor?color=${co.color}">${co.color}</a>
                                     </div>                                
                                 </c:forEach>   
                             </div>
@@ -275,12 +200,12 @@
                                         
                                         <ul class="product__hover">
                                             <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                            <li><a href="addWishList?pid=${p.id}"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="addCart?pid=${p.id}&&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="productDetail?pid=${p.id}">${p.name}</a></h6>
+                                        <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
                                         <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">
@@ -291,29 +216,36 @@
                                             </c:forEach>
                                             
                                         </div>
-                                        <div class="product__price">VND ${p.price}</div>
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:setBundle basename="path.to.your.resource.bundle" />
+                                        <c:if test="${p.sale==0}">
+                                        <div class="product__details__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__details__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
                         <c:if test="${tag!=null}">
-                            
-                        </c:if>
-                        <div class="col-lg-12 text-center">
+                            <div class="col-lg-12 text-center">
                             <div class="pagination__option">
-                                <ul class="pagination pagination-circle justify-content-center float-md-right mb-0">
+                                <ul class="pagination justify-content-center float-md-right mb-0">
                                             <c:if test="${tag != 1}">
-                                                <li class="page-item"><a href="shop?index=${tag-1 }" class="page-link"><i class="fas fa-chevron-left"></i></a></li>
+                                                <li class="page-item"><a href="shop?index=${tag-1 }" class="page-link"><i class="fa fa-chevron-left"></i></a></li>
                                                     </c:if> 
                                                     <c:forEach begin="1" end="${endPage }" var="i">
                                                 <li class="${tag==i?"page-item active":"page-item" }"><a href="shop?index=${i }" class="page-link">${i }</a></li>
                                                 </c:forEach>
                                                 <c:if test="${tag != endPage}">
-                                                <li class="page-item"><a href="shop?index=${tag+1 }" class="page-link"><i class="fas fa-chevron-right"></i></a></li>
+                                                <li class="page-item"><a href="shop?index=${tag+1 }" class="page-link"><i class="fa fa-chevron-right"></i></a></li>
                                                     </c:if> 
                                         </ul>
                             </div>
                         </div>
+                        </c:if>
+                        
                     </div>
                 </div>
             
@@ -322,144 +254,16 @@
     <!-- Shop Section End -->
 
     <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+        <jsp:include page="Footer.jsp"></jsp:include>
+    
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
+   
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -473,6 +277,33 @@
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
     
         
 </body>
