@@ -86,7 +86,7 @@ body {
 					<div class="card-footer">
 						<button class="btn btn-success" type="submit">Get New
 							Password</button>
-						<button class="btn btn-danger" type="submit">Back to
+                                            <button class="btn btn-danger" onclick="backToLogin()">Back to
 							Login</button>
 					</div>
 				</form>
@@ -98,5 +98,10 @@ body {
 	<script type='text/javascript' src=''></script>
 	<script type='text/javascript' src=''></script>
 	<script type='text/Javascript'></script>
+        <script>
+            function backToLogin(){
+                window.location.href = 'login.jsp';
+            }
+        </script>
 </body>
 </html>

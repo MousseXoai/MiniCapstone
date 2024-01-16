@@ -54,7 +54,7 @@ public class DAO extends DBContext {
     }
 
     public void addGoogleAccount(UserGoogleDto user) {
-        MD5 md = new MD5();
+        
         String sql = "INSERT INTO [dbo].[Account]\n"
                 + "           ([user]\n"
                 + "           ,[pass]\n"
