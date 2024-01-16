@@ -796,6 +796,7 @@ ol {
 	justify-content: center;
 	position: relative;
 	z-index: 1;
+        background-size: 250px;
 }
 
 .instagram__item:hover:after {
