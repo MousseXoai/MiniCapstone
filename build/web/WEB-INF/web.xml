@@ -76,6 +76,14 @@
         <servlet-name>EditCustomerInfoControl</servlet-name>
         <servlet-class>controller.EditCustomerInfoControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerOrderControl</servlet-name>
+        <servlet-class>controller.CustomerOrderControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerOrderDetailControl</servlet-name>
+        <servlet-class>controller.CustomerOrderDetailControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
         <url-pattern>/blog</url-pattern>
@@ -151,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>EditCustomerInfoControl</servlet-name>
         <url-pattern>/editcustomerinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerOrderControl</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerOrderDetailControl</servlet-name>
+        <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -87,7 +87,9 @@
                     <p>View your order</p>
                 </div>
                 <div class="ml-auto">
-                    <button class="btn danger">Order history</button>
+                    <form action="order" method="post">
+                        <button type="submit" class="btn danger">Order history</button>
+                    </form>
                 </div>
             </div>
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">

@@ -3,7 +3,7 @@
     Created on : Jan 12, 2024, 5:20:50 PM
     Author     : Tosaka
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,12 +38,58 @@
     <div class="wrapper bg-white mt-sm-5">
     <h4 class="pb-4 border-bottom">Order history</h4>
         <div class="d-flex align-items-start py-3 border-bottom">
-        <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt="">
+        <img src="${acc.getAvatar()}" class="img" alt="">
             <div class="pl-sm-4 pl-2" id="img-section">
-            <b>Profile Photo</b>
+            <b>${acc.getName()}</b>
+            <p>${acc.getEmail()}</p>
+            <p>${acc.getAddress()}</p>
             </div>
         </div>
+         <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>MaHD</th>
+                        <th>Product</th>
+                         <th>Order Date</th>						
+                        <th>Status</th>						
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listHD}" var="listHD">                          
+                    <tr>
+                        <td>${listHD.getMaHD()}</td>
+                        <td>
+                            <c:forEach items="${listOL}" var="listOL"> 
+                                <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
+                                    <c:forEach items="${listSP}" var="listSP">
+                                        <c:if test="${listSP.getId() == listOL.getProductID()}">
+                                            <img style="max-width: 25%; height: auto;" src="${listSP.getImage()}" class="avatar">${listSP.getName()}
+                                        </c:if>
+                                    </c:forEach>                                   
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                        <td>${listHD.getNgayXuat()}</td>                        
+                        <td><span class="status text-success">&bull;</span>    
+                            <c:forEach items="${listTT}" var="listTT">  
+                                <c:if test="${listHD.getTrangThaiId() == listTT.getTrangThaiId()}">
+                                    ${listTT.getTrangThai()}  
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                        <td>
+                            <fmt:setLocale value="vi_VN"/>
+                            <fmt:formatNumber type="currency" value="${listHD.getTongGia()}" currencySymbol="₫"/>
+                        </td>
+                        <td><a href="orderdetail" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
+                    </tr> 
+                    </c:forEach>
+                </tbody>
+            </table>
     </div>
+    
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.AccInfo;
 import model.Account;
@@ -14,10 +15,13 @@ import model.Blog;
 import model.Brand;
 import model.Cart;
 import model.Color;
+import model.HoaDon;
 import model.NhanXet;
+import model.OrderLine;
 import model.PhanLoai;
 import model.SanPham;
 import model.Star;
+import model.TrangThai;
 import model.WishList;
 
 /**
@@ -967,4 +971,70 @@ public class DAO extends DBContext{
             System.out.println("editAccInfo: " + e.getMessage());
         }
     }
+    
+    public ArrayList<HoaDon> getAllHoaDon(int accountID){
+        ArrayList<HoaDon> list = new ArrayList<HoaDon>();
+        try {
+            String strSQL = "select * from HoaDon where accountID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int mahd = rs.getInt(1);
+                int accountid = rs.getInt(2);
+                double tonggia = rs.getDouble(3);
+                Date ngayxuat = rs.getDate(4);  
+                int trangthai = rs.getInt(5);
+                
+                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllHoaDon: " + e.getMessage());
+        }
+        return list;
+    }
+    
+    public ArrayList<OrderLine> getAllOrderLine(){
+        ArrayList<OrderLine> list = new ArrayList<OrderLine>();
+        try {
+            String strSQL = "select * from OrderLine ";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int invoiceid = rs.getInt(1);
+                int productid = rs.getInt(2);
+                float price = rs.getFloat(3);
+                int quantity = rs.getInt(4);
+
+                OrderLine p = new OrderLine(invoiceid, productid, price, quantity);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllOrderLine: " + e.getMessage());
+        }
+        return list;
+    }
+    
+    public ArrayList<TrangThai> getAllTrangThai(){
+        ArrayList<TrangThai> list = new ArrayList<TrangThai>();
+        try {
+            String strSQL = "select * from TrangThai ";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int trangthaiid = rs.getInt(1);
+                String trangthai = rs.getString(2);
+
+                TrangThai p = new TrangThai(trangthaiid, trangthai);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllTrangThai: " + e.getMessage());
+        }
+        return list;
+    }
+    
+    
+    
 }
