@@ -14,16 +14,18 @@ public class InfoLine {
     private String email;
     private String address;
     private String phonenumber;
+    private String note;
 
     public InfoLine() {
     }
 
-    public InfoLine(int invoiceID, String name, String email, String address, String phonenumber) {
+    public InfoLine(int invoiceID, String name, String email, String address, String phonenumber, String note) {
         this.invoiceID = invoiceID;
         this.name = name;
         this.email = email;
         this.address = address;
         this.phonenumber = phonenumber;
+        this.note = note;
     }
 
     public int getInvoiceID() {
@@ -65,8 +67,19 @@ public class InfoLine {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Override
     public String toString() {
-        return "Infoline [invoiceID=" + invoiceID + ", name=" + name +", email=" + email +", address=" + address + ", phonenumber=" + phonenumber + "]";
+        return "InfoLine{" + "invoiceID=" + invoiceID + ", name=" + name + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + ", note=" + note + '}';
     }
+
+    
 }

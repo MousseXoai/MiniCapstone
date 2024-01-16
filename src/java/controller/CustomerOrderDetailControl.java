@@ -5,12 +5,17 @@
 
 package controller;
 
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.AccInfo;
+import model.HoaDon;
+import model.InfoLine;
+import model.TrangThai;
 
 /**
  *
@@ -53,7 +58,18 @@ public class CustomerOrderDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("OrderDetail.jsp");
+        String invoiceID = request.getParameter("invoiceID");
+        DAO dao = new DAO();
+        AccInfo acc = dao.getAccInfo(2);
+        InfoLine il = dao.getInfoLine(Integer.parseInt(invoiceID));
+        HoaDon hd = dao.getHoaDon(Integer.parseInt(invoiceID));
+        TrangThai tt = dao.getTrangThai(hd.getTrangThaiId());
+        
+        request.setAttribute("trangthai", tt);
+        request.setAttribute("hoadon", hd);
+        request.setAttribute("infoline", il);
+        request.setAttribute("acc", acc);     
+        request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
     } 
 
     /** 

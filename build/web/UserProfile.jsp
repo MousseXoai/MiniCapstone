@@ -55,7 +55,7 @@
             </div>          
         </div>
         <div class="py-2">
-            <form action="editcustomerinfo" method="post">
+            <form action="customerinfo" method="post">
             <div class="row py-2">
                 <div class="col-md-6">
                 <label for="firstname">Full Name</label>
@@ -79,6 +79,7 @@
             <div class="py-3 pb-4 border-bottom">
                 <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
                 <button type="reset" class="btn border button">Cancel</button>
+                <p style="color: red">${err}</p>
             </div>
             </form>
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">

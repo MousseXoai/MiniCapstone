@@ -16,6 +16,7 @@ import model.Brand;
 import model.Cart;
 import model.Color;
 import model.HoaDon;
+import model.InfoLine;
 import model.NhanXet;
 import model.OrderLine;
 import model.PhanLoai;
@@ -957,6 +958,7 @@ public class DAO extends DBContext{
         }
         return null;
     }
+    
     public void editAccInfo(String name, String address, String phonenumber, String email, int uID){
         try {
             String strSQL = "update AccInfo set name = ?, address = ?, phonenumber = ?, email = ? where uID = ? ";
@@ -1035,6 +1037,67 @@ public class DAO extends DBContext{
         return list;
     }
     
+    public InfoLine getInfoLine(int invoiceID){
+        try {
+            String strSQL = "select * from InfoLine where invoiceID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int invoiceid = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String address = rs.getString(4);
+                String phonenumber = rs.getString(5);
+                String note = rs.getString(6);
+                InfoLine p = new InfoLine(invoiceid, name, email, address, phonenumber, note);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
     
+    public HoaDon getHoaDon(int invoiceID){
+        try {
+            String strSQL = "select * from HoaDon where maHD = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int mahd = rs.getInt(1);
+                int accountid = rs.getInt(2);
+                double tonggia = rs.getDouble(3);
+                Date ngayxuat = rs.getDate(4);  
+                int trangthai = rs.getInt(5);
+                
+                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+    
+    public TrangThai getTrangThai(int trangthaiid){
+        try {
+            String strSQL = "select * from TrangThai where trangthaiid = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, trangthaiid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int trangthaiID = rs.getInt(1);
+                String trangthai = rs.getString(2);
+                
+                TrangThai p = new TrangThai(trangthaiID, trangthai);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
     
 }

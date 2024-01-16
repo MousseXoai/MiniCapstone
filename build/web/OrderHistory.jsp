@@ -80,10 +80,11 @@
                             </c:forEach>
                         </td>
                         <td>
+                            
                             <fmt:setLocale value="vi_VN"/>
                             <fmt:formatNumber type="currency" value="${listHD.getTongGia()}" currencySymbol="₫"/>
                         </td>
-                        <td><a href="orderdetail" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
+                        <td><a href="orderdetail?invoiceID=${listHD.getMaHD()}" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
                     </tr> 
                     </c:forEach>
                 </tbody>

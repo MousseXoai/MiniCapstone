@@ -73,10 +73,6 @@
         <servlet-class>controller.CustomerInfoControl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditCustomerInfoControl</servlet-name>
-        <servlet-class>controller.EditCustomerInfoControl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CustomerOrderControl</servlet-name>
         <servlet-class>controller.CustomerOrderControl</servlet-class>
     </servlet>
@@ -157,10 +153,6 @@
         <url-pattern>/customerinfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditCustomerInfoControl</servlet-name>
-        <url-pattern>/editcustomerinfo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CustomerOrderControl</servlet-name>
         <url-pattern>/order</url-pattern>
     </servlet-mapping>
@@ -168,6 +160,26 @@
         <servlet-name>CustomerOrderDetailControl</servlet-name>
         <url-pattern>/orderdetail</url-pattern>
     </servlet-mapping>
+    <context-param>
+        <param-name>messErrorEditProfileCustomer</param-name>
+        <param-value>Do not leave personal information blank</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorPhoneNum</param-name>
+        <param-value>Phone number do not more than 10 characters (Only number!)</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorNameAndEmail</param-name>
+        <param-value>Name or Email do not more than 50 characters</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorInvalidEmail</param-name>
+        <param-value>Email must be must be in the correct format</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorInvalidName</param-name>
+        <param-value>Your name must be only character</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30
