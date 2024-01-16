@@ -22,7 +22,7 @@ public class DAO extends DBContext {
     PreparedStatement ps;
     ResultSet rs;
 
-    public List<SanPham> getWishListSpByAccount() {
+    public List<SanPham> getWishListSpByAccount(int id) {
         List<SanPham> list = new ArrayList<>();
         String query = "Select [id]\n"
                 + "      ,[name]\n"
@@ -41,9 +41,10 @@ public class DAO extends DBContext {
                 + "      ,[sale]\n"
                 + "      ,[trangthai] from\n"
                 + "                               SanPham sp join WishList wl on sp.id = wl.productID\n"
-                + "                           join Account a on wl.accountID= a.uID where a.uID=2";
+                + "                           join Account a on wl.accountID= a.uID where a.uID=?";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new SanPham(rs.getInt(1),
@@ -70,18 +71,19 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public int getNumberWlByAcc() {
+    public int getNumberWlByAcc(int id) {
         int m = 0;
         String strSQL = "SELECT COUNT (productID) as n \n"
                 + "FROM WishList  \n"
-                + "WHERE accountID=2; ";
+                + "WHERE accountID=?; ";
         try {
             ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 m = rs.getInt(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("getNumberWl " + e.getMessage());
         }
         return m;
@@ -99,12 +101,13 @@ public class DAO extends DBContext {
         }
     }
 
-    public List<WishList> getWishListSpByAcc() {
+    public List<WishList> getWishListSpByAcc(int id) {
         List<WishList> list = new ArrayList<>();
-        String query = "select* from WishList where accountID=2";
+        String query = "select* from WishList where accountID=?";
         try {
 
             ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new WishList(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
@@ -130,18 +133,19 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public int getNumberSpByShop() {
+    public int getNumberSpByShop(int id) {
         int m = 0;
         String strSQL = "SELECT COUNT ([id]) as n \n"
                 + "                 FROM SanPham \n"
-                + "                WHERE shopid=2;";
+                + "                WHERE shopid=?;";
         try {
             ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 m = rs.getInt(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("getNumberSpByShop " + e.getMessage());
         }
         return m;

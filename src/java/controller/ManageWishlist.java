@@ -60,9 +60,9 @@ public class ManageWishlist extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        List<SanPham> ListSpYeuThich = dao.getWishListSpByAccount();
-        List<WishList> lwl = dao.getWishListSpByAcc();
-        int countwl = dao.getNumberWlByAcc();
+        List<SanPham> ListSpYeuThich = dao.getWishListSpByAccount(2);
+        List<WishList> lwl = dao.getWishListSpByAcc(2);
+        int countwl = dao.getNumberWlByAcc(2);
         request.setAttribute("countwl", countwl);
         request.setAttribute("lwl", lwl);
         request.setAttribute("ListSpYeuThich", ListSpYeuThich);

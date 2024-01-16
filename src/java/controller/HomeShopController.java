@@ -64,7 +64,7 @@ public class HomeShopController extends HttpServlet {
         Shop lshop = dao.getShopById(2);
         List<SanPham> top3SpMoiNhatByShop = dao.top3SpMoiNhatByShop(2);
         List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
-        int countsp = dao.getNumberSpByShop();
+        int countsp = dao.getNumberSpByShop(2);
         request.setAttribute("top3SpMoiNhatByShop", top3SpMoiNhatByShop);
         request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
         request.setAttribute("countsp", countsp);
