@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.BCrypt;
 import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import model.Account;
 
 /**
@@ -37,7 +39,7 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet Login</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
@@ -74,10 +76,12 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
+        BCrypt bCrypt = new BCrypt();
+        p = BCrypt.hashpw(p, bCrypt.gensalt());
         DAO d = new DAO();
-        Account a = d.check(u, p);
-        
-        if (a == null) {
+        Account a = d.check(u);
+        System.out.println(bCrypt.checkpw(p, a.getPass()));
+        if (a == null || (bCrypt.checkpw(p, a.getPass()) == false)) {
             request.setAttribute("errorMessage", "username or password invalid! ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
@@ -85,7 +89,7 @@ public class Login extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", a);
             response.sendRedirect("home");
-            
+
         }
     }
 

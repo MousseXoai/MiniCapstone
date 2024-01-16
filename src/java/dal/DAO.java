@@ -18,8 +18,9 @@ public class DAO extends DBContext {
 
     PreparedStatement ps = null;
     ResultSet rs = null;
-
-    public Account check(String u, String p) {
+    
+    public Account check(String u) {
+        BCrypt b = new BCrypt();
         String sql = "SELECT [uID]\n "
                 + "      ,[user]\n "
                 + "      ,[pass]\n "
@@ -29,13 +30,14 @@ public class DAO extends DBContext {
                 + "      ,[isCheck]\n "
                 + "      ,[isShip]\n "
                 + "  FROM [dbo].[Account]"
-                + "  WHERE [user] = ? and [pass] = ?";
+                + "  WHERE [user] = ?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, u);
-            ps.setString(2, p);
+                     
             rs = ps.executeQuery();
             while (rs.next()) {
+                
                 Account a = new Account(rs.getInt(1),
                          rs.getString(2),
                          rs.getString(3),
@@ -44,7 +46,6 @@ public class DAO extends DBContext {
                          rs.getInt(6),
                          rs.getInt(7),
                          rs.getInt(8));
-                
                 return a;
             }
         } catch (SQLException e) {
@@ -90,4 +91,6 @@ public class DAO extends DBContext {
         }
         return rowCount;
     }
+
+    
 }

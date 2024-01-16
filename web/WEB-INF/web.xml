@@ -20,6 +20,10 @@
         <servlet-name>NewPassword</servlet-name>
         <servlet-class>controller.NewPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>test.demo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>NewPassword</servlet-name>
         <url-pattern>/NewPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
