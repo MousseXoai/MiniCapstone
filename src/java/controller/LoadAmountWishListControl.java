@@ -12,21 +12,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.AccInfo;
 import model.Account;
-import model.Brand;
-import model.NhanXet;
-import model.PhanLoai;
-import model.SanPham;
-import model.Shop;
-import model.Star;
+import model.WishList;
 
 /**
  *
  * @author Admin
  */
-public class ProductDetailControl extends HttpServlet {
+public class LoadAmountWishListControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,35 +33,21 @@ public class ProductDetailControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("pid");
+        int totalAmountWishList;
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        PrintWriter out = response.getWriter();
+        /*if (a == null) {
+            totalAmountWishList=0;
+            
+            out.println(totalAmountWishList);
+            return;
+        }*/
+        int accountID = 2;
         DAO dao = new DAO();
-        int soLuongDaBan= dao.getSoLuongDaBanById(id);
-        SanPham p = dao.getProductByID(id);
-        int shopId=dao.getShopIdByProductId(id);
-        Shop shop= dao.getShopByProductId(shopId);
-        int cateIDProductDetail = dao.getCateIDByProductID(id);
-        List<PhanLoai> listC = dao.getAllPhanLoai();
-        List<Brand> listB = dao.getAllBrand();
-        List<SanPham> listRelatedProduct = dao.getRelatedProduct(cateIDProductDetail);
-        List<NhanXet> listAllReview = dao.getAllReviewByProductID(id);
-        int countAllReview = listAllReview.size();
-        
-        List<Account> listAllAcount = dao.getAllAccount();
-        List<Star> listStarOfProduct= dao.getStarOfProduct();
-        List<AccInfo> listAllAccInfo = dao.getAllAccInfo();
-        request.setAttribute("detail", p);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listB", listB);
-        request.setAttribute("listRelatedProduct", listRelatedProduct);
-        request.setAttribute("listAllReview", listAllReview);
-        request.setAttribute("listAllAcount", listAllAcount);
-        request.setAttribute("countAllReview", countAllReview);
-        request.setAttribute("star", listStarOfProduct);
-        request.setAttribute("sold", soLuongDaBan);
-        request.setAttribute("listAccInfo", listAllAccInfo);
-        request.setAttribute("shop", shop);
-        
-        request.getRequestDispatcher("DetailProduct.jsp").forward(request, response);
+        List<WishList> list = dao.getWishListByAccountID(accountID);
+        totalAmountWishList = list.size();
+        out.println(totalAmountWishList);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

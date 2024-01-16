@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,7 +14,7 @@
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ashion | Template</title>
+    <title>Detail Product</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -32,87 +33,12 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
+    
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Men</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    
+        <jsp:include page="Menu.jsp"></jsp:include>
+    
     <!-- Header Section End -->
 
     <!-- Breadcrumb Begin -->
@@ -121,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="home"><i class="fa fa-home"></i> Home</a>
                         <a href="#">
                             <c:forEach items="${listC}" var="c">
                                 <c:if test="${c.cid==detail.cateID}">
@@ -168,6 +94,8 @@
                         </div>
                     </div>
                 </div>
+                            <fmt:setLocale value="vi_VN" />
+                                        <fmt:setBundle basename="path.to.your.resource.bundle" />
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <h3>${detail.title}<span>Brand:
@@ -188,10 +116,10 @@
                             <span>( ${countAllReview} reviews )</span>
                         </div>
                             <c:if test="${detail.sale==0}">
-                                <div class="product__details__price">VND ${detail.price} </div>
+                                <div class="product__details__price"><fmt:formatNumber type="currency" value="${detail.price}" /> </div>
                             </c:if>
                             <c:if test="${detail.sale!=0}">
-                                <div class="product__details__price">VND ${detail.price*(1-detail.sale/100)} <span>VND ${detail.price}</span></div>
+                                <div class="product__details__price"><fmt:formatNumber type="currency" value="${detail.price*(1-detail.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${detail.price}" /></span></div>
                             </c:if>    
                         
                         <p>${detail.name}</p>
@@ -203,22 +131,35 @@
                                 <form action="addCart">
                                     <div class="quantity">
                                         <span>Quantity:</span>
-                                        <div class="pro-qty">
-                                            <input type="text" max="${detail.quantity}" value="1" name="quantity">
-                                        </div>
+                                        <div class="def-number-input number-input safari_only mb-0" style="display: flex; align-items: center;">
+                                                            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                                    class="minus">-</button>
+                                                                    <input style="margin-left: 10px; margin-top: 10px; border-radius: 5px;padding-left: 10px" class="quantity" min="1" name="quantity" value="1" max="${detail.quantity}" type="number">
+                                                            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                                    class="plus">+</button>
+                                                        </div>
                                     </div>
                                     <input type="text" value="${detail.id}" name="pid" hidden>
                                     <input type="submit" class="cart-btn" value="Add to cart">
                                 </form>
                             </c:if>    
 
-                            <a href="addWishList?pid=${detail.id}"><span class="icon_heart_alt"></span>Add to wishlist</a>
+                                
                             
                             
          
-                        </div>
+                        </div><a href="addWishList?pid=${detail.id}" style="color: red; font-weight: bold; font-size: 18px"><span class="icon_heart_alt"></span>Add to wishlist</a>
                         <div class="product__details__widget">
                             <ul>
+                                <li>
+                                    <span>Shop: </span>
+                                    <div>
+                                        <a href="#" ><img style="width: 70px; border-radius: 50%" src="${shop.avatar}"></a>
+                                        &nbsp&nbsp&nbsp&nbsp
+                                        ${shop.shopName}
+                                         
+                                    </div>
+                                </li>
                                 <li>
                                     <span>Quantity sold:</span>
                                     <div class="stock__checkbox">
@@ -264,7 +205,7 @@
                             </li>
                            
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Reviews ( 2 )</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Reviews (  ${countAllReview} )</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -299,14 +240,14 @@
                                                 </p>
                                             </div>
                                             <p class="mb-0">${r.contentReview }</p>
-
+                                            
 
                                         </div>
-                                        <div class="rating">
-                                            <c:forEach begin="1" end="${r.voteStar}" step="1">
-                                                <i class="fa fa-star"></i>
-                                            </c:forEach>
-                                        </div>
+                                        <div class="rating product__details__text">
+                                                <c:forEach begin="1" end="${r.voteStar}" step="1">
+                                                    <i class="fa fa-star"></i>
+                                                </c:forEach>
+                                            </div>
                                     </div>
                                 <hr>    
 
@@ -348,12 +289,12 @@
                                         
                                         <ul class="product__hover">
                                             <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                            <li><a href="addWishList?pid=${p.id}"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="addCart?pid=${p.id}&&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="productDetail?pid=${p.id}">${p.name}</a></h6>
+                                        <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
                                         <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">
@@ -364,7 +305,7 @@
                                             </c:forEach>
                                             
                                         </div>
-                                        <div class="product__price">VND ${p.price}</div>
+                                        <div class="product__price"><fmt:formatNumber type="currency" value="${p.price}" /></div>
                                     </div>
                                 </div>
                             </div>
@@ -376,144 +317,15 @@
     <!-- Product Details Section End -->
 
     <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
-        </div>
-    </footer>
+    
+        <jsp:include page="Footer.jsp"></jsp:include>
+    
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

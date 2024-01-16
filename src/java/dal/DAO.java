@@ -17,6 +17,7 @@ import model.Color;
 import model.NhanXet;
 import model.PhanLoai;
 import model.SanPham;
+import model.Shop;
 import model.Star;
 import model.WishList;
 
@@ -802,6 +803,78 @@ public class DAO extends DBContext{
             ps.executeUpdate();
         } catch (Exception e) {
         }
+    }
+
+    public Shop getShopByProductId(int id) {
+        String query = "select * from Shop where [shopid] = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                return new Shop(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDate(5),
+                        rs.getString(6),
+                        rs.getString(7)
+                        );
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public int getShopIdByProductId(String id) {
+        String query = "select shopid from SanPham where [id] =?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Cart> getCartByAccountID(int accountID) {
+        List<Cart> list = new ArrayList<>();
+        String query = "select * from Cart where accountID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Cart(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<WishList> getWishListByAccountID(int accountID) {
+        List<WishList> list = new ArrayList<>();
+        String query = "select * from WishList where accountID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new WishList(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
     
 }

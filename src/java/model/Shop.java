@@ -14,6 +14,7 @@ public class Shop {
     private int shopId;
     private String shopName;
     private String avatar;
+    private int accountid;
     private Date dateThamGia;
     private String address;
     private String proof;
@@ -21,10 +22,11 @@ public class Shop {
     public Shop() {
     }
 
-    public Shop(int shopId, String shopName, String avatar, Date dateThamGia, String address, String proof) {
+    public Shop(int shopId, String shopName, String avatar, int accountid, Date dateThamGia, String address, String proof) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.avatar = avatar;
+        this.accountid = accountid;
         this.dateThamGia = dateThamGia;
         this.address = address;
         this.proof = proof;
@@ -52,6 +54,14 @@ public class Shop {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(int accountid) {
+        this.accountid = accountid;
     }
 
     public Date getDateThamGia() {

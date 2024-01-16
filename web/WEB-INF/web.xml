@@ -60,6 +60,14 @@
         <servlet-name>AddWishListControl</servlet-name>
         <servlet-class>controller.AddWishListControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadAmountCartControl</servlet-name>
+        <servlet-class>controller.LoadAmountCartControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadAmountWishListControl</servlet-name>
+        <servlet-class>controller.LoadAmountWishListControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
         <url-pattern>/blog</url-pattern>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>AddWishListControl</servlet-name>
         <url-pattern>/addWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAmountCartControl</servlet-name>
+        <url-pattern>/loadAmountCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAmountWishListControl</servlet-name>
+        <url-pattern>/loadAmountWishList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
