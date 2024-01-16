@@ -80,6 +80,10 @@
         <servlet-name>CustomerOrderDetailControl</servlet-name>
         <servlet-class>controller.CustomerOrderDetailControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerAvatarControl</servlet-name>
+        <servlet-class>controller.CustomerAvatarControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
         <url-pattern>/blog</url-pattern>
@@ -180,6 +184,10 @@
         <param-name>messErrorInvalidName</param-name>
         <param-value>Your name must be only character</param-value>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>CustomerAvatarControl</servlet-name>
+        <url-pattern>/customeravatar</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

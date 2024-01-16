@@ -56,7 +56,7 @@
                                         <span class="me-3">${hoadon.getNgayXuat()}</span>
                                         <span class="me-3">#${hoadon.getMaHD()}</span>
                                         <span class="me-3">Visa</span>
-                                        <span class="badge rounded-pill bg-info">
+                                        <span class="">
                                             <c:if test="${trangthai.getTrangThaiId() == hoadon.getTrangThaiId()}">
                                             ${trangthai.getTrangThai()}  
                                             </c:if>
@@ -82,23 +82,29 @@
                                             <td>
                                                 <div class="d-flex mb-2">
                                                     <div class="flex-shrink-0">
-                                                        <img src="https://www.bootdey.com/image/280x280/FF69B4/000000" alt="" width="35" class="img-fluid">
+                                                        <img src="${sanpham.getImage()}" alt="" width="35" class="img-fluid">
                                                     </div>
                                                     <div class="flex-lg-grow-1 ms-3">
-                                                        <h6 class="small mb-0"><a href="#" class="text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h6>
-                                                        <span class="small">Color: White</span>
+                                                        <h6 class="small mb-0"><a href="#" class="text-reset">${sanpham.getName()}</a></h6>
+                                                        <span class="small">Color: ${sanpham.getColor()}</span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>1</td>
-                                            <td class="text-end">$79.99</td>
+                                            <td>${orderline.getQuantity()}</td>
+                                            <td class="text-end">
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/>                                              
+                                            </td>
                                         </tr>
                                         
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">Subtotal</td>
-                                            <td class="text-end">$159,98</td>
+                                            <td class="text-end">
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">Shipping</td>
@@ -106,7 +112,10 @@
                                         </tr>
                                         <tr class="fw-bold">
                                             <td colspan="2">Total</td>
-                                            <td class="text-end">$169,98</td>
+                                            <td class="text-end">
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/> 
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -119,7 +128,10 @@
                                     <div class="col-lg-6">
                                         <h3 class="h6">Payment Method</h3>
                                         <p>Visa <br>
-                                            Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>
+                                            Total: 
+                                            <fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/> 
+                                        <span class="">PAID</span></p>
                                     </div>
                                     <div class="col-lg-6">
                                         <h3 class="h6">Billing address</h3>

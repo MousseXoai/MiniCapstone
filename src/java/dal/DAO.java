@@ -4,9 +4,13 @@
  */
 package dal;
 
+import jakarta.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import model.AccInfo;
@@ -1098,6 +1102,54 @@ public class DAO extends DBContext{
             System.out.println("getAccInfo: " + e.getMessage());
         }
         return null;
+    }
+    public OrderLine getOrderLine(int invoiceID){
+        try {
+            String strSQL = "select * from OrderLine where invoiceID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int invoiceid = rs.getInt(1);
+                int productid = rs.getInt(2);
+                float price = rs.getFloat(3);
+                int quantity = rs.getInt(4);
+                
+                OrderLine p = new OrderLine(invoiceid, productid, price, quantity);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+    
+    public void changeAvatarShop(Part part, int shopID) {
+        String query = "UPDATE AccInfo SET avatar = ? WHERE uID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+        
+            // Đọc dữ liệu từ InputStream và chuyển thành chuỗi Base64
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        
+            byte[] buffer = new byte[4096];
+        
+            int bytesRead;
+        
+            while ((bytesRead = is.read(buffer)) != -1) {           
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
+            // Sử dụng setString để lưu trữ chuỗi Base64 vào cột VARCHAR
+            ps.setString(1, base64);
+            ps.setInt(2, shopID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
     }
     
 }

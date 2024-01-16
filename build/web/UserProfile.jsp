@@ -42,7 +42,7 @@
             <div class="pl-sm-4 pl-2" id="img-section">
             <b>Profile Photo</b>
             <p>Accepted file type .png. Less than 1MB</p>
-            <button class="btn button border"><b>Upload</b></button>
+            <button class="btn button border"><b><a href="customeravatar">Upload</a></b></button>
             </div>
             <div class="ml-auto">
                 <label for="language"><b>Total spend</b></label> 

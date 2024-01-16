@@ -79,10 +79,17 @@
                                 </c:if>
                             </c:forEach>
                         </td>
-                        <td>
-                            
-                            <fmt:setLocale value="vi_VN"/>
-                            <fmt:formatNumber type="currency" value="${listHD.getTongGia()}" currencySymbol="₫"/>
+                        <td> 
+                            <c:forEach items="${listOL}" var="listOL"> 
+                                <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
+                                    <c:forEach items="${listSP}" var="listSP">
+                                        <c:if test="${listSP.getId() == listOL.getProductID()}">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${listSP.getPrice()*listOL.getQuantity()}" currencySymbol="₫"/>
+                                        </c:if>
+                                    </c:forEach>                                   
+                                </c:if>
+                            </c:forEach>
                         </td>
                         <td><a href="orderdetail?invoiceID=${listHD.getMaHD()}" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
                     </tr> 

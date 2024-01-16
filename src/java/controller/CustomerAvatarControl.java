@@ -12,18 +12,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.AccInfo;
-import model.HoaDon;
-import model.InfoLine;
-import model.OrderLine;
-import model.SanPham;
-import model.TrangThai;
+import jakarta.servlet.http.Part;
 
 /**
  *
  * @author Tosaka
  */
-public class CustomerOrderDetailControl extends HttpServlet {
+public class CustomerAvatarControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +35,10 @@ public class CustomerOrderDetailControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerOrderDetailControl</title>");  
+            out.println("<title>Servlet CustomerAvatarControl</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomerOrderDetailControl at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CustomerAvatarControl at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,22 +55,11 @@ public class CustomerOrderDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String invoiceID = request.getParameter("invoiceID");
-        DAO dao = new DAO();
-        AccInfo acc = dao.getAccInfo(2);
-        InfoLine il = dao.getInfoLine(Integer.parseInt(invoiceID));
-        HoaDon hd = dao.getHoaDon(Integer.parseInt(invoiceID));
-        TrangThai tt = dao.getTrangThai(hd.getTrangThaiId());
-        OrderLine ol = dao.getOrderLine(Integer.parseInt(invoiceID));
-        SanPham sp = dao.getProductByID(String.valueOf(ol.getProductID()));
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            response.sendRedirect("test.jsp");
         
-        request.setAttribute("sanpham", sp);
-        request.setAttribute("orderline", ol);
-        request.setAttribute("trangthai", tt);
-        request.setAttribute("hoadon", hd);
-        request.setAttribute("infoline", il);
-        request.setAttribute("acc", acc);     
-        request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -88,7 +72,16 @@ public class CustomerOrderDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+        DAO dao = new DAO();
+        Part part = request.getPart("image");
+
+        dao.changeAvatarShop(part, 2);
+        response.sendRedirect("customerinfo");
         
+        }
     }
 
     /** 
