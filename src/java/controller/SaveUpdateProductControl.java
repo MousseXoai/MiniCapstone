@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-public class LeftAdminControl extends HttpServlet {
+public class SaveUpdateProductControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,18 +29,17 @@ public class LeftAdminControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        if (request.getParameter("mod") != null && request.getParameter("mod").equals("1")) {
-            response.sendRedirect("statistic");
-        }
-        if (request.getParameter("mod") != null && request.getParameter("mod").equals("2")) {
-            response.sendRedirect("DoanhThuTheoThuControl");
-        }
-        if (request.getParameter("mod") != null && request.getParameter("mod").equals("3")) {
-            response.sendRedirect("DoanhThuTheoThangControl");
-        }
-        if (request.getParameter("mod") != null && request.getParameter("mod").equals("4")) {
-            response.sendRedirect("HoaDonControl");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SaveUpdateProductControl</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SaveUpdateProductControl at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 
@@ -67,7 +67,32 @@ public class LeftAdminControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        DAO dao = new DAO();
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        String pname = request.getParameter("pname");
+//        String pprice = request.getParameter("pprice");
+        Double pprice = Double.parseDouble(request.getParameter("pprice"));
+//          float pprice = Float.parseFloat(request.getParameter("pprice"));
+        int pquantity = Integer.parseInt(request.getParameter("pquantity"));
+        String ptitle = request.getParameter("ptitle");
+        String pdescription = request.getParameter("pdescription");
+        int pcate = Integer.parseInt(request.getParameter("category"));
+        int pbrand = Integer.parseInt(request.getParameter("brand"));
+        String pcolor = request.getParameter("pcolor");
+        dao.updateProduct(pname, pprice, pquantity, ptitle, pdescription, pcate, pbrand, pcolor, pid);
+        System.out.println(pid);
+        System.out.println(pname);
+        System.out.println(pprice);
+        System.out.println(pquantity);
+        System.out.println(ptitle);
+        System.out.println(pdescription);
+        System.out.println(pcate);
+        System.out.println(pbrand);
+        System.out.println(pcolor);
+        request.getRequestDispatcher("QuanLySanPhamControl").forward(request, response);
     }
 
     /** 

@@ -15,6 +15,7 @@ import java.util.Base64;
 import java.util.List;
 import model.AccInfo;
 import model.Account;
+import model.Brand;
 import model.HoaDon;
 import model.PhanLoai;
 import model.SanPham;
@@ -332,4 +333,70 @@ public class DAO extends DBContext {
         System.out.println("deleteProduct:" + e.getMessage());
     }
 }
+    public List<SanPham> getProductByProductID(int pID) {
+        List<SanPham> list = new ArrayList<>();
+        String query = " select * from SanPham where id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, pID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<Brand> getBrandByShopID(int shopID) {
+        List<Brand> list = new ArrayList<>();
+        String query = " select distinct b.bid, b.bname from SanPham sp join Brand b on sp.branID = b.bid where shopid=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Brand(rs.getInt(1),
+                        rs.getString(2)
+                        
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public void updateProduct(String pname, double pprice, int pquantity, String ptitle, String pdescription, int pcateid, int pbrandid, String pcolor, int pid) {
+    String query = "UPDATE SanPham SET [name]=?, price=?, quantity=?, title=?, [description]=?, cateID=?, branID=?, color=? WHERE id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, pname);
+        ps.setDouble(2, pprice);
+        ps.setInt(3, pquantity);
+        ps.setString(4, ptitle);
+        ps.setString(5, pdescription);
+        ps.setInt(6, pcateid);
+        ps.setInt(7, pbrandid);
+        ps.setString(8, pcolor);
+        ps.setInt(9, pid);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+}
+
 }

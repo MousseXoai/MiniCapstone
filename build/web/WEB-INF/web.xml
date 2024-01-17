@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>LeftAdminControl</servlet-name>
-        <servlet-class>controller.LeftAdminControl</servlet-class>
+        <servlet-class>.LeftAdminControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShopDetailInfoControl</servlet-name>
@@ -39,6 +39,14 @@
     <servlet>
         <servlet-name>DeleteControl</servlet-name>
         <servlet-class>controller.DeleteControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductControl</servlet-name>
+        <servlet-class>controller.UpdateProductControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveUpdateProductControl</servlet-name>
+        <servlet-class>controller.SaveUpdateProductControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StatisticControl</servlet-name>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>DeleteControl</servlet-name>
         <url-pattern>/DeleteControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductControl</servlet-name>
+        <url-pattern>/UpdateProductControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveUpdateProductControl</servlet-name>
+        <url-pattern>/SaveUpdateProductControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

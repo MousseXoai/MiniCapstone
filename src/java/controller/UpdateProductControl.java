@@ -21,7 +21,7 @@ import model.SanPham;
  *
  * @author admin
  */
-public class QuanLySanPhamControl extends HttpServlet {
+public class UpdateProductControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,16 +32,17 @@ public class QuanLySanPhamControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-       DAO dao = new DAO();
-       List<SanPham> getProduct = dao.getAllProductByShopID(3);
-       request.setAttribute("getProduct", getProduct);
-       List<PhanLoai> getCategory = dao.getCategoryByShopID(3);
-       request.setAttribute("getCategory", getCategory);
-       List<Brand> getBrand = dao.getBrandByShopID(3);
-       request.setAttribute("getBrand", getBrand);
-       request.getRequestDispatcher("QuanLySanPham.jsp").forward(request, response);
+        DAO dao = new DAO();
+        int productId = Integer.parseInt(request.getParameter("id"));
+        List<SanPham> getProductByPID = dao.getProductByProductID(productId);
+        request.setAttribute("getProductByPID", getProductByPID);
+        List<PhanLoai> getCategory = dao.getCategoryByShopID(3);
+        request.setAttribute("getCategory", getCategory);
+        List<Brand> getBrand = dao.getBrandByShopID(3);
+        request.setAttribute("getBrand", getBrand);
+        request.getRequestDispatcher("UpdateProduct.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

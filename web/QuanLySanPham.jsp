@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +27,39 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <style>
+            .edit {
+                background-color: #28a745;
+                color: #fff;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
 
+            .edit:hover {
+                background-color: #218838; /* Darker color on hover */
+            }
+
+            /* Style the delete button */
+            .trash {
+                background-color: #dc3545;
+                color: #fff;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .trash:hover {
+                background-color: #c82333; /* Darker color on hover */
+            }
+        </style>
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
+        <fmt:setLocale value="vi_VN" />
+        <fmt:setBundle basename="path.to.your.resource.bundle" />
         <!-- Navbar-->
         <header class="app-header">
             <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
@@ -54,7 +84,7 @@
                 </div>
             </div>
             <hr>
-            <ul class="app-menu">
+<!--            <ul class="app-menu">
                 <div class="col-sm-2">
 
                     <a class="btn btn-add btn-sm" href="form-add-san-pham.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -84,7 +114,7 @@
                     <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                             class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-            </ul>
+            </ul>-->
         </aside>
         <main class="app-content">
             <div class="app-title">
@@ -114,6 +144,7 @@
                                         <th>Tình trạng</th>
                                         <th>Giá tiền</th>
                                         <th>Danh mục</th>
+                                        <th>Thương hiệu</th>
                                         <th>Chức năng</th>
                                     </tr>
                                 </thead>
@@ -130,7 +161,7 @@
                                                     ${p.quantity > 0 ? 'Còn hàng' : 'Hết hàng'}
                                                 </span>
                                             </td>
-                                            <td>${p.price}</td>
+                                            <td><fmt:formatNumber type="currency" value="${p.price}" /></td>
                                             <td>
                                                 <c:forEach items="${getCategory}" var="c">
                                                     <c:if test="${p.cateID eq c.cid }">
@@ -139,11 +170,18 @@
                                                 </c:forEach>
                                             </td>
                                             <td>
+                                                <c:forEach items="${getBrand}" var="b">
+                                                    <c:if test="${p.branID eq b.bid }">
+                                                        ${b.bname}
+                                                    </c:if>
+                                                </c:forEach>
+                                            </td>
+                                            <td>
                                                 <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="confirmDelete(${p.id})">
                                                     <i class="fas fa-trash-alt"></i> Xóa
-                                                </button>
-                                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#ModalUP" onclick="editProduct(${p.id})">
+                                                        <i class="fas fa-edit"></i> Chỉnh sửa
+                                                    </button>
 
                                             </td>
                                         </tr>
@@ -159,74 +197,8 @@
         <!--
           MODAL
         -->
-        <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-             data-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
 
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group  col-md-12">
-                                <span class="thong-tin-thanh-toan">
-                                    <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Mã sản phẩm </label>
-                                <input class="form-control" type="number" value="71309005">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text" required value="Bàn ăn gỗ Theresa">
-                            </div>
-                            <div class="form-group  col-md-6">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" required value="20">
-                            </div>
-                            <div class="form-group col-md-6 ">
-                                <label for="exampleSelect1" class="control-label">Tình trạng sản phẩm</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>Còn hàng</option>
-                                    <option>Hết hàng</option>
-                                    <option>Đang nhập hàng</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="text" value="5.600.000">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>Bàn ăn</option>
-                                    <option>Bàn thông minh</option>
-                                    <option>Tủ</option>
-                                    <option>Ghế gỗ</option>
-                                    <option>Ghế sắt</option>
-                                    <option>Giường người lớn</option>
-                                    <option>Giường trẻ em</option>
-                                    <option>Bàn trang điểm</option>
-                                    <option>Giá đỡ</option>
-                                </select>
-                            </div>
-                        </div>
-                        <BR>
-                        <a href="#" style="    float: right;
-                           font-weight: 600;
-                           color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>
-                        <BR>
-                        <BR>
-                        <button class="btn btn-save" type="button">Lưu lại</button>
-                        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                        <BR>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!--
         MODAL
         -->
@@ -246,76 +218,82 @@
         <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">
-                                                    $('#sampleTable').DataTable();
-                                                    //Thời Gian
-                                                    function time() {
-                                                        var today = new Date();
-                                                        var weekday = new Array(7);
-                                                        weekday[0] = "Chủ Nhật";
-                                                        weekday[1] = "Thứ Hai";
-                                                        weekday[2] = "Thứ Ba";
-                                                        weekday[3] = "Thứ Tư";
-                                                        weekday[4] = "Thứ Năm";
-                                                        weekday[5] = "Thứ Sáu";
-                                                        weekday[6] = "Thứ Bảy";
-                                                        var day = weekday[today.getDay()];
-                                                        var dd = today.getDate();
-                                                        var mm = today.getMonth() + 1;
-                                                        var yyyy = today.getFullYear();
-                                                        var h = today.getHours();
-                                                        var m = today.getMinutes();
-                                                        var s = today.getSeconds();
-                                                        m = checkTime(m);
-                                                        s = checkTime(s);
-                                                        nowTime = h + " giờ " + m + " phút " + s + " giây";
-                                                        if (dd < 10) {
-                                                            dd = '0' + dd
-                                                        }
-                                                        if (mm < 10) {
-                                                            mm = '0' + mm
-                                                        }
-                                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                                '</span>';
-                                                        document.getElementById("clock").innerHTML = tmp;
-                                                        clocktime = setTimeout("time()", "1000", "Javascript");
-
-                                                        function checkTime(i) {
-                                                            if (i < 10) {
-                                                                i = "0" + i;
+                                                        $('#sampleTable').DataTable();
+                                                        //Thời Gian
+                                                        function time() {
+                                                            var today = new Date();
+                                                            var weekday = new Array(7);
+                                                            weekday[0] = "Chủ Nhật";
+                                                            weekday[1] = "Thứ Hai";
+                                                            weekday[2] = "Thứ Ba";
+                                                            weekday[3] = "Thứ Tư";
+                                                            weekday[4] = "Thứ Năm";
+                                                            weekday[5] = "Thứ Sáu";
+                                                            weekday[6] = "Thứ Bảy";
+                                                            var day = weekday[today.getDay()];
+                                                            var dd = today.getDate();
+                                                            var mm = today.getMonth() + 1;
+                                                            var yyyy = today.getFullYear();
+                                                            var h = today.getHours();
+                                                            var m = today.getMinutes();
+                                                            var s = today.getSeconds();
+                                                            m = checkTime(m);
+                                                            s = checkTime(s);
+                                                            nowTime = h + " giờ " + m + " phút " + s + " giây";
+                                                            if (dd < 10) {
+                                                                dd = '0' + dd
                                                             }
-                                                            return i;
+                                                            if (mm < 10) {
+                                                                mm = '0' + mm
+                                                            }
+                                                            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                                            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                                    '</span>';
+                                                            document.getElementById("clock").innerHTML = tmp;
+                                                            clocktime = setTimeout("time()", "1000", "Javascript");
+
+                                                            function checkTime(i) {
+                                                                if (i < 10) {
+                                                                    i = "0" + i;
+                                                                }
+                                                                return i;
+                                                            }
                                                         }
-                                                    }
         </script>
         <script>
-    function confirmDelete(productId) {
-        swal({
-            title: "Cảnh báo",
-            text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        }).then((willDelete) => {
-            if (willDelete) {
-                // Call the server-side delete function using AJAX
-                deleteProduct(productId);
+            function confirmDelete(productId) {
+                swal({
+                    title: "Cảnh báo",
+                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                    buttons: ["Hủy bỏ", "Đồng ý"],
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        // Call the server-side delete function using AJAX
+                        deleteProduct(productId);
+                    }
+                });
             }
-        });
-    }
 
-    function deleteProduct(productId) {
-        // Use AJAX to call the server-side delete function
-        $.ajax({
-            type: "POST",
-            url: "DeleteControl", // Specify the URL of your server-side delete control
-            data: { id: productId },
-            success: function (response) {
-                // Handle success, for example, you can reload the page
-                location.reload();
-            },
-            error: function (error) {
-                console.error("Error deleting product: " + error);
+            function deleteProduct(productId) {
+                // Use AJAX to call the server-side delete function
+                $.ajax({
+                    type: "POST",
+                    url: "DeleteControl", // Specify the URL of your server-side delete control
+                    data: {id: productId},
+                    success: function (response) {
+                        // Handle success, for example, you can reload the page
+                        location.reload();
+                    },
+                    error: function (error) {
+                        console.error("Error deleting product: " + error);
+                    }
+                });
             }
-        });
+        </script>
+        <script>
+    function editProduct(productId) {
+        // Redirect to the UpdateProductControl page with the product ID as a parameter
+        window.location.href = "UpdateProductControl?id=" + productId;
     }
 </script>
     </body>
