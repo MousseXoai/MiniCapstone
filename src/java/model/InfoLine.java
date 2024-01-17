@@ -76,6 +76,10 @@ public class InfoLine {
         this.note = note;
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> a80a1c7044ea43e7e03095598d85b43400a78274
     @Override
     public String toString() {
         return "InfoLine{" + "invoiceID=" + invoiceID + ", name=" + name + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + ", note=" + note + '}';
