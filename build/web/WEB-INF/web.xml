@@ -16,6 +16,10 @@
         <servlet-name>ListSpByShop</servlet-name>
         <servlet-class>controller.ListSpByShop</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EventController</servlet-name>
+        <servlet-class>controller.EventController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ListSpByShop</servlet-name>
         <url-pattern>/shopListSp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventController</servlet-name>
+        <url-pattern>/event</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

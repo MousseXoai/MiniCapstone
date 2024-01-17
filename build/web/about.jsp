@@ -10,23 +10,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Winkel - Free Bootstrap 4 Template by Colorlib</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
         <link rel="stylesheet" href="css/1open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/1animate.css">
-
         <link rel="stylesheet" href="css/1owl.carousel.min.css">
         <link rel="stylesheet" href="css/1owl.theme.default.min.css">
         <link rel="stylesheet" href="css/1magnific-popup.css">
-
         <link rel="stylesheet" href="css/1aos.css">
-
         <link rel="stylesheet" href="css/1ionicons.min.css">
-
         <link rel="stylesheet" href="css/1bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/1jquery.timepicker.css">
         <link rel="stylesheet" href="css/1flaticon.css">
@@ -34,27 +27,6 @@
         <link rel="stylesheet" href="css/1style.css">
     </head>
     <body class="goto-here">
-        <div class="py-1 bg-black">
-            <div class="container">
-                <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-                    <div class="col-lg-12 d-block">
-                        <div class="row d-flex">
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-                                <span class="text">+ 1235 2355 98</span>
-                            </div>
-                            <div class="col-md pr-4 d-flex topper align-items-center">
-                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                                <span class="text">youremail@email.com</span>
-                            </div>
-                            <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                                <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Winkel</a>
@@ -78,7 +50,6 @@
                         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                         <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
                     </ul>
                 </div>
             </div>
@@ -103,7 +74,7 @@
                     <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
                         <div class="heading-section-bold mb-4 mt-md-5">
                             <div class="ml-md-0">
-                                <h2 class="mb-4">Latest Product</h2>
+                                <h2 class="mb-4">New Product</h2>
                             </div>
                         </div>
                         <div class="pb-md-5">
@@ -127,8 +98,6 @@
                 </div>
             </div>
         </section>
-
-
         <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url('');">
             <div class="container">
                 <div class="row justify-content-center py-5">

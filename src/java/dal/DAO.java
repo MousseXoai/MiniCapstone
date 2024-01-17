@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Event;
 import model.SanPham;
 import model.Shop;
 import model.WishList;
@@ -242,6 +243,22 @@ public class DAO extends DBContext {
             }
         } catch (SQLException e) {
             System.out.println("top6SpBanChayNhat" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<Event> ListEventByShop(int id) {
+        List<Event> list = new ArrayList<>();
+        String query = "select * from Event where shopID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+        } catch (SQLException e) {
+            System.out.println("ListEventByShop" + e.getMessage());
         }
         return list;
     }
