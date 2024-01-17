@@ -9,6 +9,8 @@ import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,8 @@ import jakarta.servlet.http.Part;
  *
  * @author Tosaka
  */
+@WebServlet(name = "CustomerAvatarControl", urlPatterns = {"/customeravatar"})
+@MultipartConfig(maxFileSize = 16177216)//1.5mb
 public class CustomerAvatarControl extends HttpServlet {
    
     /** 
@@ -55,11 +59,11 @@ public class CustomerAvatarControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            response.sendRedirect("test.jsp");
-        
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        try ( PrintWriter out = response.getWriter()) {
+//            response.sendRedirect("test.jsp");
+//        
+//        }
     } 
 
     /** 

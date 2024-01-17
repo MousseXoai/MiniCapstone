@@ -41,8 +41,8 @@
         <img src="${acc.getAvatar()}" class="img" alt="">
             <div class="pl-sm-4 pl-2" id="img-section">
             <b>Profile Photo</b>
-            <p>Accepted file type .png. Less than 1MB</p>
-            <button class="btn button border"><b><a href="customeravatar">Upload</a></b></button>
+            <p>Accepted file type .png. Less than 1.5MB</p>
+            <button class="btn button border"><b><a href="test.jsp">Upload</a></b></button>
             </div>
             <div class="ml-auto">
                 <label for="language"><b>Total spend</b></label> 

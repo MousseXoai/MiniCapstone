@@ -1145,6 +1145,7 @@ public class DAO extends DBContext{
             String base64 = "data:image/png;base64," + base64Image;
             // Sử dụng setString để lưu trữ chuỗi Base64 vào cột VARCHAR
             ps.setString(1, base64);
+            System.out.println("0");
             ps.setInt(2, shopID);
             ps.executeUpdate();
         } catch (Exception e) {
