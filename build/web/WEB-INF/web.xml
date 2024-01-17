@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductControl</servlet-name>
-        <servlet-class>ProductControl</servlet-class>
+        <servlet-class>controller.ProductControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
