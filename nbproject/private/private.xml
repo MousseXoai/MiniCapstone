@@ -5,9 +5,11 @@
         <group>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/EventController.java</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/ManageWishlist.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/HomeShopController.java</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/event.jsp</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/about.jsp</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/css/style.css</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/model/Event.java</file>
         </group>
     </open-files>
