@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>CartControl</servlet-name>
+        <servlet-class>controller.CartControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartAmountControl</servlet-name>
+        <servlet-class>controller.CartAmountControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerInfoControl</servlet-name>
+        <servlet-class>controller.CustomerInfoControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerOrderControl</servlet-name>
+        <servlet-class>controller.CustomerOrderControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerOrderDetailControl</servlet-name>
+        <servlet-class>controller.CustomerOrderDetailControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerAvatarControl</servlet-name>
+        <servlet-class>controller.CustomerAvatarControl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartControl</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartAmountControl</servlet-name>
+        <url-pattern>/cartamount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerInfoControl</servlet-name>
+        <url-pattern>/customerinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerOrderControl</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerOrderDetailControl</servlet-name>
+        <url-pattern>/orderdetail</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>messErrorEditProfileCustomer</param-name>
+        <param-value>Do not leave personal information blank</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorPhoneNum</param-name>
+        <param-value>Phone number do not more than 10 characters (Only number!)</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorNameAndEmail</param-name>
+        <param-value>Name or Email do not more than 50 characters</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorInvalidEmail</param-name>
+        <param-value>Email must be must be in the correct format</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorInvalidName</param-name>
+        <param-value>Your name must be only character</param-value>
+    </context-param>
+    <servlet-mapping>
+        <servlet-name>CustomerAvatarControl</servlet-name>
+        <url-pattern>/customeravatar</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
