@@ -59,15 +59,11 @@ public class CustomerAvatarControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-<<<<<<< HEAD
-//        response.setContentType("text/html;charset=UTF-8");
-//        try ( PrintWriter out = response.getWriter()) {
-//            response.sendRedirect("test.jsp");
-//        
-//        }
-=======
-        
->>>>>>> a80a1c7044ea43e7e03095598d85b43400a78274
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+           response.sendRedirect("test.jsp");
+       
+       }
     } 
 
     /** 
@@ -80,11 +76,7 @@ public class CustomerAvatarControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-<<<<<<< HEAD
         response.setContentType("text/html;charset=UTF-8");
-=======
-         response.setContentType("text/html;charset=UTF-8");
->>>>>>> a80a1c7044ea43e7e03095598d85b43400a78274
         try (PrintWriter out = response.getWriter()) {
             
         DAO dao = new DAO();
