@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Account;
 import model.Constants;
 import model.UserGoogleDto;
 import org.apache.http.client.ClientProtocolException;
@@ -42,12 +43,18 @@ public class LoginGoogleHandler extends HttpServlet {
                 HttpSession session = request.getSession();
 		String accessToken = getToken(code);
 		UserGoogleDto user = getUserInfo(accessToken);
+                Account a = d.check(user.name);
+                if(a==null || (a.getPass().trim().equals(user.getId())) == false) {
+                    d.addGoogleAccount(user);
+                    session.setAttribute("account", user);
+                    response.sendRedirect("home");
+                } else {
+                    session.setAttribute("account", user);
+                    response.sendRedirect("home");
+                }
                 
-                d.addGoogleAccount(user);
-                //System.out.println(user);
-                System.out.println(user.name);
-                session.setAttribute("account", user);
-                response.sendRedirect("home");
+   
+                
 	}
 
 	public static String getToken(String code) throws ClientProtocolException, IOException {

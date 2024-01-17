@@ -4,17 +4,18 @@
  */
 package controller;
 
-import dal.BCrypt;
 import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Account;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -60,7 +61,17 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        PrintWriter out = response.getWriter();
+        out.print(action);
+        if(action.equals("Face")){
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String id = request.getParameter("id");
+            out.println(name);
+            out.println(email);
+            out.println(id);
+        }
     }
 
     /**
@@ -76,12 +87,28 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
-        BCrypt bCrypt = new BCrypt();
-        p = BCrypt.hashpw(p, bCrypt.gensalt());
+        String r = request.getParameter("rem");
+        
+        Cookie cu = new Cookie("cuser",u);
+        Cookie cp = new Cookie("cpass",p);
+        Cookie cr = new Cookie("crem",r);
+        if(r!=null){
+            cu.setMaxAge(60*60*24);
+            cp.setMaxAge(60*60*24);
+            cr.setMaxAge(60*60*24);
+            
+        } else {
+            cu.setMaxAge(0);
+            cp.setMaxAge(0);
+            cr.setMaxAge(0);
+        }
+        response.addCookie(cu);
+        response.addCookie(cp);
+        response.addCookie(cr);
         DAO d = new DAO();
         Account a = d.check(u);
-        System.out.println(bCrypt.checkpw(p, a.getPass()));
-        if (a == null || (bCrypt.checkpw(p, a.getPass()) == false)) {
+        
+        if (a == null || (BCrypt.checkpw(p, a.getPass().trim() ) == false)) {
             request.setAttribute("errorMessage", "username or password invalid! ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {

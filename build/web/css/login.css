@@ -86,7 +86,24 @@ form {
 	height: 100%;
 	text-align: center;
 }
-
+.bottom-form{
+    display: flex;
+    justify-content: space-between;
+    width: 324px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.forgot-button{
+    color: #fc4364;
+}
+.rem-input{
+    width: 10px;
+    font-size: 15px;
+        
+}
+input[type='checkbox'] {
+        accent-color: blue;
+    }
 input {
 	background-color: #eee;
 	border: none;
