@@ -4,24 +4,42 @@
  */
 package model;
 
+
+import dal.DBContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Admin
  */
-public class Cart {
+
+public class Cart extends DBContext {
     private int accountID;
     private int productID;
     private int amount;
     private int maCart;
 
     public Cart() {
+
+        connectDB();
     }
+
+    public Cart(int accountID, int productID, int amount) {
+        this.accountID = accountID;
+        this.productID = productID;
+        this.amount = amount;
+        connectDB();
+    }
+       
 
     public Cart(int accountID, int productID, int amount, int maCart) {
         this.accountID = accountID;
         this.productID = productID;
         this.amount = amount;
         this.maCart = maCart;
+        connectDB();
     }
 
     public int getAccountID() {
@@ -55,5 +73,20 @@ public class Cart {
     public void setMaCart(int maCart) {
         this.maCart = maCart;
     }
+    
+
+     Connection cnn;
+    PreparedStatement stm;
+    ResultSet rs;
+
+    private void connectDB() {
+        cnn = connection;
+        if (cnn != null) {
+            System.out.println("Connect success");
+        } else {
+            System.out.println("Connect fail");
+        }
+    }
+
     
 }
