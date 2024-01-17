@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html><link rel="stylesheet" href="css/register.css"> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,11 +12,11 @@
         <div class="container right-panel-active" id="container">
             <div class="form-container sign-up-container">
                 <form action="RegisterCustomerController" method="post">
-                   
+
                     <input type="text" placeholder="Account" name="user" required="true" />  
-                    
+
                     <input type="email" name="email" placeholder="Email" required="true" />
-                
+
                     <input type="password" name="pass" placeholder="Password" required="true" />
                     <input type="password" name="repass" placeholder="Re-password" required="true" />
                     <input type="text" name="phonenumber" placeholder="Phone Number" required="true" />
@@ -33,9 +33,9 @@
                         <div style="color: red;">${errorMessage}</div>
                     </c:if>
                 </form>
-                    
+
             </div>
-                    
+
 
             <div class="overlay-container">
                 <div class="overlay">

@@ -20,21 +20,21 @@
                     <div class="inputDiv">
                         <label class="inputLabel" for="oldPassword">Old Password</label>
                         <input type="password" id="oldPassword" name="oldPass" required>
-                        <input type="hidden" name="user" value="${sessionScope.Account.user}">
+                        <input type="hidden" name="user" value="${sessionScope.account.user}">
                     </div>
 
                     <div class="inputDiv">
-                        <label class="inputLabel" for="password">New Password</label>
+                        <label class="inputLabel" for="password" >New Password</label>
                         <input type="password" id="password" name="pass" required>
                     </div>
 
                     <div class="inputDiv">
                         <label class="inputLabel" for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword">
+                        <input type="password" id="confirmPassword" name="repass">
                     </div>
 
                     <div class="buttonWrapper">
-                        <button type="submit" id="submitButton" onclick="validateChangePasswordForm()" class="submitButton pure-button pure-button-primary">
+                        <button type="submit" value="change" id="submitButton" onclick="validateChangePasswordForm()" class="submitButton pure-button pure-button-primary">
                             <span>Continue</span>
                             <span id="loader"></span>
                         </button>

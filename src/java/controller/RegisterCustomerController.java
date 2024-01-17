@@ -12,6 +12,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -19,8 +29,6 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author dell
  */
 public class RegisterCustomerController extends HttpServlet {
-   
-
 
     private static final long serialVersionUID = 1L;
 
@@ -56,7 +64,6 @@ public class RegisterCustomerController extends HttpServlet {
         processRequest(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,8 +75,6 @@ public class RegisterCustomerController extends HttpServlet {
         String phonenumber = request.getParameter("phonenumber");
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
-        
-        
 
         // Kiểm tra mật khẩu và mật khẩu xác nhận
         if (!pass.equals(re_pass)) {
@@ -97,8 +102,7 @@ public class RegisterCustomerController extends HttpServlet {
 
         // Hash mật khẩu
         String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
-
-
+        System.out.println(hashedPassword);
 
         // Tạo JavaBean Account
         Account account = new Account();
@@ -122,9 +126,11 @@ public class RegisterCustomerController extends HttpServlet {
             } else {
                 // Đăng ký tài khoản
                 if (usernameCheckResult == 0) {
+                    // Gửi OTP qua email
+                    //sendOTP(email);
                     // Dang ky thanh cong, chuyen den trang dang nhap
-                    register.RegisterCustomer(user, pass, email, phonenumber, address, gender);
-                    response.sendRedirect("HomePage.jsp");
+                    register.RegisterCustomer(user, hashedPassword, email, phonenumber, address, gender);                  
+                    response.sendRedirect("login.jsp");
                 } else {
                     // Xu ly khi tai khoan dang ky khong thanh cong
                     String errorMessage = "Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau.";
@@ -137,19 +143,50 @@ public class RegisterCustomerController extends HttpServlet {
             e.printStackTrace(); // In stack trace ra log
             String errorMessage = "Đã có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại sau.";
             request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("Register.jsp").forward(request, response);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
         }
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    //  sending OTP email
+    private void sendOTP(String email) {
+        int otpvalue = generateOTP();
+
+        // Cấu hình thông tin máy chủ SMTP
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        // Tạo phiên làm việc với máy chủ email
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("minhnnhe176468@fpt.edu.vn", "yelyxtmjzielgrwu"); // Thay thế bằng email và mật khẩu của bạn
+            }
+        });
+
+        // Soạn nội dung email
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(email)); // Điều chỉnh theo địa chỉ email người dùng
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("Xác nhận đăng ký");
+            message.setText("Mã OTP của bạn là: " + otpvalue);
+
+            // Gửi email
+            Transport.send(message);
+            System.out.println("Gửi email thành công");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //  generating random OTP
+    private int generateOTP() {
+        Random rand = new Random();
+        return rand.nextInt(999999);
+    }
 
 }

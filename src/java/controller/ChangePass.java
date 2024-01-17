@@ -51,8 +51,8 @@ public class ChangePass extends HttpServlet {
 
             HttpSession session = request.getSession();
             String successMessage = "Cập nhật mật khẩu thành công!";
-            session.setAttribute("successMessage", successMessage);
-            request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+            session.setAttribute("account", account);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
