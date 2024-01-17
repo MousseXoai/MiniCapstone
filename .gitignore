@@ -1,4 +1,16 @@
 /dist/
-/build/
-/nbproject/*
+build/
+nbproject/
+*.class
+.idea/
+.classpath
+.project
+.settings/
+*.class
+src/java/controller/CartAmountControl.java
+src/java/controller/CustomerAvatarControl.java
+src/java/controller/CustomerInfoControl.java
+src/java/dal/DAO.java
+src/java/model/InfoLine.java
+web/WEB-INF/web.xml
 
