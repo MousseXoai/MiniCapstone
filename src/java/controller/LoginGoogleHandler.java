@@ -47,6 +47,8 @@ public class LoginGoogleHandler extends HttpServlet {
                 Account a = d.check(user.name);
                 if(a==null || (a.getPass().trim().equals(user.getId())) == false) {
                     d.addGoogleAccount(user);
+                    int id = d.getUidByUserName(user);
+                    d.addEmailByUid(user.getEmail(),id);
                     session.setAttribute("account", user);
                     response.sendRedirect("home");
                 } else {

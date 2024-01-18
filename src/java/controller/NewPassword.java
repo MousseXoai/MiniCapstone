@@ -32,7 +32,7 @@ public class NewPassword extends HttpServlet {
         DAO d = new DAO();
         int n=0;
         if (newPassword != null && confPassword != null && newPassword.equals(confPassword)) {
-            n = d.resetPassword(BCrypt.hashpw(newPassword,BCrypt.gensalt()), (String) session.getAttribute("email"));
+            n = d.resetPassword(BCrypt.hashpw(newPassword,BCrypt.gensalt()), d.getAccountByEmail((String) session.getAttribute("email")));
             if(n>0){
                 request.setAttribute("status", "Reset Success!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

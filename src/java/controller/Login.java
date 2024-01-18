@@ -74,8 +74,10 @@ public class Login extends HttpServlet {
             Account a = d.check(username);
             try{
             if(a == null || (a.getPass().trim().equals(id)) == false) {
-                    a = new Account(0, username, id, email, 0, 0, 0, 0);
+                    a = new Account(0, username, id, 0, 0, 0, 0);
                     d.addFacebookAccount(a);
+                    int uID = d.getUidByName(a);
+                    d.addEmailByUid(email, uID);
                     session.setAttribute("account", a);
                     response.sendRedirect("home");
                 } else {
