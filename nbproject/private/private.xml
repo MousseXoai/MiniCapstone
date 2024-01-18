@@ -4,6 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/EventController.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/ManageWishlist.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/HomeShopController.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/event.jsp</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/about.jsp</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/css/style.css</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/model/Event.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/OrderHistory.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/OrderDetail.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/Cart.jsp</file>
@@ -17,6 +27,7 @@
             <file>file:/G:/javaweb/SWP391/MiniCapstone/web/DetailProduct.jsp</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/Blog.java</file>
 >>>>>>> a80a1c7044ea43e7e03095598d85b43400a78274
+>>>>>>> 1f02bedeef9c890333f3a5cc6f70b26eca0e5223
         </group>
     </open-files>
 </project-private>
