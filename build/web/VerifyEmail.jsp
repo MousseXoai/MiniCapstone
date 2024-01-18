@@ -46,7 +46,7 @@ Author     : dell
                                 <tr>
                                     <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                         <form action="RegisterVerify" method="post">
-                                            <input type="text" name="token" placeholder="Enter Token" required style="font-size: 20px; padding: 15px 25px; border-radius: 2px; border: 1px solid #FFA73B; display: inline-block;">
+                                            <input type="text" name="otp" placeholder="Enter Token" required style="font-size: 20px; padding: 15px 25px; border-radius: 2px; border: 1px solid #FFA73B; display: inline-block;">
                                             <button type="submit" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #FFA73B; display: inline-block; background-color: #FFA73B;">Verify Account</button>
 
                                         </form>      

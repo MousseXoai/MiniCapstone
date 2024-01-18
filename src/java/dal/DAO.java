@@ -39,6 +39,7 @@ public class DAO extends DBContext {
 
     }
 // get id theo ten
+
     public int getIDByUsername(Account account) {
         int id = 0;
         String sql = "select [uID] from Account Where [user] = ?";
@@ -53,11 +54,11 @@ public class DAO extends DBContext {
         return id;
 
     }
-    
-      public void addbyAccinfo(String email,String address,String phoneNumber,int uID ) {
 
-        String sql = "	INSERT INTO AccInfo(email,[address],phonenumber,uID)\n" +
-"                VALUES (?,?,?,?)";
+    public void addbyAccinfo(String email, String address, String phoneNumber, int uID) {
+
+        String sql = "	INSERT INTO AccInfo(email,[address],phonenumber,uID)\n"
+                + "                VALUES (?,?,?,?)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
@@ -72,9 +73,6 @@ public class DAO extends DBContext {
         }
 
     }
-    
-    
-    
 
     //check user ton tai
     public int checkUsername(String user) {
@@ -119,8 +117,9 @@ public class DAO extends DBContext {
         String sql = "update Account set pass = ? Where [user] = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, account.getUser());
-            ps.setString(2, account.getPass());
+            ps.setString(1, account.getPass());
+            ps.setString(2, account.getUser());
+            System.out.println(account.getUser());
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -194,6 +193,10 @@ public class DAO extends DBContext {
                 a.setuID(rs.getInt("uID"));
                 a.setUser(rs.getString("user"));
                 a.setPass(rs.getString("pass"));
+                a.setIsSell(rs.getInt("isSell"));
+                a.setIsAdmin(rs.getInt("isAdmin"));
+                a.setIsCheck(rs.getInt("isCheck"));
+                a.setIsShip(rs.getInt("isShip"));
                 return a;
             }
         } catch (SQLException e) {

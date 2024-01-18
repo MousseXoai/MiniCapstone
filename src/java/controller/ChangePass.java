@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "ChangePassServlet", urlPatterns = {"/ChangePassServlet"})
 public class ChangePass extends HttpServlet {
@@ -26,32 +27,48 @@ public class ChangePass extends HttpServlet {
         processRequest(request, response);
     }
 
+    
+    
+  
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         String user = request.getParameter("user");
-        String oldPass = request.getParameter("oldPass");//old
-        String newPass = request.getParameter("pass"); //new 
+        String oldPass = request.getParameter("oldPass"); // old
+        String newPass = request.getParameter("pass"); // new
 
+        
+        
         DAO cp = new DAO();
-        
-        Account account=cp.check(user,oldPass);
-        
 
-        if (account == null) {
+        Account account = cp.check(user);
+
+        if (account == null || !BCrypt.checkpw(oldPass, account.getPass().trim())) {
             // Sai pass
             String errorMessage = "Mật khẩu cũ không chính xác!";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
-            
         } else {
-            // dung pass
+            // Đúng pass
+            // Mã hóa mật khẩu mới trước khi cập nhật
+            String hashedNewPass = BCrypt.hashpw(newPass, BCrypt.gensalt());
+            account.setUser(user);
+            account.setPass(hashedNewPass);
             
-            account.setPass(newPass);
+            System.out.println(hashedNewPass);
+                   
+            System.out.println("Password updated successfully for user: " + user);
+               
+            // Cập nhật mật khẩu mới vào database
             cp.change(account);
+            
+            System.out.println(account.getPass());
+            
 
             HttpSession session = request.getSession();
-            String successMessage = "Cập nhật mật khẩu thành công!";
             session.setAttribute("account", account);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
