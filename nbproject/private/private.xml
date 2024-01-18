@@ -1,47 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/EventController.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/ManageWishlist.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/HomeShopController.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/event.jsp</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/about.jsp</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/css/style.css</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/model/Event.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/OrderHistory.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/OrderDetail.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/Cart.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/src/java/controller/CartControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/MiniCapstone/web/UserProfile.jsp</file>
-=======
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/SanPham.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/Shop.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Shop.jsp</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/DetailProduct.jsp</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/Blog.java</file>
->>>>>>> a80a1c7044ea43e7e03095598d85b43400a78274
->>>>>>> 1f02bedeef9c890333f3a5cc6f70b26eca0e5223
-=======
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/InfoLine.java</file>
->>>>>>> 020a56dea857ebfef8cdabdfbf183deacf0bc931
-=======
-            <file>file:/D:/SWP391/Project/MiniCapstone/web/login.jsp</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/Login.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/forgotPassword.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/LoginGoogleHandler.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/model/Account.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dal/DAO.java</file>
->>>>>>> 5204eb03f3f85056bcc21538f30a7eca9bad0fb0
-        </group>
-    </open-files>
 </project-private>
