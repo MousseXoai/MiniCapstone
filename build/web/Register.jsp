@@ -21,11 +21,6 @@
                     <input type="password" name="repass" placeholder="Re-password" required="true" />
                     <input type="text" name="phonenumber" placeholder="Phone Number" required="true" />
 
-
-                    <label for="male">Gender:</label>
-                    <input type="radio" id="male" name="gender" value="male" checked="checked" /> Male 
-                    <input type="radio" id="female" name="gender" value="female" /> Female
-
                     <input name="address" placeholder="Address"></input>
                     <button type="submit">Sign Up</button> 
 
