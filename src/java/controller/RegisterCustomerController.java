@@ -67,18 +67,14 @@ public class RegisterCustomerController extends HttpServlet {
         String re_pass = request.getParameter("repass");
         String phonenumber = request.getParameter("phonenumber");
         String address = request.getParameter("address");
-        
+
         // luu sesi
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", user);
-                    session.setAttribute("pass", pass);
-                    session.setAttribute("email", email);
-                    session.setAttribute("phonenumber", phonenumber);
-                    session.setAttribute("address", address);
-                     
-                    
-                    
-        
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        session.setAttribute("pass", pass);
+        session.setAttribute("email", email);
+        session.setAttribute("phonenumber", phonenumber);
+        session.setAttribute("address", address);
 
         // Kiểm tra mật khẩu và mật khẩu xác nhận
         if (!pass.equals(re_pass)) {
@@ -104,10 +100,6 @@ public class RegisterCustomerController extends HttpServlet {
             return; // Kết thúc phương thức để ngăn chặn tiếp tục đăng ký
         }
 
-        
-        
-
-
         DAO register = new DAO();
         try {
             int usernameCheckResult = register.checkUsername(user);
@@ -122,19 +114,18 @@ public class RegisterCustomerController extends HttpServlet {
                 if (usernameCheckResult == 0) {
                     // Gửi OTP qua email
                     int otp = sendOTP(email);
-                    session.setAttribute("otp",otp)  ;
-               
+                    session.setAttribute("otp", otp);
+
                     // Chuyển hướng đến trang nhập mã OTP
                     response.sendRedirect("VerifyEmail.jsp");
-                   
+
                 } else {
                     // Xu ly khi tai khoan dang ky khong thanh cong
                     String errorMessage = "Đã có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau.";
                     request.setAttribute("errorMessage", errorMessage);
                     request.getRequestDispatcher("Register.jsp").forward(request, response);
                 }
-                
-                 
+
             }
         } catch (Exception e) {
             // Xu ly ngoai le hoac loi co so du lieu
@@ -174,29 +165,21 @@ public class RegisterCustomerController extends HttpServlet {
             message.setText("Mã OTP của bạn là: " + otpvalue);
 
             // Gửi email
-            
             Transport.send(message);
             System.out.println("Gửi email thành công");
-               
-        
-            
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-        
-  return otpvalue;
+
+        return otpvalue;
     }
-    
-    
 
     //  generating random OTP
     private int generateOTP() {
         Random rand = new Random();
         return rand.nextInt(999999);
-        
 
     }
-    
 
 }
