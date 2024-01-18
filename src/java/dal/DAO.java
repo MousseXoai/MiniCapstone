@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Account;
 import model.UserGoogleDto;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -20,7 +21,7 @@ public class DAO extends DBContext {
     ResultSet rs = null;
     
     public Account check(String u) {
-        BCrypt b = new BCrypt();
+        
         String sql = "SELECT [uID]\n "
                 + "      ,[user]\n "
                 + "      ,[pass]\n "
@@ -30,7 +31,7 @@ public class DAO extends DBContext {
                 + "      ,[isCheck]\n "
                 + "      ,[isShip]\n "
                 + "  FROM [dbo].[Account]"
-                + "  WHERE [user] = ?";
+                + "  WHERE [user] = ? ";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, u);
@@ -38,14 +39,15 @@ public class DAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 
-                Account a = new Account(rs.getInt(1),
-                         rs.getString(2),
-                         rs.getString(3),
-                         rs.getString(4),
-                         rs.getInt(5),
-                         rs.getInt(6),
-                         rs.getInt(7),
-                         rs.getInt(8));
+                Account a = new Account();
+                a.setuID(rs.getInt("uID"));
+                a.setUser(rs.getString("user"));
+                a.setPass(rs.getString("pass"));
+                a.setEmail(rs.getString("email"));
+                a.setIsSell(rs.getInt("isSell"));
+                a.setIsAdmin(rs.getInt("isAdmin"));
+                a.setIsCheck(rs.getInt("isCheck"));
+                a.setIsShip(rs.getInt("isShip"));
                 return a;
             }
         } catch (SQLException e) {
@@ -71,7 +73,6 @@ public class DAO extends DBContext {
             ps.setString(1, user.getName());
             ps.setString(2, user.getId());
             ps.setString(3, user.getEmail());
-            System.out.println(user.getName());
             ps.executeUpdate();
         } catch(SQLException e){
             System.out.println("addGoogleAccount: " + e.getMessage());
@@ -87,9 +88,31 @@ public class DAO extends DBContext {
             rowCount = st.executeUpdate();
             
         } catch (Exception e) {
-            System.out.println("getListQuestion:" + e.getMessage());
+            System.out.println("resetPassword:" + e.getMessage());
         }
         return rowCount;
+    }
+
+    public void addFacebookAccount(Account a) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([user]\n"
+                + "           ,[pass]\n"
+                + "           ,[email]\n"
+                + "           ,[isSell]\n"
+                + "           ,[isAdmin]\n"
+                + "           ,[isCheck]\n"
+                + "           ,[isShip])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,0,0,0,0)";
+        try{
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, a.getUser());
+            ps.setString(2, a.getPass());
+            ps.setString(3, a.getEmail());
+            ps.executeUpdate();
+        } catch(SQLException e){
+            System.out.println("addFacebookAccount: " + e.getMessage());
+        }
     }
 
     
