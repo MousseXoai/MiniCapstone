@@ -4,7 +4,6 @@
  */
 package model;
 
-
 import dal.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,13 +15,13 @@ import java.sql.ResultSet;
  */
 
 public class Cart extends DBContext {
+
     private int accountID;
     private int productID;
     private int amount;
     private int maCart;
 
     public Cart() {
-
         connectDB();
     }
 
@@ -32,7 +31,6 @@ public class Cart extends DBContext {
         this.amount = amount;
         connectDB();
     }
-       
 
     public Cart(int accountID, int productID, int amount, int maCart) {
         this.accountID = accountID;
@@ -74,8 +72,7 @@ public class Cart extends DBContext {
         this.maCart = maCart;
     }
     
-
-     Connection cnn;
+    Connection cnn;
     PreparedStatement stm;
     ResultSet rs;
 
@@ -87,6 +84,4 @@ public class Cart extends DBContext {
             System.out.println("Connect fail");
         }
     }
-
-    
 }
