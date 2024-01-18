@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP391/Project/MiniCapstone/web/forgotPassword.jsp</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/web/login.jsp</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/Login.java</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/forgotPassword.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/ValidateOtp.java</file>
-            <file>file:/D:/SWP391/Project/MiniCapstone/web/EnterOtp.jsp</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/LoginGoogleHandler.java</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/model/Account.java</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dal/DAO.java</file>
         </group>
     </open-files>
 </project-private>
