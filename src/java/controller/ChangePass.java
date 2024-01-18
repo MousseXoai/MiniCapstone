@@ -1,6 +1,7 @@
 package controller;
 
-import DAO.ChangePassDAO;
+
+import dal.DAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,7 +33,7 @@ public class ChangePass extends HttpServlet {
         String oldPass = request.getParameter("oldPass");//old
         String newPass = request.getParameter("pass"); //new 
 
-        ChangePassDAO cp = new ChangePassDAO();
+        DAO cp = new DAO();
         
         Account account=cp.check(user,oldPass);
         

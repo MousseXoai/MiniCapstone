@@ -5,7 +5,7 @@
 
 package controller;
 
-import DAO.CategoryDAO;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -56,7 +56,7 @@ public class CategoryControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryDAO cateDao = new CategoryDAO();
+        DAO cateDao = new DAO();
         
         List<PhanLoai> cateList = cateDao.getAllCate();
         request.setAttribute("cateList", cateList);

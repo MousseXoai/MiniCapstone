@@ -6,7 +6,7 @@ package controller;
  */
 
 
-import DAO.ProductDAO;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -58,9 +58,10 @@ public class ProductControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         System.out.println("No co vao day");
-        ProductDAO p = new ProductDAO();
+        DAO p = new DAO();
         List<SanPham> data = p.TopProductNew();
         request.setAttribute("data", data);
+        System.out.println(data);
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     } 
 

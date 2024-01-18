@@ -5,7 +5,7 @@
 package controller;
 
 
-import DAO.loginDAO;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -106,7 +106,7 @@ public class login extends HttpServlet {
         response.addCookie(cu);
         response.addCookie(cp);
         response.addCookie(cr);
-        loginDAO d = new loginDAO();
+        DAO d = new DAO();
         Account a = d.check(u);
         
         if (a == null || (BCrypt.checkpw(p, a.getPass().trim() ) == false)) {

@@ -4,7 +4,8 @@
  */
 package controller;
 
-import DAO.RegisterCustomer;
+
+import dal.DAO;
 import model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -113,8 +114,7 @@ public class RegisterCustomerController extends HttpServlet {
         account.setGender(gender);
         account.setAddress(address);
 
-        RegisterCustomer register = new RegisterCustomer();
-
+        DAO register = new DAO();
         try {
             int usernameCheckResult = register.checkUsername(user);
 
@@ -127,7 +127,7 @@ public class RegisterCustomerController extends HttpServlet {
                 // Đăng ký tài khoản
                 if (usernameCheckResult == 0) {
                     // Gửi OTP qua email
-                    //sendOTP(email);
+                    sendOTP(email);
                     // Dang ky thanh cong, chuyen den trang dang nhap
                     register.RegisterCustomer(user, hashedPassword, email, phonenumber, address, gender);                  
                     response.sendRedirect("login.jsp");
