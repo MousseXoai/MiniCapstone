@@ -14,8 +14,8 @@ import java.sql.ResultSet;
  * @author Admin
  */
 
-public class Cart extends DBContext {
 
+public class Cart extends DBContext {
     private int accountID;
     private int productID;
     private int amount;

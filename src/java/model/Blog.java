@@ -26,6 +26,7 @@ public class Blog {
     public Blog() {
     }
 
+
     public Blog(int maBlog, String title, String content1, String content2, String content3, String author, Date dateBlog, String image1, String image2, String image3, int view) {
         this.maBlog = maBlog;
         this.title = title;
@@ -128,5 +129,4 @@ public class Blog {
         this.view = view;
     }
 
-    
 }

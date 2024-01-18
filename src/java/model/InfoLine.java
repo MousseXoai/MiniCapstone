@@ -19,7 +19,9 @@ public class InfoLine {
     public InfoLine() {
     }
 
+
     public InfoLine(int invoiceID, String name, String email, String address, String phonenumber, String note) {
+
         this.invoiceID = invoiceID;
         this.name = name;
         this.email = email;

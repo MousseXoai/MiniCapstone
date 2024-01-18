@@ -46,6 +46,7 @@ public class SanPham {
         this.shopID = shopID;
         this.sale = sale;
         this.trangthai = trangthai;
+
     }
 
     public int getId() {
@@ -103,6 +104,7 @@ public class SanPham {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public int getCateID() {
         return cateID;
@@ -175,8 +177,5 @@ public class SanPham {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
-
-    
-    
     
 }
