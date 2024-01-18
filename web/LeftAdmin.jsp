@@ -109,31 +109,31 @@
                         <li>
                             <a href="typography.html">
                                 <i class="ti-text"></i>
-                                <p>Typography</p>
+                                <p>Function</p>
                             </a>
                         </li>
                         <li>
                             <a href="icons.html">
                                 <i class="ti-pencil-alt2"></i>
-                                <p>Icons</p>
+                                <p>Function</p>
                             </a>
                         </li>
                         <li>
                             <a href="maps.html">
                                 <i class="ti-map"></i>
-                                <p>Maps</p>
+                                <p>Function</p>
                             </a>
                         </li>
                         <li>
                             <a href="notifications.html">
                                 <i class="ti-bell"></i>
-                                <p>Notifications</p>
+                                <p>Function</p>
                             </a>
                         </li>
                         <li class="active-pro">
                             <a href="upgrade.html">
                                 <i class="ti-export"></i>
-                                <p>Upgrade to PRO</p>
+                                <p>Function</p>
                             </a>
                         </li>
                     </ul>
