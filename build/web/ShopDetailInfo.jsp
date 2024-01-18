@@ -155,18 +155,18 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-group" >
-                                                                <label>First Name</label>
-                                                                <input type="text" class="form-control border-input" name="firstname" placeholder="First Name" value="${s.name.substring(0, s.name.indexOf(' '))}">
+                                                                <label>Name</label>
+                                                                <input type="text" class="form-control border-input" name="name" placeholder="First Name" value="${s.name}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+<!--                                                        <div class="col-md-6">
                                                             <div class="form-group" >
                                                                 <label>Last Name</label>
                                                                 <input type="text" class="form-control border-input" name="lastname" placeholder="Last Name" value="${s.name.substring(s.name.indexOf(' '))}">
                                                             </div>
-                                                        </div>
+                                                        </div>-->
                                                     </div>
 
 

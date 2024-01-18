@@ -33,11 +33,11 @@ public class UpdateShopProfileControl extends HttpServlet {
        DAO dao = new DAO();
        String userName = request.getParameter("username");
        String email = request.getParameter("email");
-       String firstName = request.getParameter("firstname")+" ";
-       String lastName = request.getParameter("lastname");
+       String name = request.getParameter("name");
+//       String lastName = request.getParameter("lastname");
        String address = request.getParameter("address");
        String phoneNumber = request.getParameter("phonenumber");
-       dao.updateShopProfile(firstName+lastName, address, phoneNumber, email, 15);
+       dao.updateShopProfile(name, address, phoneNumber, email, 15);
        
        request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
     } 
