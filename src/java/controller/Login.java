@@ -61,16 +61,30 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
-        PrintWriter out = response.getWriter();
-        out.print(action);
+        DAO d = new DAO();
+        HttpSession session = request.getSession();
         if(action.equals("Face")){
-            String name = request.getParameter("name");
+            String username = request.getParameter("name");
             String email = request.getParameter("email");
             String id = request.getParameter("id");
-            out.println(name);
-            out.println(email);
-            out.println(id);
+            
+            Account a = d.check(username);
+            try{
+            if(a == null || (a.getPass().trim().equals(id)) == false) {
+                    a = new Account(0, username, id, email, 0, 0, 0, 0);
+                    d.addFacebookAccount(a);
+                    session.setAttribute("account", a);
+                    response.sendRedirect("home");
+                } else {
+                    session.setAttribute("account", a);
+                    response.sendRedirect("home");
+                }
+            } catch(Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
     }
 

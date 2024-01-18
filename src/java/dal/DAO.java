@@ -93,5 +93,27 @@ public class DAO extends DBContext {
         return rowCount;
     }
 
+    public void addFacebookAccount(Account a) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([user]\n"
+                + "           ,[pass]\n"
+                + "           ,[email]\n"
+                + "           ,[isSell]\n"
+                + "           ,[isAdmin]\n"
+                + "           ,[isCheck]\n"
+                + "           ,[isShip])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,0,0,0,0)";
+        try{
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, a.getUser());
+            ps.setString(2, a.getPass());
+            ps.setString(3, a.getEmail());
+            ps.executeUpdate();
+        } catch(SQLException e){
+            System.out.println("addFacebookAccount: " + e.getMessage());
+        }
+    }
+
     
 }

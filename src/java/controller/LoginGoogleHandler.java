@@ -38,6 +38,7 @@ public class LoginGoogleHandler extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
                 response.setContentType("text/html;charset=UTF-8");
+                request.setCharacterEncoding("UTF-8");
 		String code = request.getParameter("code");
                 DAO d = new DAO();
                 HttpSession session = request.getSession();
@@ -74,9 +75,7 @@ public class LoginGoogleHandler extends HttpServlet {
 	public static UserGoogleDto getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
 		String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
 		String response = Request.Get(link).execute().returnContent().asString();
-
 		UserGoogleDto googlePojo = new Gson().fromJson(response, UserGoogleDto.class);
-
 		return googlePojo;
 	}
 
