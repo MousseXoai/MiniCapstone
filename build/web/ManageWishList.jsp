@@ -83,7 +83,7 @@
                                     <c:forEach var="c" items="${ListSpYeuThich}">
                                         <tr>
                                             <td class="cart__product__item">
-                                                <img style="width: 100px; height 100px"src="${c.image}" alt="">
+                                                <img style="width: 100px; height: 100px"src="${c.image}" alt="">
                                                 <div class="cart__product__item__title">
                                                     <h6>${c.name}</h6>
                                                 </div>

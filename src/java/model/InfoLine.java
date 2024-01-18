@@ -19,15 +19,12 @@ public class InfoLine {
     public InfoLine() {
     }
 
-
     public InfoLine(int invoiceID, String name, String email, String address, String phonenumber, String note) {
-
         this.invoiceID = invoiceID;
         this.name = name;
         this.email = email;
         this.address = address;
         this.phonenumber = phonenumber;
-
         this.note = note;
     }
 
@@ -70,8 +67,7 @@ public class InfoLine {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
-
-
+    
     public String getNote() {
         return note;
     }
@@ -84,5 +80,4 @@ public class InfoLine {
         return "InfoLine{" + "invoiceID=" + invoiceID + ", name=" + name + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + ", note=" + note + '}';
     }
 
-    
 }
