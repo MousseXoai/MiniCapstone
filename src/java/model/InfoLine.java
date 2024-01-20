@@ -67,7 +67,7 @@ public class InfoLine {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
-
+    
     public String getNote() {
         return note;
     }
@@ -80,5 +80,4 @@ public class InfoLine {
         return "InfoLine{" + "invoiceID=" + invoiceID + ", name=" + name + ", email=" + email + ", address=" + address + ", phonenumber=" + phonenumber + ", note=" + note + '}';
     }
 
-    
 }

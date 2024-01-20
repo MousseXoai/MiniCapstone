@@ -37,14 +37,14 @@ public class AddWishListControl extends HttpServlet {
         String id=request.getParameter("pid");
         int productID = Integer.parseInt(id);
         
-        System.out.println(productID);
+        
         
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        /*if(a == null) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }*/
-        int accountID = 2;       
+        if(a == null) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }else{
+            int accountID = a.getuID();       
         DAO dao = new DAO();
         WishList wishListExisted = dao.checkWishListExist(accountID,productID);
 
@@ -57,6 +57,8 @@ public class AddWishListControl extends HttpServlet {
         	  request.setAttribute("mess", "Da them san pham vao wish list!");
         	  request.getRequestDispatcher("shop").forward(request, response);
         }
+        }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

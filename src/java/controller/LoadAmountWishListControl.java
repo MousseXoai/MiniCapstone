@@ -37,13 +37,13 @@ public class LoadAmountWishListControl extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         PrintWriter out = response.getWriter();
-        /*if (a == null) {
+        if (a == null) {
             totalAmountWishList=0;
             
             out.println(totalAmountWishList);
             return;
-        }*/
-        int accountID = 2;
+        }
+        int accountID = a.getuID();
         DAO dao = new DAO();
         List<WishList> list = dao.getWishListByAccountID(accountID);
         totalAmountWishList = list.size();

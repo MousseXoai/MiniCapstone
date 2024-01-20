@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import model.Account;
 import model.Cart;
 import model.SanPham;
 
@@ -59,16 +61,25 @@ public class CartControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            
-            DAO dao = new DAO();           
-          
-            ArrayList<Cart> list = dao.getProductInCartByAccId(2);
-            ArrayList<SanPham> listSP = dao.getAllProduct();
-            Double totalPrice = dao.getTotalPrice(2);
-            request.setAttribute("listcart", list);
-            request.setAttribute("listsanpham", listSP);
-            request.setAttribute("totalprice", totalPrice);
-            request.getRequestDispatcher("Cart.jsp").forward(request, response);
+
+            DAO dao = new DAO();
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+                
+                int accountID = a.getuID();
+                
+                ArrayList<Cart> list = dao.getProductInCartByAccId(accountID);
+                ArrayList<SanPham> listSP = dao.getAllProduct();
+                Double totalPrice = dao.getTotalPrice(accountID);
+                request.setAttribute("listcart", list);
+                request.setAttribute("listsanpham", listSP);
+                request.setAttribute("totalprice", totalPrice);
+                request.getRequestDispatcher("Cart.jsp").forward(request, response);
+            }
+
         }
     } 
 

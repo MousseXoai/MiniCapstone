@@ -20,15 +20,18 @@ public class Account {
     public Account() {
     }
 
-    public Account(int uID, String user, String pass, int isSell, int isAdmin, int isCheck, int isShip) {
+    public Account(int uID, String user, String pass,int isSell, int isAdmin, int isCheck, int isShip) {
         this.uID = uID;
         this.user = user;
         this.pass = pass;
+        
         this.isSell = isSell;
         this.isAdmin = isAdmin;
         this.isCheck = isCheck;
         this.isShip = isShip;
     }
+
+    
 
     public int getuID() {
         return uID;
@@ -53,7 +56,7 @@ public class Account {
     public void setPass(String pass) {
         this.pass = pass;
     }
-
+  
     public int getIsSell() {
         return isSell;
     }
@@ -86,9 +89,6 @@ public class Account {
         this.isShip = isShip;
     }
 
-    public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     
     

@@ -14,7 +14,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import model.Account;
 
 /**
  *
@@ -77,14 +79,22 @@ public class CustomerAvatarControl extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-        DAO dao = new DAO();
-        Part part = request.getPart("image");
+        try ( PrintWriter out = response.getWriter()) {
 
-        dao.changeAvatarShop(part, 2);
-        response.sendRedirect("customerinfo");
-        
+            DAO dao = new DAO();
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+
+                int accountID = a.getuID();
+                Part part = request.getPart("image");
+
+                dao.changeAvatarShop(part, accountID);
+                response.sendRedirect("customerinfo");
+
+            }
         }
     }
 

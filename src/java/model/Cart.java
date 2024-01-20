@@ -13,7 +13,9 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
+
 public class Cart extends DBContext {
+
     private int accountID;
     private int productID;
     private int amount;
@@ -29,7 +31,6 @@ public class Cart extends DBContext {
         this.amount = amount;
         connectDB();
     }
-       
 
     public Cart(int accountID, int productID, int amount, int maCart) {
         this.accountID = accountID;
@@ -71,7 +72,7 @@ public class Cart extends DBContext {
         this.maCart = maCart;
     }
     
-     Connection cnn;
+    Connection cnn;
     PreparedStatement stm;
     ResultSet rs;
 
@@ -83,6 +84,4 @@ public class Cart extends DBContext {
             System.out.println("Connect fail");
         }
     }
-
-    
 }

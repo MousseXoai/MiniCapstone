@@ -40,6 +40,9 @@
         <div class="container-fluid">
 
             <div class="container">
+                <a  href="order">
+            <i style="font-size: 15px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back</i>  
+        </a>
                 <!-- Title -->
                 <div class="d-flex justify-content-between align-items-center py-3">
                     <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #${hoadon.getMaHD()}</h2>
