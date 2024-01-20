@@ -88,6 +88,7 @@
         </style>
         
     </head>
+    
     <body>
         <form action="SaveUpdateProductControl" method="post">
         <fmt:setLocale value="vi_VN" />
@@ -97,6 +98,7 @@
                  data-keyboard="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
+                        
 
                         <div class="modal-body">
                             <div class="row">
@@ -158,6 +160,7 @@
                             <BR>
                             <button class="btn btn-save" type="submit">Lưu lại</button>
                             <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                            <a class="btn btn-cancel" data-dismiss="modal" href="QuanLySanPhamControl">Thoát</a>
                             <BR>
                         </div>
                         <div class="modal-footer">

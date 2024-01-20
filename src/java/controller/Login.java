@@ -78,10 +78,10 @@ public class Login extends HttpServlet {
                     d.addFacebookAccount(a);
                     int uID = d.getUidByName(a);
                     d.addEmailByUid(email, uID);
-                    session.setAttribute("account", a);
+                    session.setAttribute("acc", a);
                     response.sendRedirect("home");
                 } else {
-                    session.setAttribute("account", a);
+                    session.setAttribute("acc", a);
                     response.sendRedirect("home");
                 }
             } catch(Exception e) {
@@ -130,8 +130,13 @@ public class Login extends HttpServlet {
         } else {
 //co roi
             HttpSession session = request.getSession();
-            session.setAttribute("account", a);
-            response.sendRedirect("home");
+            session.setAttribute("acc", a);
+            if(a.getIsSell()==1){
+                response.sendRedirect("statistic");
+            }else{
+                response.sendRedirect("home");
+            }
+            
 
         }
     }

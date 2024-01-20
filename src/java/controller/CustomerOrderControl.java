@@ -12,8 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.AccInfo;
+import model.Account;
 import model.HoaDon;
 import model.OrderLine;
 import model.SanPham;
@@ -61,9 +63,30 @@ public class CustomerOrderControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
+        try ( PrintWriter out = response.getWriter()) {
+            DAO dao = new DAO();
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+
+                int accountID = a.getuID();
+                ArrayList<HoaDon> listHD = dao.getAllHoaDon(accountID);
+                ArrayList<OrderLine> listOL = dao.getAllOrderLine();
+                ArrayList<SanPham> listSP = dao.getAllProduct();
+                ArrayList<TrangThai> listTT = dao.getAllTrangThai();
+                AccInfo acc = dao.getAccInfo(accountID);
+
+                request.setAttribute("acc", acc);
+                request.setAttribute("listHD", listHD);
+                request.setAttribute("listOL", listOL);
+                request.setAttribute("listSP", listSP);
+                request.setAttribute("listTT", listTT);
+
+                request.getRequestDispatcher("OrderHistory.jsp").forward(request, response);
+
+            }
         }
     } 
 
@@ -77,24 +100,7 @@ public class CustomerOrderControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            DAO dao = new DAO();
-            ArrayList<HoaDon> listHD = dao.getAllHoaDon(2);
-            ArrayList<OrderLine> listOL = dao.getAllOrderLine();
-            ArrayList<SanPham> listSP = dao.getAllProduct();
-            ArrayList<TrangThai> listTT = dao.getAllTrangThai();           
-            AccInfo acc = dao.getAccInfo(2);
-            
-            request.setAttribute("acc", acc);
-            request.setAttribute("listHD", listHD);
-            request.setAttribute("listOL", listOL);
-            request.setAttribute("listSP", listSP);
-            request.setAttribute("listTT", listTT);
-            
-            request.getRequestDispatcher("OrderHistory.jsp").forward(request, response);
-            
-        }
+        
     }
 
     /** 

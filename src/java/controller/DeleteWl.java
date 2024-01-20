@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -56,9 +58,15 @@ public class DeleteWl extends HttpServlet {
     throws ServletException, IOException {
         DAO dao = new DAO();
         String id = request.getParameter("wid");
-        dao.deleteByMaWl(id);
-        request.getRequestDispatcher("ManageWishlist").forward(request, response);
-    } 
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            dao.deleteByMaWl(id);
+            request.getRequestDispatcher("ManageWishlist").forward(request, response);
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

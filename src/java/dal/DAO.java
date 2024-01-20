@@ -311,12 +311,13 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> listSpByShop(int id) {
+    public List<SanPham> listSpByShop(int id, int index) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select  * from SanPham  where [shopid] = ? ";
+        String query = "select  * from SanPham  where [shopid] = ? order by [id] offset ? rows fetch next 12 rows only ";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, id);
+            ps.setInt(2, (index - 1) * 12);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new SanPham(rs.getInt(1),
@@ -382,7 +383,7 @@ public class DAO extends DBContext {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+                list.add(new Event(rs.getInt(1), rs.getInt(3), rs.getString(2)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());
@@ -1044,7 +1045,7 @@ public class DAO extends DBContext {
 
     public List<HoaDon> getAllInvoiceByShopID(int shopid) {
         List<HoaDon> list = new ArrayList<>();
-        String query = "  select hd.maHD, hd.accountID, hd.tongGia, hd.ngayXuat, hd.trangthaiid "
+        String query = "  select hd.maHD, hd.accountID, hd.tongGia, hd.ngayXuat, hd.trangthaiid, hd.loaiid "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
                 + "where shopid = ?";
@@ -1057,7 +1058,8 @@ public class DAO extends DBContext {
                         rs.getInt(2),
                         rs.getDouble(3),
                         rs.getDate(4),
-                        rs.getInt(5)
+                        rs.getInt(5),
+                        rs.getInt(6)
                 ));
             }
         } catch (Exception e) {
@@ -1529,8 +1531,9 @@ public class DAO extends DBContext {
                 double tonggia = rs.getDouble(3);
                 Date ngayxuat = rs.getDate(4);
                 int trangthai = rs.getInt(5);
+                int loai=rs.getInt(6);
 
-                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai);
+                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai, loai);
                 list.add(p);
             }
         } catch (Exception e) {
@@ -1613,8 +1616,9 @@ public class DAO extends DBContext {
                 double tonggia = rs.getDouble(3);
                 Date ngayxuat = rs.getDate(4);
                 int trangthai = rs.getInt(5);
+                int loai = rs.getInt(5);
 
-                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai);
+                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai, loai);
                 return p;
             }
         } catch (Exception e) {
@@ -1806,42 +1810,7 @@ public class DAO extends DBContext {
         }
     }
 
-    public Account check(String u) {
-
-        String sql = "  SELECT	a.[uID],\n"
-                + "                a.[user],\n"
-                + "                a.[pass],\n"
-                + "               a.[isSell],\n"
-                + "               a.[isAdmin],\n"
-                + "               a.[isCheck],\n"
-                + "               a.[isShip],\n"
-                + "               ac.[email]\n"
-                + "               FROM [dbo].[Account] a\n"
-                + "               JOIN AccInfo ac on a.[uID] = ac.[uID]\n"
-                + "               WHERE [user] = ? ";
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, u);
-
-            rs = ps.executeQuery();
-            while (rs.next()) {
-
-                Account a = new Account();
-                a.setuID(rs.getInt("uID"));
-                a.setUser(rs.getString("user"));
-                a.setPass(rs.getString("pass"));
-                a.setIsSell(rs.getInt("isSell"));
-                a.setIsAdmin(rs.getInt("isAdmin"));
-                a.setIsCheck(rs.getInt("isCheck"));
-                a.setIsShip(rs.getInt("isShip"));
-
-                return a;
-            }
-        } catch (SQLException e) {
-            System.out.println("check: " + e.getMessage());
-        }
-        return null;
-    }
+    
 
     public void addGoogleAccount(UserGoogleDto user) {
 
@@ -1963,6 +1932,563 @@ public class DAO extends DBContext {
         } catch(Exception e) {
             System.out.println("addEmailByUid: " + e.getMessage());
         }
+    }
+
+    public Account getAccountById(int id) {
+        try {
+            String strSQL = "select * from Account where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int uid = rs.getInt(1);
+                String user = rs.getString(2);
+                String pass = rs.getString(3);
+                int isSell = rs.getInt(4);
+                int isAdmin = rs.getInt(5);
+                int isCheck = rs.getInt(6);
+                int isShip = rs.getInt(7);
+                Account p = new Account(uid,user,pass,isSell,isAdmin,isCheck,isShip);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccountById: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public int getShopIdByAccountId(int accountID) {
+        int id = 0;
+        String sql = "select shopid from shop where accountid=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("shopid");
+            }
+        } catch (Exception e) {
+            System.out.println("getAccountByEmail: " + e.getMessage());
+        }
+        return id;
+    }
+
+    public int countAllLaptop() {
+        String query = "select count(*) from SanPham where cateID=1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countAllDongHo() {
+        String query = "select count(*) from SanPham where cateID=2";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countAllBanPhim() {
+        String query = "select count(*) from SanPham where cateID=6";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countAllChuot() {
+        String query = "select count(*) from SanPham where cateID=7";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countAllTaiNghe() {
+        String query = "select count(*) from SanPham where cateID=8";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<SanPham> getTop7NewProduct() {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select top 7 * from SanPham order by id desc";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> getBestSellerProduct() {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select top 3 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID,s.color, s.image2, s.image3, s.image4, s.shopid,s.sale,s.trangthai from SanPham s, SoLuongBan so where s.id=so.productID order by so.soLuongDaBan desc";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public void RegisterCustomer(String user, String pass) {
+
+        String sql = "INSERT INTO Account([user], pass, isSell, isAdmin, isCheck,isShip)\n"
+                + "VALUES (?, ?, 0, 0, 0, 0)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+// get id theo ten
+
+    public int getIDByUsername(Account account) {
+        
+        String sql = "select [uID] from Account Where [user] = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getUser());
+            
+            rs= ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+
+    }
+
+    public void addbyAccinfo(String email, String address, String phoneNumber, int uID) {
+
+        String sql = "	INSERT INTO AccInfo(email,[address],phonenumber,uID)\n"
+                + "                VALUES (?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, address);
+            ps.setString(3, phoneNumber);
+            ps.setInt(4, uID);
+            
+
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    //check user ton tai
+    public int checkUsername(String user) {
+        int exist = 0;
+        String sql = "select * from account where [user] = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user);
+
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                exist = 1;
+            }
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return exist;
+    }
+
+   
+
+    // update mk moi
+    public void change(Account account) {
+        String sql = "update Account set pass = ? Where [user] = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getPass());
+            ps.setString(2, account.getUser());
+            System.out.println(account.getUser());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public Account check(String u) {
+
+        String sql = "SELECT [uID]\n "
+                + "      ,[user]\n "
+                + "      ,[pass]\n "
+                + "      ,[isSell]\n "
+                + "      ,[isAdmin]\n "
+                + "      ,[isCheck]\n "
+                + "      ,[isShip]\n "
+                + "  FROM [dbo].[Account]"
+                + "  WHERE [user] = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, u);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Account a = new Account();
+                a.setuID(rs.getInt("uID"));
+                a.setUser(rs.getString("user"));
+                a.setPass(rs.getString("pass"));
+                a.setIsSell(rs.getInt("isSell"));
+                a.setIsAdmin(rs.getInt("isAdmin"));
+                a.setIsCheck(rs.getInt("isCheck"));
+                a.setIsShip(rs.getInt("isShip"));
+                return a;
+            }
+        } catch (SQLException e) {
+            System.out.println("check: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public List<SanPham> getProductShopByName(String txt, int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [name] like ? and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + txt + "%");
+            ps.setInt(2, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> getProductShopByCID(String cateID, int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where cateID=? and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, cateID);
+            ps.setInt(2, shopId);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<SanPham> searchShopByPriceMinToMax(String priceMin, String priceMax, int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [price] >=? and [price]<=? and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, priceMin);
+            ps.setString(2, priceMax);
+            ps.setInt(3, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> searchShopPriceUnder100(int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [price] < 10000000 and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> searchShopPrice100To200(int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [price] >= 10000000 and [price]<=20000000 and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    //18
+    public List<SanPham> searchShopPriceAbove200(int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [price] > 20000000 and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> getProductShopByBID(String bid, int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where branID=? and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, bid);
+            ps.setInt(2, shopId);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<SanPham> getProductShopByColor(String color, int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where color=? and shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, color);
+            ps.setInt(2, shopId);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int checkEmail(String email) {
+        int exist = 0;
+        String sql = "select * from accinfo where [email] = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                exist = 1;
+            }
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return exist;
     }
 
 }

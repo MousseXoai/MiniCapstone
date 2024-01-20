@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.SanPham;
 import model.WishList;
 
@@ -60,13 +62,21 @@ public class ManageWishlist extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        List<SanPham> ListSpYeuThich = dao.getWishListSpByAccount(2);
-        List<WishList> lwl = dao.getWishListSpByAcc(2);
-        int countwl = dao.getNumberWlByAcc(2);
-        request.setAttribute("countwl", countwl);
-        request.setAttribute("lwl", lwl);
-        request.setAttribute("ListSpYeuThich", ListSpYeuThich);
-        request.getRequestDispatcher("ManageWishList.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            List<SanPham> ListSpYeuThich = dao.getWishListSpByAccount(accountID);
+            List<WishList> lwl = dao.getWishListSpByAcc(accountID);
+            int countwl = dao.getNumberWlByAcc(accountID);
+            request.setAttribute("countwl", countwl);
+            request.setAttribute("lwl", lwl);
+            request.setAttribute("ListSpYeuThich", ListSpYeuThich);
+            request.getRequestDispatcher("ManageWishList.jsp").forward(request, response);
+        }
     }
 
     /**

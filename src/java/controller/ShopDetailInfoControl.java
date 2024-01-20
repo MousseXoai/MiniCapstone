@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.AccInfo;
 import model.Account;
@@ -31,22 +32,31 @@ public class ShopDetailInfoControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
-        List<AccInfo> shopInfo = dao.getShopInfo(15);
-        request.setAttribute("shopInfo", shopInfo);
-        
-        int totalItems = dao.countItemInShop(3);
-        request.setAttribute("totalItems", totalItems);
-        int totalProducts = dao.totalProductInShop(3);
-        request.setAttribute("totalProducts", totalProducts);
-        
-        List<Account> getAllAccount = dao.getAllAccount();
-        request.setAttribute("getAllAccount", getAllAccount);
-        
-        request.getRequestDispatcher("ShopDetailInfo.jsp").forward(request, response);
-    } 
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            int shopID = dao.getShopIdByAccountId(accountID);
+            List<AccInfo> shopInfo = dao.getShopInfo(accountID);
+            request.setAttribute("shopInfo", shopInfo);
+
+            int totalItems = dao.countItemInShop(shopID);
+            request.setAttribute("totalItems", totalItems);
+            int totalProducts = dao.totalProductInShop(shopID);
+            request.setAttribute("totalProducts", totalProducts);
+
+            List<Account> getAllAccount = dao.getAllAccount();
+            request.setAttribute("getAllAccount", getAllAccount);
+
+            request.getRequestDispatcher("ShopDetailInfo.jsp").forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

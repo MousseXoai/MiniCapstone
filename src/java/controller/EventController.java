@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Event;
 import model.SanPham;
 
@@ -60,13 +62,17 @@ public class EventController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
-        List<Event> listEventByShop = dao.ListEventByShop(2);
-        int countwl = dao.getNumberWlByAcc(2);
-        request.setAttribute("countwl", countwl);
-        request.setAttribute("listEventByShop", listEventByShop);
-        request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
-        request.getRequestDispatcher("event.jsp").forward(request, response);
+        String id=request.getParameter("id");
+            int shopID= Integer.parseInt(id);
+            
+            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
+            List<Event> listEventByShop = dao.ListEventByShop(shopID);
+            
+           System.out.println(listEventByShop);
+            request.setAttribute("listEventByShop", listEventByShop);
+            request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
+            request.getRequestDispatcher("event.jsp").forward(request, response);
+        
     }
 
     /**
