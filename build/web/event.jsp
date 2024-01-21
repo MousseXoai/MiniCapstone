@@ -42,10 +42,14 @@
         <jsp:include page="Menu.jsp"></jsp:include>
     
     <!-- Header Section End -->
-        <!-- Categories Section Begin -->
+    <!-- Categories Section Begin --><a  style="margin-left: 100px" href="homeshop?id=${shopId}">
+                                <i style="font-size: 20px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back to home of shop</i>  
+                            </a>
         <section class="categories">
+            
             <div class="container-fluid">
                 <div class="row">
+                    
                     <c:forEach items="${listEventByShop}" var="c">
                     <div class="col-lg-6 p-0">
                         <a href="shopListSp?id=${c.shopId}"><div class="categories__item categories__large__item set-bg" data-setbg="${c.image} ">
@@ -65,40 +69,7 @@
         <!-- Discount Section Begin -->
         <!-- Discount Section End -->
         <!-- Services Section Begin -->
-        <section class="services spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-car"></i>
-                            <h6>Free Shipping</h6>
-                            <p>For all oder over $99</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-money"></i>
-                            <h6>Money Back Guarantee</h6>
-                            <p>If good have Problems</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-support"></i>
-                            <h6>Online Support 24/7</h6>
-                            <p>Dedicated support</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-headphones"></i>
-                            <h6>Payment Secure</h6>
-                            <p>100% secure payment</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <!-- Services Section End -->
 
         <!-- Instagram Begin -->

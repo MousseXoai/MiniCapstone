@@ -74,8 +74,13 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="shop__sidebar">
+                        <a  href="homeshop?id=${shopId}">
+                                <i style="font-size: 20px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back to home of shop</i>  
+                            </a>
                         <div class="sidebar__categories">
+                            
                             <div class="section-title">
+                                
                                 <form action="shopListSp">
                                     <input type="text" name="id" value="${shopId}" hidden><br>
                                 <input type="submit" value="All Product Of Shop">

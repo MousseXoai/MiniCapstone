@@ -279,9 +279,9 @@ public class DAO extends DBContext {
         return m;
     }
 
-    public List<SanPham> top3SpMoiNhatByShop(int id) {
+    public List<SanPham> top6SpMoiNhatByShop(int id) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top(3) * from SanPham c where [shopid] = ? order by id desc ";
+        String query = "select top(6) * from SanPham c where [shopid] = ? order by id desc ";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, id);
@@ -344,11 +344,12 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> top6SpBanChayNhat() {
+    public List<SanPham> top6SpBanChayNhat(int shopId) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top(6) * from SanPham s join SoLuongBan slb on s.id = slb.productID  order by slb.soLuongDaBan desc";
+        String query = "select top(6) * from SanPham s join SoLuongBan slb on s.id = slb.productID where s.shopid=? order by slb.soLuongDaBan desc";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new SanPham(rs.getInt(1),
