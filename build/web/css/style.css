@@ -796,6 +796,7 @@ ol {
 	justify-content: center;
 	position: relative;
 	z-index: 1;
+        background-size: 250px;
 }
 
 .instagram__item:hover:after {
@@ -1051,7 +1052,7 @@ ol {
 }
 
 .categories__item.categories__large__item {
-	height: 638px;
+	height: 370px;
 	padding-left: 70px;
 }
 
