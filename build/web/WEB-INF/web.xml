@@ -21,6 +21,10 @@
         <servlet-class>controller.EventController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>controller.Login</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>HomeControl</servlet-name>
         <servlet-class>controller.HomeControl</servlet-class>
     </servlet>
@@ -183,6 +187,22 @@
     <servlet>
         <servlet-name>CustomerOrderDetailControl</servlet-name>
         <servlet-class>controller.CustomerOrderDetailControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterCustomerController</servlet-name>
+        <servlet-class>controller.RegisterCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterVerify</servlet-name>
+        <servlet-class>controller.RegisterVerify</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePass</servlet-name>
+        <servlet-class>controller.ChangePass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResendTokenControl</servlet-name>
+        <servlet-class>controller.ResendTokenControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
@@ -393,10 +413,6 @@
         <url-pattern>/SaveUpdateProductControl</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>controller.Login</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <servlet-class>controller.LoginGoogleHandler</servlet-class>
     </servlet>
@@ -416,10 +432,6 @@
         <servlet-name>demo</servlet-name>
         <servlet-class>test.demo</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
@@ -455,6 +467,14 @@
     <servlet-mapping>
         <servlet-name>ChangePass</servlet-name>
         <url-pattern>/ChangePass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResendTokenControl</servlet-name>
+        <url-pattern>/ResendToken</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutControl</servlet-name>
