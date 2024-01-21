@@ -9,7 +9,6 @@ package model;
  * @author Admin
  */
 public class Account {
-
     private int uID;
     private String user;
     private String pass;
@@ -21,7 +20,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int uID, String user, String pass, int isSell, int isAdmin, int isCheck, int isShip) {
+    public Account(int uID, String user, String pass,int isSell, int isAdmin, int isCheck, int isShip) {
         this.uID = uID;
         this.user = user;
         this.pass = pass;
@@ -31,12 +30,11 @@ public class Account {
         this.isShip = isShip;
     }
     
-     public Account(String user, String pass) {
-        
+    public Account(String user, String pass) {
         this.user = user;
         this.pass = pass;
-
     }
+
 
     public int getuID() {
         return uID;
@@ -61,8 +59,6 @@ public class Account {
     public void setPass(String pass) {
         this.pass = pass;
     }
-
- 
 
     public int getIsSell() {
         return isSell;
@@ -95,5 +91,6 @@ public class Account {
     public void setIsShip(int isShip) {
         this.isShip = isShip;
     }
+
 
 }

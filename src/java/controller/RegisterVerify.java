@@ -50,6 +50,7 @@ public class RegisterVerify extends HttpServlet {
             
             register.RegisterCustomer(user, hashedPassword);
             int uID = register.getIDByUsername(account);
+            System.out.println(uID);
             register.addbyAccinfo(email, address, phonenumber, uID);
             
             request.setAttribute("status", "success");

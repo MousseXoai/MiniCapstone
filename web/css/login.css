@@ -1,4 +1,11 @@
-
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jan 12, 2024, 1:08:33 PM
+    Author     : ADMIN
+*/
 
 * {
 	box-sizing: border-box;
@@ -79,13 +86,30 @@ form {
 	height: 100%;
 	text-align: center;
 }
-
+.bottom-form{
+    display: flex;
+    justify-content: space-between;
+    width: 324px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.forgot-button{
+    color: #fc4364;
+}
+.rem-input{
+    width: 10px;
+    font-size: 15px;
+        
+}
+input[type='checkbox'] {
+        accent-color: blue;
+    }
 input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
-	width: 100%;
+	width: 50%;
 }
 
 .container {
@@ -104,12 +128,12 @@ input {
 	position: absolute;
 	top: 0;
 	height: 100%;
-	transition: all 0.6s ease-in-out;
+	
 }
 
 .sign-in-container {
-	left: 0;
-	width: 50%;
+	
+	width: 100%;
 	z-index: 2;
 }
 
@@ -212,19 +236,31 @@ input {
 
 .social-container {
 	margin: 20px 0;
+        
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10%; 
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 5px ;
+    height: 22px;
+    width: 84px;
+    
 }
-
+.social-container a img {
+    width: 18px;
+    height: 18px;
+}
+.toRegister {
+    width: 319px;
+    height: 20px;
+    border: 1px solid #DDDDDD;
+    display: inline-block;
+    box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+}
 footer {
     background-color: #222;
     color: #fff;

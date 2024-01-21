@@ -16,16 +16,20 @@ public class SanPham {
     private int quantity;  
     private String title;
     private String description;
+    private int cateID;
+    private int branID;
     private String color;
-    private String delivery;
     private String image2;
     private String image3;
     private String image4;
+    private int shopID;
+    private int sale;
+    private int trangthai;
 
     public SanPham() {
     }
 
-    public SanPham(int id, String name, String image, double price, int quantity, String title, String description, String color, String delivery, String image2, String image3, String image4) {
+    public SanPham(int id, String name, String image, double price, int quantity, String title, String description, int cateID, int branID, String color, String image2, String image3, String image4, int shopID, int sale, int trangthai) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -33,11 +37,16 @@ public class SanPham {
         this.quantity = quantity;
         this.title = title;
         this.description = description;
+        this.cateID = cateID;
+        this.branID = branID;
         this.color = color;
-        this.delivery = delivery;
         this.image2 = image2;
         this.image3 = image3;
         this.image4 = image4;
+        this.shopID = shopID;
+        this.sale = sale;
+        this.trangthai = trangthai;
+
     }
 
     public int getId() {
@@ -96,20 +105,29 @@ public class SanPham {
         this.description = description;
     }
 
+
+    public int getCateID() {
+        return cateID;
+    }
+
+    public void setCateID(int cateID) {
+        this.cateID = cateID;
+    }
+
+    public int getBranID() {
+        return branID;
+    }
+
+    public void setBranID(int branID) {
+        this.branID = branID;
+    }
+
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public String getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(String delivery) {
-        this.delivery = delivery;
     }
 
     public String getImage2() {
@@ -135,11 +153,29 @@ public class SanPham {
     public void setImage4(String image4) {
         this.image4 = image4;
     }
-    
 
-    
-    
-	
-    
+    public int getShopID() {
+        return shopID;
+    }
+
+    public void setShopID(int shopID) {
+        this.shopID = shopID;
+    }
+
+    public int getSale() {
+        return sale;
+    }
+
+    public void setSale(int sale) {
+        this.sale = sale;
+    }
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
     
 }

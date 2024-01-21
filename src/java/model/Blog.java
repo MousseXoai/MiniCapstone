@@ -13,7 +13,9 @@ import java.sql.Date;
 public class Blog {
     private int maBlog;
     private String title;
-    private String content;
+    private String content1;
+    private String content2;
+    private String content3;
     private String author;
     private Date dateBlog;
     private String image1;
@@ -24,10 +26,13 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int maBlog, String title, String content, String author, Date dateBlog, String image1, String image2, String image3, int view) {
+
+    public Blog(int maBlog, String title, String content1, String content2, String content3, String author, Date dateBlog, String image1, String image2, String image3, int view) {
         this.maBlog = maBlog;
         this.title = title;
-        this.content = content;
+        this.content1 = content1;
+        this.content2 = content2;
+        this.content3 = content3;
         this.author = author;
         this.dateBlog = dateBlog;
         this.image1 = image1;
@@ -52,12 +57,28 @@ public class Blog {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getContent1() {
+        return content1;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent1(String content1) {
+        this.content1 = content1;
+    }
+
+    public String getContent2() {
+        return content2;
+    }
+
+    public void setContent2(String content2) {
+        this.content2 = content2;
+    }
+
+    public String getContent3() {
+        return content3;
+    }
+
+    public void setContent3(String content3) {
+        this.content3 = content3;
     }
 
     public String getAuthor() {
@@ -108,6 +129,4 @@ public class Blog {
         this.view = view;
     }
 
-    
-    
 }
