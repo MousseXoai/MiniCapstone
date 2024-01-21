@@ -34,15 +34,17 @@
     </head>
     <fmt:setLocale value="vi_VN" />
     <!-- Instagram Begin -->
+    <h2 style="color:red; margin-left: 650px; font-weight:bold">Best Seller</h2>
     <div class="instagram">
         <div class="container-fluid">
             <div class="row">
+                
                 <c:forEach var="c" items="${top6SpBanChayNhat}">
                     <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                         <div class="instagram__item set-bg" data-setbg="${c.image}">
                             <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">View Detail</a>
+                                
+                                <a href="productDetail?pid=${c.id}">View Detail</a>
                                 <p>${c.name}</p>
                                 <p><fmt:formatNumber type="currency" value="${c.price}" /></p>
                             </div>

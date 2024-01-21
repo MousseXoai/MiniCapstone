@@ -39,13 +39,13 @@ public class LoadAmountCartControl extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         PrintWriter out = response.getWriter();
-        /*if (a == null) {
+        if (a == null) {
             totalAmountCart=0;
             
             out.println(totalAmountCart);
             return;
-        }*/
-        int accountID = 2;
+        }
+        int accountID = a.getuID();
         DAO dao = new DAO();
         List<Cart> list = dao.getCartByAccountID(accountID);
         totalAmountCart = list.size();

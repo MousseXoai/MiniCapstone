@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-<body>
+<body onload="loadAmountCart(); loadAmountWishList()">
     
 
     <!-- Header Section Begin -->
@@ -144,6 +144,34 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
 </body>
 
 </html>

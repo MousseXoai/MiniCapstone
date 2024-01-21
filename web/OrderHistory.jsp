@@ -36,6 +36,9 @@
 
 <body>
     <div class="wrapper bg-white mt-sm-5">
+        <a  href="customerinfo">
+            <i style="font-size: 15px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back</i>  
+        </a>
     <h4 class="pb-4 border-bottom">Order history</h4>
         <div class="d-flex align-items-start py-3 border-bottom">
         <img src="${acc.getAvatar()}" class="img" alt="">
@@ -112,4 +115,3 @@
 </body>
 
 </html>
-

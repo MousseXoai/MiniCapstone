@@ -84,7 +84,7 @@
                         <h6>Quick links</h6>
                         <ul>
                             <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
+                            <li><a href="blog">Blogs</a></li>
                             <li><a href="#">Contact</a></li>
                             
                         </ul>
@@ -94,10 +94,10 @@
                     <div class="footer__widget">
                         <h6>Account</h6>
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
+                            <li><a href="customerInfo">My Account</a></li>
+                            <li><a href="order">Orders Tracking</a></li>
                             
-                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="ManageWishlist">Wishlist</a></li>
                         </ul>
                     </div>
                 </div>

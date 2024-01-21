@@ -34,45 +34,25 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 
-    <body>
-        <!-- Page Preloder -->
-        <div id="preloder">
-            <div class="loader"></div>
-        </div>
-
-        <!-- Offcanvas Menu Begin -->
-        <div class="offcanvas-menu-overlay"></div>
-        <div class="offcanvas-menu-wrapper">
-            <div class="offcanvas__close">+</div>
-            <ul class="offcanvas__widget">
-                <li><span class="icon_search search-switch"></span></li>
-                <li><a href="#"><span class="icon_heart_alt"></span>
-                        <div class="tip">2</div>
-                    </a></li>
-                <li><a href="#"><span class="icon_bag_alt"></span>
-                        <div class="tip">2</div>
-                    </a></li>
-            </ul>
-            <div class="offcanvas__logo">
-                <a href="./index.html"><img src="img/logo.png" alt=""></a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-            <div class="offcanvas__auth">
-                <a href="#">Login</a>
-                <a href="#">Register</a>
-            </div>
-        </div>
+    <body onload="loadAmountCart(); loadAmountWishList()">
+        
         <!-- Offcanvas Menu End -->
         <!-- Header Section Begin -->
-        <%@include file="header.jsp" %>
-        <!-- Header Section End -->
-        <!-- Categories Section Begin -->
+    
+        <jsp:include page="Menu.jsp"></jsp:include>
+    
+    <!-- Header Section End -->
+    <!-- Categories Section Begin --><a  style="margin-left: 100px" href="homeshop?id=${shopId}">
+                                <i style="font-size: 20px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back to home of shop</i>  
+                            </a>
         <section class="categories">
+            
             <div class="container-fluid">
                 <div class="row">
+                    
                     <c:forEach items="${listEventByShop}" var="c">
                     <div class="col-lg-6 p-0">
-                        <a href="homeshop?id=${c.shopId}"><div class="categories__item categories__large__item set-bg" data-setbg="${c.image} ">
+                        <a href="shopListSp?id=${c.shopId}"><div class="categories__item categories__large__item set-bg" data-setbg="${c.image} ">
                         </div></a>
                     </div>
                     </c:forEach>
@@ -89,40 +69,7 @@
         <!-- Discount Section Begin -->
         <!-- Discount Section End -->
         <!-- Services Section Begin -->
-        <section class="services spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-car"></i>
-                            <h6>Free Shipping</h6>
-                            <p>For all oder over $99</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-money"></i>
-                            <h6>Money Back Guarantee</h6>
-                            <p>If good have Problems</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-support"></i>
-                            <h6>Online Support 24/7</h6>
-                            <p>Dedicated support</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="services__item">
-                            <i class="fa fa-headphones"></i>
-                            <h6>Payment Secure</h6>
-                            <p>100% secure payment</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <!-- Services Section End -->
 
         <!-- Instagram Begin -->
@@ -130,76 +77,73 @@
         <!-- Instagram End -->
 
         <!-- Footer Section Begin -->
+    
         <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-7">
-                        <div class="footer__about">
-                            <div class="footer__logo">
-                                <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                cilisis.</p>
-                            <div class="footer__payment">
-                                <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                            </div>
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="home"><img src="logo.png" style="width: 200px" alt=""></a>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-5">
-                        <div class="footer__widget">
-                            <h6>Quick links</h6>
-                            <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Blogs</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">FAQ</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <div class="footer__widget">
-                            <h6>Account</h6>
-                            <ul>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Orders Tracking</a></li>
-                                <li><a href="#">Checkout</a></li>
-                                <li><a href="#">Wishlist</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-8 col-sm-8">
-                        <div class="footer__newslatter">
-                            <h6>NEWSLETTER</h6>
-                            <form action="#">
-                                <input type="text" placeholder="Email">
-                                <button type="submit" class="site-btn">Subscribe</button>
-                            </form>
-                            <div class="footer__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
+                        <p>Have every thing- Buy all in Tech Market</p>
+                        <div class="footer__payment">
+                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <div class="footer__copyright__text">
-                            <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Contact</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                        <h6>Account</h6>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Orders Tracking</a></li>
+                            
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                       
+                        <div class="footer__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <div class="footer__copyright__text">
+                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This web is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Group4- SE1754</a></p>
+                    </div>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
         </footer>
-        <!-- Footer Section End -->
+    
+    <!-- Footer Section End -->
 
         <!-- Search Begin -->
         <div class="search-model">
@@ -222,5 +166,33 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.nicescroll.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
     </body>
 </html>

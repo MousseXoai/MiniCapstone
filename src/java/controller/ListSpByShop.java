@@ -12,8 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
+import model.Brand;
+import model.Color;
+import model.PhanLoai;
 import model.SanPham;
+import model.Star;
 
 /**
  *
@@ -57,10 +63,44 @@ public class ListSpByShop extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         DAO dao = new DAO();
-         List<SanPham> listSpByShop = dao.listSpByShop(2);
-         request.setAttribute("listSpByShop", listSpByShop);
-         request.getRequestDispatcher("").forward(request, response);
-    } 
+        String id = request.getParameter("id");
+        int shopID = Integer.parseInt(id);
+        
+        List<PhanLoai> listC = dao.getAllPhanLoai();
+        List<Brand> listB = dao.getAllBrand();
+        String index = request.getParameter("index");
+        if (index == null) {
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+        
+        List<SanPham> listSpByShop = dao.listSpByShop(shopID, indexPage);
+        int allProduct = dao.getNumberSpByShop(shopID);
+        
+        int endPage = allProduct / 12;
+        if (allProduct % 12 != 0) {
+            endPage++;
+        }
+
+        List<SanPham> listNew = dao.getProductNew();
+        List<SanPham> listSale = dao.getProductSale();
+        List<SanPham> listOutOfStock = dao.getProductOutOfStock();
+        List<Star> listStarOfProduct = dao.getStarOfProduct();
+        List<Color> listColor = dao.getProductColor();
+        request.setAttribute("shopId", id);
+        request.setAttribute("listColor", listColor);
+        request.setAttribute("tag", indexPage);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("listC", listC);
+        request.setAttribute("listB", listB);
+        request.setAttribute("listP", listSpByShop);
+        request.setAttribute("listN", listNew);
+        request.setAttribute("listS", listSale);
+        request.setAttribute("listO", listOutOfStock);
+        request.setAttribute("star", listStarOfProduct);
+        request.getRequestDispatcher("ProductShop.jsp").forward(request, response);
+
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

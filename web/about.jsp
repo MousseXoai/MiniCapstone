@@ -26,36 +26,14 @@
         <link rel="stylesheet" href="css/1icomoon.css">
         <link rel="stylesheet" href="css/1style.css">
     </head>
-    <body class="goto-here">
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Winkel</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
-
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="shop.html">Shop</a>
-                                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                                <a class="dropdown-item" href="cart.html">Cart</a>
-                                <a class="dropdown-item" href="checkout.html">Checkout</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                        <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <body class="goto-here" onload="loadAmountCart(); loadAmountWishList()">
+        <!-- Header Section Begin -->
+    
+        <jsp:include page="Menu.jsp"></jsp:include>
+    
+    <!-- Header Section End -->
         <!-- END nav -->
-        <div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+        <div class="hero-wrap hero-bread" style="background-image: url('https://thietbiketnoi.com/wp-content/uploads/2020/01/tong-hop-hinh-nen-background-vector-designer-dep-do-phan-giai-fhd-2k-4k-moi-nhat-26.jpg');">
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center justify-content-center">
                     <div class="col-md-9 ftco-animate text-center">
@@ -69,17 +47,23 @@
         <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('https://noithatikdo.com/wp-content/uploads/2020/09/AA_Scene-4.jpg');">
+                    <div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url('https://noithatnamviet.com/wp-content/uploads/2018/07/thiet-ke-cua-hang-ban-laptop.jpg');">
                     </div>
                     <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
                         <div class="heading-section-bold mb-4 mt-md-5">
+                            <div style="margin-bottom: 20px; margin-top: -30px; margin-left: 300px">
+                                <img style="width: 170px; border-radius: 40%" src="${lshop.avatar}">
+                                &nbsp&nbsp&nbsp&nbsp
+                                <h3 style="font-weight: bold">${lshop.shopName}</h3>
+
+                            </div>
                             <div class="ml-md-0">
                                 <h2 class="mb-4">New Product</h2>
                             </div>
                         </div>
-                        <div class="pb-md-5">
+                        <div class="pb-md-6">
                             <div class="row ftco-services">
-                                <c:forEach var="c" items="${top3SpMoiNhatByShop}">
+                                <c:forEach var="c" items="${top6SpMoiNhatByShop}">
                                     <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
                                         <div class="media block-6 services">
                                             <div class="icon d-flex justify-content-center align-items-center mb-4">
@@ -87,7 +71,8 @@
                                             </div>
                                             <div class="media-body">
                                                 <h3 class="heading">${c.price}</h3>
-                                                <p>${c.name}</p>
+                                                <a href="productDetail?pid=${c.id}"><p>${c.name}</p></a>
+                                                
                                             </div>
                                         </div>      
                                     </div>
@@ -103,27 +88,27 @@
                 <div class="row justify-content-center py-5">
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18 text-center">
                                     <div class="text">
-                                        <span>Total Product</span>
-                                        <strong class="number" >${countsp}</strong>
+                                        <span style="font-weight: bold">Total Product</span>
+                                        <strong style="font-weight: bold" class="number" >${countsp}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18 text-center">
+                                    <div class="text">
+                                        <span style="font-weight: bold">Address</span>
+                                        <strong style="font-weight: bold" class="number" >${lshop.address}</strong>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                                 <div class="block-18 text-center">
                                     <div class="text">
-                                        <span>Address</span>
-                                        <strong class="number" >${lshop.address}</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                                <div class="block-18 text-center">
-                                    <div class="text">
-                                        <span>Participation time</span>
-                                        <strong class="number" >${lshop.dateThamGia}</strong>
+                                        <span style="font-weight: bold">Participation time</span>
+                                        <strong style="font-weight: bold" class="number" >${lshop.dateThamGia}</strong>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +116,18 @@
                                 <div class="block-18 text-center">
                                     <div class="text">
 
-                                        <a href="shopListSp"><strong class="number" > View More</strong></a>
+                                        <a href="shopListSp?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> View All Product</h2></a>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                                        <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18 text-center">
+                                    <div class="text">
+
+                                        <a href="event?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Events</h2></a>
+                                        
 
                                     </div>
                                 </div>
@@ -143,70 +139,74 @@
         </section>
         <hr>
         <%@include file="top6Spbanchay.jsp" %>
-        <footer class="ftco-footer bg-light ftco-section">
-            <div class="container">
-                <div class="row">
-                    <div class="mouse">
-                        <a href="#" class="mouse-icon">
-                            <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-                        </a>
+        <!-- Footer Section Begin -->
+    
+        <footer class="footer">
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="home"><img src="logo.png" style="width: 200px" alt=""></a>
+                        </div>
+                        <p>Have every thing- Buy all in Tech Market</p>
+                        <div class="footer__payment">
+                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                        </div>
                     </div>
                 </div>
-                <div class="row mb-5">
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Winkel</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                        </div>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Contact</a></li>
+                            
+                        </ul>
                     </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 class="ftco-heading-2">Menu</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                                <li><a href="#" class="py-2 d-block">About</a></li>
-                                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                        <h6>Account</h6>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Orders Tracking</a></li>
+                            
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
                     </div>
-                    <div class="col-md-4">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Help</h2>
-                            <div class="d-flex">
-                                <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-                                    <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
-                                    <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
-                                    <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
-                                    <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-                                </ul>
-                                <ul class="list-unstyled">
-                                    <li><a href="#" class="py-2 d-block">FAQs</a></li>
-                                    <li><a href="#" class="py-2 d-block">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Have a Questions?</h2>
-                            <div class="block-23 mb-3">
-                                <ul>
-                                    <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                       
+                        <div class="footer__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <div class="footer__copyright__text">
+                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This web is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Group4- SE1754</a></p>
+                    </div>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
         </footer>
+    
+    <!-- Footer Section End -->
 
 
 
@@ -230,6 +230,34 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="js/1google-map.js"></script>
         <script src="js/1main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
 
     </body>
 </html>
