@@ -69,10 +69,10 @@ public class HomeShopController extends HttpServlet {
             String id= request.getParameter("id");
             int shopID= Integer.parseInt(id);
             Shop lshop = dao.getShopById(shopID);
-            List<SanPham> top3SpMoiNhatByShop = dao.top3SpMoiNhatByShop(shopID);
-            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
+            List<SanPham> top6SpMoiNhatByShop = dao.top6SpMoiNhatByShop(shopID);
+            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat(shopID);
             int countsp = dao.getNumberSpByShop(shopID);
-            request.setAttribute("top3SpMoiNhatByShop", top3SpMoiNhatByShop);
+            request.setAttribute("top6SpMoiNhatByShop", top6SpMoiNhatByShop);
             request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
             request.setAttribute("countsp", countsp);
             request.setAttribute("lshop", lshop);
