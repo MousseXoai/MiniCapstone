@@ -4,16 +4,6 @@
     <head><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-<<<<<<< HEAD
-        <link rel="stylesheet" href="css/ChangePass.css"> 
-    </head>
-    <body>
-        <div class="mainDiv">
-            <div class="cardStyle">
-                <form action="ChangePass" method="post" name="changePasswordForm" id="changePasswordForm">
-
-                    <img src="" id="signupLogo"/>
-=======
         <link rel="stylesheet" href="css/ChangePass.css">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -37,7 +27,6 @@
 
                     <img src="" id="signupLogo"/>
                     
->>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
                     <h2 class="formTitle">
                         Change your Password
