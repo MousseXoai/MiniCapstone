@@ -45,16 +45,7 @@
                 console.log('Welcome!  Fetching your information.... ');
                 FB.api('/me?fields=email,name', function (response) {
                     console.log(response);
-
                     window.location.href='Login?action=Face&name=' + response.name + '&email=' + response.email+'&id=' +response.id;
-
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('Get', 'LoginServlet', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                    var data = 'action=Face&name=' + encodeURIComponent(response.name) + '&email=' + encodeURIComponent(response.email) + '&id=' + encodeURIComponent(response.id);
-                    window.location.href = 'Login?action=Face';
-
                 });
             }
 
