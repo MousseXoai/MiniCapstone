@@ -65,10 +65,10 @@ public class EventController extends HttpServlet {
         String id=request.getParameter("id");
             int shopID= Integer.parseInt(id);
             
-            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
+            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat(shopID);
             List<Event> listEventByShop = dao.ListEventByShop(shopID);
             
-           System.out.println(listEventByShop);
+           request.setAttribute("shopId", shopID);
             request.setAttribute("listEventByShop", listEventByShop);
             request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
             request.getRequestDispatcher("event.jsp").forward(request, response);
