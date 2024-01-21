@@ -4,6 +4,7 @@
     <head><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+<<<<<<< HEAD
         <link rel="stylesheet" href="css/ChangePass.css"> 
     </head>
     <body>
@@ -12,6 +13,31 @@
                 <form action="ChangePass" method="post" name="changePasswordForm" id="changePasswordForm">
 
                     <img src="" id="signupLogo"/>
+=======
+        <link rel="stylesheet" href="css/ChangePass.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/usersetting.css" type="text/css">
+    </head>
+    <body>
+        
+        <div class="mainDiv">
+          <a  href="customerinfo">
+            <i style="font-size: 15px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back</i>  
+        </a>  
+            <div class="cardStyle">
+                <form action="ChangePass" method="post" name="changePasswordForm" id="changePasswordForm">
+                    
+
+                    <img src="" id="signupLogo"/>
+                    
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
                     <h2 class="formTitle">
                         Change your Password

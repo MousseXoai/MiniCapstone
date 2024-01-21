@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Brand;
 import model.PhanLoai;
 import model.SanPham;
@@ -32,17 +34,26 @@ public class QuanLySanPhamControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-       DAO dao = new DAO();
-       List<SanPham> getProduct = dao.getAllProductByShopID(3);
-       request.setAttribute("getProduct", getProduct);
-       List<PhanLoai> getCategory = dao.getCategoryByShopID(3);
-       request.setAttribute("getCategory", getCategory);
-       List<Brand> getBrand = dao.getBrandByShopID(3);
-       request.setAttribute("getBrand", getBrand);
-       request.getRequestDispatcher("QuanLySanPham.jsp").forward(request, response);
-    } 
+        DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            int shopID = dao.getShopIdByAccountId(accountID);
+            List<SanPham> getProduct = dao.getAllProductByShopID(shopID);
+            request.setAttribute("getProduct", getProduct);
+            List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
+            request.setAttribute("getCategory", getCategory);
+            List<Brand> getBrand = dao.getBrandByShopID(shopID);
+            request.setAttribute("getBrand", getBrand);
+            request.getRequestDispatcher("QuanLySanPham.jsp").forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -49,10 +49,11 @@ public class LoginGoogleHandler extends HttpServlet {
                     d.addGoogleAccount(user);
                     int id = d.getUidByUserName(user);
                     d.addEmailByUid(user.getEmail(),id);
-                    session.setAttribute("account", user);
+                    Account a1= d.getAccountById(id);
+                    session.setAttribute("acc", a1);
                     response.sendRedirect("home");
                 } else {
-                    session.setAttribute("account", user);
+                    session.setAttribute("acc", a);
                     response.sendRedirect("home");
                 }
                 

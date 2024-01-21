@@ -31,7 +31,12 @@
 </head>
 
 <body>
+    
     <div class="wrapper bg-white mt-sm-5">
+        <a  href="home">
+            <i style="font-size: 15px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back</i>  
+        </a>
+       
     <h4 class="pb-4 border-bottom">Account settings</h4>
         <div class="d-flex align-items-start py-3 border-bottom">
         <img src="${acc.getAvatar()}" class="img" alt="">
@@ -84,27 +89,24 @@
                     <p>View your order</p>
                 </div>
                 <div class="ml-auto">
-                    <form action="order" method="post">
+                    <form action="order">
                         <button type="submit" class="btn danger">Order history</button>
                     </form>
                 </div>
             </div>
-            <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                <div>
-                    <b>Reset Password</b>
-                    <p>Reset your password immediately</p>
-                </div>
-                <div class="ml-auto">
-                    <button class="btn danger">Reset password</button>
-                </div>
-            </div>            
+                       
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                 <div>
                     <b>Change Password</b>
                     <p>Change your password</p>
                 </div>
                 <div class="ml-auto">
-                    <button class="btn danger">Change password</button>
+                    <form action="ChangePassServlet">
+                        <button type="submit" class="btn danger">Change password</button>
+                    </form>
+                        
+                    
+                    
                 </div>
             </div>            
             <div class="d-sm-flex align-items-center pt-3" id="deactivate">

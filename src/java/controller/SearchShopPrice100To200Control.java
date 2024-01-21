@@ -1,10 +1,9 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+package controller;
 
 import dal.DAO;
 import java.io.IOException;
@@ -12,15 +11,19 @@ import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta .servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Brand;
+import model.Color;
+import model.PhanLoai;
 import model.SanPham;
+import model.Star;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-public class ProductControl extends HttpServlet {
+public class SearchShopPrice100To200Control extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,19 +34,27 @@ public class ProductControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProductControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProductControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String id= request.getParameter("id");
+        int shopId= Integer.parseInt(id);
+        DAO dao = new DAO();
+         List<PhanLoai> listC = dao.getAllPhanLoai();
+        List<Brand> listB = dao.getAllBrand();
+        List<SanPham> list = dao.searchShopPrice100To200(shopId);
+         List<SanPham> listNew = dao.getProductNew();
+        List<SanPham> listSale = dao.getProductSale();
+        List<SanPham> listOutOfStock = dao.getProductOutOfStock();
+        List<Star> listStarOfProduct= dao.getStarOfProduct();
+        List<Color> listColor =dao.getProductColor();
+        request.setAttribute("shopId", id);
+        request.setAttribute("listColor", listColor);
+        request.setAttribute("listC", listC);
+        request.setAttribute("listB", listB);
+        request.setAttribute("listP", list);
+        request.setAttribute("listN", listNew);
+        request.setAttribute("listS", listSale);
+        request.setAttribute("listO", listOutOfStock);
+        request.setAttribute("star", listStarOfProduct);
+        request.getRequestDispatcher("Shop.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,12 +68,7 @@ public class ProductControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        System.out.println("No co vao day");
-        DAO p = new DAO();
-        List<SanPham> data = p.TopProductNew();
-        request.setAttribute("data", data);
-        System.out.println(data);
-        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

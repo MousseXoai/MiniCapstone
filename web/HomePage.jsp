@@ -4,6 +4,10 @@
     Author     : dell
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
+=======
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -32,6 +36,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 
+<<<<<<< HEAD
     <body>
         <!-- Page Preloder -->
         <div id="preloder">
@@ -130,6 +135,12 @@
             </div>
         </header>
         <!-- Header Section End -->
+=======
+    <body onload="loadAmountCart(); loadAmountWishList()">
+        <!-- Header Section Begin -->
+    <jsp:include page="Menu.jsp"></jsp:include>
+    <!-- Header Section End -->
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
         <!-- Categories Section Begin -->
         <section class="categories">
@@ -137,50 +148,90 @@
                 <div class="row">
                     <div class="col-lg-6 p-0">
                         <div class="categories__item categories__large__item set-bg"
+<<<<<<< HEAD
                              data-setbg="img/categories/category-1.jpg">
                             <div class="categories__text">
                                 <h1>Women’s fashion</h1>
                                 <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
                                     edolore magna aliquapendisse ultrices gravida.</p>
                                 <a href="#">Shop now</a>
+=======
+                             data-setbg="https://vcdn-sohoa.vnecdn.net/2021/01/21/HP-Elite-Folio-Front-Left-Forw-6107-5267-1611217952.jpg">
+                            <div class="categories__text">
+                                <h1>Laptop</h1>
+                                <p>${laptop} items</p>
+                                <a href="searchCate?cid=1">Shop now</a>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+<<<<<<< HEAD
                                 <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
                                     <div class="categories__text">
                                         <h4>Men’s fashion</h4>
                                         <p>358 items</p>
                                         <a href="#">Shop now</a>
+=======
+                                <div class="categories__item set-bg" data-setbg="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ln1htt1ocxjse3">
+                                    <div  class="categories__text">
+                                        <h4>Đồng hồ</h4>
+                                        <p>${dongho} items</p>
+                                        <a href="searchCate?cid=2">Shop now</a>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+<<<<<<< HEAD
                                 <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
                                     <div class="categories__text">
                                         <h4>Kid’s fashion</h4>
                                         <p>273 items</p>
                                         <a href="#">Shop now</a>
+=======
+                                <div class="categories__item set-bg" data-setbg="https://vcdn1-sohoa.vnecdn.net/2020/06/10/leopold-fc980c-1591758531.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=1dlqh2TlFxj59_2hxR01qA">
+                                    <div class="categories__text">
+                                        <h4>Bàn phím</h4>
+                                        <p>${banphim} items</p>
+                                        <a href="searchCate?cid=6">Shop now</a>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+<<<<<<< HEAD
                                 <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
                                     <div class="categories__text">
                                         <h4>Cosmetics</h4>
                                         <p>159 items</p>
                                         <a href="#">Shop now</a>
+=======
+                                <div class="categories__item set-bg" data-setbg="https://file.hstatic.net/200000722513/file/gearvn-chuot-cooler-master-mm310-sf6-chun-li-1_4d39b9fb299744118f8623910577f69e_grande.png">
+                                    <div class="categories__text">
+                                        <h4>Chuột</h4>
+                                        <p>${chuot} items</p>
+                                        <a href="searchCate?cid=7">Shop now</a>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+<<<<<<< HEAD
                                 <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
                                     <div class="categories__text">
                                         <h4>Accessories</h4>
                                         <p>792 items</p>
                                         <a href="#">Shop now</a>
+=======
+                                <div class="categories__item set-bg" data-setbg="https://img.myipadbox.com/upload/store/product_l/TBD0602151001A.jpg">
+                                    <div class="categories__text">
+                                        <h4>Tai nghe</h4>
+                                        <p>${tainghe} items</p>
+                                        <a href="searchCate?cid=8">Shop now</a>
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                                     </div>
                                 </div>
                             </div>
@@ -202,6 +253,7 @@
                     </div>
                     
                     
+<<<<<<< HEAD
                     <div class="col-lg-8 col-md-8">
                         <ul class="filter__controls">
                             <li class="active" data-filter="*">All</li>
@@ -395,18 +447,84 @@
                             </div>
                         </div>
                     </div>
+=======
+                    
+                </div>
+                <div class="row property__gallery">
+                    <c:forEach items="${listP}" var="p">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                        <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="${p.image}">
+                                        <c:forEach items="${listN}" var="n">
+                                            <c:if test="${n.id==p.id}">
+                                                <div class="label new">New</div>
+                                            </c:if>
+                                            
+                                                
+                                            
+                                        </c:forEach>
+                                        <c:forEach items="${listS}" var="s">
+                                                    <c:if test="${p.id==s.id}">
+                                                        <div class="label sale">Sale</div>
+                                                    </c:if>
+                                                </c:forEach>
+                                        <c:forEach items="${listO}" var="o">
+                                            <c:if test="${o.id==p.id}">
+                                                <div class="label stockout stockblue">Out Of Stock</div>
+                                            </c:if>
+                                        </c:forEach>
+                                        
+                                        <ul class="product__hover">
+                                            <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="addWishList?pid=${p.id}"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="addCart?pid=${p.id}&&quantity=1"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
+                                        <div class="rating">
+                                            <c:forEach items="${star}" var="st">
+                                                <c:if test="${st.id==p.id}">
+                                                    <c:forEach begin="1" end="${st.star}" step="1">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:setBundle basename="path.to.your.resource.bundle" />
+                                        <c:if test="${p.sale==0}">
+                                        <div class="product__details__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__details__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
+                                    </div>
+                                </div>
+                    </div>
+                    </c:forEach>
+                    
+                    
+
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                 </div>
             </div>
         </section>
         <!-- Product Section End -->
 
         <!-- Banner Section Begin -->
+<<<<<<< HEAD
         <section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
+=======
+        <section class="banner set-bg" data-setbg="https://bogounvlang.org/wp-content/uploads/2019/07/top-10-mat-hang-cong-nghe-kinh-doanh-hieu-qua-2019.jpg">
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
             <div class="container">
                 <div class="row">
                     <div class="col-xl-7 col-lg-8 m-auto">
                         <div class="banner__slider owl-carousel">
                             <div class="banner__item">
+<<<<<<< HEAD
                                 <div class="banner__text">
                                     <span>The Chloe Collection</span>
                                     <h1>The Project Jacket</h1>
@@ -427,20 +545,33 @@
                                     <a href="#">Shop now</a>
                                 </div>
                             </div>
+=======
+                                <div class="banner__text">                                    
+                                    <h1 style="color: grey">Technology market</h1>
+                                    <a  style="color: grey" href="shop">Shop now</a>
+                                </div>
+                            </div>
+                            
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
         <!-- Banner Section End -->
 
         <!-- Trend Section Begin -->
+=======
+
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
         <section class="trend spad">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="trend__content">
                             <div class="section-title">
+<<<<<<< HEAD
                                 <h4>Hot Trend</h4>
                             </div>
                             <div class="trend__item">
@@ -491,6 +622,39 @@
                                     <div class="product__price">$ 59.0</div>
                                 </div>
                             </div>
+=======
+                                <h4>New</h4>
+                            </div>
+                            <c:forEach items="${listP}" var="p" begin="1" end="3" step="1">
+                                <div class="trend__item">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
+                                            <c:forEach items="${star}" var="st">
+                                                <c:if test="${st.id==p.id}">
+                                                    <c:forEach begin="1" end="${st.star}" step="1">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
+                                     <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
+                                    
+                                </div>
+                            </div>
+                            </c:forEach>
+                            
+                            
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -498,6 +662,7 @@
                             <div class="section-title">
                                 <h4>Best seller</h4>
                             </div>
+<<<<<<< HEAD
                             <div class="trend__item">
                                 <div class="trend__item__pic">
                                     <img src="img/trend/bs-1.jpg" alt="">
@@ -546,11 +711,41 @@
                                     <div class="product__price">$ 59.0</div>
                                 </div>
                             </div>
+=======
+                            <c:forEach items="${listBest}" var="p" begin="1" end="3" step="1">
+                                <div class="trend__item">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
+                                            <c:forEach items="${star}" var="st">
+                                                <c:if test="${st.id==p.id}">
+                                                    <c:forEach begin="1" end="${st.star}" step="1">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
+                                    <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
+                                </div>
+                            </div>
+                            </c:forEach>
+                            
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="trend__content">
                             <div class="section-title">
+<<<<<<< HEAD
                                 <h4>Feature</h4>
                             </div>
                             <div class="trend__item">
@@ -601,6 +796,37 @@
                                     <div class="product__price">$ 59.0</div>
                                 </div>
                             </div>
+=======
+                                <h4>Sale</h4>
+                            </div>
+                            <c:forEach items="${listS}" var="p" begin="1" end="3" step="1">
+                                <div class="trend__item">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
+                                            <c:forEach items="${star}" var="st">
+                                                <c:if test="${st.id==p.id}">
+                                                    <c:forEach begin="1" end="${st.star}" step="1">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
+                                    <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
+                                </div>
+                            </div>
+                            </c:forEach>
+                            
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
                         </div>
                     </div>
                 </div>
@@ -608,6 +834,7 @@
         </section>
         <!-- Trend Section End -->
 
+<<<<<<< HEAD
         <!-- Discount Section Begin -->
         <section class="discount">
             <div class="container">
@@ -649,6 +876,9 @@
             </div>
         </section>
         <!-- Discount Section End -->
+=======
+       
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
         <!-- Services Section Begin -->
         <section class="services spad">
@@ -687,6 +917,7 @@
         </section>
         <!-- Services Section End -->
 
+<<<<<<< HEAD
         <!-- Instagram Begin -->
         <div class="instagram">
             <div class="container-fluid">
@@ -826,6 +1057,15 @@
             </div>
         </div>
         <!-- Search End -->
+=======
+        <!-- Footer Section Begin -->
+    
+        <jsp:include page="Footer.jsp"></jsp:include>
+    
+    <!-- Footer Section End -->
+
+        
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>
@@ -838,6 +1078,38 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/jquery.nicescroll.min.js"></script>
         <script src="js/main.js"></script>
+<<<<<<< HEAD
+=======
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
+    
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
     </body>
 
 </html>

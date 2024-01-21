@@ -33,32 +33,33 @@ public class AddCartControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String num=request.getParameter("quantity");
-        String id=request.getParameter("pid");
+        String num = request.getParameter("quantity");
+        String id = request.getParameter("pid");
         int productID = Integer.parseInt(request.getParameter("pid"));
         int amount = Integer.parseInt(request.getParameter("quantity"));
-        
+
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        /*if(a == null) {
-            request.getRequestDispatcher("login").forward(request, response);
-        }*/
-        int accountID = 2;       
-        DAO dao = new DAO();
-        Cart cartExisted = dao.checkCartExist(accountID,productID);
-        int amountExisted;
+        if (a == null) {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            int accountID = a.getuID();
+            DAO dao = new DAO();
+            Cart cartExisted = dao.checkCartExist(accountID, productID);
+            int amountExisted;
+
+            if (cartExisted != null) {
+                amountExisted = cartExisted.getAmount();
+                dao.editAmountCart(accountID, productID, (amountExisted + amount));
+                request.setAttribute("mess", "Da tang so luong san pham!");
+                request.getRequestDispatcher("shop").forward(request, response);
+            } else {
+                dao.insertCart(accountID, productID, amount);
+                request.setAttribute("mess", "Da them san pham vao gio hang!");
+                request.getRequestDispatcher("shop").forward(request, response);
+            }
+        }
         
-        if(cartExisted != null) {
-        	 amountExisted = cartExisted.getAmount();
-        	 dao.editAmountCart(accountID,productID, (amountExisted+amount));
-        	 request.setAttribute("mess", "Da tang so luong san pham!");
-        	 request.getRequestDispatcher("shop").forward(request, response);
-        }
-        else {
-        	  dao.insertCart(accountID, productID, amount);
-        	  request.setAttribute("mess", "Da them san pham vao gio hang!");
-        	  request.getRequestDispatcher("shop").forward(request, response);
-        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

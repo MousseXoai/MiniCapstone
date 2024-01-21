@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.AccInfo;
+import model.Account;
 
 /**
  *
@@ -63,10 +65,18 @@ public class CustomerInfoControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             DAO dao = new DAO();
-            AccInfo acc = dao.getAccInfo(2);
-            request.setAttribute("acc", acc);
-            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
 
+                int accountID = a.getuID();
+                AccInfo acc = dao.getAccInfo(accountID);
+                request.setAttribute("acc", acc);
+                request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+
+            }
         }
     }
 
@@ -90,27 +100,35 @@ public class CustomerInfoControl extends HttpServlet {
             String err = "";
 
             DAO dao = new DAO();
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
 
-            if (fullname.isEmpty() || address.isEmpty() || phonenum.isEmpty() || email.isEmpty()) {
-                err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
-            } else if (!fullname.matches("[\\p{L}\\s]+")) {
-                err = getServletContext().getInitParameter("messErrorInvalidName");
-            } else if (phonenum.length() > 10 || !phonenum.matches("\\d+")) {
-                err = getServletContext().getInitParameter("messErrorPhoneNum");
-            } else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-                err = getServletContext().getInitParameter("messErrorInvalidEmail");
-            } else if (fullname.length() > 50 || email.length() > 50) {
-                err = getServletContext().getInitParameter("messErrorNameAndEmail");
-            }
+                int accountID = a.getuID();
 
-            if (!err.isEmpty()) {
-                AccInfo acc = dao.getAccInfo(2);
-                request.setAttribute("acc", acc);
-                request.setAttribute("err", err);
-                request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
-            } else {            
-                dao.editAccInfo(fullname, address, phonenum, email, 2);
-                response.sendRedirect("customerinfo");
+                if (fullname.isEmpty() || address.isEmpty() || phonenum.isEmpty() || email.isEmpty()) {
+                    err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
+                } else if (!fullname.matches("[\\p{L}\\s]+")) {
+                    err = getServletContext().getInitParameter("messErrorInvalidName");
+                } else if (phonenum.length() > 10 || !phonenum.matches("\\d+")) {
+                    err = getServletContext().getInitParameter("messErrorPhoneNum");
+                } else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+                    err = getServletContext().getInitParameter("messErrorInvalidEmail");
+                } else if (fullname.length() > 50 || email.length() > 50) {
+                    err = getServletContext().getInitParameter("messErrorNameAndEmail");
+                }
+
+                if (!err.isEmpty()) {
+                    AccInfo acc = dao.getAccInfo(accountID);
+                    request.setAttribute("acc", acc);
+                    request.setAttribute("err", err);
+                    request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+                } else {
+                    dao.editAccInfo(fullname, address, phonenum, email, accountID);
+                    response.sendRedirect("customerinfo");
+                }
             }
         }
     }

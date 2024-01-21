@@ -102,6 +102,7 @@ public class RegisterCustomerController extends HttpServlet {
 
         DAO register = new DAO();
         try {
+            int emailCheckResult = register.checkEmail(email);
             int usernameCheckResult = register.checkUsername(user);
 
             // Kiểm tra tài khoản đã tồn tại hay chưa
@@ -109,7 +110,11 @@ public class RegisterCustomerController extends HttpServlet {
                 String errorMessage = "Tên đăng nhập đã được sử dụng. Vui lòng chọn tên đăng nhập khác.";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("Register.jsp").forward(request, response);
-            } else {
+            } else if(emailCheckResult==1){
+                String errorMessage = "Email đã được sử dụng. Vui lòng chọn tên đăng nhập khác.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("Register.jsp").forward(request, response);
+                }else {
                 // Đăng ký tài khoản
                 if (usernameCheckResult == 0) {
                     // Gửi OTP qua email

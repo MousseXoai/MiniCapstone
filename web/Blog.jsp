@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
+<<<<<<< HEAD
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -61,6 +62,10 @@
         </div>
     </div>
     <!-- Offcanvas Menu End -->
+=======
+<body onload="loadAmountCart(); loadAmountWishList()">
+    
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
 
     <!-- Header Section Begin -->
     <header class="header">
@@ -258,6 +263,7 @@
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->
+<<<<<<< HEAD
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -327,6 +333,10 @@
             </div>
         </div>
     </footer>
+=======
+    <jsp:include page="Footer.jsp"></jsp:include>
+    
+>>>>>>> 900e3c47ac4177ca0e65649ffd424dd79ca47fc8
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
@@ -351,7 +361,34 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                    
+                                            
+    </script>
 </body>
 
 </html>

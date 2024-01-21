@@ -24,6 +24,58 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeControl</servlet-name>
+        <servlet-class>controller.HomeControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterCustomerController</servlet-name>
+        <servlet-class>controller.RegisterCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterVerify</servlet-name>
+        <servlet-class>controller.RegisterVerify</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePass</servlet-name>
+        <servlet-class>controller.ChangePass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutControl</servlet-name>
+        <servlet-class>controller.LogoutControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByNameShopControl</servlet-name>
+        <servlet-class>controller.SearchByNameShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCateShopControl</servlet-name>
+        <servlet-class>controller.SearchCateShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBranShopControl</servlet-name>
+        <servlet-class>controller.SearchBranShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShopPriceUnder100Control</servlet-name>
+        <servlet-class>controller.SearchShopPriceUnder100Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShopPrice100To200Control</servlet-name>
+        <servlet-class>controller.SearchShopPrice100To200Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShopPriceAbove200Control</servlet-name>
+        <servlet-class>controller.SearchShopPriceAbove200Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAjaxShopPriceMinToMaxControl</servlet-name>
+        <servlet-class>controller.SearchAjaxShopPriceMinToMaxControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShopColorControl</servlet-name>
+        <servlet-class>controller.SearchShopColorControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -151,14 +203,6 @@
     <servlet>
         <servlet-name>ResendTokenControl</servlet-name>
         <servlet-class>controller.ResendTokenControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CategoryControl</servlet-name>
-        <servlet-class>controller.CategoryControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductControl</servlet-name>
-        <servlet-class>controller.ProductControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BlogControl</servlet-name>
@@ -409,6 +453,10 @@
         <url-pattern>/demo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>HomeControl</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RegisterCustomerController</servlet-name>
         <url-pattern>/RegisterCustomerController</url-pattern>
     </servlet-mapping>
@@ -425,16 +473,44 @@
         <url-pattern>/ResendToken</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CategoryControl</servlet-name>
-        <url-pattern>/CategoryControl</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductControl</servlet-name>
-        <url-pattern>/ProductControl</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutControl</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByNameShopControl</servlet-name>
+        <url-pattern>/searchByNameShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCateShopControl</servlet-name>
+        <url-pattern>/searchCateShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBranShopControl</servlet-name>
+        <url-pattern>/searchBranShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopPriceUnder100Control</servlet-name>
+        <url-pattern>/searchShopPriceUnder100</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopPrice100To200Control</servlet-name>
+        <url-pattern>/searchShopPrice100To200</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopPriceAbove200Control</servlet-name>
+        <url-pattern>/searchShopPriceAbove200</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAjaxShopPriceMinToMaxControl</servlet-name>
+        <url-pattern>/searchAjaxShopPriceMinToMax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopColorControl</servlet-name>
+        <url-pattern>/searchShopColor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.SanPham;
 import model.Shop;
 import model.WishList;
@@ -61,16 +63,22 @@ public class HomeShopController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
-        Shop lshop = dao.getShopById(2);
-        List<SanPham> top3SpMoiNhatByShop = dao.top3SpMoiNhatByShop(2);
-        List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
-        int countsp = dao.getNumberSpByShop(2);
-        request.setAttribute("top3SpMoiNhatByShop", top3SpMoiNhatByShop);
-        request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
-        request.setAttribute("countsp", countsp);
-        request.setAttribute("lshop", lshop);
-        request.getRequestDispatcher("about.jsp").forward(request, response);
+        
 
+            
+            String id= request.getParameter("id");
+            int shopID= Integer.parseInt(id);
+            Shop lshop = dao.getShopById(shopID);
+            List<SanPham> top3SpMoiNhatByShop = dao.top3SpMoiNhatByShop(shopID);
+            List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat();
+            int countsp = dao.getNumberSpByShop(shopID);
+            request.setAttribute("top3SpMoiNhatByShop", top3SpMoiNhatByShop);
+            request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
+            request.setAttribute("countsp", countsp);
+            request.setAttribute("lshop", lshop);
+            request.getRequestDispatcher("about.jsp").forward(request, response);
+
+        
     }
 
     /**

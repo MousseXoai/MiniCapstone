@@ -11,15 +11,19 @@ import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta .servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Brand;
+import model.Color;
 import model.PhanLoai;
+import model.SanPham;
+import model.Star;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-public class CategoryControl extends HttpServlet {
+public class SearchAjaxShopPriceMinToMaxControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,18 +35,33 @@ public class CategoryControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CategoryControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CategoryControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        request.setCharacterEncoding("UTF-8");
+        String priceMin = request.getParameter("priceMin");
+        String priceMax = request.getParameter("priceMax");
+        String id= request.getParameter("id");
+        int shopId= Integer.parseInt(id);
+        DAO dao = new DAO();
+        if(priceMax==""){
+            priceMax="999999999";
         }
+        List<SanPham> list = dao.searchShopByPriceMinToMax(priceMin,priceMax, shopId);
+        List<Color> listColor =dao.getProductColor();
+        List<PhanLoai> listC = dao.getAllPhanLoai();
+        List<Brand> listB = dao.getAllBrand();
+        List<SanPham> listNew = dao.getProductNew();
+        List<SanPham> listSale = dao.getProductSale();
+        List<SanPham> listOutOfStock = dao.getProductOutOfStock();
+        List<Star> listStarOfProduct= dao.getStarOfProduct();
+        request.setAttribute("shopId", id);
+        request.setAttribute("listC", listC);
+        request.setAttribute("listB", listB);
+        request.setAttribute("listP", list);
+        request.setAttribute("listN", listNew);
+        request.setAttribute("listS", listSale);
+        request.setAttribute("listO", listOutOfStock);
+        request.setAttribute("star", listStarOfProduct);
+        request.setAttribute("listColor", listColor);
+        request.getRequestDispatcher("Shop.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,13 +75,7 @@ public class CategoryControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DAO cateDao = new DAO();
-        
-        List<PhanLoai> cateList = cateDao.getAllCate();
-        request.setAttribute("cateList", cateList);
-        request.getRequestDispatcher("HomePage.jsp").forward(request, response);
-        for (PhanLoai phanLoai : cateList) {
-    System.out.println(phanLoai.getCname());}
+        processRequest(request, response);
     } 
 
     /** 

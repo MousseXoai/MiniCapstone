@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.AccInfo;
+import model.Account;
 import model.HoaDon;
 import model.InfoLine;
 import model.OrderLine;
@@ -62,21 +64,30 @@ public class CustomerOrderDetailControl extends HttpServlet {
     throws ServletException, IOException {
         String invoiceID = request.getParameter("invoiceID");
         DAO dao = new DAO();
-        AccInfo acc = dao.getAccInfo(2);
-        InfoLine il = dao.getInfoLine(Integer.parseInt(invoiceID));
-        HoaDon hd = dao.getHoaDon(Integer.parseInt(invoiceID));
-        TrangThai tt = dao.getTrangThai(hd.getTrangThaiId());
-        OrderLine ol = dao.getOrderLine(Integer.parseInt(invoiceID));
-        SanPham sp = dao.getProductByID(String.valueOf(ol.getProductID()));
-        
-        request.setAttribute("sanpham", sp);
-        request.setAttribute("orderline", ol);
-        request.setAttribute("trangthai", tt);
-        request.setAttribute("hoadon", hd);
-        request.setAttribute("infoline", il);
-        request.setAttribute("acc", acc);     
-        request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
-    } 
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            AccInfo acc = dao.getAccInfo(accountID);
+            InfoLine il = dao.getInfoLine(Integer.parseInt(invoiceID));
+            HoaDon hd = dao.getHoaDon(Integer.parseInt(invoiceID));
+            TrangThai tt = dao.getTrangThai(hd.getTrangThaiId());
+            OrderLine ol = dao.getOrderLine(Integer.parseInt(invoiceID));
+            SanPham sp = dao.getProductByID(String.valueOf(ol.getProductID()));
+
+            request.setAttribute("sanpham", sp);
+            request.setAttribute("orderline", ol);
+            request.setAttribute("trangthai", tt);
+            request.setAttribute("hoadon", hd);
+            request.setAttribute("infoline", il);
+            request.setAttribute("acc", acc);
+            request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
+        }
+    }
+    
 
     /** 
      * Handles the HTTP <code>POST</code> method.
