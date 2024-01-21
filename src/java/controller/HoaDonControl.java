@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
 import model.HoaDon;
@@ -34,17 +35,26 @@ public class HoaDonControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-      
+
         DAO dao = new DAO();
-        List<HoaDon> listAllInvoice = dao.getAllInvoiceByShopID(3);
-        List<Account> listAllAccount = dao.getAllAccount();
-        List<TrangThai> listAllInvoiceStatus = dao.getAllInvoiceStatus();
-        request.setAttribute("listAllInvoice", listAllInvoice);
-        request.setAttribute("listAllAccount", listAllAccount);
-        request.setAttribute("listAllInvoiceStatus", listAllInvoiceStatus);
-        
-        request.getRequestDispatcher("HoaDon.jsp").forward(request, response);
-    } 
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            int shopID= dao.getShopIdByAccountId(accountID);
+            List<HoaDon> listAllInvoice = dao.getAllInvoiceByShopID(shopID);
+            List<Account> listAllAccount = dao.getAllAccount();
+            List<TrangThai> listAllInvoiceStatus = dao.getAllInvoiceStatus();
+            request.setAttribute("listAllInvoice", listAllInvoice);
+            request.setAttribute("listAllAccount", listAllAccount);
+            request.setAttribute("listAllInvoiceStatus", listAllInvoiceStatus);
+
+            request.getRequestDispatcher("HoaDon.jsp").forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

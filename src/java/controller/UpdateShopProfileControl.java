@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -30,17 +32,25 @@ public class UpdateShopProfileControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-       DAO dao = new DAO();
-       String userName = request.getParameter("username");
-       String email = request.getParameter("email");
-       String name = request.getParameter("name");
+        DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            String userName = request.getParameter("username");
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
 //       String lastName = request.getParameter("lastname");
-       String address = request.getParameter("address");
-       String phoneNumber = request.getParameter("phonenumber");
-       dao.updateShopProfile(name, address, phoneNumber, email, 15);
-       
-       request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
-    } 
+            String address = request.getParameter("address");
+            String phoneNumber = request.getParameter("phonenumber");
+            dao.updateShopProfile(name, address, phoneNumber, email, accountID);
+
+            request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -83,15 +83,7 @@ public class SaveUpdateProductControl extends HttpServlet {
         int pbrand = Integer.parseInt(request.getParameter("brand"));
         String pcolor = request.getParameter("pcolor");
         dao.updateProduct(pname, pprice, pquantity, ptitle, pdescription, pcate, pbrand, pcolor, pid);
-        System.out.println(pid);
-        System.out.println(pname);
-        System.out.println(pprice);
-        System.out.println(pquantity);
-        System.out.println(ptitle);
-        System.out.println(pdescription);
-        System.out.println(pcate);
-        System.out.println(pbrand);
-        System.out.println(pcolor);
+        
         request.getRequestDispatcher("QuanLySanPhamControl").forward(request, response);
     }
 

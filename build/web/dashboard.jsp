@@ -61,6 +61,12 @@
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
+                                    <a href="logout">
+                                        
+                                        <p>Logout</p>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="ti-panel"></i>
                                         <p>Stats</p>
@@ -359,4 +365,3 @@
     </script>
 
 </html>
-

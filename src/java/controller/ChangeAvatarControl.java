@@ -15,8 +15,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import static java.lang.System.out;
+import model.Account;
 
 /**
  *
@@ -78,11 +80,18 @@ public class ChangeAvatarControl extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         DAO dao = new DAO();
-        int result = 0;
-        Part part = request.getPart("image");
-        
-        dao.changeAvatarShop(part, 15);
-        request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            int accountID = a.getuID();
+            int result = 0;
+            Part part = request.getPart("image");
+
+            dao.changeAvatarShop(part, accountID);
+            request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
 //        if (part != null) {
 //            try {
 //                PreparedStatement ps = con.prepareStatement("insert into data(image) values(?)");
@@ -98,6 +107,7 @@ public class ChangeAvatarControl extends HttpServlet {
 //                out.println(e);
 //            }
 //        }
+        }
     }
 
     /** 

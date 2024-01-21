@@ -19,6 +19,7 @@ public class Shop {
     private String address;
     private String proof;
 
+
     public Shop() {
     }
 
@@ -64,6 +65,7 @@ public class Shop {
         this.accountid = accountid;
     }
 
+
     public Date getDateThamGia() {
         return dateThamGia;
     }
@@ -88,5 +90,4 @@ public class Shop {
         this.proof = proof;
     }
     
-
 }
