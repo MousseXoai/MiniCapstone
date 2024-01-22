@@ -61,12 +61,12 @@ public class RegisterCustomerController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Lay du lieu tu form dang ky
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        String email = request.getParameter("email");
-        String re_pass = request.getParameter("repass");
-        String phonenumber = request.getParameter("phonenumber");
-        String address = request.getParameter("address");
+        String user = request.getParameter("user").trim();
+        String pass = request.getParameter("pass").trim();
+        String email = request.getParameter("email").trim();
+        String re_pass = request.getParameter("repass").trim();
+        String phonenumber = request.getParameter("phonenumber").trim();
+        String address = request.getParameter("address").trim();
 
         // luu sesi
         HttpSession session = request.getSession();
@@ -77,6 +77,16 @@ public class RegisterCustomerController extends HttpServlet {
         session.setAttribute("address", address);
 
         // Kiểm tra mật khẩu và mật khẩu xác nhận
+        // Kiểm tra khoảng trắng
+        if (user.isEmpty() || pass.isEmpty() || email.isEmpty() || re_pass.isEmpty()
+                || phonenumber.isEmpty() || address.isEmpty() || user.contains(" ")
+                || pass.contains(" ") || email.contains(" ") || re_pass.contains(" ")
+                || phonenumber.contains(" ") || address.contains(" ")) {
+            String errorMessage = "Các trường không được chứa khoảng trắng.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            return;
+        }
         if (!pass.equals(re_pass)) {
             // Xu ly khi mật khẩu và mật khẩu xác nhận không khớp
             String errorMessage = "Mật khẩu và mật khẩu xác nhận không khớp. Vui lòng nhập lại.";

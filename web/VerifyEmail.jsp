@@ -5,8 +5,23 @@ Author     : dell
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="javax.servlet.http.*" %>
+<%@ page import="java.io.*" %>
+
+<%
+    // Kiểm tra xem email đã được đăng ký hay chưa
+    HttpSession sessionotp = request.getSession();
+    String email = (String) session.getAttribute("email");
+
+    if (email == null || email.isEmpty()) {
+        
+        response.sendRedirect("Register.jsp");
+    }
+%>
 <!DOCTYPE html>
 <link rel="stylesheet" href="css/VerifyEmail.css"> 
+
 <html>
     <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> We're thrilled to have you here! Get ready to dive into your new account. </div>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -68,16 +83,17 @@ Author     : dell
         </tr>
         
         </form>
-        <!-- COPY -->
+     
 
         <tr>
             <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                <p style="margin: 0;">If you have any questions, just reply to this email—we're always happy to help out.</p>
+                <p style="margin: 0;">  If you have any questions, just reply to this email—we're always happy to help out.</p>
             </td>
         </tr>
+        
         <tr>
             <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                <p style="margin: 0;">Cheers,<br>GoSnippets Team</p>
+                <p style="margin: 0;">Cheers,<br>G4 Group</p>
             </td>
         </tr>
     </table>
@@ -100,7 +116,7 @@ Author     : dell
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
             <tr>
                 <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;"> <br>
-                    <p style="margin: 0;">If these emails get annoying, please feel free to <a href="#" target="_blank" style="color: #111111; font-weight: 700;">unsubscribe</a>.</p>
+                    <p style="margin: 0;">If these emails get annoying, please feel free to <a href="HomePage.jsp" target="_blank" style="color: #111111; font-weight: 700;">unsubscribe</a>.</p>
                 </td>
             </tr>
         </table>

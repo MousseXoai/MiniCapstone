@@ -16,6 +16,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * Servlet implementation class ValidateOtp
  */
 public class RegisterVerify extends HttpServlet {
+    
 
     private static final long serialVersionUID = 1L;
 
@@ -23,11 +24,11 @@ public class RegisterVerify extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("user");
-        String pass = (String) session.getAttribute("pass");
-        String email = (String) session.getAttribute("email");
-        String phonenumber = (String) session.getAttribute("phonenumber");
-        String address = (String) session.getAttribute("address");
+        String user = ((String) session.getAttribute("user")).replaceAll("\\s+", " ").trim();
+        String pass = ((String) session.getAttribute("pass")).replaceAll("\\s+", " ").trim();
+        String email = ((String) session.getAttribute("email")).replaceAll("\\s+", " ").trim();
+        String phonenumber = ((String) session.getAttribute("phonenumber")).replaceAll("\\s", "").trim();
+        String address = ((String) session.getAttribute("address")).replaceAll("\\s+", " ").trim();
 
         // Hash mật khẩu
         String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
