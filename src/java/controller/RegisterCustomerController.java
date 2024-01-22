@@ -110,17 +110,17 @@ public class RegisterCustomerController extends HttpServlet {
                 String errorMessage = "Tên đăng nhập đã được sử dụng. Vui lòng chọn tên đăng nhập khác.";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("Register.jsp").forward(request, response);
-            } else if(emailCheckResult==1){
+            } else if (emailCheckResult == 1) {
                 String errorMessage = "Email đã được sử dụng. Vui lòng chọn tên đăng nhập khác.";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("Register.jsp").forward(request, response);
-                }else {
+            } else {
                 // Đăng ký tài khoản
                 if (usernameCheckResult == 0) {
                     // Gửi OTP qua email
                     int otp = sendOTP(email);
                     session.setAttribute("otp", otp);
-
+                    session.setAttribute("email", email);
                     // Chuyển hướng đến trang nhập mã OTP
                     response.sendRedirect("VerifyEmail.jsp");
 

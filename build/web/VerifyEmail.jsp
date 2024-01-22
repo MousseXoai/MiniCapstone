@@ -57,11 +57,17 @@ Author     : dell
                         </td>
                     </tr>
         </tr> <!-- COPY -->
+        
         <tr>
+            
             <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                <p style="margin: 0;">If that doesn't work, click here to try again:<button type="submit" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #FFA73B; text-decoration: none; margin-left: 10px;">Resend Token</button></p>
+                <form action="ResendToken" method="get">
+              <p style="margin: 0;">If that doesn't work, click here to try again:<button type="submit" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #FFA73B; text-decoration: none; margin-left: 10px;">Resend Token</button></p>
+            </form>
             </td>
         </tr>
+        
+        </form>
         <!-- COPY -->
 
         <tr>
