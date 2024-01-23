@@ -999,8 +999,9 @@ public class DAO extends DBContext {
                         rs.getInt(2),
                         rs.getString(3),
                         rs.getDate(4),
-                        rs.getInt(5),
-                        rs.getInt(6)
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
                 ));
             }
         } catch (Exception e) {
