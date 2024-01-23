@@ -384,7 +384,7 @@ public class DAO extends DBContext {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(1), rs.getInt(3), rs.getString(2)));
+                list.add(new Event(rs.getInt(3), rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());
@@ -1060,7 +1060,8 @@ public class DAO extends DBContext {
                         rs.getDouble(3),
                         rs.getDate(4),
                         rs.getInt(5),
-                        rs.getInt(6)
+                        rs.getInt(6),
+                        rs.getInt(7)
                 ));
             }
         } catch (Exception e) {
@@ -1534,7 +1535,14 @@ public class DAO extends DBContext {
                 int trangthai = rs.getInt(5);
                 int loai=rs.getInt(6);
 
-                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai, loai);
+                HoaDon p = new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                );
                 list.add(p);
             }
         } catch (Exception e) {
@@ -1619,7 +1627,14 @@ public class DAO extends DBContext {
                 int trangthai = rs.getInt(5);
                 int loai = rs.getInt(5);
 
-                HoaDon p = new HoaDon(mahd, accountid, tonggia, ngayxuat, trangthai, loai);
+                HoaDon p = new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                );
                 return p;
             }
         } catch (Exception e) {
