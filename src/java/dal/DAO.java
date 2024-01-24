@@ -384,7 +384,7 @@ public class DAO extends DBContext {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(1), rs.getInt(3), rs.getString(2)));
+                list.add(new Event(rs.getInt(3), rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());

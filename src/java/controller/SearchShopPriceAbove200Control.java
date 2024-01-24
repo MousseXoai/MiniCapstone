@@ -54,7 +54,7 @@ public class SearchShopPriceAbove200Control extends HttpServlet {
         request.setAttribute("listS", listSale);
         request.setAttribute("listO", listOutOfStock);
         request.setAttribute("star", listStarOfProduct);
-        request.getRequestDispatcher("Shop.jsp").forward(request, response);
+        request.getRequestDispatcher("ProductShop.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
