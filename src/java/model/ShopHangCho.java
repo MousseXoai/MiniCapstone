@@ -13,23 +13,25 @@ import java.sql.Date;
 public class ShopHangCho {
     private int id;
     private String shopName;
-    private String avatar;
     private String user;
     private String pass;
+    private String email;
     private String proof;
+    private String proof1;
     private Date dateThamGia;
     private String address;
 
     public ShopHangCho() {
     }
 
-    public ShopHangCho(int id, String shopName, String avatar, String user, String pass, String proof, Date dateThamGia, String address) {
+    public ShopHangCho(int id, String shopName, String user, String pass, String email, String proof, String proof1, Date dateThamGia, String address) {
         this.id = id;
         this.shopName = shopName;
-        this.avatar = avatar;
         this.user = user;
         this.pass = pass;
+        this.email = email;
         this.proof = proof;
+        this.proof1 = proof1;
         this.dateThamGia = dateThamGia;
         this.address = address;
     }
@@ -50,14 +52,6 @@ public class ShopHangCho {
         this.shopName = shopName;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public String getUser() {
         return user;
     }
@@ -74,12 +68,28 @@ public class ShopHangCho {
         this.pass = pass;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getProof() {
         return proof;
     }
 
     public void setProof(String proof) {
         this.proof = proof;
+    }
+
+    public String getProof1() {
+        return proof1;
+    }
+
+    public void setProof1(String proof1) {
+        this.proof1 = proof1;
     }
 
     public Date getDateThamGia() {
@@ -97,5 +107,7 @@ public class ShopHangCho {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    
     
 }
