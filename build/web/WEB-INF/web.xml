@@ -76,6 +76,22 @@
         <servlet-name>SearchShopColorControl</servlet-name>
         <servlet-class>controller.SearchShopColorControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotiControl</servlet-name>
+        <servlet-class>controller.NotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Noti2Control</servlet-name>
+        <servlet-class>controller.Noti2Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewNotiControl</servlet-name>
+        <servlet-class>controller.ViewNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadAmountNotiControl</servlet-name>
+        <servlet-class>controller.LoadAmountNotiControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -511,6 +527,22 @@
     <servlet-mapping>
         <servlet-name>SearchShopColorControl</servlet-name>
         <url-pattern>/searchShopColor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiControl</servlet-name>
+        <url-pattern>/noti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Noti2Control</servlet-name>
+        <url-pattern>/noti2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewNotiControl</servlet-name>
+        <url-pattern>/viewNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAmountNotiControl</servlet-name>
+        <url-pattern>/loadAmountNoti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

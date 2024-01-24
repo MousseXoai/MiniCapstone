@@ -13,15 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.Account;
-import model.Cart;
-import model.SanPham;
+import model.Noti;
 
 /**
  *
- * @author Tosaka
+ * @author Admin
  */
-public class CartAmountControl extends HttpServlet {
+public class LoadAmountNotiControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,18 +33,21 @@ public class CartAmountControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CartAmountControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CartAmountControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int totalAmountNoti;
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        PrintWriter out = response.getWriter();
+        if (a == null) {
+            totalAmountNoti=0;
+            
+            out.println(totalAmountNoti);
+            return;
         }
+        int accountID = a.getuID();
+        DAO dao = new DAO();
+        ArrayList<Noti> list = dao.getListNotiChuaXemByAccId(accountID);
+        totalAmountNoti = list.size();
+        out.println(totalAmountNoti);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,46 +61,8 @@ public class CartAmountControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-        int productid = Integer.parseInt(request.getParameter("productID"));
-        int num = Integer.parseInt(request.getParameter("num"));
-        
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-            Account a = (Account) session.getAttribute("acc");
-            if (a == null) {
-                response.sendRedirect("login.jsp");
-            } else {
-                
-                int accountID = a.getuID();
-                
-
-        Cart c = dao.getAmountProductIdInCart(productid, accountID);
-
-        if (num == -1) {
-            if (c.getAmount() <= 1) {
-                dao.removeProductIdInCart(productid, accountID);
-            } else {
-                dao.updateDecrease(productid, accountID);
-            }
-        }
-
-        if (num == 1) {
-            SanPham sp = dao.getProductByID(String.valueOf(productid));
-            if (c.getAmount() < sp.getQuantity()) {
-                dao.updateIncrease(productid, accountID);
-            }
-        }
-        
-        if(num == 0){
-            dao.removeProductIdInCart(productid, accountID);
-        }
-
-        response.sendRedirect("cart");
-        
-        }
-    } }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -109,8 +74,8 @@ public class CartAmountControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-    } 
+        processRequest(request, response);
+    }
 
     /** 
      * Returns a short description of the servlet.
