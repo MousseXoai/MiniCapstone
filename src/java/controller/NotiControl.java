@@ -13,15 +13,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.Account;
-import model.Cart;
-import model.SanPham;
+import model.DateNoti;
+import model.Noti;
+import model.NotiCate;
+import model.Shop;
 
 /**
  *
- * @author Tosaka
+ * @author Admin
  */
-public class CartAmountControl extends HttpServlet {
+public class NotiControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,19 +36,32 @@ public class CartAmountControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CartAmountControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CartAmountControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        DAO dao= new DAO();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            int accountID = a.getuID();
+            String avatar= dao.getAvatarByAccId(accountID);
+            int countNoti= dao.countNotiByAccId(accountID);
+            int countAds = dao.countAds();
+            ArrayList<Noti> listAdsToday= dao.getListAdsToday();
+            ArrayList<Shop> listAllShop= dao.getAllShop();
+            ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
+            ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();
+            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti();
+            request.setAttribute("listDateNoti", listDateNoti);
+            request.setAttribute("listAdsMonth", listAdsMonth);
+            request.setAttribute("listNotiCate",listNotiCate );
+            request.setAttribute("listAdsToday", listAdsToday);
+            request.setAttribute("listAllShop", listAllShop);
+            request.setAttribute("countAds", countAds);
+            request.setAttribute("countNoti", countNoti);
+            request.setAttribute("avatar", avatar);
+            request.getRequestDispatcher("Notification.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -58,46 +74,8 @@ public class CartAmountControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-        int productid = Integer.parseInt(request.getParameter("productID"));
-        int num = Integer.parseInt(request.getParameter("num"));
-        
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-            Account a = (Account) session.getAttribute("acc");
-            if (a == null) {
-                response.sendRedirect("login.jsp");
-            } else {
-                
-                int accountID = a.getuID();
-                
-
-        Cart c = dao.getAmountProductIdInCart(productid, accountID);
-
-        if (num == -1) {
-            if (c.getAmount() <= 1) {
-                dao.removeProductIdInCart(productid, accountID);
-            } else {
-                dao.updateDecrease(productid, accountID);
-            }
-        }
-
-        if (num == 1) {
-            SanPham sp = dao.getProductByID(String.valueOf(productid));
-            if (c.getAmount() < sp.getQuantity()) {
-                dao.updateIncrease(productid, accountID);
-            }
-        }
-        
-        if(num == 0){
-            dao.removeProductIdInCart(productid, accountID);
-        }
-
-        response.sendRedirect("cart");
-        
-        }
-    } }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -109,8 +87,8 @@ public class CartAmountControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-    } 
+        processRequest(request, response);
+    }
 
     /** 
      * Returns a short description of the servlet.

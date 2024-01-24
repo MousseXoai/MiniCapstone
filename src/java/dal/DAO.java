@@ -33,6 +33,9 @@ import model.Star;
 import model.TrangThai;
 import model.WishList;
 import model.Account;
+import model.DateNoti;
+import model.Noti;
+import model.NotiCate;
 import model.UserGoogleDto;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -44,6 +47,10 @@ public class DAO extends DBContext {
 
     PreparedStatement ps;
     ResultSet rs;
+    private static java.sql.Date getCurrentDate() {
+        java.util.Date today = new java.util.Date();
+        return new java.sql.Date(today.getTime());
+    }
 
     public List<SanPham> getWishListSpByAccount(int id) {
         List<SanPham> list = new ArrayList<>();
@@ -1379,11 +1386,12 @@ public class DAO extends DBContext {
     }
 
     //get a cart by productid
-    public Cart getAmountProductIdInCart(int productID) {
+    public Cart getAmountProductIdInCart(int productID, int accountID) {
         try {
-            String strSQL = "select * from Cart where productID = ? ";
+            String strSQL = "select * from Cart where productID = ? and accountID= ?";
             ps = connection.prepareStatement(strSQL);
             ps.setInt(1, productID);
+            ps.setInt(2, accountID);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int accountid = rs.getInt(1);
@@ -2506,6 +2514,239 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
         return exist;
+    }
+
+    public String getAvatarByAccId(int accountID) {
+
+        String sql = "select avatar from accinfo where uID = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountID);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public int countNotiByAccId(int accountID) {
+        String sql = "select count(*) from Noti where uID=? and trangthai=0";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountID);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public int countAds() {
+        String sql = "select count(*) from Noti where dateNoti= ? and noticateid=1 or noticateid=2";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, getCurrentDate());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+
+    public ArrayList<Noti> getListAdsToday() {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where dateNoti=? and noticateid=1 or noticateid=2";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Shop> getAllShop() {
+        ArrayList<Shop> list = new ArrayList<>();
+        String query = "select * from Shop";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Shop(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDate(5),
+                        rs.getString(6),
+                        rs.getString(7)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<NotiCate> getListNotiCate() {
+        ArrayList<NotiCate> list = new ArrayList<>();
+        String query = "select * from NotiCate";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new NotiCate(rs.getInt(1),
+                        rs.getString(2)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Noti> getListAdsMonth() {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where noticateid=1 or noticateid=2 and MONTH(dateNoti)=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,  getCurrentDate().toLocalDate().getMonthValue());
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<DateNoti> getListDateNoti() {
+        ArrayList<DateNoti> list = new ArrayList<>();
+        String query = "select maNoti, DAY(dateNoti) from Noti where MONTH(dateNoti)=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,  getCurrentDate().toLocalDate().getMonthValue());
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new DateNoti(rs.getInt(1),
+                        getCurrentDate().toLocalDate().getDayOfMonth()-rs.getInt(2)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public ArrayList<DateNoti> getListDateNoti1() {
+        ArrayList<DateNoti> list = new ArrayList<>();
+        String query = "select maNoti, DATEDIFF(day, dateNoti, GETDATE()) from Noti ";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new DateNoti(rs.getInt(1),
+                        rs.getInt(2)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Noti> getListNoti(int accountID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where uID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void ChangeTrangThaiNoti(int maNoti) {
+        String query = "update Noti set trangthai=1 where maNoti=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, maNoti);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteByMaWl" + e.getMessage());
+        }
+    }
+
+    public ArrayList<Noti> getListNotiChuaXemByAccId(int accountID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where uID=? and trangthai=0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
 }
