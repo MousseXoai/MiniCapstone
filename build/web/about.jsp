@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="css/1icomoon.css">
         <link rel="stylesheet" href="css/1style.css">
     </head>
-    <body class="goto-here" onload="loadAmountCart(); loadAmountWishList()">
+    <body class="goto-here" onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
         <!-- Header Section Begin -->
 
         <jsp:include page="Menu.jsp"></jsp:include>
@@ -232,33 +232,43 @@
         <script src="js/1google-map.js"></script>
         <script src="js/1main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-                                function loadAmountCart() {
-                                    $.ajax({
-                                        url: "/MiniCapstone/loadAmountCart",
-                                        type: "get",
-                                        data: {
+         <script>
+        function loadAmountCart() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountCart",
+                type: "get",
+                data: {
 
-                                        },
-                                        success: function (responseData) {
-                                            document.getElementById("amountCart").innerHTML = responseData;
-                                        }
-                                    });
-                                }
-                                function loadAmountWishList() {
-                                    $.ajax({
-                                        url: "/MiniCapstone/loadAmountWishList",
-                                        type: "get",
-                                        data: {
+                },
+                success: function (responseData) {
+                    document.getElementById("amountCart").innerHTML = responseData;
+                }
+            });
+        }
+        function loadAmountWishList() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountWishList",
+                type: "get",
+                data: {
 
-                                        },
-                                        success: function (responseData) {
-                                            document.getElementById("amountWishList").innerHTML = responseData;
-                                        }
-                                    });
-                                }
+                },
+                success: function (responseData) {
+                    document.getElementById("amountWishList").innerHTML = responseData;
+                }
+            });
+        }
+        function loadAmountNoti() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountNoti",
+                type: "get",
+                data: {
 
+                },
+                success: function (responseData) {
+                    document.getElementById("amountNoti").innerHTML = responseData;
+                }
+            });
+        }
         </script>
-
     </body>
 </html>

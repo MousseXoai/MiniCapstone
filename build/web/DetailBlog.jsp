@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-<body onload="loadAmountCart(); loadAmountWishList()">
+<body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
     
 
     <!-- Header Section Begin -->
@@ -170,7 +170,18 @@
                                                     }
                                                 });
                                             }                                    
-                                            
+        function loadAmountNoti() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountNoti",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountNoti").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                          
     </script>
 </body>
 

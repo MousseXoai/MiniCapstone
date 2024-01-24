@@ -73,7 +73,7 @@ public class CartAmountControl extends HttpServlet {
                 int accountID = a.getuID();
                 
 
-        Cart c = dao.getAmountProductIdInCart(productid);
+        Cart c = dao.getAmountProductIdInCart(productid, accountID);
 
         if (num == -1) {
             if (c.getAmount() <= 1) {
