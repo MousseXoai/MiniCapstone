@@ -15,17 +15,19 @@ public class NhanXet {
 	  private int productID;
 	  private String contentReview;
 	  private Date dateReview;
+          private String image;
           private int voteStar;
           private int maReview;
 
     public NhanXet() {
     }
 
-    public NhanXet(int accountID, int productID, String contentReview, Date dateReview, int voteStar, int maReview) {
+    public NhanXet(int accountID, int productID, String contentReview, Date dateReview, String image, int voteStar, int maReview) {
         this.accountID = accountID;
         this.productID = productID;
         this.contentReview = contentReview;
         this.dateReview = dateReview;
+        this.image = image;
         this.voteStar = voteStar;
         this.maReview = maReview;
     }
@@ -62,6 +64,14 @@ public class NhanXet {
         this.dateReview = dateReview;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public int getVoteStar() {
         return voteStar;
     }
@@ -79,6 +89,4 @@ public class NhanXet {
     }
 
     
-	
-	
 }
