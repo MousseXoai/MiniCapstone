@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="home"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -84,8 +84,14 @@
                                         </div>
                                         </td>
                                         <td class="cart__price">
+                                        <c:if test="${itemSP.getSale()==0}">
                                         <fmt:setLocale value="vi_VN"/>
                                         <fmt:formatNumber type="currency" value="${itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </c:if>
+                                        <c:if test="${itemSP.getSale()!=0}">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol="₫"/>
+                                        </c:if>
                                         </td>
                                         <td class="cart__quantity">                                               
                                         <div class="quantity-control-cart">
@@ -95,8 +101,14 @@
                                         </div>
                                         </td>
                                         <td class="cart__total">
+                                        <c:if test="${itemSP.getSale()==0}">
                                         <fmt:setLocale value="vi_VN"/>
                                         <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </c:if>
+                                        <c:if test="${itemSP.getSale()!=0}">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol="₫"/>
+                                        </c:if>                                       
                                         </td>
                                         <td class="cart__close"><a href="cartamount?num=0&productID=${itemC.getProductID()}"><span class="icon_close"></span></a></td>
                                         </tr>
@@ -111,7 +123,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
+                        <a href="shop">Continue Shopping</a>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-2">
@@ -132,7 +144,7 @@
                                 </span>
                             </li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="Checkout.jsp" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>
