@@ -47,6 +47,7 @@ public class DAO extends DBContext {
 
     PreparedStatement ps;
     ResultSet rs;
+
     private static java.sql.Date getCurrentDate() {
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
@@ -1181,7 +1182,7 @@ public class DAO extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDouble(7)
-                        ));
+                ));
             }
         } catch (Exception e) {
         }
@@ -1542,7 +1543,7 @@ public class DAO extends DBContext {
                 double tonggia = rs.getDouble(3);
                 Date ngayxuat = rs.getDate(4);
                 int trangthai = rs.getInt(5);
-                int loai=rs.getInt(6);
+                int loai = rs.getInt(6);
 
                 HoaDon p = new HoaDon(rs.getInt(1),
                         rs.getInt(2),
@@ -1835,8 +1836,6 @@ public class DAO extends DBContext {
         }
     }
 
-    
-
     public void addGoogleAccount(UserGoogleDto user) {
 
         String sql = "INSERT INTO [dbo].[Account]\n"
@@ -1857,6 +1856,7 @@ public class DAO extends DBContext {
             System.out.println("addGoogleAccount: " + e.getMessage());
         }
     }
+
     public int getUidByName(Account a) {
         int id = 0;
         String sql = "SELECT  [uID]\n"
@@ -1874,6 +1874,7 @@ public class DAO extends DBContext {
         }
         return id;
     }
+
     public int getUidByUserName(UserGoogleDto user) {
         int id = 0;
         String sql = "SELECT  [uID]\n"
@@ -1947,14 +1948,14 @@ public class DAO extends DBContext {
         }
     }
 
-    public void addEmailByUid(String email,int id) {
+    public void addEmailByUid(String email, int id) {
         String strSQL = "insert into AccInfo (uID,email) values(?,?)";
-        try{
-        ps = connection.prepareStatement(strSQL);
-        ps.setInt(1, id);
-        ps.setString(2, email);
-        ps.executeUpdate();
-        } catch(Exception e) {
+        try {
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
             System.out.println("addEmailByUid: " + e.getMessage());
         }
     }
@@ -1973,7 +1974,7 @@ public class DAO extends DBContext {
                 int isAdmin = rs.getInt(5);
                 int isCheck = rs.getInt(6);
                 int isShip = rs.getInt(7);
-                Account p = new Account(uid,user,pass,isSell,isAdmin,isCheck,isShip);
+                Account p = new Account(uid, user, pass, isSell, isAdmin, isCheck, isShip);
                 return p;
             }
         } catch (Exception e) {
@@ -2122,6 +2123,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public void RegisterCustomer(String user, String pass) {
 
         String sql = "INSERT INTO Account([user], pass, isSell, isAdmin, isCheck,isShip)\n"
@@ -2130,7 +2132,7 @@ public class DAO extends DBContext {
             ps = connection.prepareStatement(sql);
             ps.setString(1, user);
             ps.setString(2, pass);
-            
+
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -2140,13 +2142,13 @@ public class DAO extends DBContext {
 // get id theo ten
 
     public int getIDByUsername(Account account) {
-        
+
         String sql = "select [uID] from Account Where [user] = ?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, account.getUser());
-            
-            rs= ps.executeQuery();
+
+            rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
             }
@@ -2167,9 +2169,7 @@ public class DAO extends DBContext {
             ps.setString(2, address);
             ps.setString(3, phoneNumber);
             ps.setInt(4, uID);
-            
 
-            
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -2185,7 +2185,6 @@ public class DAO extends DBContext {
             ps = connection.prepareStatement(sql);
             ps.setString(1, user);
 
-            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 exist = 1;
@@ -2196,8 +2195,6 @@ public class DAO extends DBContext {
         }
         return exist;
     }
-
-   
 
     // update mk moi
     public void change(Account account) {
@@ -2212,6 +2209,7 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
+
     public Account check(String u) {
 
         String sql = "SELECT [uID]\n "
@@ -2309,6 +2307,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<SanPham> searchShopByPriceMinToMax(String priceMin, String priceMax, int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham where [price] >=? and [price]<=? and shopid=?";
@@ -2464,6 +2463,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<SanPham> getProductShopByColor(String color, int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham where color=? and shopid=?";
@@ -2504,7 +2504,6 @@ public class DAO extends DBContext {
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
 
-            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 exist = 1;
@@ -2568,7 +2567,6 @@ public class DAO extends DBContext {
         return 0;
     }
 
-
     public ArrayList<Noti> getListAdsToday() {
         ArrayList<Noti> list = new ArrayList<>();
         String query = "select * from Noti where dateNoti=? and noticateid=1 or noticateid=2";
@@ -2597,7 +2595,7 @@ public class DAO extends DBContext {
         String query = "select * from Shop";
         try {
             ps = connection.prepareStatement(query);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Shop(rs.getInt(1),
@@ -2619,7 +2617,7 @@ public class DAO extends DBContext {
         String query = "select * from NotiCate";
         try {
             ps = connection.prepareStatement(query);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new NotiCate(rs.getInt(1),
@@ -2636,8 +2634,8 @@ public class DAO extends DBContext {
         String query = "select * from Noti where noticateid=1 or noticateid=2 and MONTH(dateNoti)=? ";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1,  getCurrentDate().toLocalDate().getMonthValue());
-            
+            ps.setInt(1, getCurrentDate().toLocalDate().getMonthValue());
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -2660,25 +2658,25 @@ public class DAO extends DBContext {
         String query = "select maNoti, DAY(dateNoti) from Noti where MONTH(dateNoti)=?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1,  getCurrentDate().toLocalDate().getMonthValue());
-            
+            ps.setInt(1, getCurrentDate().toLocalDate().getMonthValue());
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new DateNoti(rs.getInt(1),
-                        getCurrentDate().toLocalDate().getDayOfMonth()-rs.getInt(2)
+                        getCurrentDate().toLocalDate().getDayOfMonth() - rs.getInt(2)
                 ));
             }
         } catch (Exception e) {
         }
         return list;
     }
+
     public ArrayList<DateNoti> getListDateNoti1() {
         ArrayList<DateNoti> list = new ArrayList<>();
         String query = "select maNoti, DATEDIFF(day, dateNoti, GETDATE()) from Noti ";
         try {
             ps = connection.prepareStatement(query);
-            
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new DateNoti(rs.getInt(1),
@@ -2696,7 +2694,7 @@ public class DAO extends DBContext {
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, accountID);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -2731,7 +2729,7 @@ public class DAO extends DBContext {
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, accountID);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -2749,4 +2747,35 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<TrangThai> getlistTrangThai() {
+        ArrayList<TrangThai> list = new ArrayList<>();
+        String query = "select * from TrangThai";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new TrangThai(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getlistTrangThai" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<HoaDon> listHoaDon(int accountID) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = "select * from HoaDon where accountID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5),  rs.getInt(6),  rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("listHoaDon" + e.getMessage());
+        }
+        return list;
+    }
+    
 }

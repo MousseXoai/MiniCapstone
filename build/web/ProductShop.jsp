@@ -34,9 +34,9 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 
-        <!-- Header Section Begin -->
-<body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
     <!-- Header Section Begin -->
+    <body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
+        <!-- Header Section Begin -->
         <jsp:include page="Menu.jsp"></jsp:include>
 
             <!-- Header Section End -->
@@ -247,8 +247,8 @@
                                                     </c:if> 
                                                     <c:forEach begin="1" end="${endPage }" var="i">
                                                 <  li class="${tag==i?"page-item active":"page-item" }"><a href="shopListSp?id=${shopId}&index=${i }" class="page-link">${i }</a></li>
-                                                </c:forEach>
-                                                <c:if test="${tag != endPage}">
+                                            </c:forEach>
+                                            <c:if test="${tag != endPage}">
                                                 <li class="page-item"><a href="shopListSp?id=${shopId}&index=${tag+1 }" class="page-link"><i class="fa fa-chevron-right"></i></a></li>
                                                     </c:if> 
                                         </ul>
@@ -289,43 +289,43 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
         function loadAmountCart() {
-                                                $.ajax({
-                                                    url: "/MiniCapstone/loadAmountCart",
-                                                    type: "get",
-                                                    data: {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountCart",
+                type: "get",
+                data: {
 
-                                                    },
-                                                    success: function (responseData) {
-                                                        document.getElementById("amountCart").innerHTML = responseData;
-                                                    }
-                                                });
-                                            }
+                },
+                success: function (responseData) {
+                    document.getElementById("amountCart").innerHTML = responseData;
+                }
+            });
+        }
         function loadAmountWishList() {
-                                                $.ajax({
-                                                    url: "/MiniCapstone/loadAmountWishList",
-                                                    type: "get",
-                                                    data: {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountWishList",
+                type: "get",
+                data: {
 
-                                                    },
-                                                    success: function (responseData) {
-                                                        document.getElementById("amountWishList").innerHTML = responseData;
-                                                    }
-                                                });
-                                            }                                    
+                },
+                success: function (responseData) {
+                    document.getElementById("amountWishList").innerHTML = responseData;
+                }
+            });
+        }
         function loadAmountNoti() {
-                                                $.ajax({
-                                                    url: "/MiniCapstone/loadAmountNoti",
-                                                    type: "get",
-                                                    data: {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountNoti",
+                type: "get",
+                data: {
 
-                                                    },
-                                                    success: function (responseData) {
-                                                        document.getElementById("amountNoti").innerHTML = responseData;
-                                                    }
-                                                });
-                                            }                                          
-    </script>
-    
-        
-</body>
+                },
+                success: function (responseData) {
+                    document.getElementById("amountNoti").innerHTML = responseData;
+                }
+            });
+        }
+        </script>
+
+
+    </body>
 </html>

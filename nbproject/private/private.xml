@@ -3,27 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/EventController.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/ManageWishlist.java</file>
+            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/Shop.jsp</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/ProductShop.jsp</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/event.jsp</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/SearchCateShopControl.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/SearchShopPriceAbove200Control.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/SearchShopColorControl.java</file>
             <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/about.jsp</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/ListSpByShop.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/SearchAjaxShopPriceMinToMaxControl.java</file>
-=======
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/Noti.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ViewNotiControl.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/NotiControl.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/Noti2Control.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Notification.jsp</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Notification2.jsp</file>
->>>>>>> 78bbc55fc9c97e2f4e6d9dec5f13d0d40d5dfb61
         </group>
     </open-files>
 </project-private>
