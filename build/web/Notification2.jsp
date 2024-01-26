@@ -94,6 +94,14 @@
                                         <div class="text-truncate">
                                             THÔNG BÁO
                                         </div>
+                                        <div class="text-truncate">
+                                            <c:forEach items="${listAllShop}" var="s">
+                                                <c:if test="${s.shopId==a.shopId}">
+                                                    Đơn hàng mã số: ${a.maHD} từ cửa hàng:${s.shopName}
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
                                         <div class="small">${a.contentNoti}</div>
                                         <a href="viewNoti?id=${a.maNoti}">
                                            <img style="width: 150px" src="${a.image}" alt /> 

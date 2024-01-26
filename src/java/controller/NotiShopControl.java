@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
+import model.AccInfo;
 import model.Account;
 import model.DateNoti;
 import model.Noti;
@@ -24,7 +26,7 @@ import model.Shop;
  *
  * @author Admin
  */
-public class NotiControl extends HttpServlet {
+public class NotiShopControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,30 +41,30 @@ public class NotiControl extends HttpServlet {
         DAO dao= new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null) {
+        if (a == null || a.getIsSell()==0) {
             response.sendRedirect("login.jsp");
         } else {
             int accountID = a.getuID();
-            String avatar= dao.getAvatarByAccId(accountID);
-            int countNoti= dao.countNotiByAccId(accountID);
-            int countAds = dao.countAds();
-            ArrayList<Noti> listAdsToday= dao.getListAdsToday();
-            System.out.println(listAdsToday);
-            ArrayList<Shop> listAllShop= dao.getAllShop();
+            int shopID= dao.getShopIdByAccountId(accountID);
+            String avatar= dao.getAvatarByShopId(shopID);
+            int countAdsToday = dao.countAdsTodayByShopId(shopID);
+            int countAdsMonth = dao.countAdsMonthByShopId(shopID);
+            ArrayList<Noti> listAdsToday= dao.getListAdsTodayByShopId(shopID);
+            List<AccInfo> listAllCustomer= dao.getAllAccInfo();
             ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
-            ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();
+            ArrayList<Noti> listAllAds= dao.getListAllAdsByShopId(shopID);
             ArrayList<DateNoti> listDateNoti = dao.getListDateNoti();
             request.setAttribute("listDateNoti", listDateNoti);
-            request.setAttribute("listAdsMonth", listAdsMonth);
+            request.setAttribute("listAdsMonth", listAllAds);
             request.setAttribute("listNotiCate",listNotiCate );
             request.setAttribute("listAdsToday", listAdsToday);
-            request.setAttribute("listAllShop", listAllShop);
-            request.setAttribute("countAds", countAds);
-            request.setAttribute("countNoti", countNoti);
+            request.setAttribute("listAllCustomer", listAllCustomer);
+            request.setAttribute("countAdsToday", countAdsToday);
+            request.setAttribute("countAdsMonth", countAdsMonth);
             request.setAttribute("avatar", avatar);
-            request.getRequestDispatcher("Notification.jsp").forward(request, response);
+            request.getRequestDispatcher("NotificationShop.jsp").forward(request, response);
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -12,19 +12,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import model.Account;
-import model.DateNoti;
 import model.Noti;
-import model.NotiCate;
-import model.Shop;
 
 /**
  *
  * @author Admin
  */
-public class NotiControl extends HttpServlet {
+public class EditNotiControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,34 +29,8 @@ public class NotiControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        DAO dao= new DAO();
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
-        if (a == null) {
-            response.sendRedirect("login.jsp");
-        } else {
-            int accountID = a.getuID();
-            String avatar= dao.getAvatarByAccId(accountID);
-            int countNoti= dao.countNotiByAccId(accountID);
-            int countAds = dao.countAds();
-            ArrayList<Noti> listAdsToday= dao.getListAdsToday();
-            System.out.println(listAdsToday);
-            ArrayList<Shop> listAllShop= dao.getAllShop();
-            ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
-            ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();
-            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti();
-            request.setAttribute("listDateNoti", listDateNoti);
-            request.setAttribute("listAdsMonth", listAdsMonth);
-            request.setAttribute("listNotiCate",listNotiCate );
-            request.setAttribute("listAdsToday", listAdsToday);
-            request.setAttribute("listAllShop", listAllShop);
-            request.setAttribute("countAds", countAds);
-            request.setAttribute("countNoti", countNoti);
-            request.setAttribute("avatar", avatar);
-            request.getRequestDispatcher("Notification.jsp").forward(request, response);
-        }
-    }
+        
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -75,7 +43,7 @@ public class NotiControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     } 
 
     /** 
@@ -88,7 +56,16 @@ public class NotiControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        response.setContentType("text/html;charset=UTF-8");
+        String id= request.getParameter("id");
+        int notiId= Integer.parseInt(id);
+        DAO dao= new DAO();
+        Noti noti= dao.getNotiById(notiId);
+        
+        request.setAttribute("noti", noti);
+        request.getRequestDispatcher("EditNoti.jsp").forward(request, response);
     }
 
     /** 
