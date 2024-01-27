@@ -1,6 +1,6 @@
 <%-- 
-    Document   : NotificationShop
-    Created on : Jan 26, 2024, 10:51:08 AM
+    Document   : NotificationShop1
+    Created on : Jan 27, 2024, 9:22:28 AM
     Author     : Admin
 --%>
 
@@ -56,16 +56,7 @@
                         <img src="${avatar}" class="img-fluid" alt="Responsive image" />
                         <div class="p-3 border-bottom">
                             <h6 class="font-weight-bold text-dark">Notifications</h6>
-                            <p class="mb-0 text-muted">Today your shop post ${countAdsToday} advertisement and events.</p>
-                            <p class="mb-0 text-muted"> And</p>
-
-                            <p class="mb-0 text-muted">This month your shop post ${countAdsMonth} advertisement and events.</p>
-                        </div>
-                         <div class="p-3">
-                            <form action="addNoti">
-                                
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">Add new advertisement and events</button>
-                            </form>                          
+                            <p class="mb-0 text-muted">Today your shop post ${countNotiToday} notification for customer.</p>
                         </div>
                         <div class="p-3">
                             <form action="notiShop">
@@ -90,19 +81,26 @@
                         <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Today</h6>
                         </div>
-                        <c:forEach items="${listAdsToday}" var="a">
+                        <c:forEach items="${listNotiToday}" var="a">
                             <div class="box-body p-0">
                                 <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <c:forEach items="${listAllCustomer}" var="s">
                                             <c:if test="${s.uID==a.uID}">
-                                                <h6> Send to: ${s.name}</h6>
+                                                
                                                 <img style="width: 50px; height: 50px" class="rounded-circle" src="${s.avatar}" alt />
                                             </c:if>
                                         </c:forEach>
                                     </div>
                                     <div class="font-weight-bold mr-3">
                                         <div class="text-truncate">
+                                            <c:forEach items="${listAllCustomer}" var="s">
+                                            <c:if test="${s.uID==a.uID}">
+                                                Send to: ${s.name}
+                                                
+                                            </c:if>
+                                        </c:forEach>
+                                                <br>
                                             <c:forEach items="${listNotiCate}" var="n">
                                                 <c:if test="${n.noticateid==a.noticateid}">
                                                     ${n.noticate}
@@ -118,24 +116,7 @@
 
 
                                     </div>
-                                    <span class="ml-auto mb-auto">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <form action="deleteNoti">
-                                                    <input type="text" name="id" value="${a.maNoti}" hidden>
-                                                    <button class="dropdown-item" type="submit"><i class="mdi mdi-delete"></i> Delete</button>
-                                                </form>
-                                                <form action="editNoti" method="post">
-                                                    <input type="text" name="id" value="${a.maNoti}" hidden>
-                                                    <button class="dropdown-item" type="submit"><i class="mdi mdi-close"></i> Edit</button>
-                                                </form>                                               
-                                            </div>
-                                        </div>
-                                        
-                                    </span>
+                                    
                                 </div>
 
                             </div>
@@ -145,16 +126,15 @@
                         <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Earlier</h6>
                         </div>
-                        <c:forEach items="${listAdsMonth}" var="a">
+                        <c:forEach items="${listAllNoti}" var="a">
                             <div class="box-body p-0">
                                 <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
 
-                                        <c:forEach items="${listAllShop}" var="s">
-                                            <c:if test="${s.shopId==a.shopId}">
-                                                <a href="homeshop?id=${s.shopId}">
-                                                    <img style="width: 50px; height: 50px" class="rounded-circle" src="${s.avatar}" alt />
-                                                </a>
+                                        <c:forEach items="${listAllCustomer}" var="s">
+                                            <c:if test="${s.uID==a.uID}">
+                                                
+                                                <img style="width: 50px; height: 50px" class="rounded-circle" src="${s.avatar}" alt />
                                             </c:if>
                                         </c:forEach>
 
@@ -162,6 +142,13 @@
                                     </div>
                                     <div class="font-weight-bold mr-3">
                                         <div class="text-truncate">
+                                            <c:forEach items="${listAllCustomer}" var="s">
+                                            <c:if test="${s.uID==a.uID}">
+                                                Send to: ${s.name}
+                                                
+                                            </c:if>
+                                        </c:forEach>
+                                                <br>
                                             <c:forEach items="${listNotiCate}" var="n">
                                                 <c:if test="${n.noticateid==a.noticateid}">
                                                     ${n.noticate}
@@ -169,33 +156,12 @@
                                             </c:forEach>
                                         </div>
                                         <div class="small"><a>${a.contentNoti}</a></div>
-                                                <c:if test="${a.noticateid==1}">
-                                            <a href="shopListSp?id=${a.shopId}">
+                                            <a href="">
                                                 <img style="width: 150px" src="${a.image}" alt /> 
                                             </a>
-                                        </c:if>
-                                        <c:if test="${a.noticateid==2}">
-                                            <a href="event?id=${a.shopId}">
-                                                <img style="width: 150px" src="${a.image}" alt /> 
-                                            </a>
-                                        </c:if>
                                     </div>
                                     <span class="ml-auto mb-auto">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <form action="deleteNoti">
-                                                    <input type="text" name="id" value="${a.maNoti}" hidden>
-                                                    <button class="dropdown-item" type="submit"><i class="mdi mdi-delete"></i> Delete</button>
-                                                </form>
-                                                    <form action="editNoti" method="post">
-                                                    <input type="text" name="id" value="${a.maNoti}" hidden>
-                                                    <button class="dropdown-item" type="submit"><i class="mdi mdi-close"></i> Edit</button>
-                                                </form>                                               
-                                            </div>
-                                        </div>
+                                        
                                         <c:forEach items="${listDateNoti}" var="d">
                                             <c:if test="${d.maNoti==a.maNoti}">
                                                 <c:if test="${d.date==0}">
@@ -226,4 +192,3 @@
         </script>
     </body>
 </html>
-

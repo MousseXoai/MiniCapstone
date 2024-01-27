@@ -13,13 +13,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.Account;
+import model.DateNoti;
+import model.Noti;
+import model.Shop;
 
 /**
  *
  * @author Admin
  */
-public class ViewNotiControl extends HttpServlet {
+public class UnreadNotiControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,23 +35,30 @@ public class ViewNotiControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id= request.getParameter("id");
-        int maNoti = Integer.parseInt(id);
         DAO dao= new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
-            int newTrangThai=dao.getTrangThaiByNotiId(maNoti);
-            int trangthai= dao.getTrangThaiByNotiId(maNoti);
-            if(trangthai==0){
-                newTrangThai=1;
-            }else if(trangthai==2){
-                newTrangThai=3;
-            }
-            dao.ChangeTrangThaiNoti(maNoti,newTrangThai);
-            response.sendRedirect("order");
+            int accountID = a.getuID();
+            String avatar= dao.getAvatarByAccId(accountID);
+            int countNoti= dao.countNotiByAccId(accountID);
+            int countAds = dao.countAds();
+            
+            ArrayList<Shop> listAllShop= dao.getAllShop();
+            
+            ArrayList<Noti> listNoti = dao.getListNotiChuaXemByAccId(accountID);
+            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti1();
+            request.setAttribute("listDateNoti", listDateNoti);
+            request.setAttribute("listNoti", listNoti);
+            
+            
+            request.setAttribute("listAllShop", listAllShop);
+            request.setAttribute("countAds", countAds);
+            request.setAttribute("countNoti", countNoti);
+            request.setAttribute("avatar", avatar);
+            request.getRequestDispatcher("Notification2.jsp").forward(request, response);
         }
     } 
 

@@ -13,13 +13,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import model.AccInfo;
 import model.Account;
+import model.DateNoti;
+import model.Noti;
+import model.NotiCate;
 
 /**
  *
  * @author Admin
  */
-public class ViewNotiControl extends HttpServlet {
+public class NotiShop1Control extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,23 +37,29 @@ public class ViewNotiControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id= request.getParameter("id");
-        int maNoti = Integer.parseInt(id);
         DAO dao= new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null) {
+        if (a == null || a.getIsSell()==0) {
             response.sendRedirect("login.jsp");
         } else {
-            int newTrangThai=dao.getTrangThaiByNotiId(maNoti);
-            int trangthai= dao.getTrangThaiByNotiId(maNoti);
-            if(trangthai==0){
-                newTrangThai=1;
-            }else if(trangthai==2){
-                newTrangThai=3;
-            }
-            dao.ChangeTrangThaiNoti(maNoti,newTrangThai);
-            response.sendRedirect("order");
+            int accountID = a.getuID();
+            int shopID= dao.getShopIdByAccountId(accountID);
+            String avatar= dao.getAvatarByShopId(shopID);
+            int countNotiToday = dao.countNotiTodayByShopId(shopID);
+            ArrayList<Noti> listNotiToday= dao.getListNotiTodayByShopId(shopID);
+            List<AccInfo> listAllCustomer= dao.getAllAccInfo();
+            ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
+            ArrayList<Noti> listAllNoti= dao.getListAllNotiByShopId(shopID);
+            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti1();
+            request.setAttribute("listDateNoti", listDateNoti);
+            request.setAttribute("listAllNoti", listAllNoti);
+            request.setAttribute("listNotiCate",listNotiCate );
+            request.setAttribute("listNotiToday", listNotiToday);
+            request.setAttribute("listAllCustomer", listAllCustomer);
+            request.setAttribute("countNotiToday", countNotiToday);
+            request.setAttribute("avatar", avatar);
+            request.getRequestDispatcher("NotificationShop1.jsp").forward(request, response);
         }
     } 
 

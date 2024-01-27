@@ -116,6 +116,26 @@
         <servlet-name>EditNoti1Control</servlet-name>
         <servlet-class>controller.EditNoti1Control</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotiShop1Control</servlet-name>
+        <servlet-class>controller.NotiShop1Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotiShop2Control</servlet-name>
+        <servlet-class>controller.NotiShop2Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnreadNotiControl</servlet-name>
+        <servlet-class>controller.UnreadNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewNoti2Control</servlet-name>
+        <servlet-class>controller.ViewNoti2Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnreadNotiShopControl</servlet-name>
+        <servlet-class>controller.UnreadNotiShopControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -591,6 +611,26 @@
     <servlet-mapping>
         <servlet-name>EditNoti1Control</servlet-name>
         <url-pattern>/editNoti1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiShop1Control</servlet-name>
+        <url-pattern>/notiShop1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiShop2Control</servlet-name>
+        <url-pattern>/notiShop2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnreadNotiControl</servlet-name>
+        <url-pattern>/unreadNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewNoti2Control</servlet-name>
+        <url-pattern>/viewNoti2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnreadNotiShopControl</servlet-name>
+        <url-pattern>/unreadNotiShop</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

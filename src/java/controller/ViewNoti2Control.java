@@ -19,7 +19,7 @@ import model.Account;
  *
  * @author Admin
  */
-public class ViewNotiControl extends HttpServlet {
+public class ViewNoti2Control extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,12 +42,12 @@ public class ViewNotiControl extends HttpServlet {
             int newTrangThai=dao.getTrangThaiByNotiId(maNoti);
             int trangthai= dao.getTrangThaiByNotiId(maNoti);
             if(trangthai==0){
-                newTrangThai=1;
-            }else if(trangthai==2){
+                newTrangThai=2;
+            }else if(trangthai==1){
                 newTrangThai=3;
             }
             dao.ChangeTrangThaiNoti(maNoti,newTrangThai);
-            response.sendRedirect("order");
+            response.sendRedirect("statistic");
         }
     } 
 

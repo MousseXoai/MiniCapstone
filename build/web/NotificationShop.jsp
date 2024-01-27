@@ -68,17 +68,17 @@
                             </form>                          
                         </div>
                         <div class="p-3">
-                            <form action="noti">
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new advertisement and events</button>
+                            <form action="notiShop">
+                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View post advertisement and events</button>
                             </form>                          
                         </div>
                         <div class="p-3">
-                            <form action="noti">
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new advertisement and events</button>
+                            <form action="notiShop1">
+                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View post notifications</button>
                             </form>                          
                         </div>
                         <div class="p-3">
-                            <form action="noti2">
+                            <form action="notiShop2">
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new notifications</button>
                             </form>                         
                         </div>
@@ -190,7 +190,7 @@
                                                     <input type="text" name="id" value="${a.maNoti}" hidden>
                                                     <button class="dropdown-item" type="submit"><i class="mdi mdi-delete"></i> Delete</button>
                                                 </form>
-                                                <form action="editNoti">
+                                                    <form action="editNoti" method="post">
                                                     <input type="text" name="id" value="${a.maNoti}" hidden>
                                                     <button class="dropdown-item" type="submit"><i class="mdi mdi-close"></i> Edit</button>
                                                 </form>                                               

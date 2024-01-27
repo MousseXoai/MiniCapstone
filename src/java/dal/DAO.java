@@ -2535,7 +2535,7 @@ public class DAO extends DBContext {
     }
 
     public int countNotiByAccId(int accountID) {
-        String sql = "select count(*) from Noti where uID=? and trangthai=0";
+        String sql = "select count(*) from Noti where uID=? and (trangthai=0 or trangthai=2)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, accountID);
@@ -2635,7 +2635,7 @@ public class DAO extends DBContext {
 
     public ArrayList<Noti> getListAdsMonth() {
         ArrayList<Noti> list = new ArrayList<>();
-        String query = "select * from Noti where (noticateid=1 or noticateid=2) and MONTH(dateNoti)=? ";
+        String query = "select * from Noti where (noticateid=1 or noticateid=2) and MONTH(dateNoti)=? order by maNoti desc";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1,  getCurrentDate().toLocalDate().getMonthValue());
@@ -2695,7 +2695,7 @@ public class DAO extends DBContext {
 
     public ArrayList<Noti> getListNoti(int accountID) {
         ArrayList<Noti> list = new ArrayList<>();
-        String query = "select * from Noti where uID=?";
+        String query = "select * from Noti where uID=? order by maNoti desc";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, accountID);
@@ -2718,11 +2718,12 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public void ChangeTrangThaiNoti(int maNoti) {
-        String query = "update Noti set trangthai=1 where maNoti=?";
+    public void ChangeTrangThaiNoti(int maNoti, int newTrangThai) {
+        String query = "update Noti set trangthai=? where maNoti=?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, maNoti);
+            ps.setInt(1, newTrangThai);
+            ps.setInt(2, maNoti);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("deleteByMaWl" + e.getMessage());
@@ -2731,7 +2732,7 @@ public class DAO extends DBContext {
 
     public ArrayList<Noti> getListNotiChuaXemByAccId(int accountID) {
         ArrayList<Noti> list = new ArrayList<>();
-        String query = "select * from Noti where uID=? and trangthai=0";
+        String query = "select * from Noti where uID=? and (trangthai=0 or trangthai=2)";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, accountID);
@@ -2869,7 +2870,7 @@ public class DAO extends DBContext {
 
     public ArrayList<Noti> getListAllAdsByShopId(int shopID) {
         ArrayList<Noti> list = new ArrayList<>();
-        String query = "select * from Noti where (noticateid=1 or noticateid=2) and shopID=? ";
+        String query = "select * from Noti where (noticateid=1 or noticateid=2) and shopID=? order by maNoti desc";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1,  shopID);
@@ -2986,5 +2987,208 @@ public class DAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error");
         }
+    }
+
+    public int countNotiTodayByShopId(int shopID) {
+        String sql = "select count(*) from Noti where dateNoti= ? and noticateid=3 and shopID=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public ArrayList<Noti> getListNotiTodayByShopId(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where dateNoti=? and noticateid=3 and shopID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Noti> getListAllNotiByShopId(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where noticateid=3 and shopID=? order by maNoti desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,  shopID);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countNotiTodayForShop(int shopID) {
+        String sql = "select count(*) from Noti where dateNoti= ? and noticateid=4 and shopID=? and (trangthai=0 or trangthai=1)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public ArrayList<Noti> getListNotiTodayForShop(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where dateNoti=? and noticateid=4 and shopID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Noti> getListAllNotiForShop(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where noticateid=4 and shopID=? order by maNoti desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,  shopID);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int getTrangThaiByNotiId(int maNoti) {
+        String sql = "select trangthai from Noti where maNoti=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, maNoti);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public ArrayList<Noti> getListNotiTodayForShopChuaXem(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where dateNoti=? and noticateid=4 and shopID=? and (trangthai=0 or trangthai=1)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<Noti> getListAllNotiForShopChuaXem(int shopID) {
+        ArrayList<Noti> list = new ArrayList<>();
+        String query = "select * from Noti where noticateid=4 and shopID=? and (trangthai=0 or trangthai=1) order by maNoti desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,  shopID);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Noti(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDate(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 }
