@@ -92,6 +92,50 @@
         <servlet-name>LoadAmountNotiControl</servlet-name>
         <servlet-class>controller.LoadAmountNotiControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotiShopControl</servlet-name>
+        <servlet-class>controller.NotiShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditNotiControl</servlet-name>
+        <servlet-class>controller.EditNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNotiControl</servlet-name>
+        <servlet-class>controller.AddNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteNotiControl</servlet-name>
+        <servlet-class>controller.DeleteNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeImageNotiControl</servlet-name>
+        <servlet-class>controller.ChangeImageNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditNoti1Control</servlet-name>
+        <servlet-class>controller.EditNoti1Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotiShop1Control</servlet-name>
+        <servlet-class>controller.NotiShop1Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotiShop2Control</servlet-name>
+        <servlet-class>controller.NotiShop2Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnreadNotiControl</servlet-name>
+        <servlet-class>controller.UnreadNotiControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewNoti2Control</servlet-name>
+        <servlet-class>controller.ViewNoti2Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnreadNotiShopControl</servlet-name>
+        <servlet-class>controller.UnreadNotiShopControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -543,6 +587,50 @@
     <servlet-mapping>
         <servlet-name>LoadAmountNotiControl</servlet-name>
         <url-pattern>/loadAmountNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiShopControl</servlet-name>
+        <url-pattern>/notiShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditNotiControl</servlet-name>
+        <url-pattern>/editNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNotiControl</servlet-name>
+        <url-pattern>/addNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteNotiControl</servlet-name>
+        <url-pattern>/deleteNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeImageNotiControl</servlet-name>
+        <url-pattern>/changeImageNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditNoti1Control</servlet-name>
+        <url-pattern>/editNoti1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiShop1Control</servlet-name>
+        <url-pattern>/notiShop1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotiShop2Control</servlet-name>
+        <url-pattern>/notiShop2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnreadNotiControl</servlet-name>
+        <url-pattern>/unreadNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewNoti2Control</servlet-name>
+        <url-pattern>/viewNoti2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnreadNotiShopControl</servlet-name>
+        <url-pattern>/unreadNotiShop</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,14 +17,13 @@ import java.util.ArrayList;
 import model.Account;
 import model.DateNoti;
 import model.Noti;
-import model.NotiCate;
 import model.Shop;
 
 /**
  *
  * @author Admin
  */
-public class NotiControl extends HttpServlet {
+public class UnreadNotiControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,23 +45,22 @@ public class NotiControl extends HttpServlet {
             String avatar= dao.getAvatarByAccId(accountID);
             int countNoti= dao.countNotiByAccId(accountID);
             int countAds = dao.countAds();
-            ArrayList<Noti> listAdsToday= dao.getListAdsToday();
-            System.out.println(listAdsToday);
+            
             ArrayList<Shop> listAllShop= dao.getAllShop();
-            ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
-            ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();
-            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti();
+            
+            ArrayList<Noti> listNoti = dao.getListNotiChuaXemByAccId(accountID);
+            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti1();
             request.setAttribute("listDateNoti", listDateNoti);
-            request.setAttribute("listAdsMonth", listAdsMonth);
-            request.setAttribute("listNotiCate",listNotiCate );
-            request.setAttribute("listAdsToday", listAdsToday);
+            request.setAttribute("listNoti", listNoti);
+            
+            
             request.setAttribute("listAllShop", listAllShop);
             request.setAttribute("countAds", countAds);
             request.setAttribute("countNoti", countNoti);
             request.setAttribute("avatar", avatar);
-            request.getRequestDispatcher("Notification.jsp").forward(request, response);
+            request.getRequestDispatcher("Notification2.jsp").forward(request, response);
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

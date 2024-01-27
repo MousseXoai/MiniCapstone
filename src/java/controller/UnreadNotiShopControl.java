@@ -18,13 +18,12 @@ import model.Account;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
-import model.Shop;
 
 /**
  *
  * @author Admin
  */
-public class NotiControl extends HttpServlet {
+public class UnreadNotiShopControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,30 +38,28 @@ public class NotiControl extends HttpServlet {
         DAO dao= new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null) {
+        if (a == null || a.getIsSell()==0) {
             response.sendRedirect("login.jsp");
         } else {
             int accountID = a.getuID();
-            String avatar= dao.getAvatarByAccId(accountID);
-            int countNoti= dao.countNotiByAccId(accountID);
-            int countAds = dao.countAds();
-            ArrayList<Noti> listAdsToday= dao.getListAdsToday();
-            System.out.println(listAdsToday);
-            ArrayList<Shop> listAllShop= dao.getAllShop();
+            int shopID= dao.getShopIdByAccountId(accountID);
+            String avatar= dao.getAvatarByShopId(shopID);
+            int countNotiToday = dao.countNotiTodayForShop(shopID);
+            ArrayList<Noti> listNotiToday= dao.getListNotiTodayForShopChuaXem(shopID);
+            
             ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
-            ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();
-            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti();
+            ArrayList<Noti> listAllNoti= dao.getListAllNotiForShopChuaXem(shopID);
+            ArrayList<DateNoti> listDateNoti = dao.getListDateNoti1();
             request.setAttribute("listDateNoti", listDateNoti);
-            request.setAttribute("listAdsMonth", listAdsMonth);
+            request.setAttribute("listAllNoti", listAllNoti);
             request.setAttribute("listNotiCate",listNotiCate );
-            request.setAttribute("listAdsToday", listAdsToday);
-            request.setAttribute("listAllShop", listAllShop);
-            request.setAttribute("countAds", countAds);
-            request.setAttribute("countNoti", countNoti);
+            request.setAttribute("listNotiToday", listNotiToday);
+            
+            request.setAttribute("countNotiToday", countNotiToday);
             request.setAttribute("avatar", avatar);
-            request.getRequestDispatcher("Notification.jsp").forward(request, response);
+            request.getRequestDispatcher("NotificationShop2.jsp").forward(request, response);
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
