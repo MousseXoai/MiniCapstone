@@ -27,7 +27,7 @@
                                 </c:if>
                                 
 
-                            <li><a href="./contact.html">Contact</a></li>                          
+                            <li><a href="contact">Contact</a></li>                          
                         </ul>
                     </nav>
                 </div>

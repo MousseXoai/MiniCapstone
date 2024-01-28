@@ -33,6 +33,7 @@ import model.Star;
 import model.TrangThai;
 import model.WishList;
 import model.Account;
+import model.Contact;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
@@ -3190,5 +3191,131 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public void addContact(String name, String email, String subject, String content) {
+        String query = "insert Contact(name, email, subject, [content], trangthai)\n" +
+"values(?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, subject);
+            ps.setString(4, content);
+            ps.setInt(5, 0);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void addContact1(String name, String email, String subject, String content, int accountId) {
+        String query = "insert Contact(name, email, subject, [content], uID, trangthai)\n" +
+"values(?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, subject);
+            ps.setString(4, content);
+            ps.setInt(5, accountId);
+            ps.setInt(6, 0);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            
+        }
+    }
+
+    public int countContact() {
+        String sql = "select count(*) from Contact";
+        try {
+            ps = connection.prepareStatement(sql);
+            
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public ArrayList<Contact> getListContact() {
+        ArrayList<Contact> list = new ArrayList<>();
+        String query = "select * from Contact where trangthai=0";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Contact(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<AccInfo> getListAccInfo() {
+        ArrayList<AccInfo> list = new ArrayList<>();
+        String query = "select * from AccInfo";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void deleteContactByID(int contactID) {
+        String query = "delete Contact where contactID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, contactID);
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public Contact getContactById(int contactID) {
+        
+        String query = "select * from Contact where contactID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, contactID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Contact(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                );
+            }
+        } catch (Exception e) {
+        }
+        return null;
     }
 }

@@ -136,6 +136,22 @@
         <servlet-name>UnreadNotiShopControl</servlet-name>
         <servlet-class>controller.UnreadNotiShopControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactControl</servlet-name>
+        <servlet-class>controller.ContactControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerContactControl</servlet-name>
+        <servlet-class>controller.ManagerContactControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteContactControl</servlet-name>
+        <servlet-class>controller.DeleteContactControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReplyContactControl</servlet-name>
+        <servlet-class>controller.ReplyContactControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -631,6 +647,22 @@
     <servlet-mapping>
         <servlet-name>UnreadNotiShopControl</servlet-name>
         <url-pattern>/unreadNotiShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactControl</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerContactControl</servlet-name>
+        <url-pattern>/managerContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteContactControl</servlet-name>
+        <url-pattern>/deleteContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReplyContactControl</servlet-name>
+        <url-pattern>/replyContact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
