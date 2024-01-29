@@ -3226,7 +3226,7 @@ public class DAO extends DBContext {
     }
 
     public int countContact() {
-        String sql = "select count(*) from Contact";
+        String sql = "select count(*) from Contact where trangthai=0";
         try {
             ps = connection.prepareStatement(sql);
             
@@ -3317,5 +3317,16 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    public void changeStatusContact(String id) {
+        String sql = "update Contact set trangthai = 1 Where contactID = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }
