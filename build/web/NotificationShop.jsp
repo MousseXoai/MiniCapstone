@@ -169,16 +169,7 @@
                                             </c:forEach>
                                         </div>
                                         <div class="small"><a>${a.contentNoti}</a></div>
-                                                <c:if test="${a.noticateid==1}">
-                                            <a href="shopListSp?id=${a.shopId}">
                                                 <img style="width: 150px" src="${a.image}" alt /> 
-                                            </a>
-                                        </c:if>
-                                        <c:if test="${a.noticateid==2}">
-                                            <a href="event?id=${a.shopId}">
-                                                <img style="width: 150px" src="${a.image}" alt /> 
-                                            </a>
-                                        </c:if>
                                     </div>
                                     <span class="ml-auto mb-auto">
                                         <div class="btn-group">

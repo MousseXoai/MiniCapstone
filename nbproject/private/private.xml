@@ -4,6 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ManageContact.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ReplyContactControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/forgotPassword.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/Contact.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ReplyContact.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ManagerContactControl.java</file>
         </group>
     </open-files>
 </project-private>
