@@ -56,14 +56,6 @@
                         <img src="${avatar}" class="img-fluid" alt="Responsive image" />
                         <div class="p-3 border-bottom">
                             <h6 class="font-weight-bold text-dark">Notifications</h6>
-                            <c:if test="${countNoti==0}">
-                                <p  class="mb-0 text-muted">You’re all caught up! Check back later for new notifications.</p>
-                            </c:if>
-                            <c:if test="${countNoti!=0}">
-                                <p  class="mb-0 text-muted">You have ${countNoti} new notifications.</p>
-                            </c:if>
-                            <p class="mb-0 text-muted"> And</p>
-
                             <p class="mb-0 text-muted">Today have ${countAds} advertisement and events of shops for you.</p>
                         </div>
                         <div class="p-3">
