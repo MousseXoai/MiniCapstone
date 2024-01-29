@@ -144,7 +144,7 @@
                                 </span>
                             </li>
                         </ul>
-                        <a href="Checkout.jsp" class="primary-btn">Proceed to checkout</a>
+                        <a href="checkout" class="primary-btn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>

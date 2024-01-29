@@ -23,7 +23,7 @@ import model.Account;
  * @author Tosaka
  */
 @WebServlet(name = "CustomerAvatarControl", urlPatterns = {"/customeravatar"})
-@MultipartConfig(maxFileSize = 16177216)//1.5mb
+@MultipartConfig(maxFileSize = 16177216)
 public class CustomerAvatarControl extends HttpServlet {
    
     /** 

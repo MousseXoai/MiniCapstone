@@ -42,7 +42,7 @@
                 <img src="${acc.getAvatar()}" class="img" alt="" id="profileImage" onclick="openFileInput()">
                 <div class="pl-sm-4 pl-2" id="img-section">
                     <b>Profile Photo</b>
-                    <p>Accepted file type .png. Less than 1.5MB</p>
+                    <p>Accepted file type .png. Less than 15MB</p>
                     
                     <form action="customeravatar" method="post" enctype="multipart/form-data">
                         <button type="submit" value="Upload" class="btn button border"><b>Upload</b></button>
@@ -51,7 +51,7 @@
                     </form>
                     
                 </div>
-
+                
                 <script>
                     function openFileInput() {
                         document.getElementById('fileInput').click();

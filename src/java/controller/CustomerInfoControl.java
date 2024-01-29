@@ -112,7 +112,7 @@ public class CustomerInfoControl extends HttpServlet {
                     err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
                 } else if (!fullname.matches("[\\p{L}\\s]+")) {
                     err = getServletContext().getInitParameter("messErrorInvalidName");
-                } else if (phonenum.length() > 10 || !phonenum.matches("\\d+")) {
+                } else if (phonenum.length() != 10 || !phonenum.matches("\\d+")) {
                     err = getServletContext().getInitParameter("messErrorPhoneNum");
                 } else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
                     err = getServletContext().getInitParameter("messErrorInvalidEmail");

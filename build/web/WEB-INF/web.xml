@@ -92,6 +92,10 @@
         <servlet-name>LoadAmountNotiControl</servlet-name>
         <servlet-class>controller.LoadAmountNotiControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerCheckoutControl</servlet-name>
+        <servlet-class>controller.CustomerCheckoutControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -314,7 +318,7 @@
     </context-param>
     <context-param>
         <param-name>messErrorPhoneNum</param-name>
-        <param-value>Phone number do not more than 10 characters (Only number!)</param-value>
+        <param-value>Phone number must have 10 characters (Only number!)</param-value>
     </context-param>
     <context-param>
         <param-name>messErrorNameAndEmail</param-name>
@@ -543,6 +547,10 @@
     <servlet-mapping>
         <servlet-name>LoadAmountNotiControl</servlet-name>
         <url-pattern>/loadAmountNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerCheckoutControl</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
