@@ -2770,12 +2770,27 @@ public class DAO extends DBContext {
             ps.setInt(1, accountID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5),  rs.getInt(6),  rs.getInt(7)));
+                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7)));
             }
         } catch (SQLException e) {
             System.out.println("listHoaDon" + e.getMessage());
         }
         return list;
     }
-    
+
+    public List<OrderLine> getListOrderLine() {
+        ArrayList<OrderLine> list = new ArrayList<>();
+        String query = "select * from HoaDon where accountID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderLine(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListOrderLine" + e.getMessage());
+        }
+        return list;
+    }
+
 }

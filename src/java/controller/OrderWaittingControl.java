@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
 import model.HoaDon;
+import model.OrderLine;
 import model.TrangThai;
 
 /**
@@ -70,8 +71,11 @@ public class OrderWaittingControl extends HttpServlet {
             int accountID = a.getuID();
             List<TrangThai> listTrangThai = dao.getlistTrangThai();
             List<HoaDon> listHoaDon = dao.listHoaDon(accountID);
+            List<OrderLine> ListOrderLine = dao.getListOrderLine();
+            request.setAttribute("ListOrderLine", ListOrderLine);
             request.setAttribute("listTrangThai", listTrangThai);
             request.setAttribute("listHoaDon", listHoaDon);
+            request.getRequestDispatcher("OrderWaitting.jsp").forward(request, response);
             
         }
 
