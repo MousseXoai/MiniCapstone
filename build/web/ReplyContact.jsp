@@ -90,7 +90,7 @@
     </head>
     
     <body>
-        <form action="" method="post">
+        <form action="replyContact" method="post">
         
             <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                  data-keyboard="false">
@@ -109,27 +109,27 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Mã contact</label>
-                                    <input class="form-control" type="number" name ="cid" value="${c.contactID}" readonly>
+                                    <input class="form-control" type="number" name ="id" value="${c.contactID}" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">User Name</label>
-                                    <input class="form-control" type="text" name="cname" required value="${c.name}" readonly>
+                                    <input class="form-control" type="text" name="name" required value="${c.name}" readonly>
                                 </div>
                                 <div class="form-group  col-md-6">
                                     <label class="control-label">Email</label>
-                                    <input class="form-control" type="text" name="cemail" required value="${c.email}" readonly>
+                                    <input class="form-control" type="text" name="email" required value="${c.email}" readonly>
                                 </div>
                                 <div class="form-group  col-md-6">
                                     <label class="control-label">Subject</label>
-                                    <input class="form-control" type="text" name="csubject" required value="${c.subject}" readonly>
+                                    <input class="form-control" type="text" name="subject" required value="${c.subject}" readonly>
                                 </div>
                                 <div class="form-group  col-md-6">
                                     <label class="control-label">Message</label>
-                                    <input class="form-control" type="text" name="ccontent" required value="${c.content}" readonly>
+                                    <input class="form-control" type="text" name="content" required value="${c.content}" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Reply</label>
-                                    <textarea class="form-control" rows="5" name="creply" required ></textarea>
+                                    <textarea class="form-control" rows="5" name="reply" required ></textarea>
                                 </div>   
                                 
                             <BR>
@@ -144,6 +144,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         
         </form>

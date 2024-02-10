@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/SWP391/Project/MiniCapstone/web/SellerOrderManagement.jsp</file>
+=======
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ReplyContactControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Menu.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ManagerContactControl.java</file>
+>>>>>>> b8a06a3c8d057b795574c9a69bf9d31b421712ff
         </group>
     </open-files>
 </project-private>
