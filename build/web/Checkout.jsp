@@ -58,7 +58,7 @@
             <!-- Checkout Section Begin -->
             <section class="checkout spad">
                 <div class="container">
-                    <form action="#" class="checkout__form">
+                    <form action="payment" method="get" class="checkout__form">
                         <div class="row">
                             <div class="col-lg-7">
                                 <h5>Billing detail</h5>
@@ -66,49 +66,53 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="checkout__form__input">
                                             <p>Full Name <span>*</span></p>
-                                            <input type="text" placeholder="Your full name">
-                                        </div>
+                                            <p style="color: red">${err}</p>
+                                        <input type="text" name="fullname" placeholder="Your full name">
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="checkout__form__input">
-                                            <p>Address <span>*</span></p>
-                                            <input type="text" placeholder="Your address">
-                                        </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="checkout__form__input">
+                                        <p>Address <span>*</span></p>
+                                        <p style="color: red">${err}</p>
+                                        <input type="text" name="address" placeholder="Your address">
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="checkout__form__input">
-                                            <p>Phone <span>*</span></p>
-                                            <input type="text" placeholder="Your phone">
-                                        </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>Phone <span>*</span></p>
+                                        <p style="color: red">${err}</p>
+                                        <input type="text" name="phonenum" placeholder="Your phone">
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="checkout__form__input">
-                                            <p>Email <span>*</span></p>
-                                            <input type="text" placeholder="Your email">
-                                        </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>Email <span>*</span></p>
+                                        <p style="color: red">${err}</p>
+                                        <input type="text" name="email" placeholder="Your email">
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="checkout__form__input">
-                                            <p>Order note<span>*</span></p>
-                                            <textarea type="text" placeholder="Note about your order, e.g, special note for delivery" style="width: 100%; height: 291px;"></textarea>
-                                        </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="checkout__form__input">
+                                        <p>Order note<span>*</span></p>
+                                        <textarea type="text" name="note" placeholder="Note about your order, e.g, special note for delivery" style="width: 100%; height: 291px;"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="checkout__order">
-                                    <h5>Your order</h5>                                  
-                                    <div class="checkout__order__product">
-                                        <table>
-                                            <thead>
-                                                <tr class="col-lg-2">
-                                                    <th scope="col" class="col-lg-3">Product</th>
-                                                    <th scope="col" class="col-lg-3">Quantity</th>
-                                                    <th scope="col" class="col-lg-3">Price</th>
-                                                    <th scope="col" class="col-lg-3">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="checkout__order">
+                                <h5>Your order</h5>                                  
+                                <div class="checkout__order__product">
+                                    <table>
+                                        <thead>
+                                            <tr class="col-lg-2">
+                                                <th scope="col" class="col-lg-3">Product</th>
+                                                <th scope="col" class="col-lg-3">Quantity</th>
+                                                <th scope="col" class="col-lg-3">Price</th>
+                                                <th scope="col" class="col-lg-3">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <c:forEach items="${listcart}" var="itemC">    
                                                 <c:forEach items="${listsanpham}" var="itemSP">
                                                     <c:if test="${itemC.getProductID() == itemSP.getId()}">
@@ -119,7 +123,7 @@
                                                                 <c:if test="${itemSP.getSale()==0}">
                                                                     <fmt:setLocale value="vi_VN"/>
                                                                     <fmt:formatNumber type="currency" value="${itemSP.getPrice()}" currencySymbol=""/>
-                                                                    
+
                                                                 </c:if>
                                                                 <c:if test="${itemSP.getSale()!=0}">
                                                                     <fmt:setLocale value="vi_VN"/>
@@ -154,26 +158,28 @@
                                         <li>Shipping <span>Freeship</span></li>
                                         <li>Total
                                             <span>
-                                                <fmt:setLocale value="vi_VN"/>
-                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>
+                                                <fmt:setLocale value="vi_VN"/>                                              
+                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>   
+                                                <input type="hidden" name="totalprice" value="<fmt:formatNumber pattern="##################" value="${totalprice}"/>">
                                             </span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="checkout__order__widget">
+                                    <p style="color: red">${err}</p>
                                     <label>
                                         Nhận hàng trực tiếp
-                                        <input type="radio" name="payment_option" id="">
+                                        <input type="radio" name="payment_option" value="cod" id="">
                                         <span class="checkmark"></span>
                                     </label>
                                     <label>
                                         Thanh toán bằng MoMo 
-                                        <input type="radio" name="payment_option" id="">
+                                        <input type="radio" name="payment_option" value="momo" id="">
                                         <span class="checkmark"></span>
                                     </label>
                                     <label>
                                         Thanh toán bằng VNPAY
-                                        <input type="radio" name="payment_option" id="">
+                                        <input type="radio" name="payment_option" value="vnpay" id="">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
@@ -214,6 +220,7 @@
         <script src="js/jquery.nicescroll.min.js"></script>
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
         <script>
         function loadAmountCart() {
             $.ajax({
@@ -239,8 +246,10 @@
                 }
             });
         }
-
+     
         </script>
+            
+        
     </body>
 
 </html>

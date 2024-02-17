@@ -96,6 +96,10 @@
         <servlet-name>CustomerCheckoutControl</servlet-name>
         <servlet-class>controller.CustomerCheckoutControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerPaymentControl</servlet-name>
+        <servlet-class>controller.CustomerPaymentControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -332,6 +336,10 @@
         <param-name>messErrorInvalidName</param-name>
         <param-value>Your name must be only character</param-value>
     </context-param>
+    <context-param>
+        <param-name>messErrorPaymentOption</param-name>
+        <param-value>You must choose one payment option</param-value>
+    </context-param>
     <servlet-mapping>
         <servlet-name>CustomerAvatarControl</servlet-name>
         <url-pattern>/customeravatar</url-pattern>
@@ -551,6 +559,10 @@
     <servlet-mapping>
         <servlet-name>CustomerCheckoutControl</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerPaymentControl</servlet-name>
+        <url-pattern>/payment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
