@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/cartamountconfig.css" type="text/css">
+    <link rel="stylesheet" href="css/checkout.css" type="text/css">
 </head>
 
 <body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
@@ -80,7 +81,7 @@
                                         <td class="cart__product__item d-flex align-items-center">
                                         <img src="${itemSP.getImage()}" alt="" style="max-width: 25%; height: auto;">
                                         <div class="cart__product__item__title">
-                                            <h6>${itemSP.getName()}</h6>                                        
+                                            <h6><a href="productDetail?pid=${itemSP.getId()}" class="product-link">${itemSP.getName()}</a></h6>                                        
                                         </div>
                                         </td>
                                         <td class="cart__price">

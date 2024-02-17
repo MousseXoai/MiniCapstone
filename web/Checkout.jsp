@@ -31,89 +31,133 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/checkout.css" type="text/css">
     </head>
 
     <body onload="loadAmountCart(); loadAmountWishList()">
 
         <!-- Header Section Begin -->
         <jsp:include page="Menu.jsp"></jsp:include>
-        <!-- Header Section End -->
+            <!-- Header Section End -->
 
-        <!-- Breadcrumb Begin -->
-        <div class="breadcrumb-option">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb__links">
-                            <a href="home"><i class="fa fa-home"></i> Home</a>
-                            <span>Shopping cart</span>
+            <!-- Breadcrumb Begin -->
+            <div class="breadcrumb-option">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="breadcrumb__links">
+                                <a href="home"><i class="fa fa-home"></i> Home</a>
+                                <span>Shopping cart</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Breadcrumb End -->
+            <!-- Breadcrumb End -->
 
-        <!-- Checkout Section Begin -->
-        <section class="checkout spad">
-            <div class="container">
-                <form action="#" class="checkout__form">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h5>Billing detail</h5>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="checkout__form__input">
-                                        <p>Full Name <span>*</span></p>
-                                        <input type="text" placeholder="Your full name">
+            <!-- Checkout Section Begin -->
+            <section class="checkout spad">
+                <div class="container">
+                    <form action="#" class="checkout__form">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h5>Billing detail</h5>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="checkout__form__input">
+                                            <p>Full Name <span>*</span></p>
+                                            <input type="text" placeholder="Your full name">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="checkout__form__input">
-                                        <p>Address <span>*</span></p>
-                                        <input type="text" placeholder="Your address">
+                                    <div class="col-lg-12">
+                                        <div class="checkout__form__input">
+                                            <p>Address <span>*</span></p>
+                                            <input type="text" placeholder="Your address">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="checkout__form__input">
-                                        <p>Phone <span>*</span></p>
-                                        <input type="text" placeholder="Your phone">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="checkout__form__input">
+                                            <p>Phone <span>*</span></p>
+                                            <input type="text" placeholder="Your phone">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="checkout__form__input">
-                                        <p>Email <span>*</span></p>
-                                        <input type="text" placeholder="Your email">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="checkout__form__input">
+                                            <p>Email <span>*</span></p>
+                                            <input type="text" placeholder="Your email">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="checkout__form__input">
-                                        <p>Order note<span>*</span></p>
-                                        <textarea type="text" placeholder="Note about your order, e.g, special note for delivery" style="width: 100%; height: 291px;"></textarea>
+                                    <div class="col-lg-12">
+                                        <div class="checkout__form__input">
+                                            <p>Order note<span>*</span></p>
+                                            <textarea type="text" placeholder="Note about your order, e.g, special note for delivery" style="width: 100%; height: 291px;"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="checkout__order">
-                                <h5>Your order</h5>
-                                <div class="checkout__order__product">
-                                    <ul>
-                                        <li>
-                                            <span class="top__text">Product</span>                                      
-                                            <span class="top__text__right">Total</span>
-                                            <span>Quantity</span>
-                                        </li>
-                                        <li>Chain buck bagg                                          
-                                            <span>$300.0</span>
-                                            <span>1</span>
-                                        </li>
-                                    </ul>
+                            <div class="col-lg-5">
+                                <div class="checkout__order">
+                                    <h5>Your order</h5>                                  
+                                    <div class="checkout__order__product">
+                                        <table>
+                                            <thead>
+                                                <tr class="col-lg-2">
+                                                    <th scope="col" class="col-lg-3">Product</th>
+                                                    <th scope="col" class="col-lg-3">Quantity</th>
+                                                    <th scope="col" class="col-lg-3">Price</th>
+                                                    <th scope="col" class="col-lg-3">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${listcart}" var="itemC">    
+                                                <c:forEach items="${listsanpham}" var="itemSP">
+                                                    <c:if test="${itemC.getProductID() == itemSP.getId()}">
+                                                        <tr>
+                                                            <td class="col-lg-3 product-name"><a href="productDetail?pid=${itemSP.getId()}" class="product-link">${itemSP.getName()}</a></td>
+                                                            <td class="col-lg-3">x${itemC.getAmount()}</td>
+                                                            <td class="col-lg-3" style="color:#ca1515">
+                                                                <c:if test="${itemSP.getSale()==0}">
+                                                                    <fmt:setLocale value="vi_VN"/>
+                                                                    <fmt:formatNumber type="currency" value="${itemSP.getPrice()}" currencySymbol=""/>
+                                                                    
+                                                                </c:if>
+                                                                <c:if test="${itemSP.getSale()!=0}">
+                                                                    <fmt:setLocale value="vi_VN"/>
+                                                                    <fmt:formatNumber type="currency" value="${itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol=""/>
+                                                                </c:if>
+                                                            </td>
+                                                            <td class="col-lg-3" style="color:#ca1515">
+                                                                <c:if test="${itemSP.getSale()==0}">
+                                                                    <fmt:setLocale value="vi_VN"/>
+                                                                    <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()}" currencySymbol=""/>
+                                                                </c:if>
+                                                                <c:if test="${itemSP.getSale()!=0}">
+                                                                    <fmt:setLocale value="vi_VN"/>
+                                                                    <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol=""/>
+                                                                </c:if>   
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="checkout__order__total">
                                     <ul>
-                                        <li>Subtotal <span>$ 750.0</span></li>
-                                        <li>Total <span>$ 750.0</span></li>
+                                        <li>Subtotal
+                                            <span>
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>
+                                            </span>
+                                        </li>
+                                        <li>Shipping <span>Freeship</span></li>
+                                        <li>Total
+                                            <span>
+                                                <fmt:setLocale value="vi_VN"/>
+                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>
+                                            </span>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="checkout__order__widget">
@@ -141,10 +185,10 @@
             </div>
         </section>
         <!-- Checkout Section End -->
-        
+
         <!-- Footer Section Begin -->
         <jsp:include page="Footer.jsp"></jsp:include>
-    
+
         <!-- Footer Section End -->
 
         <!-- Search Begin -->
@@ -171,30 +215,30 @@
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-                                function loadAmountCart() {
-                                    $.ajax({
-                                        url: "/MiniCapstone/loadAmountCart",
-                                        type: "get",
-                                        data: {
+        function loadAmountCart() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountCart",
+                type: "get",
+                data: {
 
-                                        },
-                                        success: function (responseData) {
-                                            document.getElementById("amountCart").innerHTML = responseData;
-                                        }
-                                    });
-                                }
-                                function loadAmountWishList() {
-                                    $.ajax({
-                                        url: "/MiniCapstone/loadAmountWishList",
-                                        type: "get",
-                                        data: {
+                },
+                success: function (responseData) {
+                    document.getElementById("amountCart").innerHTML = responseData;
+                }
+            });
+        }
+        function loadAmountWishList() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountWishList",
+                type: "get",
+                data: {
 
-                                        },
-                                        success: function (responseData) {
-                                            document.getElementById("amountWishList").innerHTML = responseData;
-                                        }
-                                    });
-                                }
+                },
+                success: function (responseData) {
+                    document.getElementById("amountWishList").innerHTML = responseData;
+                }
+            });
+        }
 
         </script>
     </body>
