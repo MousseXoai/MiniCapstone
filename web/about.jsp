@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="css/1icomoon.css">
         <link rel="stylesheet" href="css/1style.css">
     </head>
-    <body class="goto-here" onload="loadAmountCart(); loadAmountWishList()">
+    <body class="goto-here" onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
         <!-- Header Section Begin -->
     
         <jsp:include page="Menu.jsp"></jsp:include>
@@ -256,7 +256,18 @@
                                                     }
                                                 });
                                             }                                    
-                                            
+        function loadAmountNoti() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountNoti",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountNoti").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                          
     </script>
 
     </body>

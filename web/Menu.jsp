@@ -27,7 +27,7 @@
                                 </c:if>
                                 
 
-                            <li><a href="./contact.html">Contact</a></li>                          
+                            <li><a href="contact">Contact</a></li>                          
                         </ul>
                     </nav>
                 </div>
@@ -46,6 +46,9 @@
                             
                         </div>
                         <ul class="header__right__widget">
+                            <li><a href="noti"><span  class="icon_chat_alt"></span>
+                                <div class="tip" id="amountNoti">0</div>
+                            </a></li>
                             <li><a href="ManageWishlist"><span  class="icon_heart_alt"></span>
                                 <div class="tip" id="amountWishList">0</div>
                             </a></li>

@@ -13,25 +13,23 @@ import java.sql.Date;
 public class ShopHangCho {
     private int id;
     private String shopName;
-    private String avatar;
-    private String user;
-    private String pass;
     private String proof;
+    private String proof1;
     private Date dateThamGia;
     private String address;
+    private int uID;
 
     public ShopHangCho() {
     }
 
-    public ShopHangCho(int id, String shopName, String avatar, String user, String pass, String proof, Date dateThamGia, String address) {
+    public ShopHangCho(int id, String shopName, String proof, String proof1, Date dateThamGia, String address, int uID) {
         this.id = id;
         this.shopName = shopName;
-        this.avatar = avatar;
-        this.user = user;
-        this.pass = pass;
         this.proof = proof;
+        this.proof1 = proof1;
         this.dateThamGia = dateThamGia;
         this.address = address;
+        this.uID = uID;
     }
 
     public int getId() {
@@ -50,36 +48,20 @@ public class ShopHangCho {
         this.shopName = shopName;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
     public String getProof() {
         return proof;
     }
 
     public void setProof(String proof) {
         this.proof = proof;
+    }
+
+    public String getProof1() {
+        return proof1;
+    }
+
+    public void setProof1(String proof1) {
+        this.proof1 = proof1;
     }
 
     public Date getDateThamGia() {
@@ -97,5 +79,14 @@ public class ShopHangCho {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
     
 }
