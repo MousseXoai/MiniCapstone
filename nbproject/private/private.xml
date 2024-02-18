@@ -5,19 +5,8 @@
         <group>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerCheckoutControl.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Checkout.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/Config.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/thankyou.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddProductControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeAvatarControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/AddProduct.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/PhanLoai.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/SanPham.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/ChangeAvatar.jsp</file>
         </group>
     </open-files>
 </project-private>
