@@ -79,7 +79,7 @@ public class CustomerPaymentControl extends HttpServlet {
         String note = request.getParameter("note").replaceAll("\\s", "").trim();
         String payment_option = request.getParameter("payment_option");
 
-        String err = "";
+        String err = "", err2 = "", err3 = "", err4 = "", err5 = "";
 
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
@@ -90,27 +90,29 @@ public class CustomerPaymentControl extends HttpServlet {
             if (fullname.isEmpty() || address.isEmpty() || phonenum.isEmpty() || email.isEmpty()) {
                 err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
             } else if (!fullname.matches("[\\p{L}\\s]+")) {
-                err = getServletContext().getInitParameter("messErrorInvalidName");
+                err2 = getServletContext().getInitParameter("messErrorInvalidName");
             } else if (phonenum.length() != 10 || !phonenum.matches("\\d+")) {
-                err = getServletContext().getInitParameter("messErrorPhoneNum");
+                err3 = getServletContext().getInitParameter("messErrorPhoneNum");
             } else if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-                err = getServletContext().getInitParameter("messErrorInvalidEmail");
+                err4 = getServletContext().getInitParameter("messErrorInvalidEmail");
             } else if (fullname.length() > 50 || email.length() > 50) {
-                err = getServletContext().getInitParameter("messErrorNameAndEmail");
-            } else if (payment_option.isEmpty() || payment_option.equals("null")) {
-                err = getServletContext().getInitParameter("messErrorPaymentOption");
+                err5 = getServletContext().getInitParameter("messErrorNameAndEmail");
             }
 
-            if (!err.isEmpty()) {
+            if (!err.isEmpty() || !err2.isEmpty() || !err3.isEmpty() || !err4.isEmpty() || !err5.isEmpty()) {
                 request.setAttribute("err", err);
+                request.setAttribute("err2", err2);
+                request.setAttribute("err3", err3);
+                request.setAttribute("err4", err4);
+                request.setAttribute("err5", err5);
                 request.getRequestDispatcher("checkout").forward(request, response);
             } else {
                 if (payment_option.equals("vnpay")) {
                     
                     String vnp_Version = "2.1.0";
                     String vnp_Command = "pay";
-                    String orderType = "other";
-                    long amount = Integer.parseInt(request.getParameter("totalprice")) * 100;
+                    String orderType = "other";          
+                    long amount = Long.parseLong(request.getParameter("totalprice")) * 100;
 
                     String vnp_TxnRef = Config.getRandomNumber(8);
                     String vnp_IpAddr = Config.getIpAddress(request);
@@ -181,7 +183,7 @@ public class CustomerPaymentControl extends HttpServlet {
 //                    response.getWriter().write(gson.toJson(job));
                     response.sendRedirect(paymentUrl);
                 }
-
+        
             }
         }
     }

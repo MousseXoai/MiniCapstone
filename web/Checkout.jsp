@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="css/checkout.css" type="text/css">
     </head>
 
-    <body onload="loadAmountCart(); loadAmountWishList()">
+    <body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
 
         <!-- Header Section Begin -->
         <jsp:include page="Menu.jsp"></jsp:include>
@@ -65,35 +65,40 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="checkout__form__input">
-                                            <p>Full Name <span>*</span></p>
-                                            <p style="color: red">${err}</p>
+                                            <p>Full Name <span>*</span></p>                                                                                  
                                         <input type="text" name="fullname" placeholder="Your full name">
+                                        <p style="color: red">${err}</p>
+                                        <p style="color: red">${err2}</p>
+                                        <p style="color: red">${err5}</p> 
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="checkout__form__input">
                                         <p>Address <span>*</span></p>
-                                        <p style="color: red">${err}</p>
                                         <input type="text" name="address" placeholder="Your address">
+                                        <p style="color: red">${err}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
-                                        <p>Phone <span>*</span></p>
-                                        <p style="color: red">${err}</p>
+                                        <p>Phone <span>*</span></p>                                       
                                         <input type="text" name="phonenum" placeholder="Your phone">
+                                        <p style="color: red">${err}</p>
+                                        <p style="color: red">${err3}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
-                                        <p>Email <span>*</span></p>
-                                        <p style="color: red">${err}</p>
+                                        <p>Email <span>*</span></p>                                    
                                         <input type="text" name="email" placeholder="Your email">
+                                        <p style="color: red">${err}</p>
+                                        <p style="color: red">${err4}</p>
+                                        <p style="color: red">${err5}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="checkout__form__input">
-                                        <p>Order note<span>*</span></p>
+                                        <p>Order note</p>
                                         <textarea type="text" name="note" placeholder="Note about your order, e.g, special note for delivery" style="width: 100%; height: 291px;"></textarea>
                                     </div>
                                 </div>
@@ -158,18 +163,18 @@
                                         <li>Shipping <span>Freeship</span></li>
                                         <li>Total
                                             <span>
-                                                <fmt:setLocale value="vi_VN"/>                                              
-                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>   
-                                                <input type="hidden" name="totalprice" value="<fmt:formatNumber pattern="##################" value="${totalprice}"/>">
+                                                <fmt:setLocale value="vi_VN"/>   
+                                                <fmt:formatNumber type="currency" value="${totalprice}" currencySymbol="₫"/>  
+                                                <fmt:formatNumber var="totalprice" value="${totalprice}"/>  
+                                                <input type="hidden" name="totalprice" value="${totalprice.replace('.', '')}"/>
                                             </span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="checkout__order__widget">
-                                    <p style="color: red">${err}</p>
                                     <label>
                                         Nhận hàng trực tiếp
-                                        <input type="radio" name="payment_option" value="cod" id="">
+                                        <input type="radio" name="payment_option" value="cod" id="" checked>
                                         <span class="checkmark"></span>
                                     </label>
                                     <label>
@@ -246,6 +251,18 @@
                 }
             });
         }
+        function loadAmountNoti() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountNoti",
+                                                    type: "get",
+                                                    data: {
+
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountNoti").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
      
         </script>
             
