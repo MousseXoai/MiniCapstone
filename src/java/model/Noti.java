@@ -19,11 +19,12 @@ public class Noti {
     private Date dateNoti;
     private int noticateid;
     private int maNoti;
+    private int maHD;
 
     public Noti() {
     }
 
-    public Noti(int shopId, int uID, int trangthai, String image, String contentNoti, Date dateNoti, int noticateid, int maNoti) {
+    public Noti(int shopId, int uID, int trangthai, String image, String contentNoti, Date dateNoti, int noticateid, int maNoti, int maHD) {
         this.shopId = shopId;
         this.uID = uID;
         this.trangthai = trangthai;
@@ -32,6 +33,7 @@ public class Noti {
         this.dateNoti = dateNoti;
         this.noticateid = noticateid;
         this.maNoti = maNoti;
+        this.maHD = maHD;
     }
 
     public int getShopId() {
@@ -98,6 +100,13 @@ public class Noti {
         this.maNoti = maNoti;
     }
 
-    
+    public int getMaHD() {
+        return maHD;
+    }
+
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
+    }
+
     
 }

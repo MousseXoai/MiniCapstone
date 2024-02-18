@@ -15,17 +15,19 @@ public class Contact {
     private String subject;
     private String content;
     private int uID;
+    private int trangthai;
 
     public Contact() {
     }
 
-    public Contact(int contactID, String name, String email, String subject, String content, int uID) {
+    public Contact(int contactID, String name, String email, String subject, String content, int uID, int trangthai) {
         this.contactID = contactID;
         this.name = name;
         this.email = email;
         this.subject = subject;
         this.content = content;
         this.uID = uID;
+        this.trangthai = trangthai;
     }
 
     public int getContactID() {
@@ -75,5 +77,16 @@ public class Contact {
     public void setuID(int uID) {
         this.uID = uID;
     }
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    
+    
     
 }

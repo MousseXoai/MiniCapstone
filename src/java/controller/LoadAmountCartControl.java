@@ -49,7 +49,8 @@ public class LoadAmountCartControl extends HttpServlet {
         DAO dao = new DAO();
         List<Cart> list = dao.getCartByAccountID(accountID);
         totalAmountCart = list.size();
-        out.println(totalAmountCart);
+        int total = dao.getQuantityCartByAccountID(accountID);
+        out.println(total);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

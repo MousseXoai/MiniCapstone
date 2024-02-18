@@ -47,6 +47,7 @@ public class LoadAmountNotiControl extends HttpServlet {
         DAO dao = new DAO();
         ArrayList<Noti> list = dao.getListNotiChuaXemByAccId(accountID);
         totalAmountNoti = list.size();
+        
         out.println(totalAmountNoti);
     } 
 
