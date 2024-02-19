@@ -85,11 +85,11 @@
             </div>
             <hr>
 <!--            <ul class="app-menu">
-                <div class="col-sm-2">
+-->                <div class="col-sm-2">
 
-                    <a class="btn btn-add btn-sm" href="form-add-san-pham.html" title="Thêm"><i class="fas fa-plus"></i>
+                    <a class="btn btn-add btn-sm" href="addproduct" title="Thêm"><i class="fas fa-plus"></i>
                         Tạo mới sản phẩm</a>
-                </div>
+                </div><!--
                 <div class="col-sm-2">
                     <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
                             class="fas fa-file-upload"></i> Tải từ file</a>
@@ -154,7 +154,7 @@
                                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                             <td>${p.id}</td>
                                             <td>${p.name}</td>
-                                            <td><img src="${p.image}" alt="" width="100px;"></td>
+                                            <td><img src="${p.image}" width="100px;"></td>
                                             <td>${p.quantity}</td>
                                             <td>
                                                 <span class="badge ${p.quantity > 0 ? 'bg-success' : 'bg-danger'}">
