@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -76,7 +76,6 @@ public class RegisterCustomerController extends HttpServlet {
         session.setAttribute("phonenumber", phonenumber);
         session.setAttribute("address", address);
 
-        // Kiểm tra mật khẩu và mật khẩu xác nhận
         // Kiểm tra khoảng trắng
         if (user.isEmpty() || pass.isEmpty() || email.isEmpty() || re_pass.isEmpty()
                 || phonenumber.isEmpty() || address.isEmpty() || user.contains(" ")
@@ -87,27 +86,54 @@ public class RegisterCustomerController extends HttpServlet {
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;
         }
+        // Kiểm tra mật khẩu và mật khẩu xác nhận
         if (!pass.equals(re_pass)) {
-            // Xu ly khi mật khẩu và mật khẩu xác nhận không khớp
             String errorMessage = "Mật khẩu và mật khẩu xác nhận không khớp. Vui lòng nhập lại.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return; // Kết thúc phương thức để ngăn chặn tiếp tục đăng ký
+            return;
+        }
+        if (user.length() > 20) {
+            String errorMessage = "Tài khoản không được quá 20 ký tự.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            return;
+        }
+        if (pass.length() > 20) {
+            String errorMessage = "Mật khẩu không được quá 20 ký tự.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            return;
+        }
+        System.out.println("Password: " + pass);
+        System.out.println("First character is uppercase: " + Character.isUpperCase(pass.charAt(0)));
+        System.out.println("Password matches regex: " + pass.matches("^[A-Za-z0-9!@#$%^&*()-=_+]+$"));
+        if (pass.length() <= 8 || !(Character.isUpperCase(pass.charAt(0)) && pass.matches("^[A-Za-z0-9!@#$%^&*()-=_+]+$"))) {
+            String errorMessage = "Mật khẩu phải bắt đầu bằng chữ cái in hoa, chứa ít nhất một chữ cái và tối đa 8 ký tự.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            return;
         }
 
+        if (email.length() > 20) {
+            String errorMessage = "Email không được quá 20 ký tự.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            return;
+        }
         // Kiểm tra độ dài của phonenumber 
         if (phonenumber.length() > 10) {
             String errorMessage = "Số điện thoại không được quá 10 ký tự.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return; // Kết thúc phương thức để ngăn chặn tiếp tục đăng ký
+            return;
         }
         // Kiểm tra độ dài của address 
         if (address.length() > 50) {
             String errorMessage = "Địa chỉ không được quá 50 ký tự.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return; // Kết thúc phương thức để ngăn chặn tiếp tục đăng ký
+            return;
         }
 
         DAO register = new DAO();

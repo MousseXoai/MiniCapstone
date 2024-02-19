@@ -521,7 +521,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductNew() {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top 5 * from SanPham order by [id] desc ";
+        String query = "select top 5 * from   SanPham order by [id] desc ";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();

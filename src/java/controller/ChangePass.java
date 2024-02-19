@@ -53,8 +53,14 @@ public class ChangePass extends HttpServlet {
                 String errorMessage = "Mật khẩu mới không trùng nhau!";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
+            }
+            if (newPass.length() <= 8 || !(Character.isUpperCase(newPass.charAt(0)) && newPass.matches("^[A-Za-z0-9!@#$%^&*()-=_+]+$"))) {
+                String errorMessage = "Mật khẩu phải bắt đầu bằng chữ cái in hoa, chứa ít nhất một chữ cái và tối đa 8 ký tự.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
+
             } else if (oldPass.isEmpty() || newPass.isEmpty() || rePass.isEmpty()
-                    || oldPass.contains(" ") || newPass.contains(" ") || rePass.contains(" "))   {
+                    || oldPass.contains(" ") || newPass.contains(" ") || rePass.contains(" ")) {
                 String errorMessage = "Các trường không được chứa khoảng trắng.";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("ChangePass.jsp").forward(request, response);

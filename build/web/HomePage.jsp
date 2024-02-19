@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                                <div class="categories__item set-bg" data-setbg="https://img.myipadbox.com/upload/store/product_l/TBD0602151001A.jpg">
+                                <div class="categories__item set-bg" data-setbg="https://img.meyipadbox.com/upload/store/product_l/TBD0602151001A.jpg">
                                     <div class="categories__text">
                                         <h4>Tai nghe</h4>
                                         <p>${tainghe} items</p>
