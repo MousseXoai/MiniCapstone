@@ -37,6 +37,7 @@ import model.Contact;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
+import model.SoLuongBan;
 import model.UserGoogleDto;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -435,6 +436,23 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new PhanLoai(rs.getInt(1),
                         rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SoLuongBan> getHotSell() {
+        List<SoLuongBan> list = new ArrayList<>();
+        String query = "SELECT TOP 8 productID, soLuongDaBan\n"
+                + "FROM SoLuongBan\n"
+                + "ORDER BY soLuongDaBan DESC;";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SoLuongBan(rs.getInt(1),
+                        rs.getInt(2)));
             }
         } catch (Exception e) {
         }
@@ -3350,7 +3368,7 @@ public class DAO extends DBContext {
             int bytesRead3;
             int bytesRead4;
 
-            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3= is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
+            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3 = is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
                 outputStream1.write(buffer1, 0, bytesRead1);
                 outputStream2.write(buffer2, 0, bytesRead2);
                 outputStream3.write(buffer3, 0, bytesRead3);
