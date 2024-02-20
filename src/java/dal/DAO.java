@@ -3350,7 +3350,7 @@ public class DAO extends DBContext {
             int bytesRead3;
             int bytesRead4;
 
-            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3= is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
+            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3 = is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
                 outputStream1.write(buffer1, 0, bytesRead1);
                 outputStream2.write(buffer2, 0, bytesRead2);
                 outputStream3.write(buffer3, 0, bytesRead3);
@@ -3385,5 +3385,146 @@ public class DAO extends DBContext {
         } catch (Exception e) {
 
         }
+    }
+
+    public List<HoaDon> getOrderByShopID(int shopID) {
+        List<HoaDon> list = new ArrayList<>();
+        String sql = "select hd.*\n"
+                + "from  HoaDon hd\n"
+                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "join SanPham sp on ol.productID = sp.id "
+                + " where sp.shopid = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDon d = new HoaDon();
+                d.setMaHD(rs.getInt(1));
+                d.setAccountID(rs.getInt(2));
+                d.setTongGia(rs.getDouble(3));
+                d.setNgayXuat(rs.getDate(4));
+                d.setTrangThaiId(rs.getInt(5));
+                d.setLoaiid(rs.getInt(6));
+                d.setPaymentid(rs.getInt(7));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+            System.out.println("getOrderByShopID: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<TrangThai> getOrderStatusByShopID(int shopID) {
+        List<TrangThai> list = new ArrayList<>();
+        String sql = "select tt.*\n"
+                + "from  HoaDon hd\n"
+                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "join SanPham sp on ol.productID = sp.id\n"
+                + "join TrangThai tt on hd.trangthaiid = tt.trangthaiid\n"
+                + "where sp.shopid = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                TrangThai d = new TrangThai();
+                d.setTrangThaiId(rs.getInt(1));
+                d.setTrangThai(rs.getString(2));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+            System.out.println("getOrderStatusByShopID: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<SanPham> getProductOrderByShopID(int shopID) {
+        List<SanPham> list = new ArrayList<>();
+        String sql = "select sp.*\n"
+                + "from  HoaDon hd\n"
+                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "join SanPham sp on ol.productID = sp.id\n"
+                + "where sp.shopid = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("getProductOrderByShopID: " + e.getMessage());
+        }
+        return list;
+
+    }
+
+    public List<OrderLine> getOrderLineByShopID(int shopID) {
+        List<OrderLine> list = new ArrayList<>();
+        String sql = "select ol.*\n"
+                + "from  HoaDon hd\n"
+                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "join SanPham sp on ol.productID = sp.id\n"
+                + "where sp.shopid = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderLine(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getFloat(3),
+                        rs.getInt(4)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("getOrderLineByShopID: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<AccInfo> getBuyerInfoByOrderWithShopID(int shopID) {
+        List<AccInfo> list = new ArrayList<>();
+        String sql = "select ai.*\n"
+                + "from  HoaDon hd\n"
+                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "join SanPham sp on ol.productID = sp.id\n"
+                + "join Account a on hd.accountID = a.[uID]\n"
+                + "join AccInfo ai on a.[uID] = ai.[uID]\n"
+                + "where sp.shopid = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getOrderLineByShopID: " + e.getMessage());
+        }
+        return list;
     }
 }

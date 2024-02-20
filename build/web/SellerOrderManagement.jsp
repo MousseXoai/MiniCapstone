@@ -4,6 +4,8 @@
     Author     : ADMIN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -75,67 +77,92 @@
             .order-color{
                 color: blue;
             }
+            .heading {
+                display: flex;
+                justify-content: space-between;
+                
+            }
         </style>
+        <script>
+            function changeStatus(){
+                var c1 = document.getElementById("c1");
+                c1.submit();
+            }
+        </script>
     </head>
     <body>
         <div class="container mt-5">
 
-
+            <div class="heading">
+                <div class="head-detail"><h1>Order Management</h1></div>
+                <div class="head-detail">
+                    <form action="searchOrder" method="post">
+                        <select>
+                            <option>Order ID</option>
+                            <option>Date</option>
+                        </select>
+                        <input type="text" name="input"/>
+                        <input type="submit" value="Search"/>
+                    </form>
+                </div>
+            </div>
             <table class="table table-borderless main">
                 <thead>
                     <tr class="head">
-                        <th scope="col" class="ml-2">
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-
-                            </div>
-
-                        </th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Order Details</th>
                         <th scope="col">Image</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Order Status</th>
                         <th scope="col">Action</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Updated</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
 
 
                     <tr class="rounded bg-white">
-                        <th scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-
-                            </div>
-                        </th>
+                        <c:forEach items="${orderList}" var="c">
+                <form action="changeStatus" method="post" id="c1">
                         <td class="order-color">
-                            <span>2/10/2024</span><br>
-                            <span>11:30</span>
+                            <span>${c.ngayXuat}</span><br>
                         </td>
-                        <td>Mar 21</td>
+                        <td>
+                            <span>${c.maHD}</span><br>
+                            <c:forEach items="${accInfo}" var="a">
+                            <span>Buyer Name: ${a.name}</span><br>
+                            <span>Address: ${a.address}</span>
+                            </c:forEach>
+                        </td>
+                        <c:forEach items="${productList}" var="p">
                         <td class="d-flex align-items-center">
-                            <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25">
-                            <span class="ml-2">Harrient Santigo</span>
+                            <img src="${p.image}" style="width: 70px;">
                         </td>
+                        
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Unfullfilled
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Fullfilled</a></li>
-                                    <li><a class="dropdown-item" href="#">Unfullfilled</a></li>
-                                    <li><a class="dropdown-item" href="#">Hold</a></li>
-                                </ul>
-                            </div>
+                            <span>${p.name}</span><br>
+                            <c:forEach items="${orderLine}" var="o">
+                            <span>Quantity: ${o.quantity}</span><br>
+                            <span>Item subtotal: <fmt:formatNumber type="currency" value="${o.price}" /> đ</span>
+                            </c:forEach>
+                            
                         </td>
-                        <td>$604.50</td>
-                        <td>$182.40</td>
+                        </c:forEach>
+                        <c:forEach items="${statusList}" var="s" >
+                            <td>${s.trangThai}</td>
+                        </c:forEach>
+                        
                         <td>
+                            <select onchange="changeStatus()">
+                                <option>Awaiting</option>
+                                <option>Delivering</option>
+                                <option>Completed</option>
+                            </select>                       
+                        </td>
+                    </form>
+                        </c:forEach>
+<!--                        <td>
                             <div class="dropdown">
                                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                                     Authorized
@@ -147,11 +174,11 @@
                                 </ul>
                             </div>
                         </td>
-                        <td>Today</td>
+                        <td>Today</td>-->
 
                     </tr>
 
-                    <tr class="rounded bg-white">
+<!--                    <tr class="rounded bg-white">
                         <th scope="row">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -405,9 +432,9 @@
                                 </ul>
                             </div>
                         </td>
-                        <td>June 20,2020</td>
+                        <td>June 20,2020</td>-->
 
-                    </tr>
+                    
 
 
 

@@ -156,6 +156,10 @@
         <servlet-name>AddProductControl</servlet-name>
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerOrderManagement</servlet-name>
+        <servlet-class>controller.SellerOrderManagement</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -671,6 +675,10 @@
     <servlet-mapping>
         <servlet-name>AddProductControl</servlet-name>
         <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderManagement</servlet-name>
+        <url-pattern>/SellerOrderManagement</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

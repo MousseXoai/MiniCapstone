@@ -106,7 +106,7 @@
                                 <p>Product Management</p>
                             </a>
                         </li>
-                        <li>
+<!--                        <li>
                             <a href="typography.html">
                                 <i class="ti-text"></i>
                                 <p>Function</p>
@@ -117,11 +117,11 @@
                                 <i class="ti-pencil-alt2"></i>
                                 <p>Function</p>
                             </a>
-                        </li>
+                        </li>-->
                         <li>
-                            <a href="maps.html">
+                            <a href="SellerOrderManagement">
                                 <i class="ti-map"></i>
-                                <p>Function</p>
+                                <p>Order Management</p>
                             </a>
                         </li>
                         <li>
