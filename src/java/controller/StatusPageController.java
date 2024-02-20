@@ -24,7 +24,7 @@ import model.TrangThai;
  *
  * @author ADMIN
  */
-public class SellerOrderManagement extends HttpServlet {
+public class StatusPageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class SellerOrderManagement extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SellerOrderManagement</title>");            
+            out.println("<title>Servlet StatusPageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SellerOrderManagement at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StatusPageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,7 +66,8 @@ public class SellerOrderManagement extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        int sid=0;
+        String sid_raw = request.getParameter("sid");
+        int sid = Integer.parseInt(sid_raw);
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
@@ -76,13 +77,13 @@ public class SellerOrderManagement extends HttpServlet {
 
             int accountID = a.getuID();
             int shopID = dao.getShopIdByAccountId(accountID);
-            List<HoaDon> orderList = dao.getOrderByShopID(shopID);
+            List<HoaDon> orderList = dao.getOrderByShopIDAndStatus(shopID,sid);
             List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
             List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopID(shopID);
-            List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
-            request.setAttribute("sid", sid);
+            List<SanPham> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
+            List<OrderLine> orderLine = dao.getOrderLineByShopIDAndStatus(shopID,sid);
+            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
+            request.setAttribute("sid",sid);
             request.setAttribute("statusCate", statusCate);
             request.setAttribute("accInfo", accInfo);
             request.setAttribute("orderLine", orderLine);
@@ -104,34 +105,7 @@ public class SellerOrderManagement extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String maHD_raw = request.getParameter("maHD");
-        String changeStatus_raw = request.getParameter("changeStatus");
-        int maHD = Integer.parseInt(maHD_raw);
-        int changeStatus = Integer.parseInt(changeStatus_raw);
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsSell()!=1) {
-            response.sendRedirect("login.jsp");
-        } else {
-
-            int accountID = a.getuID();
-            int shopID = dao.getShopIdByAccountId(accountID);
-            dao.changeOrderStatus(maHD,changeStatus);
-            List<HoaDon> orderList = dao.getOrderByShopID(shopID);
-            List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
-            List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopID(shopID);
-            List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
-            request.setAttribute("statusCate", statusCate);
-            request.setAttribute("accInfo", accInfo);
-            request.setAttribute("orderLine", orderLine);
-            request.setAttribute("productList", productList);
-            request.setAttribute("statusList", statusList);
-            request.setAttribute("orderList", orderList);
-            request.getRequestDispatcher("SellerOrderController.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
