@@ -442,22 +442,40 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SoLuongBan> getHotSell() {
-        List<SoLuongBan> list = new ArrayList<>();
-        String query = "SELECT TOP 8 productID, soLuongDaBan\n"
-                + "FROM SoLuongBan\n"
-                + "ORDER BY soLuongDaBan DESC;";
-        try {
-            ps = connection.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new SoLuongBan(rs.getInt(1),
-                        rs.getInt(2)));
-            }
-        } catch (Exception e) {
+   public List<SanPham> getHotSell() {
+    List<SanPham> list = new ArrayList<>();
+    String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai "
+            + "FROM SanPham s "
+            + "INNER JOIN SoLuongBan sl ON s.id = sl.productID "
+            + "ORDER BY sl.soLuongDaBan DESC";
+    try {
+        ps = connection.prepareStatement(query);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+             list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+               System.out.println("ID: " + rs.getInt(1));
         }
-        return list;
+    } catch (Exception e) {
+       
     }
+    return list;
+}
+
 
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();

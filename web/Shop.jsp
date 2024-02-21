@@ -80,7 +80,7 @@
                             <div class="sidebar__categories">
                                 <div class="section-title">
                                     <h4>
-                                        <a id="hotSellLink" style="color: black; font-family: serif; font-size: 20px; cursor: pointer;" href="#">Hot-sell</a> /
+                                        <a  style="color: black; font-family: serif; font-size: 20px; cursor: pointer;" href="HotSell">Hot-sell</a> /
                                         <a id="newestLink" style="color: black; font-family: serif; font-size: 20px; cursor: pointer;" href="#">Newest</a>
                                     </h4>
                                     <div id="productContainer"></div>
@@ -184,6 +184,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9">
                         <div class="row" id="content">
+                            
                             <c:forEach items="${listP}" var="p">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="product__item">
@@ -206,6 +207,7 @@
                                                     <div class="label stockout stockblue">Out Of Stock</div>
                                                 </c:if>
                                             </c:forEach>
+                                                    
 
                                             <ul class="product__hover">
                                                 <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
@@ -287,24 +289,7 @@
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-        document.getElementById('hotSellLink').addEventListener('click', function () {
-            loadProducts('HotSell');
-        });
-
-        document.getElementById('newestLink').addEventListener('click', function () {
-            loadProducts('newest');
-        });
-
-        function loadProducts(type) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    document.getElementById("productContainer").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "loadProducts?type=" + type, true);
-            xhttp.send();
-        }
+       
         function loadAmountCart() {
             $.ajax({
                 url: "/MiniCapstone/loadAmountCart",
