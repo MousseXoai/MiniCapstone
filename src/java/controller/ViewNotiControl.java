@@ -39,7 +39,14 @@ public class ViewNotiControl extends HttpServlet {
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
-            dao.ChangeTrangThaiNoti(maNoti);
+            int newTrangThai=dao.getTrangThaiByNotiId(maNoti);
+            int trangthai= dao.getTrangThaiByNotiId(maNoti);
+            if(trangthai==0){
+                newTrangThai=1;
+            }else if(trangthai==2){
+                newTrangThai=3;
+            }
+            dao.ChangeTrangThaiNoti(maNoti,newTrangThai);
             response.sendRedirect("order");
         }
     } 

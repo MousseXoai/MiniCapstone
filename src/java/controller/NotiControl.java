@@ -47,6 +47,7 @@ public class NotiControl extends HttpServlet {
             int countNoti= dao.countNotiByAccId(accountID);
             int countAds = dao.countAds();
             ArrayList<Noti> listAdsToday= dao.getListAdsToday();
+            System.out.println(listAdsToday);
             ArrayList<Shop> listAllShop= dao.getAllShop();
             ArrayList<NotiCate> listNotiCate= dao.getListNotiCate();
             ArrayList<Noti> listAdsMonth= dao.getListAdsMonth();

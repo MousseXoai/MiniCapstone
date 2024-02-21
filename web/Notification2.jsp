@@ -50,11 +50,8 @@
                                 <p  class="mb-0 text-muted">You’re all caught up! Check back later for new notifications.</p>
                             </c:if>
                             <c:if test="${countNoti!=0}">
-                                <p  class="mb-0 text-muted">You have ${countNoti} new notifications.</p>
+                                <p  class="mb-0 text-muted">You have ${countNoti} new notifications unread.</p>
                             </c:if>
-                            <p class="mb-0 text-muted"> And</p>
-
-                            <p class="mb-0 text-muted">Today have ${countAds} advertisement and events of shops for you.</p>
                         </div>
                         <div class="p-3">
                             <form action="noti">
@@ -64,6 +61,11 @@
                         <div class="p-3">
                             <form action="noti2">
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new notifications</button>
+                            </form>                         
+                        </div>
+                        <div class="p-3">
+                            <form action="unreadNoti">
+                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View unread notifications</button>
                             </form>                         
                         </div>
                     </div>
@@ -94,6 +96,14 @@
                                         <div class="text-truncate">
                                             THÔNG BÁO
                                         </div>
+                                        <div class="text-truncate">
+                                            <c:forEach items="${listAllShop}" var="s">
+                                                <c:if test="${s.shopId==a.shopId}">
+                                                    Đơn hàng mã số: ${a.maHD} từ cửa hàng:${s.shopName}
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
                                         <div class="small">${a.contentNoti}</div>
                                         <a href="viewNoti?id=${a.maNoti}">
                                            <img style="width: 150px" src="${a.image}" alt /> 
@@ -118,7 +128,13 @@
                                                </c:if>
                                                <c:if test="${a.trangthai==1}">
                                                    <div class="text-right text-muted pt-1">Đã xem</div>
-                                               </c:if>    
+                                               </c:if>
+                                                   <c:if test="${a.trangthai==2}">
+                                                   <div class="text-right text-muted pt-1">Chưa xem</div>
+                                               </c:if>
+                                                   <c:if test="${a.trangthai==3}">
+                                                   <div class="text-right text-muted pt-1">Đã xem</div>
+                                               </c:if>
 
 
                                            </span>

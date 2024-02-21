@@ -40,9 +40,9 @@
                 <i style="font-size: 15px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back</i>  
             </a>
             <h3 class="pb-4 border-bottom">Order history</h3> 
-            <a  href="oderwaitting"> <h5 class="pb-4 border-bottom">Order awaiting confirmation</h5></a>
-            <a  href="orderdeliver"><h5 class="pb-4 border-bottom">Order is being delivered</h5></a>
-            <a  href="orderdone"> <h5 class="pb-4 border-bottom">Order done</h5></a>
+            <a  href="oderwaitting?trangthaiid=1"> <h5 class="pb-4 border-bottom" style="color: red">Order awaiting confirmation</h5></a>
+            <a  href="orderdeliver?trangthaiid=2"><h5 class="pb-4 border-bottom" style="color: red" >Order is being delivered</h5></a>
+            <a  href="orderdone?trangthaiid=3"> <h5 class="pb-4 border-bottom" style="color: red">Order done</h5></a>
             <div class="d-flex align-items-start py-3 border-bottom">
                 <img src="${acc.getAvatar()}" class="img" alt="">
                 <div class="pl-sm-4 pl-2" id="img-section">

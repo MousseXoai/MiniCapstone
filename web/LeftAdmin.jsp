@@ -125,9 +125,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="notifications.html">
+                            <a href="notiShop">
                                 <i class="ti-bell"></i>
-                                <p>Function</p>
+                                <p>Notification</p>
                             </a>
                         </li>
                         <li class="active-pro">
