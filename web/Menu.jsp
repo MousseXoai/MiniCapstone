@@ -26,7 +26,7 @@
                                 
                                 </c:if>
                                 
-
+                            <li><a href="createShop">Create Shop</a></li>
                             <li><a href="contact">Contact</a></li>                          
                         </ul>
                     </nav>

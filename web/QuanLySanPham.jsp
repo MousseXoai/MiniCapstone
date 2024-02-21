@@ -84,37 +84,37 @@
                 </div>
             </div>
             <hr>
-<!--            <ul class="app-menu">
--->                <div class="col-sm-2">
+            <!--            <ul class="app-menu">
+            -->                <div class="col-sm-2">
 
-                    <a class="btn btn-add btn-sm" href="addproduct" title="Thêm"><i class="fas fa-plus"></i>
-                        Tạo mới sản phẩm</a>
-                </div><!--
-                <div class="col-sm-2">
-                    <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                            class="fas fa-file-upload"></i> Tải từ file</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                            class="fas fa-print"></i> In dữ liệu</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                            class="fas fa-copy"></i> Sao chép</a>
-                </div>
+                <a class="btn btn-add btn-sm" href="addproduct" title="Thêm"><i class="fas fa-plus"></i>
+                    Tạo mới sản phẩm</a>
+            </div><!--
+            <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
+                        class="fas fa-file-upload"></i> Tải từ file</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                        class="fas fa-print"></i> In dữ liệu</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
+                        class="fas fa-copy"></i> Sao chép</a>
+            </div>
 
-                <div class="col-sm-2">
-                    <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                            class="fas fa-file-pdf"></i> Xuất PDF</a>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                            class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                </div>
-            </ul>-->
+            <div class="col-sm-2">
+                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
+                        class="fas fa-file-pdf"></i> Xuất PDF</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                        class="fas fa-trash-alt"></i> Xóa tất cả </a>
+            </div>
+        </ul>-->
         </aside>
         <main class="app-content">
             <div class="app-title">
@@ -128,6 +128,16 @@
                     <div class="tile">
                         <div class="tile-body">
                             <div class="row element-button">
+                                <div class="col-md-7"></div> <!-- Empty column to create space on the left -->
+                                <form action="SearchControl" method="get" class="col-md-5 text-right">
+                                    <div class="input-group">
+                                        <div class="input-group-append" style="margin-right: 10px;padding: 5px;">
+                                            <button class="btn btn-primary" type="submit">Tìm Kiếm</button>
+                                        </div>
+                                        <input style="width: 200px" type="text" class="form-control" id="searchInput" name="searchTerm" placeholder="Tìm kiếm">
+
+                                    </div>
+                                </form>
 
 
 
@@ -154,7 +164,7 @@
                                             <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                             <td>${p.id}</td>
                                             <td>${p.name}</td>
-                                            <td><img src="${p.image}" width="100px;"></td>
+                                            <td><img src="${p.image}" style="width:100px;"></td>
                                             <td>${p.quantity}</td>
                                             <td>
                                                 <span class="badge ${p.quantity > 0 ? 'bg-success' : 'bg-danger'}">
@@ -188,6 +198,23 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <c:if test="${tag!=null}">
+                                <div class="col-lg-12 text-center">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination pagination-circle justify-content-center float-md-right mb-0">
+                                            <c:if test="${tag != 1}">
+                                                <li class="page-item"><a href="QuanLySanPhamControl?index=${tag-1 }" class="page-link">Trước</a></li>
+                                                    </c:if> 
+                                                    <c:forEach begin="1" end="${endPage }" var="i">
+                                                <li class="${tag==i?"page-item active":"page-item" }"><a href="QuanLySanPhamControl?index=${i }" class="page-link">${i }</a></li>
+                                                </c:forEach>
+                                                <c:if test="${tag != endPage}">
+                                                <li class="page-item"><a href="QuanLySanPhamControl?index=${tag+1 }" class="page-link">Sau</a></li>
+                                                    </c:if> 
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -215,8 +242,8 @@
         <!-- Page specific javascripts-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
         <!-- Data table plugin-->
-        <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+<!--        <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>-->
         <script type="text/javascript">
                                                         $('#sampleTable').DataTable();
                                                         //Thời Gian
@@ -291,11 +318,11 @@
             }
         </script>
         <script>
-    function editProduct(productId) {
-        // Redirect to the UpdateProductControl page with the product ID as a parameter
-        window.location.href = "UpdateProductControl?id=" + productId;
-    }
-</script>
+            function editProduct(productId) {
+                // Redirect to the UpdateProductControl page with the product ID as a parameter
+                window.location.href = "UpdateProductControl?id=" + productId;
+            }
+        </script>
     </body>
 
 </html>

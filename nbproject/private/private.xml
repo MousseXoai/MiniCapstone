@@ -3,14 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DBContext.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/CreateShop.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddProductControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeAvatarControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ShopDetailInfoControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/PhanLoai.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/SanPham.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SearchControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/CreateShopControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/ChangeAvatar.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/forgotPassword.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/UpdateProduct.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/colorlib-regform-2/css/main.css</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/AddProduct.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/Menu.jsp</file>
         </group>
     </open-files>
 </project-private>

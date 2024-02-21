@@ -12,6 +12,8 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -3350,7 +3352,7 @@ public class DAO extends DBContext {
             int bytesRead3;
             int bytesRead4;
 
-            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3= is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
+            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3 = is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
                 outputStream1.write(buffer1, 0, bytesRead1);
                 outputStream2.write(buffer2, 0, bytesRead2);
                 outputStream3.write(buffer3, 0, bytesRead3);
@@ -3381,6 +3383,126 @@ public class DAO extends DBContext {
             ps.setInt(13, shopID);
             ps.setInt(14, sale);
             ps.setInt(15, trangthai);
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public List<SanPham> searchProductByName(String txt, int shopid) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where [name] like ? and shopid =? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + txt + "%");
+            ps.setInt(2, shopid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<SanPham> getProductByIndex2(int indexPage, int shopid) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham where shopid=? order by [id] offset ? rows fetch next 10 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopid);
+            ps.setInt(2, (indexPage - 1) * 10);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<AccInfo> getAccEmail(int accountID) {
+        List<AccInfo> list = new ArrayList<>();
+        String query = " select AI.uID, AI.name, AI.avatar, AI.address, AI.phonenumber, AI.email, AI.TongChiTieu from AccInfo AI join Account A on AI.uID = A.uID where AI.uID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void createShop(String shopName, Part proof1, Part proof2, String address, int uID) {
+        String query = "insert ShopHangCho(shopname, proof, proof1, dateThamGia, address, uID) values (?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is1 = proof1.getInputStream();
+            InputStream is2 = proof2.getInputStream();
+            // Đọc dữ liệu từ InputStream và chuyển thành chuỗi Base64
+            ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+            ByteArrayOutputStream outputStream2 = new ByteArrayOutputStream();
+            byte[] buffer1 = new byte[4096];
+            byte[] buffer2 = new byte[4096];
+            int bytesRead1;
+            int bytesRead2;
+
+            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1) {
+                outputStream1.write(buffer1, 0, bytesRead1);
+                outputStream2.write(buffer2, 0, bytesRead2);
+            }
+
+            String base64Image1 = Base64.getEncoder().encodeToString(outputStream1.toByteArray());
+            String base64Image2 = Base64.getEncoder().encodeToString(outputStream2.toByteArray());
+            String base641 = "data:image/png;base64," + base64Image1;
+            String base642 = "data:image/png;base64," + base64Image2;
+            ps.setString(1, shopName);
+            ps.setString(2, base641);
+            ps.setString(3, base642);
+            ps.setDate(4, getCurrentDate());
+            ps.setString(5, address);
+            ps.setInt(6, uID);
             ps.executeUpdate();
         } catch (Exception e) {
 
