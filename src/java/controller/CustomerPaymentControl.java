@@ -86,9 +86,9 @@ public class CustomerPaymentControl extends HttpServlet {
         String email = request.getParameter("email").replaceAll("\\s", "").trim();
         String note = request.getParameter("note").replaceAll("\\s", "").trim();
         String payment_option = request.getParameter("payment_option");
-        
+
         DAO dao = new DAO();
-              
+
         int paymentid = 0;
         String err = "", err2 = "", err3 = "", err4 = "", err5 = "";
 
@@ -141,7 +141,10 @@ public class CustomerPaymentControl extends HttpServlet {
                     vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
                     vnp_Params.put("vnp_Amount", String.valueOf(amount));
                     vnp_Params.put("vnp_CurrCode", "VND");
-                    vnp_Params.put("vnp_BankCode", "NCB");
+                    String bank_code = request.getParameter("bankcode");
+                    if (bank_code != null && !bank_code.isEmpty()) {
+                        vnp_Params.put("vnp_BankCode", bank_code);
+                    }
                     vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
                     vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
                     vnp_Params.put("vnp_OrderType", orderType);
@@ -206,34 +209,33 @@ public class CustomerPaymentControl extends HttpServlet {
 
                 if (payment_option.equals("cod")) {
                     long tonggia = Long.parseLong(request.getParameter("totalprice"));
- 
+
                     Calendar calender = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
                     SimpleDateFormat formatterCOD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String ngayXuat = formatterCOD.format(calender.getTime());
 
                     paymentid = 3;
-                    int maHD = Integer.parseInt(Config.getRandomNumber(8));                    
-                    dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid ,maHD);
+                    int maHD = Integer.parseInt(Config.getRandomNumber(8));
+                    dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid, maHD);
                     dao.insertInfoLine(fullname, email, address, phonenum, note);
-                    
+
                     for (Cart cart : list) {
                         for (SanPham sanPham : listSP) {
                             if (cart.getProductID() == sanPham.getId()) {
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
                                 dao.insertOrderLine(cart.getProductID(), (float) sanPham.getPrice(), cart.getAmount());
                                 dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
-                                if(slb == null){
+                                if (slb == null) {
                                     dao.insertSoLuongBan(sanPham.getId(), cart.getAmount());
+                                } else {
+                                    dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId());
                                 }
-                                else{
-                                    dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId()); 
-                                }                                                           
                                 dao.removeProductIdInCart(cart.getProductID(), accountID);
                                 break;
                             }
                         }
                     }
-                                      
+
                     response.sendRedirect("thankyou.jsp");
 
                 }
