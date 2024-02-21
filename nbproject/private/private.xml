@@ -6,7 +6,10 @@
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerCheckoutControl.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Checkout.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DBContext.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/Noti2Control.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/NotiControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/Noti.java</file>
         </group>
     </open-files>
 </project-private>

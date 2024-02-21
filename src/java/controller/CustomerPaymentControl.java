@@ -16,6 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,8 +28,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
+import model.Cart;
 import model.Config;
+import model.SanPham;
+import model.SoLuongBan;
 
 /**
  *
@@ -78,7 +86,10 @@ public class CustomerPaymentControl extends HttpServlet {
         String email = request.getParameter("email").replaceAll("\\s", "").trim();
         String note = request.getParameter("note").replaceAll("\\s", "").trim();
         String payment_option = request.getParameter("payment_option");
-
+        
+        DAO dao = new DAO();
+              
+        int paymentid = 0;
         String err = "", err2 = "", err3 = "", err4 = "", err5 = "";
 
         HttpSession session = request.getSession();
@@ -86,6 +97,11 @@ public class CustomerPaymentControl extends HttpServlet {
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
+
+            int accountID = a.getuID();
+
+            ArrayList<Cart> list = dao.getProductInCartByAccId(accountID);
+            ArrayList<SanPham> listSP = dao.getAllProduct();
 
             if (fullname.isEmpty() || address.isEmpty() || phonenum.isEmpty() || email.isEmpty()) {
                 err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
@@ -108,10 +124,10 @@ public class CustomerPaymentControl extends HttpServlet {
                 request.getRequestDispatcher("checkout").forward(request, response);
             } else {
                 if (payment_option.equals("vnpay")) {
-                    
+
                     String vnp_Version = "2.1.0";
                     String vnp_Command = "pay";
-                    String orderType = "other";          
+                    String orderType = "other";
                     long amount = Long.parseLong(request.getParameter("totalprice")) * 100;
 
                     String vnp_TxnRef = Config.getRandomNumber(8);
@@ -181,9 +197,46 @@ public class CustomerPaymentControl extends HttpServlet {
                     job.addProperty("data", paymentUrl);
 //                    Gson gson = new Gson();
 //                    response.getWriter().write(gson.toJson(job));
+                    paymentid = 2;
                     response.sendRedirect(paymentUrl);
                 }
-        
+                if (payment_option.equals("momo")) {
+                    paymentid = 1;
+                }
+
+                if (payment_option.equals("cod")) {
+                    long tonggia = Long.parseLong(request.getParameter("totalprice"));
+ 
+                    Calendar calender = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+                    SimpleDateFormat formatterCOD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String ngayXuat = formatterCOD.format(calender.getTime());
+
+                    paymentid = 3;
+                    int maHD = Integer.parseInt(Config.getRandomNumber(8));                    
+                    dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid ,maHD);
+                    dao.insertInfoLine(fullname, email, address, phonenum, note);
+                    
+                    for (Cart cart : list) {
+                        for (SanPham sanPham : listSP) {
+                            if (cart.getProductID() == sanPham.getId()) {
+                                SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
+                                dao.insertOrderLine(cart.getProductID(), (float) sanPham.getPrice(), cart.getAmount());
+                                dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
+                                if(slb == null){
+                                    dao.insertSoLuongBan(sanPham.getId(), cart.getAmount());
+                                }
+                                else{
+                                    dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId()); 
+                                }                                                           
+                                dao.removeProductIdInCart(cart.getProductID(), accountID);
+                                break;
+                            }
+                        }
+                    }
+                                      
+                    response.sendRedirect("thankyou.jsp");
+
+                }
             }
         }
     }
@@ -199,7 +252,7 @@ public class CustomerPaymentControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

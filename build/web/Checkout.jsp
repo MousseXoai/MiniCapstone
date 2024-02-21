@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="checkout__order__widget">
                                     <label>
-                                        Nhận hàng trực tiếp
+                                        Thanh toán khi nhận hàng
                                         <input type="radio" name="payment_option" value="cod" id="" checked>
                                         <span class="checkmark"></span>
                                     </label>

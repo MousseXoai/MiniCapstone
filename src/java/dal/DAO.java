@@ -37,6 +37,7 @@ import model.Contact;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
+import model.SoLuongBan;
 import model.UserGoogleDto;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -3384,6 +3385,115 @@ public class DAO extends DBContext {
             ps.executeUpdate();
         } catch (Exception e) {
 
+        }       
+    }
+    
+    public void insertBillCOD(int accountid, long tongGia, String ngayXuat, int trangThaiId, int loaiid, int paymentid, int maThanhToanTrucTiep) {
+        String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maThanhToanTrucTiep) values (?, ?, ? ,?, ?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountid);
+            ps.setLong(2, tongGia);
+            ps.setString(3,ngayXuat);
+            ps.setInt(4, trangThaiId);
+            ps.setInt(5, loaiid);
+            ps.setInt(6, paymentid);
+            ps.setInt(7, maThanhToanTrucTiep);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
+    
+    public void insertInfoLine(String name, String email, String address, String phonenumber, String note) {
+        String sql = "insert into InfoLine ([invoiceID], [name], [email], [address], [phonenumber], [note]) SELECT TOP 1 [maHD], ?, ?, ?, ?, ? FROM [HoaDon] ORDER BY [maHD] DESC";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, address);
+            ps.setString(4, phonenumber);
+            ps.setString(5, note);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void insertOrderLine(int productID, float price, int quantity) {
+        String sql = "INSERT INTO OrderLine ([invoiceID], [productID], [price], [quantity]) SELECT TOP 1 [maHD], ?, ?, ? FROM [HoaDon] ORDER BY [maHD] DESC";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, productID);
+            ps.setFloat(2, price);
+            ps.setInt(3, quantity);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void insertSoLuongBan(int productID, int soLuongDaBan) {
+        String sql = "INSERT INTO SoLuongBan (productID, soLuongDaBan) values (?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, productID);
+            ps.setInt(2, soLuongDaBan);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateQuantity(int quantity, int productID) {
+        String sql = "update SanPham set quantity = ? where id = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, quantity);
+            ps.setInt(2, productID);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateSoLuongBan(int soLuongDaBan, int productID) {
+        String sql = "update SoLuongBan set soLuongDaBan = ? where productID = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, soLuongDaBan);
+            ps.setInt(2, productID);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public SoLuongBan getSoLuongBanByID(int productID) {
+        String sql = "select * from SoLuongBan where productID = ?  ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, productID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int productid = rs.getInt(1);
+                int soLuongDaBan = rs.getInt(2);
+
+                SoLuongBan p = new SoLuongBan(productid, soLuongDaBan);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
 }
