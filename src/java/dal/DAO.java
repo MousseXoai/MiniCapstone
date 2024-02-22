@@ -23,6 +23,7 @@ import model.Brand;
 import model.Cart;
 import model.Color;
 import model.HoaDon;
+
 import model.InfoLine;
 import model.NhanXet;
 import model.OrderLine;
@@ -386,15 +387,18 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<Event> ListEventByShop(int id) {
+    public List<Event> ListEventByShop(int shopID) {
         List<Event> list = new ArrayList<>();
         String query = "select * from Event where shopID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, id);
+            ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(3), rs.getInt(1), rs.getString(2)));
+                list.add(new Event(rs.getInt(3),
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(4)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());
@@ -493,7 +497,6 @@ public class DAO extends DBContext {
                         rs.getString(6),
                         rs.getDouble(7)));
                 System.out.println("ID: " + rs.getInt(1));
-           
 
             }
         } catch (Exception e) {
@@ -1409,6 +1412,8 @@ public class DAO extends DBContext {
         return list;
     }
 
+   
+
     public List<WishList> getWishListByAccountID(int accountID) {
         List<WishList> list = new ArrayList<>();
         String query = "select * from WishList where accountID = ?";
@@ -1828,6 +1833,22 @@ public class DAO extends DBContext {
             }
         } catch (Exception e) {
             System.out.println("deleteProduct:" + e.getMessage());
+        }
+    }
+    
+     public void deleteEvent(int eid) {
+        try {
+            String query = "DELETE FROM Event WHERE eid=?";
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, eid);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Event deleted successfully!");
+            } else {
+                System.out.println("Failed to delete event.");
+            }
+        } catch (Exception e) {
+            System.out.println("deleteEvent: " + e.getMessage());
         }
     }
 

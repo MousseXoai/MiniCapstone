@@ -106,18 +106,19 @@
                                 <p>Product Management</p>
                             </a>
                         </li>
+                         <li>
+                            <a href="EventManager">
+                                <i class="ti-layers"></i>
+                                <p>Event Management</p>
+                            </a>
+                        </li>
                         <li>
                             <a href="LoyalCustomers">
                                 <i class="ti-heart"></i>
                                 <p>Loyal customer</p>
                             </a> 
                         </li>
-                        <li>
-                            <a href="icons.html">
-                                <i class="ti-pencil-alt2"></i>
-                                <p>Function</p>
-                            </a>
-                        </li>
+                       
                         <li>
                             <a href="maps.html">
                                 <i class="ti-map"></i>
