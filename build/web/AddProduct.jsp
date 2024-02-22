@@ -169,10 +169,7 @@
                                             <label>Tiêu đề</label>
                                             <input required name="prd_title"  class="form-control">
                                         </div> 
-                                        <div class="form-group">
-                                            <label>Màu sắc</label>
-                                            <input required name="prd_color" class="form-control">
-                                        </div> '
+                                         '
 
                                         </div>
                                         <div class="col-md-6">
@@ -185,6 +182,10 @@
                                                 <input required name="prd_image4" type="file">
                                                 
                                             </div>
+                                            <div class="form-group">
+                                            <label>Màu sắc</label>
+                                            <input required name="prd_color" class="form-control">
+                                        </div>
                                             <div class="form-group">
                                                 <label>Danh mục</label>
                                                 <select name="cat_id" class="form-control">

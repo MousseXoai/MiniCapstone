@@ -8,6 +8,7 @@
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddProductControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeAvatarControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ShopDetailInfoControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/EditNoti.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SearchControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/CreateShopControl.java</file>
@@ -16,9 +17,10 @@
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/forgotPassword.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/UpdateProduct.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/colorlib-regform-2/css/main.css</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/EditNotiControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/AddProduct.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/Menu.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/css/main_1.css</file>
         </group>
     </open-files>
 </project-private>
