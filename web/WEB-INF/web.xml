@@ -164,6 +164,10 @@
         <servlet-name>StatusPageController</servlet-name>
         <servlet-class>controller.StatusPageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerSearchOrderController</servlet-name>
+        <servlet-class>controller.SellerSearchOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -687,6 +691,10 @@
     <servlet-mapping>
         <servlet-name>StatusPageController</servlet-name>
         <url-pattern>/statusPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerSearchOrderController</servlet-name>
+        <url-pattern>/searchOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -247,8 +247,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <c:forEach items="${orderList}" var="c">
-                                    <form action="SellerOrderManagement" method="post" id="c1">
+                                    <form action="statusPage" method="post" id="c1">
+                                        <input type="hidden" name="sid" value="${sid}"/>
                                         <tr>
 
                                             <td><span>${c.ngayXuat}</span><br></td>
