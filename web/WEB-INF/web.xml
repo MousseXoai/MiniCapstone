@@ -160,6 +160,10 @@
         <servlet-name>HotSellControl</servlet-name>
         <servlet-class>controller.HotSellControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoyalCustomers</servlet-name>
+        <servlet-class>controller.LoyalCustomers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -679,6 +683,10 @@
     <servlet-mapping>
         <servlet-name>HotSellControl</servlet-name>
         <url-pattern>/HotSell</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoyalCustomers</servlet-name>
+        <url-pattern>/LoyalCustomers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -107,10 +107,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="typography.html">
-                                <i class="ti-text"></i>
-                                <p>Function</p>
-                            </a>
+                            <a href="LoyalCustomers">
+                                <i class="ti-heart"></i>
+                                <p>Loyal customer</p>
+                            </a> 
                         </li>
                         <li>
                             <a href="icons.html">

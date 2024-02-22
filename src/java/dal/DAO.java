@@ -442,17 +442,17 @@ public class DAO extends DBContext {
         return list;
     }
 
-   public List<SanPham> getHotSell() {
-    List<SanPham> list = new ArrayList<>();
-    String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai "
-            + "FROM SanPham s "
-            + "INNER JOIN SoLuongBan sl ON s.id = sl.productID "
-            + "ORDER BY sl.soLuongDaBan DESC";
-    try {
-        ps = connection.prepareStatement(query);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-             list.add(new SanPham(rs.getInt(1),
+    public List<SanPham> getHotSell() {
+        List<SanPham> list = new ArrayList<>();
+        String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai "
+                + "FROM SanPham s "
+                + "INNER JOIN SoLuongBan sl ON s.id = sl.productID "
+                + "ORDER BY sl.soLuongDaBan DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getDouble(4),
@@ -468,14 +468,39 @@ public class DAO extends DBContext {
                         rs.getInt(14),
                         rs.getInt(15),
                         rs.getInt(16)));
-               System.out.println("ID: " + rs.getInt(1));
-        }
-    } catch (Exception e) {
-       
-    }
-    return list;
-}
+                System.out.println("ID: " + rs.getInt(1));
+            }
+        } catch (Exception e) {
 
+        }
+        return list;
+    }
+
+    public List<AccInfo> getLoyalCustomers() {
+        List<AccInfo> loyalCustomers = new ArrayList<>();
+        String query = "SELECT TOP 10 uID, name, avatar, address, phonenumber, email, TongChiTieu "
+                + "FROM AccInfo "
+                + "ORDER BY TongChiTieu DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                loyalCustomers.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+           
+
+            }
+        } catch (Exception e) {
+
+        }
+        return loyalCustomers;
+    }
 
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();

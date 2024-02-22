@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Shop.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/SearchPriceUnder100Control.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/SearchBranControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/HotSellControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/top6Spbanchay.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/SearchPriceAbove200Control.java</file>
         </group>
     </open-files>
 </project-private>
