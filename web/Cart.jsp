@@ -128,6 +128,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-2">
+                    
+                    <c:if test="${totalItemsInCart > 0}">
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
@@ -147,6 +149,8 @@
                         </ul>
                         <a href="checkout" class="primary-btn">Proceed to checkout</a>
                     </div>
+                    </c:if>   
+                                
                 </div>
             </div>
         </div>

@@ -177,11 +177,11 @@
                                         <input type="radio" name="payment_option" value="cod" id="" checked>
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label>
+<!--                                    <label>
                                         Thanh toán bằng MoMo 
                                         <input type="radio" name="payment_option" value="momo" id="">
                                         <span class="checkmark"></span>
-                                    </label>
+                                    </label>-->
                                     <label>
                                         Thanh toán bằng VNPAY
                                         <input type="radio" name="payment_option" value="vnpay" id="">
