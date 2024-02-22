@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -3405,6 +3406,26 @@ public class DAO extends DBContext {
         }
     }
     
+    public void insertBillVNPAY(int accountid, long tongGia, LocalDate ngayXuat, int trangThaiId, int loaiid, int paymentid, int maHoaDonTo) {
+        String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maHoaDonTo) values (?, ?, ? ,?, ?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountid);
+            ps.setLong(2, tongGia);
+
+            java.sql.Date sqlDate = java.sql.Date.valueOf(ngayXuat);
+            ps.setDate(3, sqlDate);
+            
+            ps.setInt(4, trangThaiId);
+            ps.setInt(5, loaiid);
+            ps.setInt(6, paymentid);
+            ps.setInt(7, maHoaDonTo);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void insertInfoLine(String name, String email, String address, String phonenumber, String note) {
         String sql = "insert into InfoLine ([invoiceID], [name], [email], [address], [phonenumber], [note]) SELECT TOP 1 [maHD], ?, ?, ?, ?, ? FROM [HoaDon] ORDER BY [maHD] DESC";
         try {
@@ -3447,6 +3468,32 @@ public class DAO extends DBContext {
         }
     }
     
+    public void insertThanhToanVNPAY(int vnp_TxnRef, int vnp_Amount, String vnp_BankCode, String vnp_BankTranNo, String vnp_CardType, String vnp_OrderInfo, LocalDate vnp_PayDate, int vnp_ResponseCode, String vnp_TmnCode, int vnp_TransactionNo, String vnp_SecureHashType, String vnp_SecureHash) {
+        String sql = "insert into [ThanhToanVNPAY] ([vnp_TxnRef], [vnp_Amount], [vnp_BankCode], [vnp_BankTranNo], [vnp_CardType], [vnp_OrderInfo], [vnp_PayDate],[vnp_ResponseCode], [vnp_TmnCode], [vnp_TransactionNo], [vnp_SecureHashType], [vnp_SecureHash]) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, vnp_TxnRef);
+            ps.setInt(2, vnp_Amount);
+            ps.setString(3, vnp_BankCode);
+            ps.setString(4, vnp_BankTranNo);
+            ps.setString(5, vnp_CardType);
+            ps.setString(6, vnp_OrderInfo);
+            
+            java.sql.Date sqlDate = java.sql.Date.valueOf(vnp_PayDate);
+            ps.setDate(7, sqlDate);
+            
+            ps.setInt(8, vnp_ResponseCode);
+            ps.setString(9, vnp_TmnCode);
+            ps.setInt(10, vnp_TransactionNo);
+            ps.setString(11, vnp_SecureHashType);
+            ps.setString(12, vnp_SecureHash);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void updateQuantity(int quantity, int productID) {
         String sql = "update SanPham set quantity = ? where id = ? ";
         try {
@@ -3473,6 +3520,18 @@ public class DAO extends DBContext {
         }
     }
     
+    public void updateTongChiTieu(double tongChiTieu, int uID) {
+        String sql = "update [AccInfo] set [TongChiTieu] = ? where [uID] = ? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setDouble(1, tongChiTieu);
+            ps.setInt(2, uID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public SoLuongBan getSoLuongBanByID(int productID) {
         String sql = "select * from SoLuongBan where productID = ?  ";
         try {
@@ -3491,6 +3550,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
+
     
     
     

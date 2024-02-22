@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.AccInfo;
 import model.Account;
 import model.Cart;
 import model.Config;
@@ -102,6 +103,7 @@ public class CustomerPaymentControl extends HttpServlet {
 
             ArrayList<Cart> list = dao.getProductInCartByAccId(accountID);
             ArrayList<SanPham> listSP = dao.getAllProduct();
+            AccInfo accInfo = dao.getAccInfo(accountID);
 
             if (fullname.isEmpty() || address.isEmpty() || phonenum.isEmpty() || email.isEmpty()) {
                 err = getServletContext().getInitParameter("messErrorEditProfileCustomer");
@@ -200,7 +202,11 @@ public class CustomerPaymentControl extends HttpServlet {
                     job.addProperty("data", paymentUrl);
 //                    Gson gson = new Gson();
 //                    response.getWriter().write(gson.toJson(job));
-                    paymentid = 2;
+                    session.setAttribute("ssFullname", fullname);
+                    session.setAttribute("ssAddress", address);
+                    session.setAttribute("ssPhonenum", phonenum);
+                    session.setAttribute("ssEmail", email);
+                    session.setAttribute("ssNote", note);
                     response.sendRedirect(paymentUrl);
                 }
                 if (payment_option.equals("momo")) {
@@ -215,13 +221,13 @@ public class CustomerPaymentControl extends HttpServlet {
                     String ngayXuat = formatterCOD.format(calender.getTime());
 
                     paymentid = 3;
-                    int maHD = Integer.parseInt(Config.getRandomNumber(8));
-                    dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid, maHD);
-                    dao.insertInfoLine(fullname, email, address, phonenum, note);
+                    int maHD = Integer.parseInt(Config.getRandomNumber(8));                                      
 
                     for (Cart cart : list) {
                         for (SanPham sanPham : listSP) {
                             if (cart.getProductID() == sanPham.getId()) {
+                                dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid, maHD);
+                                dao.insertInfoLine(fullname, email, address, phonenum, note);
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
                                 dao.insertOrderLine(cart.getProductID(), (float) sanPham.getPrice(), cart.getAmount());
                                 dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
@@ -230,6 +236,7 @@ public class CustomerPaymentControl extends HttpServlet {
                                 } else {
                                     dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId());
                                 }
+                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* sanPham.getPrice()), accountID);
                                 dao.removeProductIdInCart(cart.getProductID(), accountID);
                                 break;
                             }

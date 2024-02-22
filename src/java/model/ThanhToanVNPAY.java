@@ -21,13 +21,13 @@ public class ThanhToanVNPAY {
     int vnp_ResponseCode;
     String vnp_TmnCode;
     int vnp_TransactionNo;
-    int vnp_TransactionStatus;
+    String vnp_SecureHashType;
     String vnp_SecureHash;
 
     public ThanhToanVNPAY() {
     }
 
-    public ThanhToanVNPAY(int vnp_TxnRef, int vnp_Amount, String vnp_BankCode, String vnp_BankTranNo, String vnp_CardType, String vnp_OrderInfo, LocalDate vnp_PayDate, int vnp_ResponseCode, String vnp_TmnCode, int vnp_TransactionNo, int vnp_TransactionStatus, String vnp_SecureHash) {
+    public ThanhToanVNPAY(int vnp_TxnRef, int vnp_Amount, String vnp_BankCode, String vnp_BankTranNo, String vnp_CardType, String vnp_OrderInfo, LocalDate vnp_PayDate, int vnp_ResponseCode, String vnp_TmnCode, int vnp_TransactionNo, String vnp_SecureHashType, String vnp_SecureHash) {
         this.vnp_TxnRef = vnp_TxnRef;
         this.vnp_Amount = vnp_Amount;
         this.vnp_BankCode = vnp_BankCode;
@@ -38,7 +38,7 @@ public class ThanhToanVNPAY {
         this.vnp_ResponseCode = vnp_ResponseCode;
         this.vnp_TmnCode = vnp_TmnCode;
         this.vnp_TransactionNo = vnp_TransactionNo;
-        this.vnp_TransactionStatus = vnp_TransactionStatus;
+        this.vnp_SecureHashType = vnp_SecureHashType;
         this.vnp_SecureHash = vnp_SecureHash;
     }
 
@@ -122,12 +122,12 @@ public class ThanhToanVNPAY {
         this.vnp_TransactionNo = vnp_TransactionNo;
     }
 
-    public int getVnp_TransactionStatus() {
-        return vnp_TransactionStatus;
+    public String getVnp_SecureHashType() {
+        return vnp_SecureHashType;
     }
 
-    public void setVnp_TransactionStatus(int vnp_TransactionStatus) {
-        this.vnp_TransactionStatus = vnp_TransactionStatus;
+    public void setVnp_SecureHashType(String vnp_SecureHashType) {
+        this.vnp_SecureHashType = vnp_SecureHashType;
     }
 
     public String getVnp_SecureHash() {
@@ -137,6 +137,6 @@ public class ThanhToanVNPAY {
     public void setVnp_SecureHash(String vnp_SecureHash) {
         this.vnp_SecureHash = vnp_SecureHash;
     }
-    
+  
     
 }
