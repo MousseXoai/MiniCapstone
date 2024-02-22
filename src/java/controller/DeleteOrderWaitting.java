@@ -12,19 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.AccInfo;
 import model.Account;
-import model.HoaDon;
-import model.OrderLine;
-import model.SanPham;
-import model.TrangThai;
 
 /**
  *
  * @author Acer
  */
-public class OrderWaittingControl extends HttpServlet {
+public class DeleteOrderWaitting extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +37,10 @@ public class OrderWaittingControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderWaittingControl</title>");
+            out.println("<title>Servlet DeleteOrderWaitting</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderWaittingControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteOrderWaitting at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,27 +59,27 @@ public class OrderWaittingControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        String invoiceId = request.getParameter("invoiceId");
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        String trangthaiid1 = request.getParameter("trangthaiid");
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
-            int trangthaiid = Integer.parseInt(trangthaiid1);
-            int accountID = a.getuID();
-            List<SanPham> listAllSP = dao.getListAllSanPham();
-            List<HoaDon> listHoaDon = dao.listHoaDon(accountID, trangthaiid);
-            List<OrderLine> ListOrderLine = dao.getListOrderLine();
-            AccInfo acc = dao.getAccInfo(accountID);
-            request.setAttribute("acc", acc);
-            request.setAttribute("listAllSP", listAllSP);
-            request.setAttribute("ListOrderLine", ListOrderLine);
-            request.setAttribute("listHoaDon", listHoaDon);
-            request.getRequestDispatcher("OrderWaitting.jsp").forward(request, response);
+            dao.deleteOrderLine(invoiceId);
+            dao.deleteOrderWaitting(invoiceId);
+            dao.deleteÌnorLine(invoiceId);
+            request.getRequestDispatcher("oderwaitting").forward(request, response);
         }
-
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

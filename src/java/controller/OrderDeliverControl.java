@@ -18,13 +18,12 @@ import model.Account;
 import model.HoaDon;
 import model.OrderLine;
 import model.SanPham;
-import model.TrangThai;
 
 /**
  *
  * @author Acer
  */
-public class OrderWaittingControl extends HttpServlet {
+public class OrderDeliverControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +42,10 @@ public class OrderWaittingControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderWaittingControl</title>");
+            out.println("<title>Servlet OrderDeliverControl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderWaittingControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderDeliverControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -81,11 +80,18 @@ public class OrderWaittingControl extends HttpServlet {
             request.setAttribute("listAllSP", listAllSP);
             request.setAttribute("ListOrderLine", ListOrderLine);
             request.setAttribute("listHoaDon", listHoaDon);
-            request.getRequestDispatcher("OrderWaitting.jsp").forward(request, response);
+            request.getRequestDispatcher("OrderDeliver.jsp").forward(request, response);
         }
-
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : OrderWaitting
-    Created on : Jan 26, 2024, 1:37:19 PM
+    Document   : OrderDone
+    Created on : Feb 23, 2024, 12:25:21 AM
     Author     : Acer
 --%>
 
@@ -102,8 +102,9 @@
                         <th scope="col">Product</th>
                         <th scope="col">Total Price</th>
                         <th scope="col">Discount</th>
-                        <th scope="col">Action</th>
                         <th scope="col">View</th>
+                        <th scope="col">Action</th>
+
 
                     </tr>
                 </thead>
@@ -140,8 +141,8 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td><a href="deleteorder?trangthaiid=1&invoiceId=${c.maHD}"></span>Delete</td>
                             <td>Details</td>
+                            <td><a href="feedBack"></span>FeedBack</td>
                         </tr>
                     </c:forEach>
                 </tbody>

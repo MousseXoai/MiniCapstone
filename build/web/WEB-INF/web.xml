@@ -155,7 +155,19 @@
     <servlet>
         <servlet-name>ReplyContactControl</servlet-name>
         <servlet-class>controller.ReplyContactControl</servlet-class>
-        >>>>>>> b8a06a3c8d057b795574c9a69bf9d31b421712ff
+        &gt;&gt;&gt;&gt;&gt;&gt;&gt; b8a06a3c8d057b795574c9a69bf9d31b421712ff
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderWaitting</servlet-name>
+        <servlet-class>controller.DeleteOrderWaitting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDeliverControl</servlet-name>
+        <servlet-class>controller.OrderDeliverControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDoneControl</servlet-name>
+        <servlet-class>controller.OrderDoneControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -672,6 +684,18 @@
     <servlet-mapping>
         <servlet-name>ReplyContactControl</servlet-name>
         <url-pattern>/replyContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderWaitting</servlet-name>
+        <url-pattern>/deleteorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDeliverControl</servlet-name>
+        <url-pattern>/orderdeliver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDoneControl</servlet-name>
+        <url-pattern>/orderdone</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3374,4 +3374,72 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
+
+    public List<SanPham> getListAllSanPham() {
+        List<SanPham> list = new ArrayList<>();
+        String query = "Select * from SanPham ";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListAllSanPham" + e.getMessage());
+        }
+        return list;
+    }
+
+    public void deleteOrderWaitting(String invoiceId) {
+        String query = "DELETE FROM [dbo].[HoaDon]\n"
+                + "      WHERE maHD = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteOrderWaitting" + e.getMessage());
+        }
+
+    }
+
+    public void deleteOrderLine(String invoiceId) {
+        String query = "DELETE FROM [dbo].[OrderLine]\n"
+                + "      WHERE invoiceID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteOrderLine" + e.getMessage());
+        }
+    }
+
+    public void deleteÌnorLine(String invoiceId) {
+        String query = "DELETE FROM [dbo].[InfoLine]\n" +
+"      WHERE invoiceID =?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteÌnorLine" + e.getMessage());
+        }
+    }
 }

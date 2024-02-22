@@ -114,13 +114,33 @@
                             </th>
                             <td class="order-color">${c.maHD}</td>
                             <td>${c.ngayXuat}</td>
+
                             <td class="d-flex align-items-center">
-                                <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle" width="25">
-                                <span class="ml-2">Harrient Santigo</span>
+                                <c:forEach items="${ListOrderLine}" var="d"> 
+                                    <c:if test="${d.getInvoiceID() == c.getMaHD()}">
+                                        <c:forEach items="${listAllSP}" var="e">
+                                            <c:if test="${e.getId() == d.getProductID()}">
+                                                <img src="${e.image}" class="rounded-circle" width="40">
+                                                <span class="ml-2">${e.name}</span>
+                                            </c:if>
+                                        </c:forEach>                                   
+                                    </c:if>
+                                </c:forEach>
+
                             </td>
                             <td><fmt:formatNumber type="currency" value="${c.tongGia}" /></td>
-                            <td>$182.40</td>
-                            <td>Delete</td>
+                            <td> 
+                                <c:forEach items="${ListOrderLine}" var="d"> 
+                                    <c:if test="${d.getInvoiceID() == c.getMaHD()}">
+                                        <c:forEach items="${listAllSP}" var="e">
+                                            <c:if test="${e.getId() == d.getProductID()}">
+                                                <fmt:formatNumber type="currency" value="${e.price*(e.sale/100)}" />
+                                            </c:if>
+                                        </c:forEach>                                   
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td><a href="deleteorder?trangthaiid=1&invoiceId=${c.maHD}"></span>Delete</td>
                             <td>Details</td>
                         </tr>
                     </c:forEach>
