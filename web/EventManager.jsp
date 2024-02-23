@@ -172,7 +172,7 @@
                                                         <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="confirmDelete(${e.eid})">
                                                             <i class="fas fa-trash-alt"></i> Xóa
                                                             </button>
-                                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#ModalUP" onclick="editProduct(${p.id})">
+                                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#ModalUP" onclick="editEvent(${e.eid})">
                                                                 <i class="fas fa-edit"></i> Chỉnh sửa
                                                             </button>
 
@@ -275,9 +275,9 @@
                     }
                 </script>
                 <script>
-                    function editProduct(productId) {
+                    function editEvent(eventid) {
                         // Redirect to the UpdateProductControl page with the product ID as a parameter
-                        window.location.href = "UpdateProductControl?id=" + productId;
+                        window.location.href = "UpdateEventControl?eid=" + eventid;
                     }
                 </script>
                 </body>

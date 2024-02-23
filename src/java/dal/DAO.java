@@ -405,6 +405,25 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+        public List<Event> getEventByEventID(int eid) {
+        List<Event> list = new ArrayList<>();
+        String query = "select * from Event where eid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, eid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Event(rs.getInt(3),
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getEventByEventID" + e.getMessage());
+        }
+        return list;
+    }
 
     public List<Blog> getTop3Blog() {
         List<Blog> list = new ArrayList<>();
@@ -1412,8 +1431,6 @@ public class DAO extends DBContext {
         return list;
     }
 
-   
-
     public List<WishList> getWishListByAccountID(int accountID) {
         List<WishList> list = new ArrayList<>();
         String query = "select * from WishList where accountID = ?";
@@ -1835,8 +1852,8 @@ public class DAO extends DBContext {
             System.out.println("deleteProduct:" + e.getMessage());
         }
     }
-    
-     public void deleteEvent(int eid) {
+
+    public void deleteEvent(int eid) {
         try {
             String query = "DELETE FROM Event WHERE eid=?";
             ps = connection.prepareStatement(query);
@@ -1913,6 +1930,20 @@ public class DAO extends DBContext {
             ps.setInt(7, pbrandid);
             ps.setString(8, pcolor);
             ps.setInt(9, pid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void updateEvent(int shopId, String image, int eid, String eventName) {
+        String query = " UPDATE Event set [shopID]  = ? , [image] = ?, [eventName] = ?  where [eid] = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(3, eid);
+            ps.setInt(1, shopId);
+            ps.setString(2, image);
+            ps.setString(4, eventName);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
