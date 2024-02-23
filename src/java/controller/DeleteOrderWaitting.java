@@ -66,8 +66,8 @@ public class DeleteOrderWaitting extends HttpServlet {
             response.sendRedirect("login.jsp");
         } else {
             dao.deleteOrderLine(invoiceId);
-            dao.deleteOrderWaitting(invoiceId);
             dao.deleteÌnorLine(invoiceId);
+            dao.deleteOrderWaitting(invoiceId);
             request.getRequestDispatcher("oderwaitting").forward(request, response);
         }
     }
