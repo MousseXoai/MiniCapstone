@@ -164,6 +164,10 @@
         <servlet-name>AddProductControl</servlet-name>
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerThankYouControll</servlet-name>
+        <servlet-class>controller.CustomerThankYouControll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -691,6 +695,10 @@
     <servlet-mapping>
         <servlet-name>AddProductControl</servlet-name>
         <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerThankYouControll</servlet-name>
+        <url-pattern>/thankyou</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

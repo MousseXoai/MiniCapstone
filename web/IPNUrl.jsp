@@ -141,7 +141,7 @@
                             }
                         }
                                 
-                        request.getRequestDispatcher("thankyou.jsp").forward(request, response);
+                        request.getRequestDispatcher("thankyou").forward(request, response);
                         //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Thành công"
                         // out.print("GD Thanh cong");
                     } else {

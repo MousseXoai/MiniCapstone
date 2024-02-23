@@ -1449,7 +1449,7 @@ public class DAO extends DBContext {
     public double getTotalPrice(int accountID) {
         double total = 0;
         try {
-            String strSQL = "select SUM(price*amount) as total from Cart as c join SanPham as sp on sp.id = c.productID where c.accountID = ? ";
+            String strSQL = "  select SUM(price*amount*(1-sale/100.0)) as total from Cart as c join SanPham as sp on sp.id = c.productID where c.accountID = ? ";
             ps = connection.prepareStatement(strSQL);
             ps.setInt(1, accountID);
             rs = ps.executeQuery();
