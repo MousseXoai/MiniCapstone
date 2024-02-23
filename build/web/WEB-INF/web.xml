@@ -169,6 +169,10 @@
         <servlet-name>OrderDoneControl</servlet-name>
         <servlet-class>controller.OrderDoneControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeedBackControl</servlet-name>
+        <servlet-class>controller.FeedBackControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -696,6 +700,10 @@
     <servlet-mapping>
         <servlet-name>OrderDoneControl</servlet-name>
         <url-pattern>/orderdone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackControl</servlet-name>
+        <url-pattern>/feedBack</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

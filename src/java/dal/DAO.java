@@ -3432,8 +3432,8 @@ public class DAO extends DBContext {
     }
 
     public void deleteÌnorLine(String invoiceId) {
-        String query = "DELETE FROM [dbo].[InfoLine]\n" +
-"      WHERE invoiceID =?";
+        String query = "DELETE FROM [dbo].[InfoLine]\n"
+                + "      WHERE invoiceID =?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, invoiceId);
@@ -3441,5 +3441,44 @@ public class DAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("deleteÌnorLine" + e.getMessage());
         }
+    }
+
+    public void addFeedBack(int accid, int pID, String message, String image, int rate) {
+        String query = "INSERT INTO [dbo].[NhanXet]\n"
+                + "           ([accountID]\n"
+                + "           ,[productID]\n"
+                + "           ,[contentReview]\n"
+                + "           ,[dateReview]\n"
+                + "           ,[image]\n"
+                + "           ,[voteStar])\n"
+                + "     VALUES"
+                + "           (?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accid);
+            ps.setInt(2, pID);
+            ps.setString(3, message);
+            ps.setDate(4, getCurrentDate());
+            ps.setString(5, image);
+            ps.setInt(6, rate);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("addFeedBack" + e.getMessage());
+        }
+    }
+
+    public List<NhanXet> getListNhanXet() {
+        List<NhanXet> list = new ArrayList<>();
+        String query = "Select * from NhanXet ";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new NhanXet(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListNhanXet" + e.getMessage());
+        }
+        return list;
     }
 }

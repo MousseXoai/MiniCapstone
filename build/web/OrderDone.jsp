@@ -142,7 +142,15 @@
                                 </c:forEach>
                             </td>
                             <td>Details</td>
-                            <td><a href="feedBack"></span>FeedBack</td>
+                            <c:forEach items="${ListOrderLine}" var="d"> 
+                                <c:if test="${d.getInvoiceID() == c.getMaHD()}">
+                                    <c:forEach items="${listAllSP}" var="e">
+                                        <c:if test="${e.getId() == d.getProductID()}"> 
+                                            <td><a href="feedBack?pid=${e.id}"></span>FeedBack</td>
+                                        </c:if>
+                                    </c:forEach>                                   
+                                </c:if>
+                            </c:forEach>
                         </tr>
                     </c:forEach>
                 </tbody>

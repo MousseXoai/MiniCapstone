@@ -17,6 +17,7 @@ import java.util.List;
 import model.AccInfo;
 import model.Account;
 import model.HoaDon;
+import model.NhanXet;
 import model.OrderLine;
 import model.SanPham;
 
@@ -73,8 +74,10 @@ public class OrderDoneControl extends HttpServlet {
             List<SanPham> listAllSP = dao.getListAllSanPham();
             List<HoaDon> listHoaDon = dao.listHoaDon(accountID, trangthaiid);
             List<OrderLine> ListOrderLine = dao.getListOrderLine();
+            List<NhanXet> listNX = dao.getListNhanXet();
             AccInfo acc = dao.getAccInfo(accountID);
             request.setAttribute("acc", acc);
+            request.setAttribute("listNX", listNX);
             request.setAttribute("listAllSP", listAllSP);
             request.setAttribute("ListOrderLine", ListOrderLine);
             request.setAttribute("listHoaDon", listHoaDon);
