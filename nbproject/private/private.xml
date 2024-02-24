@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerCheckoutControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Checkout.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/LoadAmountCartControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/Config.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/HoaDon.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/thankyou.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Cart.jsp</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CartAmountControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerThankYouControll.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CartControl.java</file>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/IPNUrl.jsp</file>
         </group>
     </open-files>
 </project-private>

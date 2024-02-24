@@ -85,7 +85,7 @@ public class CustomerPaymentControl extends HttpServlet {
         String address = request.getParameter("address").replaceAll("\\s+", " ").trim();
         String phonenum = request.getParameter("phonenum").replaceAll("\\s", "").trim();
         String email = request.getParameter("email").replaceAll("\\s", "").trim();
-        String note = request.getParameter("note").replaceAll("\\s", "").trim();
+        String note = request.getParameter("note").replaceAll("\\s", " ");
         String payment_option = request.getParameter("payment_option");
 
         DAO dao = new DAO();
@@ -221,29 +221,30 @@ public class CustomerPaymentControl extends HttpServlet {
                     String ngayXuat = formatterCOD.format(calender.getTime());
 
                     paymentid = 3;
-                    int maHD = Integer.parseInt(Config.getRandomNumber(8));                                      
-
+                    int maHD = Integer.parseInt(Config.getRandomNumber(8));  
+                    session.setAttribute("checkMaHoaDonTo", "none");
+                    session.setAttribute("checkMaThanhToanTrucTiep", String.valueOf(maHD));
                     for (Cart cart : list) {
                         for (SanPham sanPham : listSP) {
                             if (cart.getProductID() == sanPham.getId()) {
                                 dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid, maHD);
                                 dao.insertInfoLine(fullname, email, address, phonenum, note);
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
-                                dao.insertOrderLine(cart.getProductID(), (float) sanPham.getPrice(), cart.getAmount());
+                                dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());
                                 dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
                                 if (slb == null) {
                                     dao.insertSoLuongBan(sanPham.getId(), cart.getAmount());
                                 } else {
                                     dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId());
                                 }
-                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* sanPham.getPrice()), accountID);
+                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* (sanPham.getPrice()*(1-sanPham.getSale()/100.0))), accountID);
                                 dao.removeProductIdInCart(cart.getProductID(), accountID);
                                 break;
                             }
                         }
                     }
 
-                    response.sendRedirect("thankyou.jsp");
+                    response.sendRedirect("thankyou");
 
                 }
             }

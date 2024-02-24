@@ -3,7 +3,7 @@
     Created on : Feb 22, 2024, 7:32:23 AM
     Author     : Tosaka
 --%>
-<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
@@ -90,7 +90,7 @@
                         String noteParam = (String) session.getAttribute("ssNote");
                         String note = "";
                         if (noteParam != null) {
-                        note = noteParam.replaceAll("\\s+", " ").trim();
+                        note = noteParam.replaceAll("\\s+", " ");
                         }
 
                         int paymentid = 2;
@@ -104,7 +104,7 @@
                         AccInfo accInfo = dao.getAccInfo(accountID);
                         
                         int vnp_TxnRef = Integer.parseInt(request.getParameter("vnp_TxnRef"));
-                        int vnp_Amount = Integer.parseInt(request.getParameter("vnp_Amount")) / 100;
+                        long vnp_Amount = Long.parseLong(request.getParameter("vnp_Amount")) / 100;
                         String vnp_BankCode = request.getParameter("vnp_BankCode");
                         String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
                         String vnp_CardType = request.getParameter("vnp_CardType");
@@ -112,14 +112,14 @@
                                 
                         String vnp_PayDateStr = request.getParameter("vnp_PayDate");
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-                        LocalDate vnp_PayDate = LocalDate.parse(vnp_PayDateStr, formatter);
-                        
+                        LocalDateTime vnp_PayDate = LocalDateTime.parse(vnp_PayDateStr, formatter);
+                    
                         int vnp_ResponseCode = Integer.parseInt(request.getParameter("vnp_ResponseCode"));
                         String vnp_TmnCode = request.getParameter("vnp_TmnCode");
                         int vnp_TransactionNo = Integer.parseInt(request.getParameter("vnp_TransactionNo"));
-                        String vnp_SecureHashType = request.getParameter("vnp_SecureHashType");
+                        String vnp_SecureHashType = "hmacSHA512";
                                 
-                        dao.insertThanhToanVNPAY(vnp_TxnRef, vnp_Amount, vnp_BankCode, vnp_BankTranNo,vnp_CardType, vnp_OrderInfo, vnp_PayDate, vnp_ResponseCode, vnp_TmnCode,vnp_TransactionNo,  vnp_SecureHashType, vnp_SecureHash);
+                        dao.insertThanhToanVNPAY(vnp_TxnRef, vnp_Amount, vnp_BankCode, vnp_BankTranNo,vnp_CardType, vnp_OrderInfo, vnp_PayDate, vnp_ResponseCode, vnp_TmnCode,vnp_TransactionNo, vnp_SecureHashType, vnp_SecureHash);
                                 
                         for (Cart cart : list) {
                             for (SanPham sanPham : listSP) {
@@ -127,28 +127,31 @@
                                 dao.insertBillVNPAY(accountID, vnp_Amount, vnp_PayDate, 1, 1, paymentid, vnp_TxnRef);
                                 dao.insertInfoLine(fullname, email, address, phonenum, note);
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
-                                dao.insertOrderLine(cart.getProductID(), (float) sanPham.getPrice(), cart.getAmount());
+                                dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());
                                 dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
                                 if (slb == null) {
                                     dao.insertSoLuongBan(sanPham.getId(), cart.getAmount());
                                 } else {
                                     dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId());
                                 }
-                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* sanPham.getPrice()), accountID);
+                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* (sanPham.getPrice()*(1-sanPham.getSale()/100.0))), accountID);
                                 dao.removeProductIdInCart(cart.getProductID(), accountID);
                                 break;
                                 }
                             }
                         }
+                        
+                        session.setAttribute("checkMaHoaDonTo",  String.valueOf(vnp_TxnRef));
+                        session.setAttribute("checkMaThanhToanTrucTiep", "none");
                                 
-                        request.getRequestDispatcher("thankyou").forward(request, response);
+                        response.sendRedirect("thankyou");
+                        out.print("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
                         //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Thành công"
-                        // out.print("GD Thanh cong");
+                        out.print("GD Thanh cong");
                     } else {
                         //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Không thành công"
-                        out.print("GD Khong thanh cong");
+                        out.print("GD Khong thanh cong do bi huy");
                     }
-                    out.print("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
                 } else {
                     //Trạng thái giao dịch đã được cập nhật trước đó
                     out.print("{\"RspCode\":\"02\",\"Message\":\"Order already confirmed\"}");

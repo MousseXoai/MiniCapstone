@@ -12,7 +12,9 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -3352,7 +3354,7 @@ public class DAO extends DBContext {
             int bytesRead3;
             int bytesRead4;
 
-            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3= is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
+            while ((bytesRead1 = is1.read(buffer1)) != -1 && (bytesRead2 = is2.read(buffer2)) != -1 && (bytesRead3 = is3.read(buffer3)) != -1 && (bytesRead4 = is4.read(buffer4)) != -1) {
                 outputStream1.write(buffer1, 0, bytesRead1);
                 outputStream2.write(buffer2, 0, bytesRead2);
                 outputStream3.write(buffer3, 0, bytesRead3);
@@ -3386,16 +3388,16 @@ public class DAO extends DBContext {
             ps.executeUpdate();
         } catch (Exception e) {
 
-        }       
+        }
     }
-    
+
     public void insertBillCOD(int accountid, long tongGia, String ngayXuat, int trangThaiId, int loaiid, int paymentid, int maThanhToanTrucTiep) {
         String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maThanhToanTrucTiep) values (?, ?, ? ,?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, accountid);
             ps.setLong(2, tongGia);
-            ps.setString(3,ngayXuat);
+            ps.setString(3, ngayXuat);
             ps.setInt(4, trangThaiId);
             ps.setInt(5, loaiid);
             ps.setInt(6, paymentid);
@@ -3405,17 +3407,17 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void insertBillVNPAY(int accountid, long tongGia, LocalDate ngayXuat, int trangThaiId, int loaiid, int paymentid, int maHoaDonTo) {
+
+    public void insertBillVNPAY(int accountid, long tongGia, LocalDateTime ngayXuat, int trangThaiId, int loaiid, int paymentid, int maHoaDonTo) {
         String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maHoaDonTo) values (?, ?, ? ,?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, accountid);
             ps.setLong(2, tongGia);
 
-            java.sql.Date sqlDate = java.sql.Date.valueOf(ngayXuat);
-            ps.setDate(3, sqlDate);
-            
+            Timestamp timestamp = Timestamp.valueOf(ngayXuat);
+            ps.setTimestamp(3, timestamp);
+
             ps.setInt(4, trangThaiId);
             ps.setInt(5, loaiid);
             ps.setInt(6, paymentid);
@@ -3425,7 +3427,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void insertInfoLine(String name, String email, String address, String phonenumber, String note) {
         String sql = "insert into InfoLine ([invoiceID], [name], [email], [address], [phonenumber], [note]) SELECT TOP 1 [maHD], ?, ?, ?, ?, ? FROM [HoaDon] ORDER BY [maHD] DESC";
         try {
@@ -3440,7 +3442,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void insertOrderLine(int productID, float price, int quantity) {
         String sql = "INSERT INTO OrderLine ([invoiceID], [productID], [price], [quantity]) SELECT TOP 1 [maHD], ?, ?, ? FROM [HoaDon] ORDER BY [maHD] DESC";
         try {
@@ -3454,7 +3456,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void insertSoLuongBan(int productID, int soLuongDaBan) {
         String sql = "INSERT INTO SoLuongBan (productID, soLuongDaBan) values (?, ?)";
         try {
@@ -3467,21 +3469,21 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void insertThanhToanVNPAY(int vnp_TxnRef, int vnp_Amount, String vnp_BankCode, String vnp_BankTranNo, String vnp_CardType, String vnp_OrderInfo, LocalDate vnp_PayDate, int vnp_ResponseCode, String vnp_TmnCode, int vnp_TransactionNo, String vnp_SecureHashType, String vnp_SecureHash) {
+
+    public void insertThanhToanVNPAY(int vnp_TxnRef, long vnp_Amount, String vnp_BankCode, String vnp_BankTranNo, String vnp_CardType, String vnp_OrderInfo, LocalDateTime vnp_PayDate, int vnp_ResponseCode, String vnp_TmnCode, int vnp_TransactionNo, String vnp_SecureHashType, String vnp_SecureHash) {
         String sql = "insert into [ThanhToanVNPAY] ([vnp_TxnRef], [vnp_Amount], [vnp_BankCode], [vnp_BankTranNo], [vnp_CardType], [vnp_OrderInfo], [vnp_PayDate],[vnp_ResponseCode], [vnp_TmnCode], [vnp_TransactionNo], [vnp_SecureHashType], [vnp_SecureHash]) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, vnp_TxnRef);
-            ps.setInt(2, vnp_Amount);
+            ps.setLong(2, vnp_Amount);
             ps.setString(3, vnp_BankCode);
             ps.setString(4, vnp_BankTranNo);
             ps.setString(5, vnp_CardType);
             ps.setString(6, vnp_OrderInfo);
-            
-            java.sql.Date sqlDate = java.sql.Date.valueOf(vnp_PayDate);
-            ps.setDate(7, sqlDate);
-            
+
+            Timestamp timestamp = Timestamp.valueOf(vnp_PayDate);
+            ps.setTimestamp(7, timestamp);
+
             ps.setInt(8, vnp_ResponseCode);
             ps.setString(9, vnp_TmnCode);
             ps.setInt(10, vnp_TransactionNo);
@@ -3493,7 +3495,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void updateQuantity(int quantity, int productID) {
         String sql = "update SanPham set quantity = ? where id = ? ";
         try {
@@ -3506,7 +3508,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void updateSoLuongBan(int soLuongDaBan, int productID) {
         String sql = "update SoLuongBan set soLuongDaBan = ? where productID = ? ";
         try {
@@ -3519,7 +3521,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void updateTongChiTieu(double tongChiTieu, int uID) {
         String sql = "update [AccInfo] set [TongChiTieu] = ? where [uID] = ? ";
         try {
@@ -3531,7 +3533,7 @@ public class DAO extends DBContext {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public SoLuongBan getSoLuongBanByID(int productID) {
         String sql = "select * from SoLuongBan where productID = ?  ";
         try {
@@ -3551,9 +3553,140 @@ public class DAO extends DBContext {
         return null;
     }
 
-    
-    
-    
-    
+    public ArrayList<HoaDon> getHoaDonByMaHoaDonTo(int maHoaDonTo, int accountID) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = " SELECT * FROM HoaDon WHERE maHoaDonTo = ? and accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, maHoaDonTo);
+            ps.setInt(2, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+            System.out.println(list);
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public ArrayList<HoaDon> getHoaDonByMaHoaDonCOD(int maThanhToanTrucTiep, int accountID) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = "SELECT * FROM HoaDon WHERE maThanhToanTrucTiep = ? and accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, maThanhToanTrucTiep);
+            ps.setInt(2, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)
+                ));
+            }
+            System.out.println(list);
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+     public HoaDon get1HoaDonto(int maHoaDonTo, int accountID) {
+        try {
+            String strSQL = "select top 1 * from HoaDon where maHoaDonTo = ? and accountID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, maHoaDonTo);
+            ps.setInt(2, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int mahd = rs.getInt(1);
+                int accountid = rs.getInt(2);
+                double tonggia = rs.getDouble(3);
+                Date ngayxuat = rs.getDate(4);
+                int trangthai = rs.getInt(5);
+                int loai = rs.getInt(5);
+
+                HoaDon p = new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                );
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+     
+     public HoaDon get1HoaDonThanhToanTT(int maThanhToanTrucTiep, int accountID) {
+        try {
+            String strSQL = "select top 1 * from HoaDon where maThanhToanTrucTiep = ? and accountID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, maThanhToanTrucTiep);
+            ps.setInt(2, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int mahd = rs.getInt(1);
+                int accountid = rs.getInt(2);
+                double tonggia = rs.getDouble(3);
+                Date ngayxuat = rs.getDate(4);
+                int trangthai = rs.getInt(5);
+                int loai = rs.getInt(5);
+
+                HoaDon p = new HoaDon(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)
+                );
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+     
+     public InfoLine getInfoLineBill(int invoiceID) {
+        try {
+            String strSQL = "select * from InfoLine where invoiceID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int invoiceid = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String address = rs.getString(4);
+                String phonenumber = rs.getString(5);
+                String note = rs.getString(6);
+                InfoLine p = new InfoLine(invoiceid, name, email, address, phonenumber, note);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
     
 }
