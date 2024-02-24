@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dto.OrderDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -2786,14 +2787,24 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<OrderLine> getListOrderLine() {
-        ArrayList<OrderLine> list = new ArrayList<>();
-        String query = "select * from OrderLine";
+    public List<OrderDTO> getListOrderDone(int accid, int trangthaiid) {
+        ArrayList<OrderDTO> list = new ArrayList<>();
+        String query = "select \n"
+                + "	h.maHD, h.ngayXuat, sp.image, sp.name, h.tongGia, sp.sale, sp.id as productId ,\n"
+                + "	(select count(1) from NhanXet nx where nx.accountID = a.uID and nx.productID =o.productID) as countfb\n"
+                + "from OrderLine o\n"
+                + "inner join HoaDon h on o.invoiceID = h.maHD\n"
+                + "inner join Account a on a.uID = h.accountID\n"
+                + "inner join SanPham sp on sp.id = o.productID\n"
+                + "where a.uID = ?\n"
+                + "and h.trangthaiid = ?";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, accid);
+            ps.setInt(2, trangthaiid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new OrderLine(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4)));
+                list.add(new OrderDTO(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getInt(6), rs.getInt(8), rs.getString(7)));
             }
         } catch (SQLException e) {
             System.out.println("getListOrderLine" + e.getMessage());
@@ -3467,17 +3478,33 @@ public class DAO extends DBContext {
         }
     }
 
-    public List<NhanXet> getListNhanXet() {
+    public List<NhanXet> getListNhanXet(int accountID) {
         List<NhanXet> list = new ArrayList<>();
-        String query = "Select * from NhanXet ";
+        String query = "Select * from NhanXet where accountID = ? ";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new NhanXet(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
             }
         } catch (SQLException e) {
             System.out.println("getListNhanXet" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<OrderLine> getListOrderLine() {
+         ArrayList<OrderLine> list = new ArrayList<>();
+        String query = "select * from OrderLine";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderLine(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4)) );
+            }
+        } catch (SQLException e) {
+            System.out.println("getListOrderLine" + e.getMessage());
         }
         return list;
     }

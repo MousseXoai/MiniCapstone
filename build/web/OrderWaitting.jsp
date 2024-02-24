@@ -103,7 +103,6 @@
                         <th scope="col">Total Price</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Action</th>
-                        <th scope="col">View</th>
 
                     </tr>
                 </thead>
@@ -141,7 +140,6 @@
                                 </c:forEach>
                             </td>
                             <td><a href="deleteorder?trangthaiid=1&invoiceId=${c.maHD}"></span>Delete</td>
-                            <td>Details</td>
                         </tr>
                     </c:forEach>
                 </tbody>

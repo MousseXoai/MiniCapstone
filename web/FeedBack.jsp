@@ -37,6 +37,9 @@
                                             Your message was sent, thank you!
                                         </div>
                                         <form action="feedBack" method="post" id="contactForm" name="contactForm" class="contactForm">
+                                            <c:if test="${not empty errorMessage}">
+                                                <div style="color: red;">${errorMessage}</div>
+                                            </c:if>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">

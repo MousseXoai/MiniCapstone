@@ -91,10 +91,17 @@ public class FeedBackControl extends HttpServlet {
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
+
             DAO dao = new DAO();
             AccInfo aif = dao.getAccInfo(a.getuID());
             String rate = request.getParameter("rate");
             int ratep = Integer.parseInt(rate);
+            if (ratep < 1 || ratep > 5) {
+                String errorMessage = "Vui lòng nhập từ 1 đến 5";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
+                return;
+            }
             String message = request.getParameter("message");
             dao.addFeedBack(a.getuID(), pid, message, aif.getAvatar(), ratep);
             response.sendRedirect("home");

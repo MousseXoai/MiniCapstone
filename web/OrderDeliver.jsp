@@ -102,7 +102,6 @@
                         <th scope="col">Product</th>
                         <th scope="col">Total Price</th>
                         <th scope="col">Discount</th>
-                        <th scope="col">View</th>
 
                     </tr>
                 </thead>
@@ -139,7 +138,6 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td>Details</td>
                         </tr>
                     </c:forEach>
                 </tbody>

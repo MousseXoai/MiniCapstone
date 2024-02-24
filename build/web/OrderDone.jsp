@@ -102,55 +102,32 @@
                         <th scope="col">Product</th>
                         <th scope="col">Total Price</th>
                         <th scope="col">Discount</th>
-                        <th scope="col">View</th>
                         <th scope="col">Action</th>
 
 
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="c" items="${listHoaDon}">
+                    <c:forEach items="${ListOrderDone}" var="lod" >
                         <tr class="rounded bg-white">
                             <th scope="row">
                             </th>
-                            <td class="order-color">${c.maHD}</td>
-                            <td>${c.ngayXuat}</td>
-
+                            <td class="order-color">${lod.invoiceID}</td>
+                            <td>${lod.created}</td>
                             <td class="d-flex align-items-center">
-                                <c:forEach items="${ListOrderLine}" var="d"> 
-                                    <c:if test="${d.getInvoiceID() == c.getMaHD()}">
-                                        <c:forEach items="${listAllSP}" var="e">
-                                            <c:if test="${e.getId() == d.getProductID()}">
-                                                <img src="${e.image}" class="rounded-circle" width="40">
-                                                <span class="ml-2">${e.name}</span>
-                                            </c:if>
-                                        </c:forEach>                                   
-                                    </c:if>
-                                </c:forEach>
-
+                                <img src="${lod.img}" class="rounded-circle" width="40">
+                                <span class="ml-2">${lod.name}</span>
                             </td>
-                            <td><fmt:formatNumber type="currency" value="${c.tongGia}" /></td>
+                            <td><fmt:formatNumber type="currency" value="${lod.price}" /></td>
                             <td> 
-                                <c:forEach items="${ListOrderLine}" var="d"> 
-                                    <c:if test="${d.getInvoiceID() == c.getMaHD()}">
-                                        <c:forEach items="${listAllSP}" var="e">
-                                            <c:if test="${e.getId() == d.getProductID()}">
-                                                <fmt:formatNumber type="currency" value="${e.price*(e.sale/100)}" />
-                                            </c:if>
-                                        </c:forEach>                                   
-                                    </c:if>
-                                </c:forEach>
+                                <fmt:formatNumber type="currency" value="${lod.price*(lod.sale/100)}" />
                             </td>
-                            <td>Details</td>
-                            <c:forEach items="${ListOrderLine}" var="d"> 
-                                <c:if test="${d.getInvoiceID() == c.getMaHD()}">
-                                    <c:forEach items="${listAllSP}" var="e">
-                                        <c:if test="${e.getId() == d.getProductID()}"> 
-                                            <td><a href="feedBack?pid=${e.id}"></span>FeedBack</td>
-                                        </c:if>
-                                    </c:forEach>                                   
-                                </c:if>
-                            </c:forEach>
+                            <c:if test="${lod.count == 1}"> 
+                                <td>Submitted</td>
+                            </c:if>
+                            <c:if test="${lod.count == 0}"> 
+                                <td><a href="feedBack?pid=${lod.productId}">FeedBack</a></td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
