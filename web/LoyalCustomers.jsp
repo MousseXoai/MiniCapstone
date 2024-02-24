@@ -1,130 +1,115 @@
-<%-- 
-    Document   : LoyalCustomers
-    Created on : Feb 22, 2024, 5:32:32 PM
-    Author     : dell
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<head>
+    <title>khách hàng thân thiết</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-        <title>Statistic Your Online Shop</title>
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <style>
+        .edit {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-        <meta name="viewport" content="width=device-width" />
+        .edit:hover {
+            background-color: #218838; /* Darker color on hover */
+        }
 
+        /* Style the delete button */
+        .trash {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-        <!-- Bootstrap core CSS     -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        .trash:hover {
+            background-color: #c82333; /* Darker color on hover */
+        }
+    </style>
+</head>
 
-        <!-- Animation library for notifications   -->
-        <link href="assets/css/animate.min.css" rel="stylesheet"/>
-
-        <!--  Paper Dashboard core CSS    -->
-        <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-
-        <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="assets/css/demo.css" rel="stylesheet" />
-
-
-        <!--  Fonts and icons     -->
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-        <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-    </head>
-    <body>
-
-        <div class="wrapper">
-            <jsp:include page="LeftAdmin.jsp"></jsp:include>
-            <fmt:setLocale value="vi_VN" />
-            <fmt:setBundle basename="path.to.your.resource.bundle" />
-            <div class="main-panel">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar bar1"></span>
-                                <span class="icon-bar bar2"></span>
-                                <span class="icon-bar bar3"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Loyal Customers</a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="logout">
-
-                                        <p>Logout</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="ti-panel"></i>
-                                        <p>Stats</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="ti-bell"></i>
-                                        <p class="notification">5</p>
-                                        <p>Notifications</p>
-                                        <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-settings"></i>
-                                        <p>Settings</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </nav>
-
-                <table border="2">
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Avatar</th>
-                        <th>address</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Total Spent</th>
-                    </tr>
-                    <c:forEach items="${LoyalCustomers}" var="Loyal">
-                        <tr>
-                            <td>${Loyal.getuID()}</td>
-                            <td>${Loyal.getName()}</td>
-                            <td><img src="${Loyal.getAvatar()}" alt="" width="100px;"></td>                            
-                            <td>${Loyal.getAddress()}</td>
-                            <td>${Loyal.getPhonenumber()}</td>
-                            <td>${Loyal.getEmail()}</td>
-                            
-                            <td ><fmt:setLocale value="vi_VN"/>
-                            <fmt:formatNumber type="currency" value="${Loyal.getTongChiTieu()}" currencySymbol="₫"/></td>
-                        </tr>
-                    </c:forEach>
-                </table>
+<body onload="time()" class="app sidebar-mini rtl">
+    <fmt:setLocale value="vi_VN" />
+    <fmt:setBundle basename="path.to.your.resource.bundle" />
+    <!-- Navbar-->
+    <header class="app-header">
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+                                        aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
 
 
-                </body>
-                </html>
+            <!-- User Menu-->
+            <li><a class="app-nav__item" href="statistic"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+
+
+    <main style="margin-left: 0" class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><b>Danh sách khách hàng thân thiết</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button"> </div>
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Avatar</th>
+                                    <th>address</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Total Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${LoyalCustomers}" var="Loyal">
+                                    <tr>
+                                        <td>${Loyal.getuID()}</td>
+                                        <td>${Loyal.getName()}</td>
+                                        <td><img src="${Loyal.getAvatar()}" alt="" width="100px;"></td>                            
+                                        <td>${Loyal.getAddress()}</td>
+                                        <td>${Loyal.getPhonenumber()}</td>
+                                        <td>${Loyal.getEmail()}</td>
+
+                                        <td ><fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber type="currency" value="${Loyal.getTongChiTieu()}" currencySymbol="₫"/></td>
+                                    </tr>
+                                </c:forEach>
+                        </table>
+
+                        </main>
+                        </body>
+                        </html>
