@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DBContext.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddProductControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeAvatarControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/AddProduct.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/PhanLoai.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/SanPham.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/ChangeAvatar.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/NewShippingAddress.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerChangeShipControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/ShippingAddress.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/ChangeShip.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerShippingAddressControl.java</file>
         </group>
     </open-files>
 </project-private>

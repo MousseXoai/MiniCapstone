@@ -96,7 +96,7 @@
                                             <td>${orderline.getQuantity()}</td>
                                             <td class="text-end">
                                                 <fmt:setLocale value="vi_VN"/>
-                                                <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/>                                              
+                                                <fmt:formatNumber type="currency" value="${sanpham.getPrice()}" currencySymbol="₫"/>                                              
                                             </td>
                                         </tr>
                                         
