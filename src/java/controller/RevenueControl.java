@@ -12,14 +12,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Calendar;
+import java.util.List;
 import model.Account;
+import model.PhanLoai;
+import model.SanPham;
 
 /**
  *
  * @author admin
  */
-public class StatisticControl extends HttpServlet {
+public class RevenueControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,46 +51,19 @@ public class StatisticControl extends HttpServlet {
             request.setAttribute("revenue", revenue);
             int numOfCmt = dao.countNumOfCmt(shopID);
             request.setAttribute("numOfCmt", numOfCmt);
+            int countTotalProduct = dao.totalProductInShop(shopID);
+            request.setAttribute("countTotalProduct", countTotalProduct);
             int countNumOfInvoice = dao.countNumOfInvoice(shopID);
             request.setAttribute("countNumOfInvoice", countNumOfInvoice);
-
-            // Lấy thứ của ngày hiện tại
-            Calendar calendar = Calendar.getInstance();
-            double calculateRevenueDay1 = dao.calculateRevenueDay(1, shopID);
-            double calculateRevenueDay2 = dao.calculateRevenueDay(2, shopID);
-            double calculateRevenueDay3 = dao.calculateRevenueDay(3, shopID);
-            double calculateRevenueDay4 = dao.calculateRevenueDay(4, shopID);
-            double calculateRevenueDay5 = dao.calculateRevenueDay(5, shopID);
-            double calculateRevenueDay6 = dao.calculateRevenueDay(6, shopID);
-            double calculateRevenueDay7 = dao.calculateRevenueDay(7, shopID);
-
-            request.setAttribute("calculateRevenueDay1", calculateRevenueDay1);
-            request.setAttribute("calculateRevenueDay2", calculateRevenueDay2);
-            request.setAttribute("calculateRevenueDay3", calculateRevenueDay3);
-            request.setAttribute("calculateRevenueDay4", calculateRevenueDay4);
-            request.setAttribute("calculateRevenueDay5", calculateRevenueDay5);
-            request.setAttribute("calculateRevenueDay6", calculateRevenueDay6);
-            request.setAttribute("calculateRevenueDay7", calculateRevenueDay7);
-
-            // Lấy năm hiện tại
-            int currentYear = calendar.get(Calendar.YEAR);
-
-// Mảng để lưu trữ doanh thu của từng tháng trong năm hiện tại
-            double[] calculateRevenueMonths = new double[12];
-
-// Tính toán doanh thu cho từng tháng trong năm hiện tại
-            for (int i = 0; i < 12; i++) {
-                calculateRevenueMonths[i] = dao.calculateRevenueMonth(i + 1, currentYear, shopID); // Tháng được tính từ 1 đến 12
-            }
-
-// Gửi dữ liệu xuống lớp giao diện người dùng (UI)
-            for (int i = 0; i < 12; i++) {
-                request.setAttribute("calculateRevenueMonth" + (i + 1), calculateRevenueMonths[i]); // Gửi dữ liệu của từng tháng xuống UI
-            }
-
-            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
-            PrintWriter out = response.getWriter();
-
+            int countNumOfOutProduct = dao.countNumOfOutProduct(shopID);
+            request.setAttribute("countNumOfOutProduct", countNumOfOutProduct);
+            List<SanPham> top5SPBanChay = dao.top5SpBanChayNhat(shopID);
+            request.setAttribute("top5SPBanChay", top5SPBanChay);
+            List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
+            request.setAttribute("getCategory", getCategory);
+            List<SanPham> getOutOfProduct = dao.getOutOfProduct(shopID);
+            request.setAttribute("getOutOfProduct", getOutOfProduct);
+            request.getRequestDispatcher("Revenue.jsp").forward(request, response);
         }
     }
 

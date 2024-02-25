@@ -1038,15 +1038,16 @@ public class DAO extends DBContext {
         return 0;
     }
 
-    public double calculateRevenueMonth(int month, int shopID) {
+    public double calculateRevenueMonth(int month, int year, int shopID) {
         String query = "select sum(ol.price * ol.quantity) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
-                + "where MONTH(ngayXuat) = ? and sp.shopid =? ";
+                + "where MONTH(ngayXuat) = ? and YEAR(ngayXuat)=? and sp.shopid =? ";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, month);
-            ps.setInt(2, shopID);
+            ps.setInt(2, year);
+            ps.setInt(3, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getDouble(1);
@@ -3507,5 +3508,80 @@ public class DAO extends DBContext {
         } catch (Exception e) {
 
         }
+    }
+    public int countNumOfOutProduct(int shopId){
+        String query = "select count(*) from SanPham sp where sp.quantity =0 and sp.shopid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public List<SanPham> top5SpBanChayNhat(int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select top(5) * from SanPham s join SoLuongBan slb on s.id = slb.productID where s.shopid=? order by slb.soLuongDaBan desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("top5SpBanChayNhat" + e.getMessage());
+        }
+        return list;
+    }
+    public List<SanPham> getOutOfProduct(int shopId) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from SanPham sp where sp.quantity = 0 and sp.shopid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("getOutOfProduct" + e.getMessage());
+        }
+        return list;
     }
 }

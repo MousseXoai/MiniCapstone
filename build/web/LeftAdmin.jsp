@@ -107,9 +107,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="typography.html">
-                                <i class="ti-text"></i>
-                                <p>Function</p>
+                            <a href="revenue">
+                                <i class="ti-bar-chart"></i>
+                                <p>Revenue Report</p>
                             </a>
                         </li>
                         <li>

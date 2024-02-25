@@ -169,7 +169,7 @@
                                             <label>Tiêu đề</label>
                                             <input required name="prd_title"  class="form-control">
                                         </div> 
-                                         '
+                                         
 
                                         </div>
                                         <div class="col-md-6">

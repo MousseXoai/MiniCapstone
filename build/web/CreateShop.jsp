@@ -42,7 +42,7 @@
                         <h2 class="title">Fill in your shop info</h2>
                         <form action="createShop" method="POST" enctype="multipart/form-data">
                             <div class="input-group">
-                                <input class="input--style-2" type="text" placeholder="Shop Name" name="name">
+                                <input class="input--style-2" type="text" placeholder="Shop Name" required name="name">
                             </div>
                             <div class="row row-space">
                                 <input type="text" class="input--style-2" value="Upload citizen identification card" readonly>
@@ -61,8 +61,8 @@
                               
                             </c:forEach>
                             
-                                    <div class="input-group">
-                                        <input class="input--style-2" type="text" placeholder="Address" name="address">
+                                    <div  class="input-group">
+                                        <input class="input--style-2" type="text" placeholder="Address" required name="address">
                                     </div>
                              
                             
