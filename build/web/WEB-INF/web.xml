@@ -168,6 +168,18 @@
         <servlet-name>CustomerThankYouControll</servlet-name>
         <servlet-class>controller.CustomerThankYouControll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerShippingAddressControl</servlet-name>
+        <servlet-class>controller.CustomerShippingAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerChangeShipControl</servlet-name>
+        <servlet-class>controller.CustomerChangeShipControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerChoiceAddressControl</servlet-name>
+        <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -699,6 +711,18 @@
     <servlet-mapping>
         <servlet-name>CustomerThankYouControll</servlet-name>
         <url-pattern>/thankyou</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerShippingAddressControl</servlet-name>
+        <url-pattern>/shippingaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerChangeShipControl</servlet-name>
+        <url-pattern>/changeship</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerChoiceAddressControl</servlet-name>
+        <url-pattern>/choiceaddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

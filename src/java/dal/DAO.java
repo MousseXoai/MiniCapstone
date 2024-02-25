@@ -40,6 +40,7 @@ import model.Contact;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
+import model.ShippingAddress;
 import model.SoLuongBan;
 import model.UserGoogleDto;
 import org.mindrot.jbcrypt.BCrypt;
@@ -3604,6 +3605,28 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+    public ArrayList<ShippingAddress> getShippingAddress(int accountID) {
+        ArrayList<ShippingAddress> list = new ArrayList<>();
+        String query = "select * from ShippingAddress where accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShippingAddress(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                ));
+            }
+            System.out.println(list);
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
      public HoaDon get1HoaDonto(int maHoaDonTo, int accountID) {
         try {
@@ -3681,6 +3704,69 @@ public class DAO extends DBContext {
                 String phonenumber = rs.getString(5);
                 String note = rs.getString(6);
                 InfoLine p = new InfoLine(invoiceid, name, email, address, phonenumber, note);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccInfo: " + e.getMessage());
+        }
+        return null;
+    }
+     
+    public void insertShippingAddress(int accountID, String name, String email, String address, String phonenumber) {
+        try {
+            String strSQL = "insert into ShippingAddress ([accountID], [name], [email], [address], [phonenumber]) values (?, ?, ?, ?, ?) ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            ps.setString(2, name);
+            ps.setString(3, email);
+            ps.setString(4, address);
+            ps.setString(5, phonenumber);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("insertShippingAddress: " + e.getMessage());
+        }
+    }
+    public void updateShippingAddress(String name, String email, String address, String phonenumber, int shippingID) {
+        try {
+            String strSQL = "update ShippingAddress set [name] = ? , [email] = ? , [address] = ? , [phonenumber] = ? where shippingID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, address);
+            ps.setString(4, phonenumber);
+            ps.setInt(5, shippingID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("insertShippingAddress: " + e.getMessage());
+        }
+    }
+    
+    public void deleteShippingAddress(int shippingID) {
+        try {
+            String strSQL = "  DELETE FROM ShippingAddress WHERE shippingID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, shippingID);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("daleteShippingAddress: " + e.getMessage());
+        }
+    }
+    
+     public ShippingAddress getShippingAddressByShippingId(int shippingID) {
+        try {
+            String strSQL = "select * from ShippingAddress where shippingID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, shippingID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int shippingid = rs.getInt(1);
+                int accountID = rs.getInt(2);
+                String name = rs.getString(3);
+                String email = rs.getString(4);
+                String address = rs.getString(5);
+                String phonenumber = rs.getString(6);
+                ShippingAddress p = new ShippingAddress(shippingid, accountID, name, email, address, phonenumber);
                 return p;
             }
         } catch (Exception e) {

@@ -78,3 +78,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .product-link:hover {
     color: red; /* Hover color */
 }
+
+
+.btn-primary {
+    background-color: #ca1515;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    text-decoration: none; 
+}
+
+.btn-primary:hover {
+    background-color: #b20d0d; /* Darken color on hover */
+}
+
+
+

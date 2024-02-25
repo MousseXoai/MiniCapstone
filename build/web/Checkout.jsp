@@ -61,13 +61,15 @@
                     <form action="payment" method="get" class="checkout__form">
                         <div class="row">
                             <div class="col-lg-7">
-                                <h5>Billing detail</h5>
+                                <div class="billing-container">                                   
+                                    <h5>Billing detail <a href="shippingaddress" class="btn btn-sm btn-primary" style="float: right">Select address</a></h5>                                  
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="checkout__form__input">
                                             <p>Full Name <span>*</span></p>                                                                                  
-                                        <input type="text" name="fullname" placeholder="Your full name">
-                                        <p style="color: red">${err}</p>
+                                            <input type="text" name="fullname" placeholder="Your full name" value="${sa.getName()}">
+                                            <p style="color: red">${err}</p>
                                         <p style="color: red">${err2}</p>
                                         <p style="color: red">${err5}</p> 
                                     </div>
@@ -75,14 +77,14 @@
                                 <div class="col-lg-12">
                                     <div class="checkout__form__input">
                                         <p>Address <span>*</span></p>
-                                        <input type="text" name="address" placeholder="Your address">
+                                        <input type="text" name="address" placeholder="Your address" value="${sa.getAddress()}">
                                         <p style="color: red">${err}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
                                         <p>Phone <span>*</span></p>                                       
-                                        <input type="text" name="phonenum" placeholder="Your phone">
+                                        <input type="text" name="phonenum" placeholder="Your phone" value="${sa.getPhonenumber()}">
                                         <p style="color: red">${err}</p>
                                         <p style="color: red">${err3}</p>
                                     </div>
@@ -90,7 +92,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="checkout__form__input">
                                         <p>Email <span>*</span></p>                                    
-                                        <input type="text" name="email" placeholder="Your email">
+                                        <input type="text" name="email" placeholder="Your email" value="${sa.getEmail()}">
                                         <p style="color: red">${err}</p>
                                         <p style="color: red">${err4}</p>
                                         <p style="color: red">${err5}</p>
@@ -177,11 +179,11 @@
                                         <input type="radio" name="payment_option" value="cod" id="" checked>
                                         <span class="checkmark"></span>
                                     </label>
-<!--                                    <label>
-                                        Thanh toán bằng MoMo 
-                                        <input type="radio" name="payment_option" value="momo" id="">
-                                        <span class="checkmark"></span>
-                                    </label>-->
+                                    <!--                                    <label>
+                                                                            Thanh toán bằng MoMo 
+                                                                            <input type="radio" name="payment_option" value="momo" id="">
+                                                                            <span class="checkmark"></span>
+                                                                        </label>-->
                                     <label>
                                         Thanh toán bằng VNPAY
                                         <input type="radio" name="payment_option" value="vnpay" id="">
@@ -225,7 +227,7 @@
         <script src="js/jquery.nicescroll.min.js"></script>
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
+
         <script>
         function loadAmountCart() {
             $.ajax({
@@ -252,21 +254,21 @@
             });
         }
         function loadAmountNoti() {
-                                                $.ajax({
-                                                    url: "/MiniCapstone/loadAmountNoti",
-                                                    type: "get",
-                                                    data: {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountNoti",
+                type: "get",
+                data: {
 
-                                                    },
-                                                    success: function (responseData) {
-                                                        document.getElementById("amountNoti").innerHTML = responseData;
-                                                    }
-                                                });
-                                            }
-     
+                },
+                success: function (responseData) {
+                    document.getElementById("amountNoti").innerHTML = responseData;
+                }
+            });
+        }
+
         </script>
-            
-        
+
+
     </body>
 
 </html>
