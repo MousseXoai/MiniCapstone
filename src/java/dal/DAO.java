@@ -12,11 +12,13 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import model.AccInfo;
 import model.Account;
@@ -3584,4 +3586,91 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2 ) {
+        String query = " select COUNT(hd.maHD) "
+                + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
+                + "join SanPham sp on ol.productID = sp.id "
+                + "where sp.shopid = ? AND hd.ngayXuat BETWEEN ? AND ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDate(2, date1);
+            ps.setDate(3, date2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public int countNumOfCmtByDay(int shopID, Date date1, Date date2) {
+        String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ? "
+                + "and nx.dateReview between ? and ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDate(2, date1);
+            ps.setDate(3, date2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public double calculateRevenueByDay(int shopID, Date date1, Date date2) {
+        String query = "  select sum(sp.price) from HoaDon hd "
+                + "join OrderLine ol on hd.maHD = ol.invoiceID "
+                + "join SanPham sp on sp.id = ol.productID "
+                + "where sp.shopid= ? and hd.ngayXuat between ? and ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDate(2, date1);
+            ps.setDate(3, date2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public int countNumOfRefundInvoice(int shopID) {
+        String query = " select COUNT(hd.maHD) "
+                + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
+                + "join SanPham sp on ol.productID = sp.id "
+                + "where sp.shopid = ? and hd.loaiid=2 ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public int countNumOfRefundInvoiceByDay(int shopID, Date date1, Date date2 ) {
+        String query = " select COUNT(hd.maHD) "
+                + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
+                + "join SanPham sp on ol.productID = sp.id "
+                + "where sp.shopid = ? and hd.loaiid=2 AND hd.ngayXuat BETWEEN ? AND ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDate(2, date1);
+            ps.setDate(3, date2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
 }

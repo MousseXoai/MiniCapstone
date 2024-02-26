@@ -12,7 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Account;
 import model.PhanLoai;
 import model.SanPham;
@@ -63,6 +69,8 @@ public class RevenueControl extends HttpServlet {
             request.setAttribute("getCategory", getCategory);
             List<SanPham> getOutOfProduct = dao.getOutOfProduct(shopID);
             request.setAttribute("getOutOfProduct", getOutOfProduct);
+            int countNumOfRefundInvoice = dao.countNumOfRefundInvoice(shopID);
+            request.setAttribute("countNumOfRefundInvoice", countNumOfRefundInvoice);
             request.getRequestDispatcher("Revenue.jsp").forward(request, response);
         }
     }
@@ -93,7 +101,37 @@ public class RevenueControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell() != 1) {
+            response.sendRedirect("login.jsp");
+        } else {
+            
+            Date date1 = null;
+            Date date2 = null;
+            date1 = Date.valueOf(request.getParameter("date1"));
+            date2 = Date.valueOf(request.getParameter("date2"));
+            request.setAttribute("date1", date1);
+            request.setAttribute("date2", date2);
+            int accountID = a.getuID();
+            int shopID = dao.getShopIdByAccountId(accountID);
+            int countTotalProduct = dao.totalProductInShop(shopID);
+            request.setAttribute("countTotalProduct", countTotalProduct);
+            int countNumOfInvoice = dao.countNumOfInvoiceByDay(shopID, date1, date2);
+            request.setAttribute("countNumOfInvoice", countNumOfInvoice);
+            int numOfCmt = dao.countNumOfCmtByDay(shopID,date1, date2);
+            request.setAttribute("numOfCmt", numOfCmt);
+            double revenue = dao.calculateRevenueByDay(shopID,date1, date2);
+            request.setAttribute("revenue", revenue);
+            int countNumOfOutProduct = dao.countNumOfOutProduct(shopID);
+            request.setAttribute("countNumOfOutProduct", countNumOfOutProduct);
+            int countNumOfRefundInvoice = dao.countNumOfRefundInvoiceByDay(shopID,date1, date2);
+            request.setAttribute("countNumOfRefundInvoice", countNumOfRefundInvoice);
+            request.getRequestDispatcher("Revenue.jsp").forward(request, response);
+        }
     }
 
     /**

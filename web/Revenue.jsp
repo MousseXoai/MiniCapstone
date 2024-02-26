@@ -38,14 +38,21 @@
 
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     </aside>
+    <form action="revenue" method="post">
     <main class="app-content1">
         <div class="row">
             <div class="col-md-12">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><b>Báo cáo doanh thu  </b></a></li>
+                        <li class="breadcrumb-item"><a href="#"><b>Báo cáo doanh thu  </b></a></li> 
                     </ul>
+                    
                     <div id="clock"></div>
+                    <ul class="app-breadcrumb breadcrumb">
+                        <input type="submit" value ="Áp dụng">
+                        Từ  <input type="date" name ="date1" value="${date1}"> Đến  <input type="date" name="date2" value="${date2}"> 
+                    </ul>
+                    
                 </div>
             </div>
         </div>
@@ -111,8 +118,8 @@
             <div class="col-md-6 col-lg-4">
                 <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-receipt' ></i>
                     <div class="info">
-                        <h4>Đơn hàng hủy</h4>
-                        <p><b>2 đơn hàng</b></p>
+                        <h4>Đơn hàng hoàn trả</h4>
+                        <p><b>${countNumOfRefundInvoice} đơn hàng</b></p>
                     </div>
                 </div>
             </div>
@@ -196,7 +203,7 @@
                 </div>
             </div>
         </div>
-        
+        </form>
 <!--        <div class="row">
             <div class="col-md-6">
                 <div class="tile">
