@@ -392,7 +392,7 @@ public class DAO extends DBContext {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(3), rs.getInt(1), rs.getString(2)));
+                list.add(new Event(rs.getInt(4), rs.getInt(1), rs.getString(3)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());
@@ -2933,14 +2933,29 @@ public class DAO extends DBContext {
         }
     }
 
-    public void addNoti(int shopId, String image, String content, String cate) {
+    public void addNoti(int shopId, Part part, String content, String cate) {
         String query = "insert Noti(shopID, trangthai, image, contentNoti, dateNoti, noticateid)\n" +
 "values(?,?,?,?,?,?)";
         try {
             ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+
+            
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[4096];
+
+            int bytesRead;
+
+            while ((bytesRead = is.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
             ps.setInt(1, shopId);
             ps.setInt(2, 0);
-            ps.setString(3, image);
+            ps.setString(3, base64);
             ps.setString(4, content);
             ps.setDate(5, getCurrentDate());
             ps.setString(6, cate);
@@ -2948,6 +2963,7 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    
 
     public void deleteNotiById(String id) {
         String query = "delete Noti where maNoti=?";
@@ -3329,4 +3345,6 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
+
+    
 }

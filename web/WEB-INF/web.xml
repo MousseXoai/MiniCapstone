@@ -152,6 +152,10 @@
         <servlet-name>ReplyContactControl</servlet-name>
         <servlet-class>controller.ReplyContactControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <servlet-class>controller.AddImageNotiControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -663,6 +667,10 @@
     <servlet-mapping>
         <servlet-name>ReplyContactControl</servlet-name>
         <url-pattern>/replyContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <url-pattern>/addImageNoti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

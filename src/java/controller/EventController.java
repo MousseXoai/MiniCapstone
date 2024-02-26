@@ -67,7 +67,7 @@ public class EventController extends HttpServlet {
             
             List<SanPham> top6SpBanChayNhat = dao.top6SpBanChayNhat(shopID);
             List<Event> listEventByShop = dao.ListEventByShop(shopID);
-            
+            System.out.println(listEventByShop);
            request.setAttribute("shopId", shopID);
             request.setAttribute("listEventByShop", listEventByShop);
             request.setAttribute("top6SpBanChayNhat", top6SpBanChayNhat);
