@@ -193,7 +193,7 @@
                         <form action="searchOrder" method="post">
                             <select name="op">
                                 <option value="1">Order ID</option>
-                                
+
                             </select>
                             <input type="text" name="input"/>
                             <input type="submit" value="Search"/>
@@ -212,9 +212,9 @@
 
                             <ul class="main-nav nav navbar-nav-1">
                                 <li class="${sid==0?"active":""}"><a href="SellerOrderManagement">All</a></li>
-                                <c:forEach items="${statusCate}" var="sc">
-                                <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>                                
-                                </c:forEach>
+                                    <c:forEach items="${statusCate}" var="sc">
+                                    <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>                                
+                                    </c:forEach>
                             </ul>
                             <!-- /NAV -->
                         </div>
@@ -242,67 +242,100 @@
                                         <th>Image</th>
                                         <th>Product Name</th>
                                         <th>Order Status</th>
-                                        <th>Action</th>
-
+                                            <c:if test="${sid!=3}">
+                                            <th>Action</th>
+                                            </c:if>
+                                            <c:if test="${sid==3}">
+                                            <th>Feedback</th>
+                                            </c:if>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${orderList}" var="c">
                                     <form action="SellerOrderManagement" method="post" id="c1">
-                                        <tr>
 
+                                        <tr>                                           
                                             <td><span>${c.ngayXuat}</span><br></td>
                                             <td>
-                                                <input type="hidden" name="maHD" value="${c.maHD}"
+                                                <input type="hidden" name="maHD" value="${c.maHD}"/>
                                                 <span>${c.maHD}</span><br>
                                                 <c:forEach items="${accInfo}" var="a">
-                                                    <span>Buyer Name: ${a.name}</span><br>
-                                                    <span>Address: ${a.address}</span>
+                                                    <c:if test="${c.accountID == a.uID}">
+                                                        <span>Buyer Name: ${a.name}</span><br>
+                                                        <span>Address: ${a.address}</span>
+                                                        <input type="hidden" name="uID" value="${a.uID}"/>
+                                                    </c:if>
                                                 </c:forEach>
                                             </td>
-                                            <c:forEach items="${productList}" var="p">
-                                                <td><img src="${p.image}" style="width: 70px;"></td>
-                                                <td>
-                                                    <span>${p.name}</span><br>
-                                                    <c:forEach items="${orderLine}" var="o">
-                                                        <span>Quantity: ${o.quantity}</span><br>
-                                                        <span>Item subtotal: <fmt:formatNumber type="currency" value="${o.price}" /> đ</span>
+                                            <c:forEach items="${orderLine}" var="o">
+                                                <c:if test="${o.invoiceID == c.maHD}">
+                                                    <c:forEach items="${productList}" var="p">
+                                                        <c:if test="${p.id == o.productID}">   
+                                                            <td><img src="${p.image}" style="width: 70px;"></td>
+                                                            <td>
+                                                                <span>${p.name}</span><br>
+
+                                                                <span>Quantity: ${o.quantity}</span><br>
+                                                                <span>Item subtotal: <fmt:formatNumber type="currency" value="${o.price}" /> đ</span>
+
+                                                            </td>
+                                                        </c:if> 
                                                     </c:forEach>
-                                                </td>
+                                                </c:if>
                                             </c:forEach>
-                                            <c:forEach items="${statusList}" var="s" >
+
+                                            <c:forEach items="${statusCate}" var="s" >
+                                                <c:if test="${c.trangThaiId == s.trangThaiId}">
+                                                    <td>
+                                                        <c:if test="${s.trangThaiId == 1}">
+                                                            <span class="badge bg-danger">
+                                                                Awaiting to Confirm
+                                                            </span>
+                                                        </c:if>
+                                                        <c:if test="${s.trangThaiId == 2}">
+                                                            <span class="badge bg-delivery">
+                                                                Delivering
+                                                            </span>
+                                                        </c:if>
+                                                        <c:if test="${s.trangThaiId == 3}">
+                                                            <span class="badge bg-success">
+                                                                Completed
+                                                            </span>
+                                                        </c:if>
+                                                    </td>
+                                                </c:if>
+                                            </c:forEach>
+
+                                            <c:forEach items="${statusList}" var="sl">
+                                                <c:if test="${c.trangThaiId == sl.trangThaiId}">
+                                                <c:if test="${sl.trangThaiId != 3}">  
+                                                    <td>
+
+                                                        <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
+
+                                                            <option value="0">Change</option>
+                                                            <option value="1">Awaiting</option>
+                                                            <option value="2">Delivering</option>
+                                                            <option value="3">Completed</option>
+
+                                                        </select>
+
+                                                    </td>
+                                                </c:if>
+                                                </c:if>
+                                            </c:forEach> 
+                                            <c:if test="${sid==3}">
                                                 <td>
-                                                    <c:if test="${s.trangThaiId == 1}">
-                                                    <span class="badge bg-danger">
-                                                        Awaiting to Confirm
-                                                    </span>
-                                                    </c:if>
-                                                    <c:if test="${s.trangThaiId == 2}">
-                                                    <span class="badge bg-delivery">
-                                                        Delivering
-                                                    </span>
-                                                    </c:if>
-                                                    <c:if test="${s.trangThaiId == 3}">
-                                                    <span class="badge bg-success">
-                                                        Completed
-                                                    </span>
-                                                    </c:if>
+                                                    <a href="ViewFeedback">View Feedback</a>
                                                 </td>
-                                                
-                                            <td>
-                                                  
-                                                <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                    
-                                                    <option value="0">Change</option>
-                                                    <option value="1">Awaiting</option>
-                                                    <option value="2">Delivering</option>
-                                                    <option value="3">Completed</option>
-                                                    
-                                                </select>
-                                                
-                                            </td>
-                                            </c:forEach>
+                                            </c:if>
+
+
+
                                         </tr>
+
+
+
                                     </form>
                                 </c:forEach>
                                 </tbody>
