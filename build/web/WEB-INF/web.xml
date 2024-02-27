@@ -173,6 +173,22 @@
         <servlet-name>FeedBackControl</servlet-name>
         <servlet-class>controller.FeedBackControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchOrderByDate</servlet-name>
+        <servlet-class>SearchOrderByDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate</servlet-name>
+        <servlet-class>controller.SearchByDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate1</servlet-name>
+        <servlet-class>controller.SearchByDate1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate2</servlet-name>
+        <servlet-class>controller.SearchByDate2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -704,6 +720,22 @@
     <servlet-mapping>
         <servlet-name>FeedBackControl</servlet-name>
         <url-pattern>/feedBack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchOrderByDate</servlet-name>
+        <url-pattern>/SearchOrderByDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate</servlet-name>
+        <url-pattern>/searchdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate1</servlet-name>
+        <url-pattern>/searchdate1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate2</servlet-name>
+        <url-pattern>/searchdate2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

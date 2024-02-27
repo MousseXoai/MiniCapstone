@@ -93,6 +93,12 @@
             <a  href="oderwaitting?trangthaiid=1"> <h5 class="pb-4 border-bottom" style="color: red">Order awaiting confirmation</h5></a>
             <a  href="orderdeliver?trangthaiid=2"><h5 class="pb-4 border-bottom" style="color: red" >Order is being delivered</h5></a>
             <a  href="orderdone?trangthaiid=3"> <h5 class="pb-4 border-bottom" style="color: red">Order done</h5></a>
+            <form action="searchdate1">
+                <input type="hidden" name="trangthaiid" value="2">
+                <input type="date" name="date1" value="${datea}">
+                <input type="date" name="date2" value="${dateb}">
+                <button type="submit">Search</button>
+            </form>
             <table class="table table-borderless main">
                 <thead>
                     <tr class="head">
