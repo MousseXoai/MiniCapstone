@@ -405,8 +405,8 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
-        public List<Event> getEventByEventID(int eid) {
+
+    public List<Event> getEventByEventID(int eid) {
         List<Event> list = new ArrayList<>();
         String query = "select * from Event where eid = ?";
         try {
@@ -465,11 +465,13 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getHotSell() {
+    public List<SanPham> getHotSell(int shopID) {
         List<SanPham> list = new ArrayList<>();
-        String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai "
-                + "FROM SanPham s "
-                + "INNER JOIN SoLuongBan sl ON s.id = sl.productID "
+        String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai, pl.cname AS category_name,  b.bname AS brand_name\n"
+                + "FROM SanPham s \n"
+                + "INNER JOIN SoLuongBan sl ON s.id = sl.productID \n"
+                + "INNER JOIN PhanLoai pl ON s.cateID = pl.cid\n"
+                + "INNER JOIN  Brand b ON s.branID = b.bid\n"
                 + "ORDER BY sl.soLuongDaBan DESC";
         try {
             ps = connection.prepareStatement(query);

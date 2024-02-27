@@ -11,7 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Brand;
 import model.Color;
 import model.PhanLoai;
@@ -37,23 +39,25 @@ public class HotSellControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
           DAO dao = new DAO();
+           HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell() != 1) {
+            response.sendRedirect("login.jsp");
+            
+         } else {
+            int accountID = a.getuID();
+            int shopID = dao.getShopIdByAccountId(accountID);  
           List<PhanLoai> listC = dao.getAllPhanLoai();
         List<Brand> listB = dao.getAllBrand();
-        List<SanPham> list = dao.getHotSell();
-        List<SanPham> listNew = dao.getProductNew();
-        List<SanPham> listSale = dao.getProductSale();
-        List<SanPham> listOutOfStock = dao.getProductOutOfStock();
-        List<Star> listStarOfProduct= dao.getStarOfProduct();
+        List<SanPham> list = dao.getHotSell(shopID);
         List<Color> listColor =dao.getProductColor();
         request.setAttribute("listColor", listColor);
         request.setAttribute("listC", listC);
         request.setAttribute("listB", listB);
         request.setAttribute("listP", list);
-        request.setAttribute("listN", listNew);
-        request.setAttribute("listS", listSale);
-        request.setAttribute("listO", listOutOfStock);
-        request.setAttribute("star", listStarOfProduct);        
+        
         request.getRequestDispatcher("top6Spbanchay.jsp").forward(request, response);
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
