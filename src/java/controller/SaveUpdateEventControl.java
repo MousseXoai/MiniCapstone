@@ -34,9 +34,9 @@ public class SaveUpdateEventControl extends HttpServlet {
         DAO dao = new DAO();
         int eid = Integer.parseInt(request.getParameter("eid"));
         int shopId = Integer.parseInt(request.getParameter("shopId"));
-        String image = request.getParameter("image");
+        
         String eventName = request.getParameter("ename");
-        dao.updateEvent(shopId, image, eid, eventName);
+        dao.updateEvent(shopId, eid, eventName);
          request.getRequestDispatcher("EventManager").forward(request, response);
 
     }

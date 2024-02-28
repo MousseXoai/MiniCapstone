@@ -1938,14 +1938,13 @@ public class DAO extends DBContext {
         }
     }
 
-    public void updateEvent(int shopId, String image, int eid, String eventName) {
-        String query = " UPDATE Event set [shopID]  = ? , [image] = ?, [eventName] = ?  where [eid] = ?";
+    public void updateEvent(int shopId, int eid, String eventName) {
+        String query = " UPDATE Event set [shopID]  = ? , [eventName] = ?  where [eid] = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(3, eid);
+            ps.setInt(2, eid);
             ps.setInt(1, shopId);
-            ps.setString(2, image);
-            ps.setString(4, eventName);
+            ps.setString(3, eventName);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
