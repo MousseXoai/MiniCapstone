@@ -164,6 +164,10 @@
         <servlet-name>RevenueControl</servlet-name>
         <servlet-class>controller.RevenueControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RevenueByDay</servlet-name>
+        <servlet-class>controller.RevenueByDayControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -687,6 +691,10 @@
     <servlet-mapping>
         <servlet-name>RevenueControl</servlet-name>
         <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueByDay</servlet-name>
+        <url-pattern>/revenueByDay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

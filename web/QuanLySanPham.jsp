@@ -124,6 +124,7 @@
         <main class="app-content1">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
+                    <li class="breadcrumb-item active"><a href="statistic"><b>Home</b></a></li>
                     <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
                 </ul>
                 <div id="clock"></div>

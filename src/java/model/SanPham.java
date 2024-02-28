@@ -25,6 +25,7 @@ public class SanPham {
     private int shopID;
     private int sale;
     private int trangthai;
+    private int totalRevenue;
 
     public SanPham() {
     }
@@ -47,6 +48,25 @@ public class SanPham {
         this.sale = sale;
         this.trangthai = trangthai;
 
+    }
+    public SanPham(int id, String name, String image, double price, int quantity, String title, String description, int cateID, int branID, String color, String image2, String image3, String image4, int shopID, int sale, int trangthai, int totalRevenue) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.quantity = quantity;
+        this.title = title;
+        this.description = description;
+        this.cateID = cateID;
+        this.branID = branID;
+        this.color = color;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.image4 = image4;
+        this.shopID = shopID;
+        this.sale = sale;
+        this.trangthai = trangthai;
+        this.totalRevenue = totalRevenue;
     }
 
     public int getId() {
@@ -177,5 +197,11 @@ public class SanPham {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
-    
+    public int getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setToalRevenue(int totalQuantity) {
+        this.totalRevenue = totalQuantity;
+    }
 }

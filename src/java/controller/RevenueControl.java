@@ -101,37 +101,7 @@ public class RevenueControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsSell() != 1) {
-            response.sendRedirect("login.jsp");
-        } else {
-            
-            Date date1 = null;
-            Date date2 = null;
-            date1 = Date.valueOf(request.getParameter("date1"));
-            date2 = Date.valueOf(request.getParameter("date2"));
-            request.setAttribute("date1", date1);
-            request.setAttribute("date2", date2);
-            int accountID = a.getuID();
-            int shopID = dao.getShopIdByAccountId(accountID);
-            int countTotalProduct = dao.totalProductInShop(shopID);
-            request.setAttribute("countTotalProduct", countTotalProduct);
-            int countNumOfInvoice = dao.countNumOfInvoiceByDay(shopID, date1, date2);
-            request.setAttribute("countNumOfInvoice", countNumOfInvoice);
-            int numOfCmt = dao.countNumOfCmtByDay(shopID,date1, date2);
-            request.setAttribute("numOfCmt", numOfCmt);
-            double revenue = dao.calculateRevenueByDay(shopID,date1, date2);
-            request.setAttribute("revenue", revenue);
-            int countNumOfOutProduct = dao.countNumOfOutProduct(shopID);
-            request.setAttribute("countNumOfOutProduct", countNumOfOutProduct);
-            int countNumOfRefundInvoice = dao.countNumOfRefundInvoiceByDay(shopID,date1, date2);
-            request.setAttribute("countNumOfRefundInvoice", countNumOfRefundInvoice);
-            request.getRequestDispatcher("Revenue.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

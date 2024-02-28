@@ -1823,8 +1823,8 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public void updateProduct(String pname, double pprice, int pquantity, String ptitle, String pdescription, int pcateid, int pbrandid, String pcolor, int pid) {
-        String query = "UPDATE SanPham SET [name]=?, price=?, quantity=?, title=?, [description]=?, cateID=?, branID=?, color=? WHERE id=?";
+    public void updateProduct(String pname, double pprice, int pquantity, String ptitle, String pdescription, int pcateid, int pbrandid, String pcolor, int pid,String image) {
+        String query = "UPDATE SanPham SET [name]=?, price=?, quantity=?, title=?, [description]=?, cateID=?, branID=?, color=?, image=? WHERE id=?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, pname);
@@ -1835,7 +1835,8 @@ public class DAO extends DBContext {
             ps.setInt(6, pcateid);
             ps.setInt(7, pbrandid);
             ps.setString(8, pcolor);
-            ps.setInt(9, pid);
+            ps.setString(9, image);
+            ps.setInt(10, pid);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -3425,7 +3426,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductByIndex2(int indexPage, int shopid) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select * from SanPham where shopid=? order by [id] offset ? rows fetch next 10 rows only";
+        String query = "select * from SanPham where shopid=? and trangthai=1 order by [id] offset ? rows fetch next 10 rows only";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, shopid);
@@ -3511,7 +3512,8 @@ public class DAO extends DBContext {
 
         }
     }
-    public int countNumOfOutProduct(int shopId){
+
+    public int countNumOfOutProduct(int shopId) {
         String query = "select count(*) from SanPham sp where sp.quantity =0 and sp.shopid = ?";
         try {
             ps = connection.prepareStatement(query);
@@ -3524,9 +3526,22 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public List<SanPham> top5SpBanChayNhat(int shopId) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top(5) * from SanPham s join SoLuongBan slb on s.id = slb.productID where s.shopid=? order by slb.soLuongDaBan desc";
+        String query = "WITH ProductQuantity AS (\n"
+                + "  SELECT sp.id, SUM(ol.quantity) AS total_quantity\n"
+                + "  FROM OrderLine ol \n"
+                + "  JOIN SanPham sp ON ol.productID = sp.id\n"
+                + "  JOIN HoaDon hd ON ol.invoiceID = hd.maHD\n"
+                + "  WHERE sp.shopid = ? \n"
+                + "    \n"
+                + "  GROUP BY sp.id\n"
+                + ")\n"
+                + "SELECT TOP(5) sp.*, pq.total_quantity, pq.total_quantity * sp.price AS total_sales\n"
+                + "FROM SanPham sp\n"
+                + "JOIN ProductQuantity pq ON sp.id = pq.id\n"
+                + "ORDER BY pq.total_quantity DESC;";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, shopId);
@@ -3547,7 +3562,8 @@ public class DAO extends DBContext {
                         rs.getString(13),
                         rs.getInt(14),
                         rs.getInt(15),
-                        rs.getInt(16)
+                        rs.getInt(16),
+                        rs.getInt(18)
                 ));
             }
         } catch (SQLException e) {
@@ -3555,6 +3571,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<SanPham> getOutOfProduct(int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham sp where sp.quantity = 0 and sp.shopid = ?";
@@ -3586,7 +3603,8 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2 ) {
+
+    public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
@@ -3604,6 +3622,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public int countNumOfCmtByDay(int shopID, Date date1, Date date2) {
         String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ? "
                 + "and nx.dateReview between ? and ? ";
@@ -3620,6 +3639,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public double calculateRevenueByDay(int shopID, Date date1, Date date2) {
         String query = "  select sum(sp.price) from HoaDon hd "
                 + "join OrderLine ol on hd.maHD = ol.invoiceID "
@@ -3638,6 +3658,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public int countNumOfRefundInvoice(int shopID) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
@@ -3654,7 +3675,8 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    public int countNumOfRefundInvoiceByDay(int shopID, Date date1, Date date2 ) {
+
+    public int countNumOfRefundInvoiceByDay(int shopID, Date date1, Date date2) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
@@ -3672,5 +3694,51 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    
+
+    public List<SanPham> top5SpBanChayNhatByDay(int shopId, Date date1, Date date2) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "WITH ProductQuantity AS (\n"
+                + "  SELECT sp.id, SUM(ol.quantity) AS total_quantity\n"
+                + "  FROM OrderLine ol \n"
+                + "  JOIN SanPham sp ON ol.productID = sp.id\n"
+                + "  JOIN HoaDon hd ON ol.invoiceID = hd.maHD\n"
+                + "  WHERE sp.shopid = ? \n"
+                + "    AND hd.ngayXuat BETWEEN ? AND ?\n"
+                + "  GROUP BY sp.id\n"
+                + ")\n"
+                + "SELECT TOP(5) sp.*, pq.total_quantity, pq.total_quantity * sp.price AS total_sales\n"
+                + "FROM SanPham sp\n"
+                + "JOIN ProductQuantity pq ON sp.id = pq.id\n"
+                + "ORDER BY pq.total_quantity DESC;";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopId);
+            ps.setDate(2, date1);
+            ps.setDate(3, date2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16),
+                        rs.getInt(18)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("top5SpBanChayNhatByDay" + e.getMessage());
+        }
+        return list;
+    }
 }
