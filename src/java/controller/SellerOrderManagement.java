@@ -5,6 +5,8 @@
 package controller;
 
 import dal.DAO;
+import dto.ShopOrderDTO;
+import dto.StatusOrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -44,7 +46,7 @@ public class SellerOrderManagement extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SellerOrderManagement</title>");            
+            out.println("<title>Servlet SellerOrderManagement</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SellerOrderManagement at " + request.getContextPath() + "</h1>");
@@ -67,20 +69,20 @@ public class SellerOrderManagement extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        int sid=0;
+        int sid = 0;
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsSell()!=1) {
+        if (a == null || a.getIsSell() != 1) {
             response.sendRedirect("login.jsp");
         } else {
 
             int accountID = a.getuID();
             int shopID = dao.getShopIdByAccountId(accountID);
             List<HoaDon> orderList = dao.getOrderByShopID(shopID);
-            List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
+            List<StatusOrderDTO> statusList = dao.getOrderStatusByShopID(shopID);
             List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopID(shopID);
+            List<ShopOrderDTO> productList = dao.getProductOrderByShopID(shopID);
             List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
             List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
             request.setAttribute("sid", sid);
@@ -111,33 +113,33 @@ public class SellerOrderManagement extends HttpServlet {
         int uID = Integer.parseInt(uID_raw);
         int maHD = Integer.parseInt(maHD_raw);
         int changeStatus = Integer.parseInt(changeStatus_raw);
-        int sid=0;
+        int sid = 0;
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsSell()!=1) {
+        if (a == null || a.getIsSell() != 1) {
             response.sendRedirect("login.jsp");
         } else {
 
             int accountID = a.getuID();
             int shopID = dao.getShopIdByAccountId(accountID);
-            dao.changeOrderStatus(maHD,changeStatus);
-            if(changeStatus == 2) {
-                Noti noti = new Noti(shopID, uID, 0,"https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg",
+            dao.changeOrderStatus(maHD, changeStatus);
+            if (changeStatus == 2) {
+                Noti noti = new Noti(shopID, uID, 0, "https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg",
                         "Đơn hàng của bạn đã được xác nhận, shipper sẽ sớm lấy hàng và giao đến bạn.",
                         getCurrentDate(), 3, 0, maHD);
                 dao.addNotiChangeStatus(noti);
             }
-//            if(changeStatus == 3) {
-//                Noti noti = new Noti(shopID, uID, 0,"https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg",
-//                        "Đơn hàng ",
-//                        getCurrentDate(), 4, 0, maHD);
-//                dao.addNotiChangeStatus(noti);
-//            }
+            if (changeStatus == 3) {
+                Noti noti = new Noti(shopID, uID, 0, "https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg",
+                        "Đơn hàng ",
+                        getCurrentDate(), 4, 0, maHD);
+                dao.addNotiChangeStatus(noti);
+            }
             List<HoaDon> orderList = dao.getOrderByShopID(shopID);
-            List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
+            List<StatusOrderDTO> statusList = dao.getOrderStatusByShopID(shopID);
             List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopID(shopID);
+            List<ShopOrderDTO> productList = dao.getProductOrderByShopID(shopID);
             List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
             List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
             request.setAttribute("sid", sid);
@@ -160,7 +162,8 @@ public class SellerOrderManagement extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-     private static java.sql.Date getCurrentDate() {
+
+    private static java.sql.Date getCurrentDate() {
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
     }

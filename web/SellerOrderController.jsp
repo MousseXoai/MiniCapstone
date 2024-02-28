@@ -253,7 +253,7 @@
                                 <tbody>
                                     <c:forEach items="${orderList}" var="c">
                                     <form action="SellerOrderManagement" method="post" id="c1">
-
+                                        <input type="hidden" name="sid" value="${sid}"/>
                                         <tr>                                           
                                             <td><span>${c.ngayXuat}</span><br></td>
                                             <td>
@@ -270,7 +270,8 @@
                                             <c:forEach items="${orderLine}" var="o">
                                                 <c:if test="${o.invoiceID == c.maHD}">
                                                     <c:forEach items="${productList}" var="p">
-                                                        <c:if test="${p.id == o.productID}">   
+                                                        
+                                                        <c:if test="${p.invoiceID == o.invoiceID}">   
                                                             <td><img src="${p.image}" style="width: 70px;"></td>
                                                             <td>
                                                                 <span>${p.name}</span><br>
@@ -279,7 +280,8 @@
                                                                 <span>Item subtotal: <fmt:formatNumber type="currency" value="${o.price}" /> đ</span>
 
                                                             </td>
-                                                        </c:if> 
+                                                        </c:if>
+                                                        
                                                     </c:forEach>
                                                 </c:if>
                                             </c:forEach>
@@ -307,8 +309,8 @@
                                             </c:forEach>
 
                                             <c:forEach items="${statusList}" var="sl">
-                                                <c:if test="${c.trangThaiId == sl.trangThaiId}">
-                                                <c:if test="${sl.trangThaiId != 3}">  
+                                                <c:if test="${c.maHD == sl.maHD}">
+                                                <c:if test="${sl.trangthaiid != 3}">  
                                                     <td>
 
                                                         <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">

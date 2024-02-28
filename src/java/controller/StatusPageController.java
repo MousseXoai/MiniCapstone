@@ -5,6 +5,8 @@
 package controller;
 
 import dal.DAO;
+import dto.ShopOrderDTO;
+import dto.StatusOrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -78,9 +80,9 @@ public class StatusPageController extends HttpServlet {
             int accountID = a.getuID();
             int shopID = dao.getShopIdByAccountId(accountID);
             List<HoaDon> orderList = dao.getOrderByShopIDAndStatus(shopID,sid);
-            List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
+            List<StatusOrderDTO> statusList = dao.getOrderStatusByShopID(shopID);
             List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
+            List<ShopOrderDTO> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
             List<OrderLine> orderLine = dao.getOrderLineByShopIDAndStatus(shopID,sid);
             List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
             request.setAttribute("sid",sid);
@@ -124,9 +126,9 @@ public class StatusPageController extends HttpServlet {
             int shopID = dao.getShopIdByAccountId(accountID);
             dao.changeOrderStatus(maHD,changeStatus);
             List<HoaDon> orderList = dao.getOrderByShopIDAndStatus(shopID,sid);
-            List<TrangThai> statusList = dao.getOrderStatusByShopID(shopID);
+            List<StatusOrderDTO> statusList = dao.getOrderStatusByShopID(shopID);
             List<TrangThai> statusCate = dao.getStatusCategory();
-            List<SanPham> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
+            List<ShopOrderDTO> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
             List<OrderLine> orderLine = dao.getOrderLineByShopIDAndStatus(shopID,sid);
             List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
             request.setAttribute("sid",sid);

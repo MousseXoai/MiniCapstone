@@ -4,6 +4,8 @@
  */
 package dal;
 
+import dto.ShopOrderDTO;
+import dto.StatusOrderDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -3415,9 +3417,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<TrangThai> getOrderStatusByShopID(int shopID) {
-        List<TrangThai> list = new ArrayList<>();
-        String sql = "select tt.*\n"
+    public List<StatusOrderDTO> getOrderStatusByShopID(int shopID) {
+        List<StatusOrderDTO> list = new ArrayList<>();
+        String sql = "select tt.*,hd.maHD \n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3428,9 +3430,10 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                TrangThai d = new TrangThai();
-                d.setTrangThaiId(rs.getInt(1));
-                d.setTrangThai(rs.getString(2));
+                StatusOrderDTO d = new StatusOrderDTO();
+                d.setTrangthaiid(rs.getInt(1));
+                d.setTrangthai(rs.getString(2));
+                d.setMaHD(rs.getInt(3));
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -3439,35 +3442,20 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getProductOrderByShopID(int shopID) {
-        List<SanPham> list = new ArrayList<>();
-        String sql = "select sp.*\n"
-                + "from  HoaDon hd\n"
-                + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
-                + "join SanPham sp on ol.productID = sp.id\n"
-                + "where sp.shopid = ? ";
+    public List<ShopOrderDTO> getProductOrderByShopID(int shopID) {
+        List<ShopOrderDTO> list = new ArrayList<>();
+        String sql = "  select sp.[image],sp.[name],hd.maHD\n"
+                + "  from  HoaDon hd\n"
+                + "  join OrderLine ol on hd.maHD = ol.invoiceID\n"
+                + "  join SanPham sp on ol.productID = sp.id\n"
+                + "  where sp.shopid = ? ";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new SanPham(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getInt(14),
-                        rs.getInt(15),
-                        rs.getInt(16)
-                ));
+                list.add(new ShopOrderDTO(rs.getString(1), rs.getString(2), rs.getInt(3))
+                );
             }
         } catch (SQLException e) {
             System.out.println("getProductOrderByShopID: " + e.getMessage());
@@ -3586,9 +3574,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<TrangThai> getOrderStatusByShopIDAndStatus(int shopID, int sid) {
-        List<TrangThai> list = new ArrayList<>();
-        String sql = "select tt.*\n"
+    public List<StatusOrderDTO> getOrderStatusByShopIDAndStatus(int shopID, int sid) {
+        List<StatusOrderDTO> list = new ArrayList<>();
+        String sql = "select tt.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3600,9 +3588,10 @@ public class DAO extends DBContext {
             ps.setInt(2, sid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                TrangThai d = new TrangThai();
-                d.setTrangThaiId(rs.getInt(1));
-                d.setTrangThai(rs.getString(2));
+                StatusOrderDTO d = new StatusOrderDTO();
+                d.setTrangthaiid(rs.getInt(1));
+                d.setTrangthai(rs.getString(2));
+                d.setMaHD(rs.getInt(3));
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -3611,9 +3600,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getProductOrderByShopIDAndStatus(int shopID, int sid) {
-        List<SanPham> list = new ArrayList<>();
-        String sql = "select sp.*\n"
+    public List<ShopOrderDTO> getProductOrderByShopIDAndStatus(int shopID, int sid) {
+        List<ShopOrderDTO> list = new ArrayList<>();
+        String sql = "select sp.[image],sp.[name],hd.maHD \n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3624,23 +3613,8 @@ public class DAO extends DBContext {
             ps.setInt(2, sid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new SanPham(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getInt(14),
-                        rs.getInt(15),
-                        rs.getInt(16)
-                ));
+                list.add(new ShopOrderDTO(rs.getString(1), rs.getString(2), rs.getInt(3))
+                );
             }
         } catch (SQLException e) {
             System.out.println("getProductOrderByShopIDAndStatus: " + e.getMessage());
@@ -3733,10 +3707,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<TrangThai> getOrderStatusByOrderID(int shopID, String input) {
-        List<TrangThai> list = new ArrayList<>();
+    public List<StatusOrderDTO> getOrderStatusByOrderID(int shopID, String input) {
+        List<StatusOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select tt.*\n"
+        String sql = "select tt.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3748,9 +3722,10 @@ public class DAO extends DBContext {
             ps.setInt(2, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                TrangThai d = new TrangThai();
-                d.setTrangThaiId(rs.getInt(1));
-                d.setTrangThai(rs.getString(2));
+                StatusOrderDTO d = new StatusOrderDTO();
+                d.setTrangthaiid(rs.getInt(1));
+                d.setTrangthai(rs.getString(2));
+                d.setMaHD(rs.getInt(3));
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -3759,10 +3734,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getProductOrderByOrderID(int shopID, String input) {
-        List<SanPham> list = new ArrayList<>();
+    public List<ShopOrderDTO> getProductOrderByOrderID(int shopID, String input) {
+        List<ShopOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select sp.*\n"
+        String sql = "select sp.[image],sp.[name],hd.maHD \n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3773,23 +3748,8 @@ public class DAO extends DBContext {
             ps.setInt(2, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new SanPham(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getInt(14),
-                        rs.getInt(15),
-                        rs.getInt(16)
-                ));
+                list.add(new ShopOrderDTO(rs.getString(1), rs.getString(2), rs.getInt(3))
+                );
             }
         } catch (SQLException e) {
             System.out.println("getProductOrderByOrderID: " + e.getMessage());
@@ -3885,10 +3845,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<TrangThai> getOrderStatusByShopIDAndStatus(int shopID, int sid, String input) {
-        List<TrangThai> list = new ArrayList<>();
+    public List<StatusOrderDTO> getOrderStatusByShopIDAndStatus(int shopID, int sid, String input) {
+        List<StatusOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select tt.*\n"
+        String sql = "select tt.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3901,9 +3861,10 @@ public class DAO extends DBContext {
             ps.setInt(3, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                TrangThai d = new TrangThai();
-                d.setTrangThaiId(rs.getInt(1));
-                d.setTrangThai(rs.getString(2));
+                StatusOrderDTO d = new StatusOrderDTO();
+                d.setTrangthaiid(rs.getInt(1));
+                d.setTrangthai(rs.getString(2));
+                d.setMaHD(rs.getInt(3));
                 list.add(d);
             }
         } catch (SQLException e) {
@@ -3912,10 +3873,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getProductOrderByOrderIDAndStatus(int shopID, int sid, String input) {
-        List<SanPham> list = new ArrayList<>();
+    public List<ShopOrderDTO> getProductOrderByOrderIDAndStatus(int shopID, int sid, String input) {
+        List<ShopOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select sp.*\n"
+        String sql = "select sp.[image],sp.[name],hd.maHD \n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3927,23 +3888,8 @@ public class DAO extends DBContext {
             ps.setInt(3, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new SanPham(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getInt(14),
-                        rs.getInt(15),
-                        rs.getInt(16)
-                ));
+                list.add(new ShopOrderDTO(rs.getString(1), rs.getString(2), rs.getInt(3))
+                );
             }
         } catch (SQLException e) {
             System.out.println("getProductOrderByOrderIDAndStatus: " + e.getMessage());
@@ -4021,18 +3967,18 @@ public class DAO extends DBContext {
                 + "           ,[dateNoti]\n"
                 + "           ,[noticateid])\n"
                 + "     VALUES(?,?,?,?,?,?,?,?)";
-        try{
+        try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1,noti.getShopId());
-            ps.setInt(2,noti.getuID());
-            ps.setInt(3,noti.getMaHD());
-            ps.setInt(4,noti.getTrangthai());
-            ps.setString(5,noti.getImage());
-            ps.setString(6,noti.getContentNoti());
-            ps.setDate(7,noti.getDateNoti());
-            ps.setInt(8,noti.getNoticateid());
+            ps.setInt(1, noti.getShopId());
+            ps.setInt(2, noti.getuID());
+            ps.setInt(3, noti.getMaHD());
+            ps.setInt(4, noti.getTrangthai());
+            ps.setString(5, noti.getImage());
+            ps.setString(6, noti.getContentNoti());
+            ps.setDate(7, noti.getDateNoti());
+            ps.setInt(8, noti.getNoticateid());
             ps.executeUpdate();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("addNotiChangeStatus: " + e.getMessage());
         }
     }

@@ -5,6 +5,8 @@
 package controller;
 
 import dal.DAO;
+import dto.ShopOrderDTO;
+import dto.StatusOrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -96,9 +98,9 @@ public class SellerSearchOrderController extends HttpServlet {
             int shopID = dao.getShopIdByAccountId(accountID);
             if (sid == 0) {
                 List<HoaDon> orderList = dao.searchOrderByOrderID(shopID, input);
-                List<TrangThai> statusList = dao.getOrderStatusByOrderID(shopID, input);
+                List<StatusOrderDTO> statusList = dao.getOrderStatusByOrderID(shopID, input);
                 List<TrangThai> statusCate = dao.getStatusCategory();
-                List<SanPham> productList = dao.getProductOrderByOrderID(shopID, input);
+                List<ShopOrderDTO> productList = dao.getProductOrderByOrderID(shopID, input);
                 List<OrderLine> orderLine = dao.getOrderLineByOrderID(shopID, input);
                 List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithOrderID(shopID, input);
                 request.setAttribute("sid", sid);
@@ -111,9 +113,9 @@ public class SellerSearchOrderController extends HttpServlet {
                 request.getRequestDispatcher("SellerOrderController.jsp").forward(request, response);
             } else {
                 List<HoaDon> orderList = dao.getOrderByOrderIDAndStatus(shopID, sid,input);
-                List<TrangThai> statusList = dao.getOrderStatusByOrderID(shopID, input);
+                List<StatusOrderDTO> statusList = dao.getOrderStatusByOrderID(shopID, input);
                 List<TrangThai> statusCate = dao.getStatusCategory();
-                List<SanPham> productList = dao.getProductOrderByOrderIDAndStatus(shopID, sid,input);
+                List<ShopOrderDTO> productList = dao.getProductOrderByOrderIDAndStatus(shopID, sid,input);
                 List<OrderLine> orderLine = dao.getOrderLineByOrderIDAndStatus(shopID, sid,input);
                 List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithOrderIDAndStatus(shopID, sid,input);
                 request.setAttribute("sid", sid);
