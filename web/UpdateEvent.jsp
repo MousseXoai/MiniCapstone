@@ -22,12 +22,12 @@
                 <fmt:setBundle basename="path.to.your.resource.bundle" />
                 <c:forEach items="${getEventByEventID}" var="e">
                     <div class="form-group">
-                        <label for="eventName">EventID:</label>
+                        <label class="control-label">Event ID:</label>
                         <input type="number" class="form-control" name="eid" value="${e.eid}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="eventName">Event Name:</label>
-                        <input type="text" class="form-control" id="eventName" name="ename" required value="${e.eventName}" >
+                        <label class="control-label">Event Name:</label>
+                        <input type="text" class="form-control"  name="ename" required value="${e.eventName}" >
                     </div>
                    
                     <button type="submit" class="btn btn-primary">Update Event</button>

@@ -180,6 +180,10 @@
         <servlet-name>UpdateEventControl</servlet-name>
         <servlet-class>controller.UpdateEventControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEventControl</servlet-name>
+        <servlet-class>controller.AddEventControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -719,6 +723,10 @@
     <servlet-mapping>
         <servlet-name>UpdateEventControl</servlet-name>
         <url-pattern>/UpdateEventControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEventControl</servlet-name>
+        <url-pattern>/AddEventControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

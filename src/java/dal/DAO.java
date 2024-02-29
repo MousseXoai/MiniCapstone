@@ -1938,13 +1938,13 @@ public class DAO extends DBContext {
         }
     }
 
-    public void updateEvent(int shopId, int eid, String eventName) {
-        String query = " UPDATE Event set [shopID]  = ? , [eventName] = ?  where [eid] = ?";
+    public void updateEvent(String eventName, int eid) {
+        String query = " UPDATE Event set  [eventName] = ?  where [eid] = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(2, eid);
-            ps.setInt(1, shopId);
-            ps.setString(3, eventName);
+
+            ps.setString(1, eventName);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -3495,6 +3495,35 @@ public class DAO extends DBContext {
             ps.setInt(13, shopID);
             ps.setInt(14, sale);
             ps.setInt(15, trangthai);
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void addEvent(int shopId,Part image,String eventName) {
+        String query = " insert Event([shopID], [image],eventName) values(?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is1 = image.getInputStream();
+
+            // Đọc dữ liệu từ InputStream và chuyển thành chuỗi Base64
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = is1.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base641 = "data:image/png;base64," + base64Image;
+
+            // Sử dụng setString để lưu trữ chuỗi Base64 vào cột VARCHAR
+            ps.setInt(1, shopId);
+            
+            ps.setString(2, base641);
+            ps.setString(3, eventName);
+            
+     
             ps.executeUpdate();
         } catch (Exception e) {
 

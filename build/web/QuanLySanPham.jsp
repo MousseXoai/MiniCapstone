@@ -75,14 +75,7 @@
             </ul>
         </header>
         <!-- Sidebar menu-->
-        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <aside class="app-sidebar">
-            <div class="app-sidebar__user">
-                <div>
-                    <p class="app-sidebar__user-name"><b>Manage Your Product</b></p>
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-                </div>
-            </div>
+      
             <hr>
 
         </aside>

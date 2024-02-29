@@ -95,7 +95,7 @@
                                     <th>Image</th>
                                     <th>Event Name</th>
                                     <th><a href="AddEvent.jsp"><button class="btn btn-primary btn-sm edit" type="button" title="Thêm" data-toggle="modal" data-target="#ModalUP" >
-                                            Tạo mới
+                                            <i class="fas fa-plus-circle"></i> Tạo mới
                                         </button></a></th>
 
                                 </tr>

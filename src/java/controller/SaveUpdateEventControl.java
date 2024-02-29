@@ -33,10 +33,9 @@ public class SaveUpdateEventControl extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
         int eid = Integer.parseInt(request.getParameter("eid"));
-        int shopId = Integer.parseInt(request.getParameter("shopId"));
-        
+       
         String eventName = request.getParameter("ename");
-        dao.updateEvent(shopId, eid, eventName);
+        dao.updateEvent( eventName,eid);
          request.getRequestDispatcher("EventManager").forward(request, response);
 
     }
