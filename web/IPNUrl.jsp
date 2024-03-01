@@ -149,25 +149,29 @@
                         //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Thành công"
                         out.print("GD Thanh cong");
                     } else {
-                        //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Không thành công"
+                        //Xử lý/Cập nhật tình trạng giao dịch thanh toán "Không thành công"                      
                         out.print("GD Khong thanh cong do bi huy");
+                        response.sendRedirect("checkout");
                     }
                 } else {
-                    //Trạng thái giao dịch đã được cập nhật trước đó
+                    //Trạng thái giao dịch đã được cập nhật trước đó                 
                     out.print("{\"RspCode\":\"02\",\"Message\":\"Order already confirmed\"}");
+                    response.sendRedirect("checkout");
                 }
             } else {
                 //Số tiền không trùng khớp
                 out.print("{\"RspCode\":\"04\",\"Message\":\"Invalid Amount\"}");
+                response.sendRedirect("checkout");
             }
         } else {
-            //Mã giao dịch không tồn tại
             out.print("{\"RspCode\":\"01\",\"Message\":\"Order not Found\"}");
+            response.sendRedirect("checkout");
         }
 
     } else {
         // Sai checksum
         out.print("{\"RspCode\":\"97\",\"Message\":\"Invalid Checksum\"}");
+        response.sendRedirect("checkout");
     }
 %>
 

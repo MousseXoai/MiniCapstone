@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import model.AccInfo;
 import model.Account;
