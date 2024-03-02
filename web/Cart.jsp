@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/cartamountconfig.css" type="text/css">
+    <link rel="stylesheet" href="css/checkout.css" type="text/css">
 </head>
 
 <body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
@@ -47,7 +48,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="home"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -80,12 +81,18 @@
                                         <td class="cart__product__item d-flex align-items-center">
                                         <img src="${itemSP.getImage()}" alt="" style="max-width: 25%; height: auto;">
                                         <div class="cart__product__item__title">
-                                            <h6>${itemSP.getName()}</h6>                                        
+                                            <h6><a href="productDetail?pid=${itemSP.getId()}" class="product-link">${itemSP.getName()}</a></h6>                                        
                                         </div>
                                         </td>
                                         <td class="cart__price">
+                                        <c:if test="${itemSP.getSale()==0}">
                                         <fmt:setLocale value="vi_VN"/>
                                         <fmt:formatNumber type="currency" value="${itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </c:if>
+                                        <c:if test="${itemSP.getSale()!=0}">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol="₫"/>
+                                        </c:if>
                                         </td>
                                         <td class="cart__quantity">                                               
                                         <div class="quantity-control-cart">
@@ -95,8 +102,14 @@
                                         </div>
                                         </td>
                                         <td class="cart__total">
+                                        <c:if test="${itemSP.getSale()==0}">
                                         <fmt:setLocale value="vi_VN"/>
                                         <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()}" currencySymbol="₫"/>
+                                        </c:if>
+                                        <c:if test="${itemSP.getSale()!=0}">
+                                        <fmt:setLocale value="vi_VN"/>
+                                        <fmt:formatNumber type="currency" value="${itemC.getAmount() * itemSP.getPrice()*(1-itemSP.getSale()/100)}" currencySymbol="₫"/>
+                                        </c:if>                                       
                                         </td>
                                         <td class="cart__close"><a href="cartamount?num=0&productID=${itemC.getProductID()}"><span class="icon_close"></span></a></td>
                                         </tr>
@@ -111,10 +124,12 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
+                        <a href="shop">Continue Shopping</a>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-2">
+                    
+                    <c:if test="${totalItemsInCart > 0}">
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
@@ -132,8 +147,10 @@
                                 </span>
                             </li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="checkout" class="primary-btn">Proceed to checkout</a>
                     </div>
+                    </c:if>   
+                                
                 </div>
             </div>
         </div>

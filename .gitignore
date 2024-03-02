@@ -1,11 +1,8 @@
 /dist/
+/nbproject/private/
+/nbproject/
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
+/build/*/
 =======
->>>>>>> 020a56dea857ebfef8cdabdfbf183deacf0bc931
-=======
->>>>>>> 5204eb03f3f85056bcc21538f30a7eca9bad0fb0
-=======
->>>>>>> fda4f836af8c3de88a6f225505e77aa6769b2e0e
+/build/*/
+>>>>>>> 18c3f56d8c394318540edf4085e19d7e569cd3bf
