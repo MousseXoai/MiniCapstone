@@ -165,6 +165,34 @@
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>HotSellControl</servlet-name>
+        <servlet-class>controller.HotSellControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoyalCustomers</servlet-name>
+        <servlet-class>controller.LoyalCustomers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventManager</servlet-name>
+        <servlet-class>controller.EventManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEventControl</servlet-name>
+        <servlet-class>controller.DeleteEventControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveUpdateEventControl</servlet-name>
+        <servlet-class>controller.SaveUpdateEventControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateEventControl</servlet-name>
+        <servlet-class>controller.UpdateEventControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEventControl</servlet-name>
+        <servlet-class>controller.AddEventControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CustomerThankYouControll</servlet-name>
         <servlet-class>controller.CustomerThankYouControll</servlet-class>
     </servlet>
@@ -707,6 +735,34 @@
     <servlet-mapping>
         <servlet-name>AddProductControl</servlet-name>
         <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HotSellControl</servlet-name>
+        <url-pattern>/HotSell</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoyalCustomers</servlet-name>
+        <url-pattern>/LoyalCustomers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventManager</servlet-name>
+        <url-pattern>/EventManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEventControl</servlet-name>
+        <url-pattern>/DeleteEventControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveUpdateEventControl</servlet-name>
+        <url-pattern>/SaveUpdateEventControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEventControl</servlet-name>
+        <url-pattern>/UpdateEventControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEventControl</servlet-name>
+        <url-pattern>/AddEventControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CustomerThankYouControll</servlet-name>

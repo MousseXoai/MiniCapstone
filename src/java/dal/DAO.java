@@ -26,6 +26,7 @@ import model.Brand;
 import model.Cart;
 import model.Color;
 import model.HoaDon;
+
 import model.InfoLine;
 import model.NhanXet;
 import model.OrderLine;
@@ -390,18 +391,40 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<Event> ListEventByShop(int id) {
+    public List<Event> ListEventByShop(int shopID) {
         List<Event> list = new ArrayList<>();
         String query = "select * from Event where shopID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, id);
+            ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Event(rs.getInt(3), rs.getInt(1), rs.getString(2)));
+                list.add(new Event(rs.getInt(3),
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(4)));
             }
         } catch (SQLException e) {
             System.out.println("ListEventByShop" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<Event> getEventByEventID(int eid) {
+        List<Event> list = new ArrayList<>();
+        String query = "select * from Event where eid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, eid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Event(rs.getInt(3),
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getEventByEventID" + e.getMessage());
         }
         return list;
     }
@@ -444,6 +467,67 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public List<SanPham> getHotSell(int shopID) {
+        List<SanPham> list = new ArrayList<>();
+        String query = "SELECT TOP 6 s.id, s.name, s.image, s.price, s.quantity, s.title, s.description, s.cateID, s.branID, s.color, s.image2, s.image3, s.image4, s.shopid, s.sale, s.trangthai, pl.cname AS category_name,  b.bname AS brand_name\n"
+                + "FROM SanPham s \n"
+                + "INNER JOIN SoLuongBan sl ON s.id = sl.productID \n"
+                + "INNER JOIN PhanLoai pl ON s.cateID = pl.cid\n"
+                + "INNER JOIN  Brand b ON s.branID = b.bid\n"
+                + "ORDER BY sl.soLuongDaBan DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)));
+                System.out.println("ID: " + rs.getInt(1));
+            }
+        } catch (Exception e) {
+
+        }
+        return list;
+    }
+
+    public List<AccInfo> getLoyalCustomers() {
+        List<AccInfo> loyalCustomers = new ArrayList<>();
+        String query = "SELECT TOP 10 uID, name, avatar, address, phonenumber, email, TongChiTieu "
+                + "FROM AccInfo "
+                + "ORDER BY TongChiTieu DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                loyalCustomers.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+
+            }
+        } catch (Exception e) {
+
+        }
+        return loyalCustomers;
     }
 
     public List<Brand> getAllBrand() {
@@ -535,7 +619,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductNew() {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top 5 * from SanPham order by [id] desc ";
+        String query = "select top 5 * from   SanPham order by [id] desc ";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -1775,6 +1859,22 @@ public class DAO extends DBContext {
         }
     }
 
+    public void deleteEvent(int eid) {
+        try {
+            String query = "DELETE FROM Event WHERE eid=?";
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, eid);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Event deleted successfully!");
+            } else {
+                System.out.println("Failed to delete event.");
+            }
+        } catch (Exception e) {
+            System.out.println("deleteEvent: " + e.getMessage());
+        }
+    }
+
     public List<SanPham> getProductByProductID(int pID) {
         List<SanPham> list = new ArrayList<>();
         String query = " select * from SanPham where id=?";
@@ -1836,6 +1936,19 @@ public class DAO extends DBContext {
             ps.setInt(7, pbrandid);
             ps.setString(8, pcolor);
             ps.setInt(9, pid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void updateEvent(String eventName, int eid) {
+        String query = " UPDATE Event set  [eventName] = ?  where [eid] = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(2, eid);
+
+            ps.setString(1, eventName);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -3392,6 +3505,35 @@ public class DAO extends DBContext {
         }
     }
 
+    public void addEvent(int shopId,Part image,String eventName) {
+        String query = " insert Event([shopID], [image],eventName) values(?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is1 = image.getInputStream();
+
+            // Đọc dữ liệu từ InputStream và chuyển thành chuỗi Base64
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = is1.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base641 = "data:image/png;base64," + base64Image;
+
+            // Sử dụng setString để lưu trữ chuỗi Base64 vào cột VARCHAR
+            ps.setInt(1, shopId);
+            
+            ps.setString(2, base641);
+            ps.setString(3, eventName);
+            
+     
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
     public void insertBillCOD(int accountid, long tongGia, String ngayXuat, int trangThaiId, int loaiid, int paymentid, int maThanhToanTrucTiep) {
         String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maThanhToanTrucTiep) values (?, ?, ? ,?, ?, ?, ?)";
         try {
@@ -3774,5 +3916,5 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
+
 }

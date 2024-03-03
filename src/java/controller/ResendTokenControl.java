@@ -1,81 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta .servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author dell
- */
+
 public class ResendTokenControl extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ResendTokenControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ResendTokenControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
+    private static final long serialVersionUID = 1L;
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        System.out.println("Email: " + email);
+        if (email != null && !email.isEmpty()) {
+            int otp = sendOTP(email);
+            
+            session.setAttribute("otp", otp);
+            session.setAttribute("email", email);
+            request.setAttribute("message", "OTP has been resent to your email");
+            request.getRequestDispatcher("VerifyEmail.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("HomePage.jsp"); // Chuyển hướng về trang chủ nếu không có email
+        }
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    // Phương thức để gửi mã OTP qua email
+    private int sendOTP(String email) {
+        int otpValue = generateOTP();
 
+        // Cấu hình thông tin máy chủ SMTP
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        // Tạo phiên làm việc với máy chủ email
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("minhnnhe176468@fpt.edu.vn", "yelyxtmjzielgrwu"); // Thay thế bằng email và mật khẩu của bạn
+            }
+        });
+
+        // Soạn nội dung email
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(email)); // Điều chỉnh theo địa chỉ email người dùng
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("Xác nhận đăng ký");
+            message.setText("Mã OTP của bạn là: " + otpValue);
+
+            // Gửi email
+            Transport.send(message);
+            System.out.println("Gửi email thành công");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return otpValue;
+    }
+
+    // Phương thức để tạo mã OTP ngẫu nhiên
+    private int generateOTP() {
+        Random rand = new Random();
+        return rand.nextInt(999999);
+    }
 }

@@ -59,18 +59,7 @@
                 </div>
             </div>
         </section>
-        <!-- Categories Section End -->
-        <!-- Product Section Begin -->
-        <!-- Product Section End -->
-        <!-- Banner Section Begin -->
-        <!-- Banner Section End -->
-        <!-- Trend Section Begin -->
-        <!-- Trend Section End -->
-        <!-- Discount Section Begin -->
-        <!-- Discount Section End -->
-        <!-- Services Section Begin -->
-        
-        <!-- Services Section End -->
+     
 
         <!-- Instagram Begin -->
         <%@include file="top6Spbanchay.jsp"%>
