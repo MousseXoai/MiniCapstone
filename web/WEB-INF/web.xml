@@ -93,6 +93,14 @@
         <servlet-class>controller.LoadAmountNotiControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CustomerCheckoutControl</servlet-name>
+        <servlet-class>controller.CustomerCheckoutControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerPaymentControl</servlet-name>
+        <servlet-class>controller.CustomerPaymentControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NotiShopControl</servlet-name>
         <servlet-class>controller.NotiShopControl</servlet-class>
     </servlet>
@@ -183,6 +191,22 @@
     <servlet>
         <servlet-name>AddEventControl</servlet-name>
         <servlet-class>controller.AddEventControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerThankYouControll</servlet-name>
+        <servlet-class>controller.CustomerThankYouControll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerShippingAddressControl</servlet-name>
+        <servlet-class>controller.CustomerShippingAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerChangeShipControl</servlet-name>
+        <servlet-class>controller.CustomerChangeShipControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerChoiceAddressControl</servlet-name>
+        <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -406,7 +430,7 @@
     </context-param>
     <context-param>
         <param-name>messErrorPhoneNum</param-name>
-        <param-value>Phone number do not more than 10 characters (Only number!)</param-value>
+        <param-value>Phone number must have 10 characters (Only number!)</param-value>
     </context-param>
     <context-param>
         <param-name>messErrorNameAndEmail</param-name>
@@ -419,6 +443,10 @@
     <context-param>
         <param-name>messErrorInvalidName</param-name>
         <param-value>Your name must be only character</param-value>
+    </context-param>
+    <context-param>
+        <param-name>messErrorPaymentOption</param-name>
+        <param-value>You must choose one payment option</param-value>
     </context-param>
     <servlet-mapping>
         <servlet-name>CustomerAvatarControl</servlet-name>
@@ -637,6 +665,14 @@
         <url-pattern>/loadAmountNoti</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CustomerCheckoutControl</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerPaymentControl</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>NotiShopControl</servlet-name>
         <url-pattern>/notiShop</url-pattern>
     </servlet-mapping>
@@ -727,6 +763,22 @@
     <servlet-mapping>
         <servlet-name>AddEventControl</servlet-name>
         <url-pattern>/AddEventControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerThankYouControll</servlet-name>
+        <url-pattern>/thankyou</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerShippingAddressControl</servlet-name>
+        <url-pattern>/shippingaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerChangeShipControl</servlet-name>
+        <url-pattern>/changeship</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerChoiceAddressControl</servlet-name>
+        <url-pattern>/choiceaddress</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

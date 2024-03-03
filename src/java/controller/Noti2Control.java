@@ -48,7 +48,6 @@ public class Noti2Control extends HttpServlet {
             int countAds = dao.countAds();
             
             ArrayList<Shop> listAllShop= dao.getAllShop();
-            
             ArrayList<Noti> listNoti = dao.getListNoti(accountID);
             ArrayList<DateNoti> listDateNoti = dao.getListDateNoti1();
             request.setAttribute("listDateNoti", listDateNoti);
