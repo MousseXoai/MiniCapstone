@@ -42,10 +42,22 @@ public class QuanLySanPhamControl extends HttpServlet {
         if (a == null || a.getIsSell()!=1) {
             response.sendRedirect("login.jsp");
         } else {
+            String index = request.getParameter("index");
+            if (index == null) {
+                index = "1";
+            }
+            int indexPage = Integer.parseInt(index);
 
             int accountID = a.getuID();
             int shopID = dao.getShopIdByAccountId(accountID);
-            List<SanPham> getProduct = dao.getAllProductByShopID(shopID);
+            int allProduct = dao.countItemInShop(shopID);
+            int endPage = allProduct / 10;
+            if (allProduct % 10 != 0) {
+                endPage++;
+            }
+            request.setAttribute("tag", indexPage);
+            request.setAttribute("endPage", endPage);
+            List<SanPham> getProduct = dao.getProductByIndex2(indexPage, shopID);
             request.setAttribute("getProduct", getProduct);
             List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
             request.setAttribute("getCategory", getCategory);

@@ -11,7 +11,6 @@
         <div class="file-upload-container">
             <input type="file" name="image" id="fileInput" class="file-upload-input" required="required" accept=".png, .jpg, .jpeg"/>
             <label for="fileInput" class="file-upload-label">Choose an image</label>
-            <span id="selectedFileName" class="selected-file-label">No file chosen</span>
         </div>
         <input type="submit" value="Upload"/>
     </form>
