@@ -12,15 +12,19 @@ public class Event {
     int eid;
     int shopId;
     String image;
+    String eventName;
 
     public Event() {
     }
 
-    public Event(int eid, int shopId, String image) {
+    public Event(int eid, int shopId, String image, String eventName) {
         this.eid = eid;
         this.shopId = shopId;
         this.image = image;
+        this.eventName = eventName;
     }
+
+    
 
     public int getEid() {
         return eid;
@@ -41,7 +45,18 @@ public class Event {
     public String getImage() {
         return image;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+   
 }

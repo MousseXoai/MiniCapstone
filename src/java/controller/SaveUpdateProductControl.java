@@ -79,10 +79,11 @@ public class SaveUpdateProductControl extends HttpServlet {
         int pquantity = Integer.parseInt(request.getParameter("pquantity"));
         String ptitle = request.getParameter("ptitle");
         String pdescription = request.getParameter("pdescription");
+        String image = request.getParameter("image");
         int pcate = Integer.parseInt(request.getParameter("category"));
         int pbrand = Integer.parseInt(request.getParameter("brand"));
         String pcolor = request.getParameter("pcolor");
-        dao.updateProduct(pname, pprice, pquantity, ptitle, pdescription, pcate, pbrand, pcolor, pid);
+        dao.updateProduct(pname, pprice, pquantity, ptitle, pdescription, pcate, pbrand, pcolor, pid, image);
         
         request.getRequestDispatcher("QuanLySanPhamControl").forward(request, response);
     }

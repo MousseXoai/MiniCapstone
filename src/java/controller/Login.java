@@ -71,7 +71,6 @@ public class Login extends HttpServlet {
             String username = request.getParameter("name");
             String email = request.getParameter("email");
             String id = request.getParameter("id");
-            
             Account a = d.check(username);
             try{
             if(a == null || (a.getPass().trim().equals(id)) == false) {

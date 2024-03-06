@@ -8,7 +8,7 @@
         <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Paper Dashboard by Creative Tim</title>
+        <title>Left Admin</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -82,7 +82,7 @@
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="http://www.creative-tim.com" class="simple-text">
+                        <a href="#" class="simple-text">
                             Manage Your Shop
                         </a>
                     </div>
@@ -106,7 +106,7 @@
                                 <p>Product Management</p>
                             </a>
                         </li>
-                        <li>
+<!--                        <li>
                             <a href="typography.html">
                                 <i class="ti-text"></i>
                                 <p>Function</p>
@@ -117,11 +117,37 @@
                                 <i class="ti-pencil-alt2"></i>
                                 <p>Function</p>
                             </a>
+                        </li>-->
+                        <li>
+                            <a href="SellerOrderManagement">
+                                <i class="ti-map"></i>
+                                <p>Order Management</p>
+                            </a>    
+                        </li>        
+                        <li>
+                            <a href="revenue">
+                                <i class="ti-bar-chart"></i>
+                                <p>Revenue Report</p>
+                            </a>    
+                        </li>        
+                         <li>
+                            <a href="EventManager">
+                                <i class="ti-layers"></i>
+                                <p>Event Management</p>
+
+                            </a>
                         </li>
                         <li>
-                            <a href="maps.html">
-                                <i class="ti-map"></i>
-                                <p>Function</p>
+                            <a href="LoyalCustomers">
+                                <i class="ti-heart"></i>
+                                <p>Loyal customer</p>
+                            </a> 
+                        </li>
+                       
+                        <li>
+                            <a href="HotSell">
+                                <i class="ti-files"></i>
+                                <p>Top Sell</p>
                             </a>
                         </li>
                         <li>

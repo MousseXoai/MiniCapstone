@@ -2,8 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
-            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DBContext.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/CreateShop.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddCartControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/HomePage.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Event.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Constants.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/LogoutControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Config.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ViewNotiControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/LeftAdmin.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/HoaDon.java</file>
         </group>
+>>>>>>> f4c20b7195d5a09a75ee057a5249fa7dcd0e572d
     </open-files>
 </project-private>
