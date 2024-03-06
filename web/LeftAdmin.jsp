@@ -106,22 +106,30 @@
                                 <p>Product Management</p>
                             </a>
                         </li>
+
                         <li>
                             <a href="revenue">
                                 <i class="ti-bar-chart"></i>
                                 <p>Revenue Report</p>
+
+                         <li>
+                            <a href="EventManager">
+                                <i class="ti-layers"></i>
+                                <p>Event Management</p>
+
                             </a>
                         </li>
                         <li>
-                            <a href="icons.html">
-                                <i class="ti-pencil-alt2"></i>
-                                <p>Function</p>
-                            </a>
+                            <a href="LoyalCustomers">
+                                <i class="ti-heart"></i>
+                                <p>Loyal customer</p>
+                            </a> 
                         </li>
+                       
                         <li>
-                            <a href="maps.html">
-                                <i class="ti-map"></i>
-                                <p>Function</p>
+                            <a href="HotSell">
+                                <i class="ti-files"></i>
+                                <p>Top Sell</p>
                             </a>
                         </li>
                         <li>

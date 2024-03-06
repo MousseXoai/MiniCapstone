@@ -18,6 +18,8 @@ public class HoaDon {
         private int trangThaiId;
         private int loaiid;
         private int paymentid;
+        int maHoaDonTo;
+        int maThanhToanTrucTiep;
 
     public HoaDon() {
     }
@@ -31,6 +33,30 @@ public class HoaDon {
         this.loaiid = loaiid;
         this.paymentid = paymentid;
     }
+
+    public HoaDon(int maHD, int accountID, double tongGia, Date ngayXuat, int trangThaiId, int loaiid, int paymentid, int maHoaDonTo, int maThanhToanTrucTiep) {
+        this.maHD = maHD;
+        this.accountID = accountID;
+        this.tongGia = tongGia;
+        this.ngayXuat = ngayXuat;
+        this.trangThaiId = trangThaiId;
+        this.loaiid = loaiid;
+        this.paymentid = paymentid;
+        this.maHoaDonTo = maHoaDonTo;
+        this.maThanhToanTrucTiep = maThanhToanTrucTiep;
+    }
+
+    
+
+    public int getMaThanhToanTrucTiep() {
+        return maThanhToanTrucTiep;
+    }
+
+    public void setMaThanhToanTrucTiep(int maThanhToanTrucTiep) {
+        this.maThanhToanTrucTiep = maThanhToanTrucTiep;
+    }
+ 
+       
 
     public int getMaHD() {
         return maHD;
@@ -86,6 +112,14 @@ public class HoaDon {
 
     public void setPaymentid(int paymentid) {
         this.paymentid = paymentid;
+    }
+
+    public int getMaHoaDonTo() {
+        return maHoaDonTo;
+    }
+
+    public void setMaHoaDonTo(int maHoaDonTo) {
+        this.maHoaDonTo = maHoaDonTo;
     }
 
     
