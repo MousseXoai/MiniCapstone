@@ -57,7 +57,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
+                    <file>${file.reference.sqljdbc42.jar-1}</file>
+=======
                     <file>${file.reference.sqljdbc42.jar-2}</file>
+>>>>>>> f4c20b7195d5a09a75ee057a5249fa7dcd0e572d
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
