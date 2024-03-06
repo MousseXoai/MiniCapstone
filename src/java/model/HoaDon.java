@@ -46,6 +46,8 @@ public class HoaDon {
         this.maThanhToanTrucTiep = maThanhToanTrucTiep;
     }
 
+    
+
     public int getMaThanhToanTrucTiep() {
         return maThanhToanTrucTiep;
     }

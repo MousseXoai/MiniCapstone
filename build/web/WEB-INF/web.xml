@@ -165,6 +165,18 @@
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CreateShopControl</servlet-name>
+        <servlet-class>controller.CreateShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RevenueControl</servlet-name>
+        <servlet-class>controller.RevenueControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RevenueByDay</servlet-name>
+        <servlet-class>controller.RevenueByDayControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>HotSellControl</servlet-name>
         <servlet-class>controller.HotSellControl</servlet-class>
     </servlet>
@@ -735,6 +747,18 @@
     <servlet-mapping>
         <servlet-name>AddProductControl</servlet-name>
         <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateShopControl</servlet-name>
+        <url-pattern>/createShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueControl</servlet-name>
+        <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueByDay</servlet-name>
+        <url-pattern>/revenueByDay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HotSellControl</servlet-name>
