@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dto.OrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
 import java.sql.PreparedStatement;
@@ -1926,7 +1927,7 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public void updateProduct(String pname, double pprice, int pquantity, String ptitle, String pdescription, int pcateid, int pbrandid, String pcolor, int pid,String image) {
+    public void updateProduct(String pname, double pprice, int pquantity, String ptitle, String pdescription, int pcateid, int pbrandid, String pcolor, int pid, String image) {
         String query = "UPDATE SanPham SET [name]=?, price=?, quantity=?, title=?, [description]=?, cateID=?, branID=?, color=?, image=? WHERE id=?";
         try {
             ps = connection.prepareStatement(query);
@@ -1960,7 +1961,6 @@ public class DAO extends DBContext {
     }
 
     public void addGoogleAccount(UserGoogleDto user) {
-
         String sql = "INSERT INTO [dbo].[Account]\n"
                 + "           ([user]\n"
                 + "           ,[pass]\n"
@@ -2876,6 +2876,63 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<TrangThai> getlistTrangThai() {
+        ArrayList<TrangThai> list = new ArrayList<>();
+        String query = "select * from TrangThai";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new TrangThai(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getlistTrangThai" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<HoaDon> listHoaDon(int accountID, int trangthai) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = "select * from HoaDon where accountID=? and trangthaiid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setInt(2, trangthai);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("listHoaDon" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<OrderDTO> getListOrderDone(int accid, int trangthaiid) {
+        ArrayList<OrderDTO> list = new ArrayList<>();
+        String query = "select \n"
+                + "	h.maHD, h.ngayXuat, sp.image, sp.name, h.tongGia, sp.sale, sp.id as productId ,\n"
+                + "	(select count(1) from NhanXet nx where nx.accountID = a.uID and nx.productID =o.productID) as countfb\n"
+                + "from OrderLine o\n"
+                + "inner join HoaDon h on o.invoiceID = h.maHD\n"
+                + "inner join Account a on a.uID = h.accountID\n"
+                + "inner join SanPham sp on sp.id = o.productID\n"
+                + "where a.uID = ?\n"
+                + "and h.trangthaiid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accid);
+            ps.setInt(2, trangthaiid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderDTO(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getInt(6), rs.getInt(8), rs.getString(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListOrderLine" + e.getMessage());
+        }
+        return list;
+    }
+
     public int getQuantityCartByAccountID(int accountID) {
         String sql = "select sum(amount) from Cart where accountID=? group by accountID";
         try {
@@ -2985,6 +3042,7 @@ public class DAO extends DBContext {
                 ));
             }
         } catch (Exception e) {
+            System.out.println("getListAdsTodayByShopId" + e.getMessage());
         }
         return list;
     }
@@ -3449,6 +3507,37 @@ public class DAO extends DBContext {
         }
     }
 
+    public List<SanPham> getListAllSanPham() {
+        List<SanPham> list = new ArrayList<>();
+        String query = "Select * from SanPham ";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListAllSanPham" + e.getMessage());
+        }
+        return list;
+    }
+
     public void addProduct(String name, Part image1, double price, int quantity, String title, String description, int cateID, int branID, String color, Part image2, Part image3, Part image4, int shopID, int sale, int trangthai) {
         String query = "insert SanPham(name, image, price, quantity, title, description, cateID, branID, color, image2, image3, image4, shopid, sale, trangthai)\n"
                 + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -3536,6 +3625,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<SanPham> searchProductByName(String txt, int shopid) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham where [name] like ? and shopid =? ";
@@ -3637,6 +3727,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<SanPham> getProductByIndex2(int indexPage, int shopid) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham where shopid=? and trangthai=1 order by [id] offset ? rows fetch next 10 rows only";
@@ -3718,6 +3809,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<TrangThai> getStatusCategory() {
         List<TrangThai> list = new ArrayList<>();
         String sql = "SELECT [trangthaiid]\n"
@@ -4184,6 +4276,7 @@ public class DAO extends DBContext {
             System.out.println("addNotiChangeStatus: " + e.getMessage());
         }
     }
+
     public void createShop(String shopName, Part proof1, Part proof2, String address, int uID) {
         String query = "insert ShopHangCho(shopname, proof, proof1, dateThamGia, address, uID) values (?,?,?,?,?,?)";
         try {
@@ -4219,8 +4312,7 @@ public class DAO extends DBContext {
         }
     }
 
-            
-    public void addEvent(int shopId,Part image,String eventName) {
+    public void addEvent(int shopId, Part image, String eventName) {
         String query = " insert Event([shopID], [image],eventName) values(?,?,?)";
         try {
             ps = connection.prepareStatement(query);
@@ -4238,10 +4330,10 @@ public class DAO extends DBContext {
 
             // Sử dụng setString để lưu trữ chuỗi Base64 vào cột VARCHAR
             ps.setInt(1, shopId);
-            
+
             ps.setString(2, base641);
             ps.setString(3, eventName);
-            
+
             ps.executeUpdate();
         } catch (Exception e) {
 
@@ -4306,7 +4398,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public void insertBillCOD(int accountid, long tongGia, String ngayXuat, int trangThaiId, int loaiid, int paymentid, int maThanhToanTrucTiep) {
         String sql = "insert into HoaDon (accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid, maThanhToanTrucTiep) values (?, ?, ? ,?, ?, ?, ?)";
         try {
@@ -4495,7 +4587,7 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<SanPham> getOutOfProduct(int shopId) {
+   public List<SanPham> getOutOfProduct(int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham sp where sp.quantity = 0 and sp.shopid = ?";
         try {
@@ -4526,7 +4618,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public ArrayList<HoaDon> getHoaDonByMaHoaDonCOD(int maThanhToanTrucTiep, int accountID) {
         ArrayList<HoaDon> list = new ArrayList<>();
         String query = "SELECT * FROM HoaDon WHERE maThanhToanTrucTiep = ? and accountID = ? ";
@@ -4552,7 +4644,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public ArrayList<ShippingAddress> getShippingAddress(int accountID) {
         ArrayList<ShippingAddress> list = new ArrayList<>();
         String query = "select * from ShippingAddress where accountID = ? ";
@@ -4576,7 +4668,144 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public void deleteOrderWaitting(String invoiceId) {
+        String query = "DELETE FROM [dbo].[HoaDon]\n"
+                + "      WHERE maHD = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteOrderWaitting" + e.getMessage());
+        }
 
+    }
+
+    public void deleteOrderLine(String invoiceId) {
+        String query = "DELETE FROM [dbo].[OrderLine]\n"
+                + "      WHERE invoiceID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteOrderLine" + e.getMessage());
+        }
+    }
+
+    public void deleteÌnorLine(String invoiceId) {
+        String query = "DELETE FROM [dbo].[InfoLine]\n"
+                + "      WHERE invoiceID =?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("deleteÌnorLine" + e.getMessage());
+        }
+    }
+
+    public void addFeedBack(int accid, int pID, String message, String image, int rate) {
+        String query = "INSERT INTO [dbo].[NhanXet]\n"
+                + "           ([accountID]\n"
+                + "           ,[productID]\n"
+                + "           ,[contentReview]\n"
+                + "           ,[dateReview]\n"
+                + "           ,[image]\n"
+                + "           ,[voteStar])\n"
+                + "     VALUES"
+                + "           (?,?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accid);
+            ps.setInt(2, pID);
+            ps.setString(3, message);
+            ps.setDate(4, getCurrentDate());
+            ps.setString(5, image);
+            ps.setInt(6, rate);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("addFeedBack" + e.getMessage());
+        }
+    }
+
+    public List<NhanXet> getListNhanXet(int accountID) {
+        List<NhanXet> list = new ArrayList<>();
+        String query = "Select * from NhanXet where accountID = ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new NhanXet(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListNhanXet" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<OrderLine> getListOrderLine() {
+        ArrayList<OrderLine> list = new ArrayList<>();
+        String query = "select * from OrderLine";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderLine(rs.getInt(1), rs.getInt(2), rs.getFloat(3), rs.getInt(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListOrderLine" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<HoaDon> listHoaDon(int accountID, int trangthaiid, java.sql.Date datea, java.sql.Date dateb) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = "SELECT * from HoaDon h where accountID=? and trangthaiid=? and  h.ngayXuat between ? and ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setInt(2, trangthaiid);
+            ps.setDate(3, datea);
+            ps.setDate(4, dateb);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("listHoaDon" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<OrderDTO> getListOrderDone(int accountID, int trangthaiid, java.sql.Date datea, java.sql.Date dateb) {
+        ArrayList<OrderDTO> list = new ArrayList<>();
+        String query = "select\n"
+                + "                	h.maHD, h.ngayXuat, sp.image, sp.name, h.tongGia, sp.sale, sp.id as productId ,\n"
+                + "                	(select count(1) from NhanXet nx where nx.accountID = a.uID and nx.productID =o.productID) as countfb\n"
+                + "              from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD\n"
+                + "               inner join Account a on a.uID = h.accountID\n"
+                + "                inner join SanPham sp on sp.id = o.productID\n"
+                + "                where a.uID = ?\n"
+                + "               and h.trangthaiid = ? and h.ngayXuat between ? and ? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setInt(2, trangthaiid);
+            ps.setDate(3, datea);
+            ps.setDate(4, dateb);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderDTO(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getInt(6), rs.getInt(8), rs.getString(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListOrderLine" + e.getMessage());
+        }
+        return list;
+    }
+    
     public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
@@ -4715,7 +4944,7 @@ public class DAO extends DBContext {
         return list;
     }
 
-     public HoaDon get1HoaDonto(int maHoaDonTo, int accountID) {
+    public HoaDon get1HoaDonto(int maHoaDonTo, int accountID) {
         try {
             String strSQL = "select top 1 * from HoaDon where maHoaDonTo = ? and accountID = ? ";
             ps = connection.prepareStatement(strSQL);
@@ -4745,8 +4974,8 @@ public class DAO extends DBContext {
         }
         return null;
     }
-     
-     public HoaDon get1HoaDonThanhToanTT(int maThanhToanTrucTiep, int accountID) {
+
+    public HoaDon get1HoaDonThanhToanTT(int maThanhToanTrucTiep, int accountID) {
         try {
             String strSQL = "select top 1 * from HoaDon where maThanhToanTrucTiep = ? and accountID = ? ";
             ps = connection.prepareStatement(strSQL);
@@ -4776,8 +5005,8 @@ public class DAO extends DBContext {
         }
         return null;
     }
-     
-     public InfoLine getInfoLineBill(int invoiceID) {
+
+    public InfoLine getInfoLineBill(int invoiceID) {
         try {
             String strSQL = "select * from InfoLine where invoiceID = ? ";
             ps = connection.prepareStatement(strSQL);
@@ -4798,7 +5027,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-     
+
     public void insertShippingAddress(int accountID, String name, String email, String address, String phonenumber) {
         try {
             String strSQL = "insert into ShippingAddress ([accountID], [name], [email], [address], [phonenumber]) values (?, ?, ?, ?, ?) ";
@@ -4813,6 +5042,7 @@ public class DAO extends DBContext {
             System.out.println("insertShippingAddress: " + e.getMessage());
         }
     }
+
     public void updateShippingAddress(String name, String email, String address, String phonenumber, int shippingID) {
         try {
             String strSQL = "update ShippingAddress set [name] = ? , [email] = ? , [address] = ? , [phonenumber] = ? where shippingID = ? ";
@@ -4827,7 +5057,7 @@ public class DAO extends DBContext {
             System.out.println("insertShippingAddress: " + e.getMessage());
         }
     }
-    
+
     public void deleteShippingAddress(int shippingID) {
         try {
             String strSQL = "  DELETE FROM ShippingAddress WHERE shippingID = ? ";
@@ -4839,8 +5069,8 @@ public class DAO extends DBContext {
             System.out.println("daleteShippingAddress: " + e.getMessage());
         }
     }
-    
-     public ShippingAddress getShippingAddressByShippingId(int shippingID) {
+
+    public ShippingAddress getShippingAddressByShippingId(int shippingID) {
         try {
             String strSQL = "select * from ShippingAddress where shippingID = ? ";
             ps = connection.prepareStatement(strSQL);
