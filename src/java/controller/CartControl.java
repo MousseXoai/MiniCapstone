@@ -70,6 +70,7 @@ public class CartControl extends HttpServlet {
             } else {
                 
                 int accountID = a.getuID();
+                int totalItemsInCart = dao.getQuantityCartByAccountID(accountID);
                 
                 ArrayList<Cart> list = dao.getProductInCartByAccId(accountID);
                 ArrayList<SanPham> listSP = dao.getAllProduct();
@@ -77,6 +78,7 @@ public class CartControl extends HttpServlet {
                 request.setAttribute("listcart", list);
                 request.setAttribute("listsanpham", listSP);
                 request.setAttribute("totalprice", totalPrice);
+                request.setAttribute("totalItemsInCart", totalItemsInCart);
                 request.getRequestDispatcher("Cart.jsp").forward(request, response);
             }
 

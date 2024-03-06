@@ -52,7 +52,7 @@ public class UpdateProductControl extends HttpServlet {
             request.setAttribute("getCategory", getCategory);
             List<Brand> getBrand = dao.getBrandByShopID(shopID);
             request.setAttribute("getBrand", getBrand);
-            request.getRequestDispatcher("UpdateProduct.jsp").forward(request, response);
+                request.getRequestDispatcher("UpdateProduct.jsp").forward(request, response);
         }
     }
 
