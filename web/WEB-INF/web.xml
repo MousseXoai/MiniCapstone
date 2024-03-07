@@ -198,6 +198,10 @@
         <servlet-class>controller.SearchByDate2</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <servlet-class>controller.AddImageNotiControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddProductControl</servlet-name>
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
@@ -798,6 +802,10 @@
         <url-pattern>/replyContact</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <url-pattern>/addImageNoti</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>  
         <servlet-name>DeleteOrderWaitting</servlet-name>
         <url-pattern>/deleteorder</url-pattern>
     </servlet-mapping>

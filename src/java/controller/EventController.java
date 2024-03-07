@@ -62,6 +62,7 @@ public class EventController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+
         String id = request.getParameter("id");
         int shopID = Integer.parseInt(id);
 
