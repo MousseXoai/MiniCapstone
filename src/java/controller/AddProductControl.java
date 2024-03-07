@@ -14,8 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.util.List;
+import model.Account;
 import model.Brand;
 import model.PhanLoai;
 import model.SanPham;
@@ -40,22 +42,22 @@ public class AddProductControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
-//        HttpSession session = request.getSession();
-//        Account a = (Account) session.getAttribute("acc");
-//        if (a == null || a.getIsSell()!=1) {
-//            response.sendRedirect("login.jsp");
-//        } else {
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell()!=1) {
+            response.sendRedirect("login.jsp");
+        } else {
 
-//            int accountID = a.getuID();
-//            int shopID = dao.getShopIdByAccountId(accountID);
-            List<SanPham> getProduct = dao.getAllProductByShopID(3);
+            int accountID = a.getuID();
+            int shopID = dao.getShopIdByAccountId(accountID);
+            List<SanPham> getProduct = dao.getAllProductByShopID(shopID);
             request.setAttribute("getProduct", getProduct);
-            List<PhanLoai> getCategory = dao.getCategoryByShopID(3);
+            List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
             request.setAttribute("getCategory", getCategory);
-            List<Brand> getBrand = dao.getBrandByShopID(3);
+            List<Brand> getBrand = dao.getBrandByShopID(shopID);
             request.setAttribute("getBrand", getBrand);
             request.getRequestDispatcher("AddProduct.jsp").forward(request, response);
-//        }
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,6 +84,11 @@ public class AddProductControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        int accountID = a.getuID();
+        DAO dao = new DAO();
+        int shopID = dao.getShopIdByAccountId(accountID);
         String pname = request.getParameter("prd_name");
         Part image1 = request.getPart("prd_image1");
         double pprice = Double.parseDouble(request.getParameter("prd_price"));
@@ -94,9 +101,8 @@ public class AddProductControl extends HttpServlet {
         Part image2 = request.getPart("prd_image2");
         Part image3 = request.getPart("prd_image3");
         Part image4 = request.getPart("prd_image4");
-        DAO dao = new DAO();
-        dao.addProduct(pname, image1, pprice, pquantity, ptitle, pdescription, pcateid, pbrandid, pcolor, image2, image3, image4, 3, 0, 0);
-        request.getRequestDispatcher("QuanLySanPhamControl").forward(request, response);
+        dao.addProduct(pname, image1, pprice, pquantity, ptitle, pdescription, pcateid, pbrandid, pcolor, image2, image3, image4, shopID, 0, 0);
+        response.sendRedirect("QuanLySanPhamControl");
     }
 
     /** 

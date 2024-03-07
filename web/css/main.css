@@ -3722,6 +3722,7 @@ input[type="button"].btn-block {
 
 .input-group-prepend {
   margin-right: -2px;
+      
 }
 
 .input-group-append {
@@ -13555,7 +13556,7 @@ be a descendant of the grid when it is being dragged.
 
 @media (min-width: 768px) {
   .app-content {
-    margin-left: 250px;
+   
     margin-top: 10px;
   }
 }
