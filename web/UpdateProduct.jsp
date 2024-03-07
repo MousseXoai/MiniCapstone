@@ -132,7 +132,16 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Mô tả sản phẩm</label>
                                     <textarea class="form-control" rows="5" name="pdescription" required value="${p.description}">${p.description}</textarea>
-                                </div>   
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Image</label>
+                                    <input class="form-control" type="text" name="image" required value="${p.image}">
+                                    <img style="width: 200px" src="${p.image}">
+                                    <div style="margin-bottom: 20px" class="text-center">
+                                        
+                                        
+                                    </div>
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
                                     <select class="form-control" name="category" id="exampleSelect1">

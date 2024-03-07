@@ -365,6 +365,7 @@
 .ti-thumb-down:before {
 	content: "\e671";
 }
+
 .ti-text:before {
 	content: "\e672";
 }

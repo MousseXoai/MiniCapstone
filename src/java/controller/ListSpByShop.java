@@ -99,7 +99,6 @@ public class ListSpByShop extends HttpServlet {
         request.setAttribute("listO", listOutOfStock);
         request.setAttribute("star", listStarOfProduct);
         request.getRequestDispatcher("ProductShop.jsp").forward(request, response);
-
     }
 
     /** 

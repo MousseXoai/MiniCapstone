@@ -33,6 +33,7 @@ public class DeleteControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         int productId = Integer.parseInt(request.getParameter("id"));
+       
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if (a == null || a.getIsSell() != 1) {
@@ -41,6 +42,9 @@ public class DeleteControl extends HttpServlet {
 
             DAO dao = new DAO();
             dao.deleteProduct(productId);
+            
+            
+            
         }
     }
     

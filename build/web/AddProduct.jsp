@@ -11,7 +11,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>EduBook add-product</title>
+        <title>Add New Product</title>
 
         <link href="css/bootstrap.min_2.css" rel="stylesheet">
         <link href="css/datepicker3.css" rel="stylesheet">
@@ -127,22 +127,22 @@
 
 
 
-        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+        <div class="container-fluid">			
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg>/</a></li>
-                    <li><a href="">Quản lý sản phẩm</a></li>
-                    <li class="active">/Thêm sản phẩm</li>
+                    <li><a href="statistic"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                    <li><a href="QuanLySanPhamControl">Quản lý sản phẩm</a></li>
+                    <li class="active">Thêm sản phẩm</li>
                 </ol>
             </div><!--/.row-->
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xs-12">
                     <h1 class="page-header">Thêm sản phẩm</h1>
                 </div>
             </div><!--/.row-->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-md-6">
@@ -169,10 +169,7 @@
                                             <label>Tiêu đề</label>
                                             <input required name="prd_title"  class="form-control">
                                         </div> 
-                                        <div class="form-group">
-                                            <label>Màu sắc</label>
-                                            <input required name="prd_color" class="form-control">
-                                        </div> '
+                                         
 
                                         </div>
                                         <div class="col-md-6">
@@ -185,6 +182,10 @@
                                                 <input required name="prd_image4" type="file">
                                                 
                                             </div>
+                                            <div class="form-group">
+                                            <label>Màu sắc</label>
+                                            <input required name="prd_color" class="form-control">
+                                        </div>
                                             <div class="form-group">
                                                 <label>Danh mục</label>
                                                 <select name="cat_id" class="form-control">
