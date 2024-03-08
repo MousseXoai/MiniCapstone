@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DBContext.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/CreateShop.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/AddCartControl.java</file>
@@ -16,6 +17,13 @@
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ViewNotiControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/LeftAdmin.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/HoaDon.java</file>
+=======
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/AccountBalance.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/CustomerCheckoutControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Checkout.jsp</file>
+>>>>>>> 57f52cc2af6051d038f4a1fb64e36b49d2c7a7ca
         </group>
     </open-files>
 </project-private>

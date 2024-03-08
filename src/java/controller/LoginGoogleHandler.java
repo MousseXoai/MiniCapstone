@@ -41,7 +41,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 request.setCharacterEncoding("UTF-8");
 		String code = request.getParameter("code");
                 DAO d = new DAO();
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession();               
 		String accessToken = getToken(code);
 		UserGoogleDto user = getUserInfo(accessToken);
                 Account a = d.check(user.name);

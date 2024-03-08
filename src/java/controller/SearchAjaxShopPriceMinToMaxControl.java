@@ -61,7 +61,7 @@ public class SearchAjaxShopPriceMinToMaxControl extends HttpServlet {
         request.setAttribute("listO", listOutOfStock);
         request.setAttribute("star", listStarOfProduct);
         request.setAttribute("listColor", listColor);
-        request.getRequestDispatcher("Shop.jsp").forward(request, response);
+        request.getRequestDispatcher("ProductShop.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -106,12 +106,30 @@
                                 <p>Product Management</p>
                             </a>
                         </li>
-
+<!--                        <li>
+                            <a href="typography.html">
+                                <i class="ti-text"></i>
+                                <p>Function</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="icons.html">
+                                <i class="ti-pencil-alt2"></i>
+                                <p>Function</p>
+                            </a>
+                        </li>-->
+                        <li>
+                            <a href="SellerOrderManagement">
+                                <i class="ti-map"></i>
+                                <p>Order Management</p>
+                            </a>    
+                        </li>        
                         <li>
                             <a href="revenue">
                                 <i class="ti-bar-chart"></i>
                                 <p>Revenue Report</p>
-
+                            </a>    
+                        </li>        
                          <li>
                             <a href="EventManager">
                                 <i class="ti-layers"></i>

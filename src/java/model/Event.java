@@ -24,8 +24,6 @@ public class Event {
         this.eventName = eventName;
     }
 
-    
-
     public int getEid() {
         return eid;
     }

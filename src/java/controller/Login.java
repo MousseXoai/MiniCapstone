@@ -71,7 +71,6 @@ public class Login extends HttpServlet {
             String username = request.getParameter("name");
             String email = request.getParameter("email");
             String id = request.getParameter("id");
-            
             Account a = d.check(username);
             try{
             if(a == null || (a.getPass().trim().equals(id)) == false) {
@@ -105,7 +104,7 @@ public class Login extends HttpServlet {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
         String r = request.getParameter("rem");
-        
+        System.out.println(u);
         Cookie cu = new Cookie("cuser",u);
         Cookie cp = new Cookie("cpass",p);
         Cookie cr = new Cookie("crem",r);
