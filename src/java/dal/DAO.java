@@ -40,12 +40,17 @@ import model.Star;
 import model.TrangThai;
 import model.WishList;
 import model.Account;
+import model.AccountBalance;
 import model.Contact;
 import model.DateNoti;
+import model.LoaiAccBal;
+import model.LoaiShopBal;
 import model.Noti;
 import model.NotiCate;
 import model.ShippingAddress;
+import model.ShopBalance;
 import model.SoLuongBan;
+import model.ThanhToanVNPAY;
 import model.UserGoogleDto;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -2696,7 +2701,7 @@ public class DAO extends DBContext {
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
-            System.out.println(getCurrentDate());
+            
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -5108,6 +5113,283 @@ public class DAO extends DBContext {
             System.out.println("getAccInfo: " + e.getMessage());
         }
         return null;
+    }
+
+    public Account getAccById(int accountID) {
+        try {
+            String strSQL = "select * from Account where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int uid = rs.getInt(1);
+                String user = rs.getString(2);
+                String pass = rs.getString(3);
+                int isSell = rs.getInt(4);
+                int isAdmin = rs.getInt(5);
+                int isCheck = rs.getInt(6);
+                int isShip = rs.getInt(7);
+                double accountBalance= rs.getInt(8);
+                Account p = new Account(uid, user, pass, isSell, isAdmin, isCheck, isShip, accountBalance);
+                return p;
+            }
+        } catch (Exception e) {
+            System.out.println("getAccountById: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public List<AccountBalance> getAccBalToday() {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select * from AccountBalance where ngayXuat=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<AccountBalance> getTopAccBal12() {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select top 4 * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<AccountBalance> getTopAccBal34() {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select top 4 * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<AccountBalance> getTopAccBal() {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select top 4 * from AccountBalance where ngayXuat!=? order by accBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<ThanhToanVNPAY> getAllThanhToan() {
+        List<ThanhToanVNPAY> list = new ArrayList<>();
+        String query = "select * from ThanhToanVNPAY";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ThanhToanVNPAY(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7).toLocalDate(),
+                rs.getInt(8),
+                rs.getString(9),
+                rs.getInt(10),
+                rs.getString(11),
+                rs.getString(12)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<LoaiAccBal> getAllLoaiAccBal() {
+        List<LoaiAccBal> list = new ArrayList<>();
+        String query = "select * from LoaiAccBal";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new LoaiAccBal(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public Shop getShopById1(int shopID) {
+        String strSQL = "select * from Shop where shopid=?";
+        try {
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, shopID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Shop(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getDouble(9));
+            }
+        } catch (SQLException e) {
+            System.out.println("getShopById" + e.getMessage());
+        }
+        return null;
+    }
+
+    public List<ShopBalance> getTopShopBal123() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select top 4 * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<ShopBalance> getTopShopBal45() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select top 4 * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<ShopBalance> getShopBalToday() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select * from ShopBalance where ngayXuat=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<ShopBalance> getTopShopBal() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select top 4 * from ShopBalance where ngayXuat!=? order by shopBalId desc";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<LoaiShopBal> getAllLoaiShopBal() {
+        List<LoaiShopBal> list = new ArrayList<>();
+        String query = "select * from LoaiShopBal";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new LoaiShopBal(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
 }

@@ -23,10 +23,11 @@
                             <li><a href="shop">Shop</a></li>
                                 <c:if test="${sessionScope.acc != null}">
                                 <li><a href="customerinfo">My Profile</a></li>
-                                
+                                <li><a href="createShop">Create Shop</a></li>
+                                <li><a href="accountBalance">Account Balance</a></li>
                                 </c:if>
                                 
-                            <li><a href="createShop">Create Shop</a></li>
+                            
                             <li><a href="contact">Contact</a></li>                          
                         </ul>
                     </nav>

@@ -13,7 +13,7 @@ import java.util.Date;
 public class AccountBalance {
     private int accBalId;
     private int accountID;
-    private double amout;
+    private double amount;
     Date ngayXuat;
     private int loaiid;
     private int maHD;
@@ -22,10 +22,10 @@ public class AccountBalance {
     public AccountBalance() {
     }
 
-    public AccountBalance(int accBalId, int accountID, double amout, Date ngayXuat, int loaiid, int maHD, int maThanhToan) {
+    public AccountBalance(int accBalId, int accountID, double amount, Date ngayXuat, int loaiid, int maHD, int maThanhToan) {
         this.accBalId = accBalId;
         this.accountID = accountID;
-        this.amout = amout;
+        this.amount = amount;
         this.ngayXuat = ngayXuat;
         this.loaiid = loaiid;
         this.maHD = maHD;
@@ -48,12 +48,12 @@ public class AccountBalance {
         this.accountID = accountID;
     }
 
-    public double getAmout() {
-        return amout;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmout(double amout) {
-        this.amout = amout;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public Date getNgayXuat() {
