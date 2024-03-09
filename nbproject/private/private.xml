@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Checkout.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
-=======
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/web/WEB-INF/web.xml</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/controller/RegisterCustomerController.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/model/HoaDon.java</file>
-            <file>file:/E:/s5/SWP/MiniCapstone/MiniCapstone/src/java/dal/DBContext.java</file>
->>>>>>> 1a9212d7cf74e28c84440762fec3d5a908f6064e
         </group>
     </open-files>
 </project-private>
