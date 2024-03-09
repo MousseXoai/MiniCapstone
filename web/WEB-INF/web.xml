@@ -198,6 +198,10 @@
         <servlet-class>controller.SearchByDate2</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <servlet-class>controller.AddImageNotiControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddProductControl</servlet-name>
         <servlet-class>controller.AddProductControl</servlet-class>
     </servlet>
@@ -213,7 +217,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <servlet-class>controller.SellerSearchOrderController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>CreateShopControl</servlet-name>
         <servlet-class>controller.CreateShopControl</servlet-class>
     </servlet>
@@ -268,6 +272,14 @@
     <servlet>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountBalanceControl</servlet-name>
+        <servlet-class>controller.AccountBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopBalanceControl</servlet-name>
+        <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -798,6 +810,10 @@
         <url-pattern>/replyContact</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <url-pattern>/addImageNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DeleteOrderWaitting</servlet-name>
         <url-pattern>/deleteorder</url-pattern>
     </servlet-mapping>
@@ -845,7 +861,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <url-pattern>/searchOrder</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>CreateShopControl</servlet-name>
         <url-pattern>/createShop</url-pattern>
     </servlet-mapping>
@@ -900,6 +916,14 @@
     <servlet-mapping>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <url-pattern>/choiceaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountBalanceControl</servlet-name>
+        <url-pattern>/accountBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopBalanceControl</servlet-name>
+        <url-pattern>/shopBalance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

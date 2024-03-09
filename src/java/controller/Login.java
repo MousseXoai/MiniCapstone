@@ -104,7 +104,7 @@ public class Login extends HttpServlet {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
         String r = request.getParameter("rem");
-        
+        System.out.println(u);
         Cookie cu = new Cookie("cuser",u);
         Cookie cp = new Cookie("cpass",p);
         Cookie cr = new Cookie("crem",r);

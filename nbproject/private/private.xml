@@ -3,9 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/Checkout.jsp</file>
             <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+=======
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/AccountBalance.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/dashboard.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ShopBalanceControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ShopBalance.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/model/ShopBalance.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/AccountBalanceControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/LeftAdmin.jsp</file>
+>>>>>>> b0f5dad41ddd96b900426e95dd1991b514db2258
         </group>
     </open-files>
 </project-private>

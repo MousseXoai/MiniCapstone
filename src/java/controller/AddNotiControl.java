@@ -9,10 +9,13 @@ import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import java.util.ArrayList;
 import model.Account;
 import model.Noti;
@@ -22,6 +25,8 @@ import model.NotiCate;
  *
  * @author Admin
  */
+@WebServlet(name = "AddNotiControl", urlPatterns = {"/addNoti"})
+@MultipartConfig(maxFileSize = 16177216)//1.5mb
 public class AddNotiControl extends HttpServlet {
    
     /** 
@@ -80,7 +85,7 @@ public class AddNotiControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String image= request.getParameter("image");
+        Part part = request.getPart("image");
         String content= request.getParameter("content");
         String cate= request.getParameter("cate");
         DAO dao= new DAO();
@@ -91,7 +96,7 @@ public class AddNotiControl extends HttpServlet {
         } else {
             int accountID= a.getuID();
             int shopId= dao.getShopIdByAccountId(accountID);
-            dao.addNoti(shopId, image,content,cate);
+            dao.addNoti(shopId, part,content,cate);
             request.getRequestDispatcher("notiShop").forward(request, response);
         }
         
