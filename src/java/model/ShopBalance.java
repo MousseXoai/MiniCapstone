@@ -16,6 +16,7 @@ public class ShopBalance {
     private double amount;
     Date ngayXuat;
     private int loaiid;
+    private int maHD;
     private int maShopHD;
     private int maThanhToan;
 
@@ -31,6 +32,18 @@ public class ShopBalance {
         this.maShopHD = maShopHD;
         this.maThanhToan = maThanhToan;
     }
+
+    public ShopBalance(int shopBalId, int shopID, double amount, Date ngayXuat, int loaiid, int maHD, int maShopHD, int maThanhToan) {
+        this.shopBalId = shopBalId;
+        this.shopID = shopID;
+        this.amount = amount;
+        this.ngayXuat = ngayXuat;
+        this.loaiid = loaiid;
+        this.maHD = maHD;
+        this.maShopHD = maShopHD;
+        this.maThanhToan = maThanhToan;
+    }
+    
 
     public int getShopBalId() {
         return shopBalId;
@@ -86,6 +99,14 @@ public class ShopBalance {
 
     public void setMaThanhToan(int maThanhToan) {
         this.maThanhToan = maThanhToan;
+    }
+
+    public int getMaHD() {
+        return maHD;
+    }
+
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
     }
     
 }

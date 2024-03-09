@@ -105,5 +105,14 @@ public class Account {
         this.isShip = isShip;
     }
 
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
+    }
+    
+
 
 }

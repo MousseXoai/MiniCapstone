@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AccountBalance
-    Created on : Mar 7, 2024, 3:47:22 PM
+    Document   : ShopBalance
+    Created on : Mar 8, 2024, 11:13:10 PM
     Author     : Admin
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,7 +40,7 @@
     </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <jsp:include page="Menu.jsp"></jsp:include>
+  
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
@@ -47,9 +48,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Account Balance</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Shop Balance</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Account Balance</h6>
+          <h6 class="font-weight-bolder mb-0">Shop Balance</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -74,20 +75,20 @@
                   <span class="mask bg-gradient-dark opacity-10"></span>
                   <div class="card-body position-relative z-index-1 p-3">
                     
-                    <h5 class="text-white mt-4 mb-5 pb-2">Phone Number: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${accInfo.phonenumber}</h5>
+                    <h5 class="text-white mt-4 mb-5 pb-2">Thời gian tham gia sàn: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${shop.dateThamGia}</h5>
                     <div class="d-flex">
                       <div class="d-flex">
                         <div class="me-4">
-                          <p class="text-white text-sm opacity-8 mb-0">Name: </p>
-                          <h6 class="text-white mb-0">${accInfo.name}</h6>
+                          <p class="text-white text-sm opacity-8 mb-0">Tên cửa hàng: </p>
+                          <h6 class="text-white mb-0">${shop.shopName}</h6>
                         </div>
                         <div>
-                          <p class="text-white text-sm opacity-8 mb-0">Address: </p>
-                          <h6 class="text-white mb-0">${accInfo.address}</h6>
+                          <p class="text-white text-sm opacity-8 mb-0">Địa chỉ: </p>
+                          <h6 class="text-white mb-0">${shop.address}</h6>
                         </div>
                       </div>
                       <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                        <img class="w-60 mt-2" src="${accInfo.avatar}" alt="logo">
+                        <img class="w-60 mt-2" src="${shop.avatar}" alt="logo">
                       </div>
                     </div>
                   </div>
@@ -104,12 +105,12 @@
                       </div>
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
-                      <h6 class="text-center mb-0">Account Balance</h6>
+                      <h6 class="text-center mb-0">Shop Balance</h6>
                       <span class="text-xs">Belong Interactive</span>
                       <hr class="horizontal dark my-3">
                       <fmt:setLocale value="vi_VN" />
                       <fmt:setBundle basename="path.to.your.resource.bundle" />
-                      <h5 class="mb-0"> <fmt:formatNumber type="currency" value="${acc.accountBalance}" /></h5>
+                      <h5 class="mb-0"> <fmt:formatNumber type="currency" value="${shop.shopBalance}" /></h5>
                     </div>
                   </div>
                 </div>
@@ -162,19 +163,28 @@
             </div>
             <div class="card-body p-3 pb-0">
                 <ul class="list-group">
-                    <c:forEach items="${listTopAccBal12}" var="i">
+                    <c:forEach items="${listTopShopBal123}" var="i">
                         <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                             <div class="d-flex flex-column">
                                 <h4 class="mb-1 text-dark font-weight-bold text-sm">
                                     <c:if test="${i.loaiid==1}">
-                                        Thanh Toán Đơn Hàng
+                                        Thanh Toán Hóa Đơn
                                     </c:if>
-                                        <c:if test="${i.loaiid==2}">
+                                    <c:if test="${i.loaiid==2}">
+                                        Hoàn Thành Đơn Hàng
+                                    </c:if>
+                                    <c:if test="${i.loaiid==3}">
                                         Đơn Hàng Hoàn Trả
                                     </c:if>
                                 </h4>
                                 <h6 class="mb-1 text-dark font-weight-bold text-sm">${i.ngayXuat}</h6>
-                                <span class="text-xs"># ${i.maHD} </span>
+                                <c:if test="${i.loaiid==1}">
+                                        <span class="text-xs"># ${i.maShopHD} </span>
+                                    </c:if>
+                                    <c:if test="${i.loaiid==2 || i.loaiid==3}">
+                                        <span class="text-xs"># ${i.maHD} </span>
+                                    </c:if>
+                                
                             </div>
                             <div class="d-flex align-items-center text-sm">
                                 <fmt:formatNumber type="currency" value="${i.amount}" />
@@ -196,14 +206,14 @@
             </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
-                    <c:forEach items="${listTopAccBal34}" var="t">
+                    <c:forEach items="${listTopShopBal45}" var="t">
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column">
                                 <h6 class="mb-3 text-sm">
-                                    <c:if test="${t.loaiid==3}">
+                                    <c:if test="${t.loaiid==4}">
                                         Nạp Tiền
                                     </c:if>
-                                    <c:if test="${t.loaiid==4}">
+                                    <c:if test="${t.loaiid==5}">
                                         Rút Tiền
                                     </c:if>
                                 </h6>
@@ -238,18 +248,18 @@
             <div class="card-body pt-4 p-3">
               <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Today</h6>
               <ul class="list-group">
-                  <c:forEach items="${listAccBalToday}" var="a">
+                  <c:forEach items="${listShopBalToday}" var="a">
                       <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                           <div class="d-flex align-items-center">
-                              <c:if test="${a.loaiid==1 || a.loaiid==4}">
+                              <c:if test="${a.loaiid==1 || a.loaiid==3 || a.loaiid==5}">
                                   <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_more</i></button>
                               </c:if>
-                              <c:if test="${a.loaiid==2 || a.loaiid==3}">
+                              <c:if test="${a.loaiid==2 || a.loaiid==4}">
                                   <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
                               </c:if>
                               
                               <div class="d-flex flex-column">
-                                  <c:forEach items="${loaiAccBal}" var="l">
+                                  <c:forEach items="${loaiShopBal}" var="l">
                                       <c:if test="${l.loaiid==a.loaiid}">
                                           <h6 class="mb-1 text-dark text-sm">${l.loai}</h6>
                                       </c:if>
@@ -259,12 +269,12 @@
                               </div>
                           </div>
 
-                          <c:if test="${a.loaiid==1 || a.loaiid==4}">
+                          <c:if test="${a.loaiid==1 || a.loaiid==3 || a.loaiid==5}">
                               <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
                                   -  <fmt:formatNumber type="currency" value="${a.amount}" />
                               </div>
                           </c:if>
-                          <c:if test="${a.loaiid==2 || a.loaiid==3}">
+                          <c:if test="${a.loaiid==2 || a.loaiid==4}">
                               <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
                                   + <fmt:formatNumber type="currency" value="${a.amount}" />
                               </div>
@@ -277,18 +287,18 @@
               </ul>
               <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">After</h6>
               <ul class="list-group">
-                <c:forEach items="${listTopAccBal}" var="a">
+                <c:forEach items="${listTopShopBal}" var="a">
                       <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                           <div class="d-flex align-items-center">
-                              <c:if test="${a.loaiid==1 || a.loaiid==4}">
+                              <c:if test="${a.loaiid==1 || a.loaiid==3 || a.loaiid==5}">
                                   <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_more</i></button>
                               </c:if>
-                              <c:if test="${a.loaiid==2 || a.loaiid==3}">
+                              <c:if test="${a.loaiid==2 || a.loaiid==4}">
                                   <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
                               </c:if>
                               
                               <div class="d-flex flex-column">
-                                  <c:forEach items="${loaiAccBal}" var="l">
+                                  <c:forEach items="${loaiShopBal}" var="l">
                                       <c:if test="${l.loaiid==a.loaiid}">
                                           <h6 class="mb-1 text-dark text-sm">${l.loai}</h6>
                                       </c:if>
@@ -298,12 +308,12 @@
                               </div>
                           </div>
 
-                          <c:if test="${a.loaiid==1 || a.loaiid==4}">
+                          <c:if test="${a.loaiid==1 || a.loaiid==3 || a.loaiid==5}">
                               <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
                                   -  <fmt:formatNumber type="currency" value="${a.amount}" />
                               </div>
                           </c:if>
-                          <c:if test="${a.loaiid==2 || a.loaiid==3}">
+                          <c:if test="${a.loaiid==2 || a.loaiid==4}">
                               <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
                                   + <fmt:formatNumber type="currency" value="${a.amount}" />
                               </div>

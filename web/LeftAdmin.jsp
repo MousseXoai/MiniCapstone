@@ -157,9 +157,9 @@
                             </a>
                         </li>
                         <li class="active-pro">
-                            <a href="upgrade.html">
+                            <a href="shopBalance">
                                 <i class="ti-export"></i>
-                                <p>Function</p>
+                                <p>Shop Balance</p>
                             </a>
                         </li>
                     </ul>
