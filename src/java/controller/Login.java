@@ -132,7 +132,9 @@ public class Login extends HttpServlet {
 //co roi
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
-            if(a.getIsSell()==1){
+         if(a.getIsAdmin()==1){
+             response.sendRedirect("Admin.jsp");
+        }else if(a.getIsSell()==1){
                 response.sendRedirect("statistic");
             }else{
                 response.sendRedirect("home");
