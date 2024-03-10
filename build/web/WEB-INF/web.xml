@@ -93,6 +93,10 @@
         <servlet-class>controller.LoadAmountNotiControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>OrderWaittingControl</servlet-name>
+        <servlet-class>controller.OrderWaittingControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CustomerCheckoutControl</servlet-name>
         <servlet-class>controller.CustomerCheckoutControl</servlet-class>
     </servlet>
@@ -159,10 +163,71 @@
     <servlet>
         <servlet-name>ReplyContactControl</servlet-name>
         <servlet-class>controller.ReplyContactControl</servlet-class>
+        &gt;&gt;&gt;&gt;&gt;&gt;&gt; b8a06a3c8d057b795574c9a69bf9d31b421712ff
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderWaitting</servlet-name>
+        <servlet-class>controller.DeleteOrderWaitting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDeliverControl</servlet-name>
+        <servlet-class>controller.OrderDeliverControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDoneControl</servlet-name>
+        <servlet-class>controller.OrderDoneControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedBackControl</servlet-name>
+        <servlet-class>controller.FeedBackControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchOrderByDate</servlet-name>
+        <servlet-class>SearchOrderByDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate</servlet-name>
+        <servlet-class>controller.SearchByDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate1</servlet-name>
+        <servlet-class>controller.SearchByDate1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByDate2</servlet-name>
+        <servlet-class>controller.SearchByDate2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <servlet-class>controller.AddImageNotiControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddProductControl</servlet-name>
         <servlet-class>controller.AddProductControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderManagement</servlet-name>
+        <servlet-class>controller.SellerOrderManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatusPageController</servlet-name>
+        <servlet-class>controller.StatusPageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerSearchOrderController</servlet-name>
+        <servlet-class>controller.SellerSearchOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateShopControl</servlet-name>
+        <servlet-class>controller.CreateShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RevenueControl</servlet-name>
+        <servlet-class>controller.RevenueControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RevenueByDay</servlet-name>
+        <servlet-class>controller.RevenueByDayControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HotSellControl</servlet-name>
@@ -207,6 +272,14 @@
     <servlet>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountBalanceControl</servlet-name>
+        <servlet-class>controller.AccountBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopBalanceControl</servlet-name>
+        <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -665,6 +738,10 @@
         <url-pattern>/loadAmountNoti</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>OrderWaittingControl</servlet-name>
+        <url-pattern>/oderwaitting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CustomerCheckoutControl</servlet-name>
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
@@ -733,8 +810,68 @@
         <url-pattern>/replyContact</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AddImageNotiControl</servlet-name>
+        <url-pattern>/addImageNoti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderWaitting</servlet-name>
+        <url-pattern>/deleteorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDeliverControl</servlet-name>
+        <url-pattern>/orderdeliver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDoneControl</servlet-name>
+        <url-pattern>/orderdone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedBackControl</servlet-name>
+        <url-pattern>/feedBack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchOrderByDate</servlet-name>
+        <url-pattern>/SearchOrderByDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate</servlet-name>
+        <url-pattern>/searchdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate1</servlet-name>
+        <url-pattern>/searchdate1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByDate2</servlet-name>
+        <url-pattern>/searchdate2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddProductControl</servlet-name>
         <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderManagement</servlet-name>
+        <url-pattern>/SellerOrderManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatusPageController</servlet-name>
+        <url-pattern>/statusPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerSearchOrderController</servlet-name>
+        <url-pattern>/searchOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateShopControl</servlet-name>
+        <url-pattern>/createShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueControl</servlet-name>
+        <url-pattern>/revenue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RevenueByDay</servlet-name>
+        <url-pattern>/revenueByDay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HotSellControl</servlet-name>
@@ -779,6 +916,14 @@
     <servlet-mapping>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <url-pattern>/choiceaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountBalanceControl</servlet-name>
+        <url-pattern>/accountBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopBalanceControl</servlet-name>
+        <url-pattern>/shopBalance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

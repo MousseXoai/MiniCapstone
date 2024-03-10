@@ -16,9 +16,22 @@ public class Account {
     private int isAdmin;
     private int isCheck;
     private int isShip;
+    private double accountBalance;
 
     public Account() {
     }
+
+    public Account(int uID, String user, String pass, int isSell, int isAdmin, int isCheck, int isShip, double accountBalance) {
+        this.uID = uID;
+        this.user = user;
+        this.pass = pass;
+        this.isSell = isSell;
+        this.isAdmin = isAdmin;
+        this.isCheck = isCheck;
+        this.isShip = isShip;
+        this.accountBalance = accountBalance;
+    }
+    
 
     public Account(int uID, String user, String pass,int isSell, int isAdmin, int isCheck, int isShip) {
         this.uID = uID;
@@ -91,6 +104,15 @@ public class Account {
     public void setIsShip(int isShip) {
         this.isShip = isShip;
     }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
+    }
+    
 
 
 }

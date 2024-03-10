@@ -63,11 +63,7 @@
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View post advertisement and events</button>
                             </form>                          
                         </div>
-                        <div class="p-3">
-                            <form action="notiShop1">
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View post notifications</button>
-                            </form>                          
-                        </div>
+                        
                         <div class="p-3">
                             <form action="notiShop2">
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new notifications</button>
