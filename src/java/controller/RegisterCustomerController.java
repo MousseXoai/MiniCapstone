@@ -115,8 +115,8 @@ public class RegisterCustomerController extends HttpServlet {
             return;
         }
 
-        if (email.length() > 20) {
-            String errorMessage = "Email không được quá 20 ký tự.";
+        if (email.length() > 30) {
+            String errorMessage = "Email không được quá 30 ký tự.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;

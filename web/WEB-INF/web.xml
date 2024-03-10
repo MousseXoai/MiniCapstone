@@ -281,6 +281,14 @@
         <servlet-name>ShopBalanceControl</servlet-name>
         <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>controller.Admin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controller.ListCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -924,6 +932,14 @@
     <servlet-mapping>
         <servlet-name>ShopBalanceControl</servlet-name>
         <url-pattern>/shopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/ListCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

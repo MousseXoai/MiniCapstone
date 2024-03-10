@@ -537,6 +537,32 @@ public class DAO extends DBContext {
         }
         return loyalCustomers;
     }
+    
+       public List<AccInfo> getCustomerInfoList() {
+        List<AccInfo> customerInfoList = new ArrayList<>();
+         String query = "SELECT ai.*, a.* " +
+                       "FROM [ShopTech].[dbo].[AccInfo] ai " +
+                       "JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID " +
+                       "WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                customerInfoList.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+
+            }
+        } catch (Exception e) {
+
+        }
+        return customerInfoList;
+    }
 
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();
@@ -1049,6 +1075,8 @@ public class DAO extends DBContext {
         return 0;
     }
 
+  
+
     public int countNumOfCmt(int shopID) {
         String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ?";
         try {
@@ -1195,6 +1223,72 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+    
+
+
+    public int getTotalUsers() {
+        int totalUsers = 0;
+        String query = "SELECT COUNT(uID) AS totalUsers FROM [ShopTech].[dbo].[Account] WHERE isAdmin = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalUsers = rs.getInt("totalUsers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalUsers;
+    }
+
+    public int getTotalCustomer() {
+        int totalCustomer = 0;
+        String query = "SELECT COUNT(*) AS TotalCustomers FROM [ShopTech].[dbo].[Account] WHERE isSell = 0 AND isAdmin = 0 AND isCheck = 0 AND isShip = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalCustomer = rs.getInt("TotalCustomers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCustomer;
+    }
+
+    public int getTotalSeller() {
+        int totalSeller = 0;
+        String query = "SELECT COUNT(*) AS TotalSeller\n"
+                + "FROM [ShopTech].[dbo].[Account] \n"
+                + "WHERE isSell = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalSeller = rs.getInt("TotalSeller");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalSeller;
+    }
+
+    public int getTotalChecker() {
+        int totalChecker = 0;
+        String query = "SELECT COUNT(*) AS TotalChecker\n"
+                + "FROM [ShopTech].[dbo].[Account] \n"
+                + "WHERE isCheck = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalChecker = rs.getInt("TotalChecker");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalChecker;
     }
 
     public int getSoLuongDaBanById(String id) {
@@ -2701,7 +2795,7 @@ public class DAO extends DBContext {
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -3116,16 +3210,14 @@ public class DAO extends DBContext {
         }
     }
 
-
     public void addNoti(int shopId, Part part, String content, String cate) {
-        String query = "insert Noti(shopID, trangthai, image, contentNoti, dateNoti, noticateid)\n" +
-"values(?,?,?,?,?,?)";
+        String query = "insert Noti(shopID, trangthai, image, contentNoti, dateNoti, noticateid)\n"
+                + "values(?,?,?,?,?,?)";
 
         try {
             ps = connection.prepareStatement(query);
             InputStream is = part.getInputStream();
 
-            
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[4096];
@@ -3148,7 +3240,6 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
 
     public void deleteNotiById(String id) {
         String query = "delete Noti where maNoti=?";
@@ -4610,7 +4701,7 @@ public class DAO extends DBContext {
         return list;
     }
 
-   public List<SanPham> getOutOfProduct(int shopId) {
+    public List<SanPham> getOutOfProduct(int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham sp where sp.quantity = 0 and sp.shopid = ?";
         try {
@@ -4828,7 +4919,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
@@ -5129,7 +5220,7 @@ public class DAO extends DBContext {
                 int isAdmin = rs.getInt(5);
                 int isCheck = rs.getInt(6);
                 int isShip = rs.getInt(7);
-                double accountBalance= rs.getInt(8);
+                double accountBalance = rs.getInt(8);
                 Account p = new Account(uid, user, pass, isSell, isAdmin, isCheck, isShip, accountBalance);
                 return p;
             }
@@ -5166,7 +5257,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5188,7 +5278,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5242,11 +5331,11 @@ public class DAO extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDate(7).toLocalDate(),
-                rs.getInt(8),
-                rs.getString(9),
-                rs.getInt(10),
-                rs.getString(11),
-                rs.getString(12)));
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getString(11),
+                        rs.getString(12)));
             }
         } catch (Exception e) {
         }
@@ -5276,7 +5365,7 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Shop(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getDouble(9));
+                return new Shop(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9));
             }
         } catch (SQLException e) {
             System.out.println("getShopById" + e.getMessage());
@@ -5289,7 +5378,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5300,7 +5388,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5312,7 +5400,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5323,7 +5410,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5346,7 +5433,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5369,7 +5456,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
