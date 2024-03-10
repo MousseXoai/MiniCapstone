@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/ChangeShip.jsp</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/Login.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/dashboard.jsp</file>
@@ -18,6 +19,10 @@
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/AccountBalanceControl.java</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/web/LeftAdmin.jsp</file>
 >>>>>>> b0f5dad41ddd96b900426e95dd1991b514db2258
+=======
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/model/Event.java</file>
+>>>>>>> 808e2f1791e4cfb65a3adf79b85bbf726cc5b19d
         </group>
     </open-files>
 </project-private>

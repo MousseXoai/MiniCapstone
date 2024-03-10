@@ -85,11 +85,13 @@ public class AddEventControl extends HttpServlet {
         DAO dao = new DAO();
         int shopID = dao.getShopIdByAccountId(accountID);
         String eventName = request.getParameter("ename");
+       
         Part image = request.getPart("prd_image");
         
         dao.addEvent(shopID, image, eventName);
           response.sendRedirect("EventManager");
     }
+    
 
     /**
      * Returns a short description of the servlet.
