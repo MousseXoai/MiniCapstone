@@ -281,6 +281,50 @@
         <servlet-name>ShopBalanceControl</servlet-name>
         <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAccountBalanceControl</servlet-name>
+        <servlet-class>controller.AddAccountBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllInvoiceAccBalControl</servlet-name>
+        <servlet-class>controller.AllInvoiceAccBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllBillAccBalControl</servlet-name>
+        <servlet-class>controller.AllBillAccBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllTransAccBalControl</servlet-name>
+        <servlet-class>controller.AllTransAccBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllInvoiceShopBalControl</servlet-name>
+        <servlet-class>controller.AllInvoiceShopBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllBillShopBalControl</servlet-name>
+        <servlet-class>controller.AllBillShopBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllTransShopBalControl</servlet-name>
+        <servlet-class>controller.AllTransShopBalControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InputAmountControl</servlet-name>
+        <servlet-class>controller.InputAmountControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubAccountBalanceControl</servlet-name>
+        <servlet-class>controller.SubAccountBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddShopBalanceControl</servlet-name>
+        <servlet-class>controller.AddShopBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubShopBalanceControl</servlet-name>
+        <servlet-class>controller.SubShopBalanceControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -924,6 +968,50 @@
     <servlet-mapping>
         <servlet-name>ShopBalanceControl</servlet-name>
         <url-pattern>/shopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAccountBalanceControl</servlet-name>
+        <url-pattern>/addAccountBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllInvoiceAccBalControl</servlet-name>
+        <url-pattern>/allInvoiceAccBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllBillAccBalControl</servlet-name>
+        <url-pattern>/allBillAccBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllTransAccBalControl</servlet-name>
+        <url-pattern>/allTransAccBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllInvoiceShopBalControl</servlet-name>
+        <url-pattern>/allInvoiceShopBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllBillShopBalControl</servlet-name>
+        <url-pattern>/allBillShopBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllTransShopBalControl</servlet-name>
+        <url-pattern>/allTransShopBal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InputAmountControl</servlet-name>
+        <url-pattern>/inputAmount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubAccountBalanceControl</servlet-name>
+        <url-pattern>/subAccountBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddShopBalanceControl</servlet-name>
+        <url-pattern>/addShopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubShopBalanceControl</servlet-name>
+        <url-pattern>/subShopBalance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,17 +14,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.AccInfo;
 import model.Account;
 import model.AccountBalance;
-import model.LoaiAccBal;
-import model.ThanhToanVNPAY;
+import model.SanPham;
 
 /**
  *
  * @author Admin
  */
-public class AccountBalanceControl extends HttpServlet {
+public class AllInvoiceAccBalControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +39,10 @@ public class AccountBalanceControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountBalanceControl</title>");  
+            out.println("<title>Servlet AllInvoiceAccBalControl</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AccountBalanceControl at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AllInvoiceAccBalControl at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,35 +58,32 @@ public class AccountBalanceControl extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if (a == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            DAO dao= new DAO();
-            int accountID = a.getuID();
-            AccInfo accInfo= dao.getAccInfo(accountID);
-            Account acc= dao.getAccById(accountID);
-            List<AccountBalance> listAccountBalanceToday= dao.getAccBalToday();
-            List<AccountBalance> listTopAccountBalance= dao.getTopAccBal();
-            List<AccountBalance> listTopAccountBalance12= dao.getTopAccBal12();
-            List<AccountBalance> listTopAccountBalance34= dao.getTopAccBal34();
-            List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
-            List<LoaiAccBal> listLoaiAccBal= dao.getAllLoaiAccBal();
-            
-            request.setAttribute("acc", acc);            
-            request.setAttribute("accInfo", accInfo);
-            request.setAttribute("listAccBalToday", listAccountBalanceToday);
-            request.setAttribute("listTopAccBal", listTopAccountBalance);
-            request.setAttribute("listTopAccBal12", listTopAccountBalance12);
-            request.setAttribute("listTopAccBal34", listTopAccountBalance34);
-            request.setAttribute("vnpay", thanhToan);
-            request.setAttribute("loaiAccBal", listLoaiAccBal);
-            request.getRequestDispatcher("AccountBalance.jsp").forward(request, response);
+            DAO dao = new DAO();
+            String index = request.getParameter("index");
+        if(index == null) {
+        	index="1";
         }
+        int indexPage = Integer.parseInt(index);
+        List<AccountBalance> listAllAccountBalance12= dao.getAllAccBal12(indexPage);
+
+        int allAccBal = dao.countAllAccountBalance12();
+        int endPage = allAccBal/1;
+        if(allAccBal % 1 != 0) {
+        	endPage++;
+        }         
             
-    } 
+            request.setAttribute("tag", indexPage);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("listAllAccBal12", listAllAccountBalance12);
+            request.getRequestDispatcher("AllInvoiceAccBal.jsp").forward(request, response);
+        }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

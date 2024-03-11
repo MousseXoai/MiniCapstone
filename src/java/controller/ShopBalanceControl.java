@@ -80,7 +80,7 @@ public class ShopBalanceControl extends HttpServlet {
             List<ShopBalance> listTopShopBalance45= dao.getTopShopBal45();
             List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
             List<LoaiShopBal> listLoaiShopBal= dao.getAllLoaiShopBal();
-            System.out.println(listTopShopBalance123);
+            
             request.setAttribute("acc", acc);            
             request.setAttribute("shop", shop);
             request.setAttribute("listShopBalToday", listShopBalanceToday);

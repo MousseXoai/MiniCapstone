@@ -26,6 +26,19 @@
         <link rel="stylesheet" href="css/1flaticon.css">
         <link rel="stylesheet" href="css/1icomoon.css">
         <link rel="stylesheet" href="css/1style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+              rel="stylesheet">
+
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body class="goto-here" onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
         <!-- Header Section Begin -->
@@ -139,7 +152,7 @@
             </div>
         </section>
         <hr>
-        <%@include file="top6Spbanchay.jsp" %>
+        
         <!-- Footer Section Begin -->
 
         <footer class="footer">

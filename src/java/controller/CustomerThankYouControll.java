@@ -104,6 +104,8 @@ public class CustomerThankYouControll extends HttpServlet {
                     session.removeAttribute("maHoaDonTo");
                     session.removeAttribute("maThanhToanTrucTiep");  
                     request.getRequestDispatcher("thankyou.jsp").forward(request, response);
+                }else{
+                    request.getRequestDispatcher("thankyou1.jsp").forward(request, response);
                 }
             }
         }
