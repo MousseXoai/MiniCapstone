@@ -14,17 +14,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.AccInfo;
 import model.Account;
-import model.AccountBalance;
-import model.LoaiAccBal;
+import model.ShopBalance;
 import model.ThanhToanVNPAY;
 
 /**
  *
  * @author Admin
  */
-public class AccountBalanceControl extends HttpServlet {
+public class AllBillShopBalControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +39,10 @@ public class AccountBalanceControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountBalanceControl</title>");  
+            out.println("<title>Servlet AllBillShopBalControl</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AccountBalanceControl at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AllBillShopBalControl at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,28 +64,26 @@ public class AccountBalanceControl extends HttpServlet {
         if (a == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            DAO dao= new DAO();
-            int accountID = a.getuID();
-            AccInfo accInfo= dao.getAccInfo(accountID);
-            Account acc= dao.getAccById(accountID);
-            List<AccountBalance> listAccountBalanceToday= dao.getAccBalToday();
-            List<AccountBalance> listTopAccountBalance= dao.getTopAccBal();
-            List<AccountBalance> listTopAccountBalance12= dao.getTopAccBal12();
-            List<AccountBalance> listTopAccountBalance34= dao.getTopAccBal34();
-            List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
-            List<LoaiAccBal> listLoaiAccBal= dao.getAllLoaiAccBal();
-            
-            request.setAttribute("acc", acc);            
-            request.setAttribute("accInfo", accInfo);
-            request.setAttribute("listAccBalToday", listAccountBalanceToday);
-            request.setAttribute("listTopAccBal", listTopAccountBalance);
-            request.setAttribute("listTopAccBal12", listTopAccountBalance12);
-            request.setAttribute("listTopAccBal34", listTopAccountBalance34);
-            request.setAttribute("vnpay", thanhToan);
-            request.setAttribute("loaiAccBal", listLoaiAccBal);
-            request.getRequestDispatcher("AccountBalance.jsp").forward(request, response);
+            DAO dao = new DAO();
+            String index = request.getParameter("index");
+        if(index == null) {
+        	index="1";
         }
-            
+        int indexPage = Integer.parseInt(index);
+        List<ShopBalance> listAllShopBalance45= dao.getAllShopBal45(indexPage);
+
+        int allShopBal = dao.countAllShopBalance45();
+        int endPage = allShopBal/1;
+        if(allShopBal % 1 != 0) {
+        	endPage++;
+        }         
+        List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();    
+            request.setAttribute("tag", indexPage);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("listAllShopBal45", listAllShopBalance45);
+            request.setAttribute("vnpay", thanhToan);
+            request.getRequestDispatcher("AllBillShopBal.jsp").forward(request, response);
+        }
     } 
 
     /** 

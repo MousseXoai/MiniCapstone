@@ -189,6 +189,11 @@
                                         <input type="radio" name="payment_option" value="vnpay" id="">
                                         <span class="checkmark"></span>
                                     </label>
+                                    <label>
+                                        Thanh toán bằng ví
+                                        <input type="radio" name="payment_option" value="accBal" id="">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </div>
                                 <button type="submit" class="site-btn">Place order</button>
                             </div>
