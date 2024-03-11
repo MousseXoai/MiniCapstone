@@ -213,7 +213,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <servlet-class>controller.SellerSearchOrderController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>CreateShopControl</servlet-name>
         <servlet-class>controller.CreateShopControl</servlet-class>
     </servlet>
@@ -268,6 +268,18 @@
     <servlet>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipperControl</servlet-name>
+        <servlet-class>controller.ShipperControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileShipper</servlet-name>
+        <servlet-class>controller.EditProfileShipper</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfileShipper</servlet-name>
+        <servlet-class>controller.UpdateProfileShipper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -845,7 +857,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <url-pattern>/searchOrder</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>CreateShopControl</servlet-name>
         <url-pattern>/createShop</url-pattern>
     </servlet-mapping>
@@ -900,6 +912,18 @@
     <servlet-mapping>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <url-pattern>/choiceaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipperControl</servlet-name>
+        <url-pattern>/shipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileShipper</servlet-name>
+        <url-pattern>/shipperProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileShipper</servlet-name>
+        <url-pattern>/UpdateProfileShipper</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

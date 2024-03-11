@@ -4587,7 +4587,7 @@ public class DAO extends DBContext {
         return list;
     }
 
-   public List<SanPham> getOutOfProduct(int shopId) {
+    public List<SanPham> getOutOfProduct(int shopId) {
         List<SanPham> list = new ArrayList<>();
         String query = "select * from SanPham sp where sp.quantity = 0 and sp.shopid = ?";
         try {
@@ -4805,7 +4805,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public int countNumOfInvoiceByDay(int shopID, Date date1, Date date2) {
         String query = " select COUNT(hd.maHD) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
@@ -5090,6 +5090,21 @@ public class DAO extends DBContext {
             System.out.println("getAccInfo: " + e.getMessage());
         }
         return null;
+    }
+
+    public void updateShipperProfile(String name, String address, String phoneNumber, String email, int accountID) {
+        String query = "update AccInfo set name=?, address=?, phonenumber=?, email=? where uID=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, phoneNumber);
+            ps.setString(4, email);
+            ps.setInt(5, accountID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("updateShipperProfile" + e.getMessage());
+        }
     }
 
 }

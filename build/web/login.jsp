@@ -45,7 +45,7 @@
                 console.log('Welcome!  Fetching your information.... ');
                 FB.api('/me?fields=email,name', function (response) {
                     console.log(response);
-                    window.location.href='Login?action=Face&name=' + response.name + '&email=' + response.email+'&id=' +response.id;
+                    window.location.href = 'Login?action=Face&name=' + response.name + '&email=' + response.email + '&id=' + response.id;
                 });
             }
 

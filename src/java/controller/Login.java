@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.DAO;
@@ -67,13 +66,13 @@ public class Login extends HttpServlet {
         String action = request.getParameter("action");
         DAO d = new DAO();
         HttpSession session = request.getSession();
-        if(action.equals("Face")){
+        if (action.equals("Face")) {
             String username = request.getParameter("name");
             String email = request.getParameter("email");
             String id = request.getParameter("id");
             Account a = d.check(username);
-            try{
-            if(a == null || (a.getPass().trim().equals(id)) == false) {
+            try {
+                if (a == null || (a.getPass().trim().equals(id)) == false) {
                     a = new Account(0, username, id, 0, 0, 0, 0);
                     d.addFacebookAccount(a);
                     int uID = d.getUidByName(a);
@@ -84,7 +83,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("acc", a);
                     response.sendRedirect("home");
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
@@ -104,15 +103,15 @@ public class Login extends HttpServlet {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
         String r = request.getParameter("rem");
-        
-        Cookie cu = new Cookie("cuser",u);
-        Cookie cp = new Cookie("cpass",p);
-        Cookie cr = new Cookie("crem",r);
-        if(r!=null){
-            cu.setMaxAge(60*60*24);
-            cp.setMaxAge(60*60*24);
-            cr.setMaxAge(60*60*24);
-            
+
+        Cookie cu = new Cookie("cuser", u);
+        Cookie cp = new Cookie("cpass", p);
+        Cookie cr = new Cookie("crem", r);
+        if (r != null) {
+            cu.setMaxAge(60 * 60 * 24);
+            cp.setMaxAge(60 * 60 * 24);
+            cr.setMaxAge(60 * 60 * 24);
+
         } else {
             cu.setMaxAge(0);
             cp.setMaxAge(0);
@@ -123,32 +122,38 @@ public class Login extends HttpServlet {
         response.addCookie(cr);
         DAO d = new DAO();
         Account a = d.check(u);
-        
-        if (a == null || (BCrypt.checkpw(p, a.getPass().trim() ) == false)) {
+
+        if (a == null || (BCrypt.checkpw(p, a.getPass().trim()) == false)) {
             request.setAttribute("errorMessage", "username or password invalid! ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
 //co roi
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
-            if(a.getIsSell()==1){
+            if (a.getIsSell() == 1) {
                 response.sendRedirect("statistic");
-            }else{
+            } else if (a.getIsShip() == 1) {
+                response.sendRedirect("shipperProfile");
+            } else {
                 response.sendRedirect("home");
             }
-            
-
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            
+            
+            
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

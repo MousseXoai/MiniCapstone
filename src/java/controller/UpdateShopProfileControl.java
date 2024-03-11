@@ -32,22 +32,20 @@ public class UpdateShopProfileControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        DAO dao = new DAO();
+         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsSell()!=1) {
+        if (a == null || a.getIsSell()!= 1) {
             response.sendRedirect("login.jsp");
         } else {
-
             int accountID = a.getuID();
             String userName = request.getParameter("username");
             String email = request.getParameter("email");
             String name = request.getParameter("name");
-//       String lastName = request.getParameter("lastname");
             String address = request.getParameter("address");
             String phoneNumber = request.getParameter("phonenumber");
             dao.updateShopProfile(name, address, phoneNumber, email, accountID);
-
+            
             request.getRequestDispatcher("ShopDetailInfoControl").forward(request, response);
         }
     }
