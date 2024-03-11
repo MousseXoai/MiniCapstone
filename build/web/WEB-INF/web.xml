@@ -289,6 +289,10 @@
         <servlet-name>ListCustomer</servlet-name>
         <servlet-class>controller.ListCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckAndShip</servlet-name>
+        <servlet-class>controller.CheckAndShip</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -940,6 +944,10 @@
     <servlet-mapping>
         <servlet-name>ListCustomer</servlet-name>
         <url-pattern>/ListCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckAndShip</servlet-name>
+        <url-pattern>/CheckAndShip</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

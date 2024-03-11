@@ -26,7 +26,7 @@
                                 <li><a href="createShop">Create Shop</a></li>
                                 <li><a href="accountBalance">Account Balance</a></li>
                                   <c:if test="${sessionScope.acc.getIsAdmin()==1}">
-        <li><a href="Admin.jsp">Admin Dashboard</a></li>
+        <li><a href="Admin">Admin Dashboard</a></li>
     </c:if>
                                 </c:if>
                                 
