@@ -325,6 +325,38 @@
         <servlet-name>SubShopBalanceControl</servlet-name>
         <servlet-class>controller.SubShopBalanceControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReasonReportControl</servlet-name>
+        <servlet-class>controller.ReasonReportControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopReportControl</servlet-name>
+        <servlet-class>controller.ShopReportControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailReportShopControl</servlet-name>
+        <servlet-class>controller.DetailReportShopControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusReportControl</servlet-name>
+        <servlet-class>controller.ChangeStatusReportControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckReportControl</servlet-name>
+        <servlet-class>controller.CheckReportControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeReportControl</servlet-name>
+        <servlet-class>controller.ChangeReportControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListReportByStatusControl</servlet-name>
+        <servlet-class>controller.GetListReportByStatusControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListReportByStatusControl1</servlet-name>
+        <servlet-class>controller.GetListReportByStatusControl1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -1012,6 +1044,38 @@
     <servlet-mapping>
         <servlet-name>SubShopBalanceControl</servlet-name>
         <url-pattern>/subShopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReasonReportControl</servlet-name>
+        <url-pattern>/reasonReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopReportControl</servlet-name>
+        <url-pattern>/shopReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailReportShopControl</servlet-name>
+        <url-pattern>/detailReportShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusReportControl</servlet-name>
+        <url-pattern>/changeStatusReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckReportControl</servlet-name>
+        <url-pattern>/checkReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeReportControl</servlet-name>
+        <url-pattern>/changeReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListReportByStatusControl</servlet-name>
+        <url-pattern>/getListReportByStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListReportByStatusControl1</servlet-name>
+        <url-pattern>/getListReportByStatus1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

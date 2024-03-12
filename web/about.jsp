@@ -136,16 +136,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
-                                <div class="block-18 text-center">
-                                    <div class="text">
+                                        <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                            <div class="block-18 text-center">
+                                                <div class="text">
 
-                                        <a href="event?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Events</h2></a>
+                                                    <a href="event?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Events</h2></a>
 
 
-                                    </div>
-                                </div>
-                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                            <div class="block-18 text-center">
+                                                <div class="text">
+
+                                                    <a href="reasonReport?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Report Shop</h2></a>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
                         </div>
                     </div>
                 </div>
