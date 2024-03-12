@@ -260,7 +260,7 @@
                                                 <input type="hidden" name="maHD" value="${c.maHD}"/>
                                                 <span>${c.maHD}</span><br>
                                                 <c:forEach items="${accInfo}" var="a">
-                                                    <c:if test="${c.accountID == a.uID}">
+                                                    <c:if test="${c.maHD == a.invoiceID}">
                                                         <span>Buyer Name: ${a.name}</span><br>
                                                         <span>Address: ${a.address}</span>
                                                         <input type="hidden" name="uID" value="${a.uID}"/>
@@ -340,7 +340,7 @@
                                             </c:forEach> 
                                             <c:if test="${sid==3}">
                                                 <td>
-                                                    <a href="ViewFeedback">View Feedback</a>
+                                                    <a href="SellerOrderFeedback?invoiceID=${c.maHD}">View Feedback</a>
                                                 </td>
                                             </c:if>
 

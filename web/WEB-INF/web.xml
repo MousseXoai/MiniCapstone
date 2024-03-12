@@ -176,7 +176,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <servlet-class>controller.SellerSearchOrderController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>CreateShopControl</servlet-name>
         <servlet-class>controller.CreateShopControl</servlet-class>
     </servlet>
@@ -231,6 +231,10 @@
     <servlet>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderFeedback</servlet-name>
+        <servlet-class>controller.SellerOrderFeedback</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -772,7 +776,7 @@
         <servlet-name>SellerSearchOrderController</servlet-name>
         <url-pattern>/searchOrder</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>CreateShopControl</servlet-name>
         <url-pattern>/createShop</url-pattern>
     </servlet-mapping>
@@ -827,6 +831,10 @@
     <servlet-mapping>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <url-pattern>/choiceaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderFeedback</servlet-name>
+        <url-pattern>/SellerOrderFeedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

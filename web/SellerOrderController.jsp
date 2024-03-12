@@ -260,7 +260,7 @@
                                                 <input type="hidden" name="maHD" value="${c.maHD}"/>
                                                 <span>${c.maHD}</span><br>
                                                 <c:forEach items="${accInfo}" var="a">
-                                                    <c:if test="${c.accountID == a.uID}">
+                                                    <c:if test="${c.maHD == a.invoiceID}">
                                                         <span>Buyer Name: ${a.name}</span><br>
                                                         <span>Address: ${a.address}</span>
                                                         <input type="hidden" name="uID" value="${a.uID}"/>
@@ -270,18 +270,18 @@
                                             <c:forEach items="${orderLine}" var="o">
                                                 <c:if test="${o.invoiceID == c.maHD}">
                                                     <c:forEach items="${productList}" var="p">
-                                                        
+
                                                         <c:if test="${p.invoiceID == o.invoiceID}">   
                                                             <td><img src="${p.image}" style="width: 70px;"></td>
                                                             <td>
-                                                                <span>${p.name}</span><br>
+                                                                <a href="orderdetail?invoiceID=${c.maHD}"><span>${p.name}</span></a><br>
 
                                                                 <span>Quantity: ${o.quantity}</span><br>
                                                                 <span>Item subtotal: <fmt:formatNumber type="currency" value="${o.price}" /> đ</span>
 
                                                             </td>
                                                         </c:if>
-                                                            
+
                                                     </c:forEach>
                                                 </c:if>
                                             </c:forEach>
@@ -310,40 +310,34 @@
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">
-                                                    <c:if test="${s1.trangthaiid == 0}">
-                                                    <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                        <option value="0"></option>
-                                                        <option value="1">Awaiting to confirm</option>
-                                                        <option value="2">Delivering</option>
-                                                        <option value="3">Completed</option>
-                                                    </select>
+                                                    <c:if test="${sl.trangthaiid == 1}">
+                                                        <td>
+                                                            <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
+                                                                <option value="0"></option>
+                                                                <option value="2">Delivering</option>
+                                                                <option value="3">Completed</option>
+                                                            </select>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${sl.trangthaiid == 2}">  
+                                                        <td>
+                                                            <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
+                                                                <option value="0"></option>
+                                                                <option value="3">Completed</option>
+                                                            </select>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${sl.trangthaiid == 3}">  
+                                                        <td>                                                      
+                                                        </td>
+                                                    </c:if>
                                                 </c:if>
-                                                <c:if test="${s1.trangthaiid == 1}">
-                                                    <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                        <option value="0"></option>
-                                                        <option value="2">Delivering</option>
-                                                        <option value="3">Completed</option>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${sl.trangthaiid == 2}">  
-                                                    <td>
-                                                        <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                            <option value="0"></option>
-                                                            <option value="3">Completed</option>
-                                                        </select>
-                                                    </td>
-                                                </c:if>
-                                                <c:if test="${sl.trangthaiid == 3}">  
-                                                    <td>                                                      
-                                                    </td>
-                                                </c:if>
+                                            </c:forEach> 
+                                            <c:if test="${sid==3}">
+                                                <td>
+                                                    <a href="SellerOrderFeedback?invoiceID=${c.maHD}">View Feedback</a>
+                                                </td>
                                             </c:if>
-                                        </c:forEach> 
-                                        <c:if test="${sid==3}">
-                                            <td>
-                                                <a href="ViewFeedback">View Feedback</a>
-                                            </td>
-                                        </c:if>
 
 
 
