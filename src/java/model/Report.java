@@ -14,21 +14,31 @@ public class Report {
     private int reportID;
     private int shopID;
     private int accountID;
+    private int reasonID;
+    private int status;   
     Date ngayReport;
-    private String content;
-    private String image;
+    private String description;
+    private String image1;
+    private String appeal;
+    private String image2;
 
     public Report() {
     }
 
-    public Report(int reportID, int shopID, int accountID, Date ngayReport, String content, String image) {
+    public Report(int reportID, int shopID, int accountID, int reasonID, int status, Date ngayReport, String description, String image1, String appeal, String image2) {
         this.reportID = reportID;
         this.shopID = shopID;
         this.accountID = accountID;
+        this.reasonID = reasonID;
+        this.status = status;
         this.ngayReport = ngayReport;
-        this.content = content;
-        this.image = image;
+        this.description = description;
+        this.image1 = image1;
+        this.appeal = appeal;
+        this.image2 = image2;
     }
+
+    
 
     public int getReportID() {
         return reportID;
@@ -62,20 +72,54 @@ public class Report {
         this.ngayReport = ngayReport;
     }
 
-    public String getContent() {
-        return content;
+    public int getReasonID() {
+        return reasonID;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setReasonID(int reasonID) {
+        this.reasonID = reasonID;
     }
 
-    public String getImage() {
-        return image;
+    public int getStatus() {
+        return status;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setStatus(int status) {
+        this.status = status;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage1() {
+        return image1;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public String getAppeal() {
+        return appeal;
+    }
+
+    public void setAppeal(String appeal) {
+        this.appeal = appeal;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    
     
 }
