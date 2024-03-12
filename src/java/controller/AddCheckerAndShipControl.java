@@ -6,7 +6,6 @@
 package controller;
 
 import dal.DAO;
-import dto.CheckAndShipDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,12 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta .servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Account;
 
 /**
  *
  * @author dell
  */
-public class CheckAndShip extends HttpServlet {
+public class AddCheckerAndShipControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,12 +31,20 @@ public class CheckAndShip extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-      DAO dao = new DAO();
-        List<CheckAndShipDTO> CheckAndShip = dao.getCheckAndShip();
-        request.setAttribute("CheckAndShip", CheckAndShip);
-        request.getRequestDispatcher("CheckAndShip.jsp").forward(request, response);
-    } 
+       
+
+            DAO dao = new DAO();
+            
+            
+            List<Account> uIDCustomer = dao.getuIDCustomer();
+             request.setAttribute("uIDCustomer",uIDCustomer);
+            
+request.getRequestDispatcher("AddCheckAndShip.jsp").forward(request, response);
+           
+            
+      
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -62,8 +70,16 @@ public class CheckAndShip extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        DAO dao = new DAO();
+        int uID = Integer.parseInt(request.getParameter("uID"));
+         int isCheck = Integer.parseInt(request.getParameter("isCheck"));
+            int isShip = Integer.parseInt(request.getParameter("isShip"));
+             
+                dao.updateAccountRole(uID, isCheck, isShip);
+                response.sendRedirect("CheckAndShip"); // Redirect to success page
+            
+            }
+    
 
     /** 
      * Returns a short description of the servlet.

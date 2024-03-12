@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dto.CheckAndShipDTO;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
@@ -215,6 +216,70 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return 0;
+    }     
+    
+ public List<Account> getuIDCustomer(){
+        List<Account> uIDCustomer = new ArrayList<>();
+        String query = "SELECT uID FROM Account WHERE isCheck = 0 AND isShip = 0 and isSell = 0 and isAdmin = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                uIDCustomer.add(new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return uIDCustomer;
+    }
+    
+    public void updateAccountRole(int uID, int isCheck, int isShip)  {
+        String query = "UPDATE Account SET isCheck = ?, isShip = ? WHERE uID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+          ps.setInt(1, isCheck);
+            ps.setInt(2, isShip);
+            ps.setInt(3, uID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
+    
+
+    public List<CheckAndShipDTO> getCheckAndShip() {
+        List<CheckAndShipDTO> CheckAndShip = new ArrayList<>();
+        String query = "SELECT ai.uID, ai.name, ai.avatar, ai.address, ai.phonenumber, ai.email,\n"
+                + " CASE \n"
+                + " WHEN a.isCheck = 1 THEN 'Checker' \n"
+                + " WHEN a.isShip = 1 THEN 'Shipper' \n"
+                + "END AS Role \n"
+                + "FROM AccInfo ai  \n"
+                + "  INNER JOIN Account a ON ai.uID = a.uID\n"
+                + "  WHERE (a.isCheck = 1  or a.isShip = 1);";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CheckAndShip.add(new CheckAndShipDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7)));
+            }
+        } catch (Exception e) {
+            System.out.println("getCheckAndShip" + e.getMessage());
+        }
+        return CheckAndShip;
     }
 
     public List<Blog> searchBlogByName(String txtSearch) {
@@ -537,13 +602,13 @@ public class DAO extends DBContext {
         }
         return loyalCustomers;
     }
-    
-       public List<AccInfo> getCustomerInfoList() {
+
+    public List<AccInfo> getCustomerInfoList() {
         List<AccInfo> customerInfoList = new ArrayList<>();
-         String query = "SELECT ai.*, a.* " +
-                       "FROM [ShopTech].[dbo].[AccInfo] ai " +
-                       "JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID " +
-                       "WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0";
+        String query = "SELECT ai.*, a.* "
+                + "FROM [ShopTech].[dbo].[AccInfo] ai "
+                + "JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID "
+                + "WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -1075,8 +1140,6 @@ public class DAO extends DBContext {
         return 0;
     }
 
-  
-
     public int countNumOfCmt(int shopID) {
         String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ?";
         try {
@@ -1224,8 +1287,6 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
-
 
     public int getTotalUsers() {
         int totalUsers = 0;
