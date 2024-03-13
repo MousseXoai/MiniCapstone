@@ -50,6 +50,7 @@ import model.Noti;
 import model.NotiCate;
 import model.ShippingAddress;
 import model.ShopBalance;
+import model.ShopHangCho;
 import model.SoLuongBan;
 import model.ThanhToanVNPAY;
 import model.UserGoogleDto;
@@ -5539,5 +5540,50 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+    public List<ShopHangCho> getAllShopHangCho() {
+        List<ShopHangCho> list = new ArrayList<>();
+        String query = "select * from ShopHangCho ";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopHangCho(rs.getInt(1),
+                        rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void AddShopHangChoToShop(String shopname, int accountid, String datethamgia, String address, String proof, String proof1) {
+        try {
+            String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance]) values (?,null,?, ?,?,?, ?,0 ) ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setString(1, shopname);
+            ps.setInt(2, accountid);
+            ps.setString(3, datethamgia);
+            ps.setString(4, address);
+            ps.setString(5, proof);
+            ps.setString(6, proof1);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("AddShopHangChoToShop: " + e.getMessage());
+        }
+    }
+
+    public void deleteShopHangCho(int id) {
+        try {
+            String strSQL = "delete from [ShopHangCho] where id = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShopHangCho: " + e.getMessage());
+        }
+    }
+    
 
 }

@@ -297,6 +297,10 @@
         <servlet-name>AddCheckerAndShipControl</servlet-name>
         <servlet-class>controller.AddCheckerAndShipControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShopWaiting</servlet-name>
+        <servlet-class>controller.ShopWaiting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -956,6 +960,10 @@
     <servlet-mapping>
         <servlet-name>AddCheckerAndShipControl</servlet-name>
         <url-pattern>/AddCheckerAndShipControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopWaiting</servlet-name>
+        <url-pattern>/ShopWaiting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

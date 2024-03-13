@@ -5,13 +5,17 @@
         <group>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddProduct.jsp</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dto/CheckAndShipDTO.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/ListCustomer.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddEventControl.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/CheckAndShip.jsp</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddCheckAndShip.jsp</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/Admin.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddCheckerAndShipControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/UpdateProductControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddProductControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddEvent.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dto/CheckAndShipDTO.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/CheckAndShip.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Admin.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/UpdateEventControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/model/Account.java</file>
         </group>
     </open-files>
 </project-private>

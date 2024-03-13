@@ -103,7 +103,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/virtual-reality.html">
+          <a class="nav-link  " href="ShopWaiting">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -120,7 +120,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Active Shop</span>
+            <span class="nav-link-text ms-1">Shop Waiting</span>
           </a>
         </li>
         <li class="nav-item">
