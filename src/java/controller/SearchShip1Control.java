@@ -5,6 +5,7 @@
 package controller;
 
 import dal.DAO;
+import dto.InvoiceShipping;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,15 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import model.AccInfo;
+import java.util.List;
 import model.Account;
 
 /**
  *
  * @author Acer
  */
-public class FeedBackControl extends HttpServlet {
+public class SearchShip1Control extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class FeedBackControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FeedBackControl</title>");
+            out.println("<title>Servlet SearchShip1Control</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet FeedBackControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchShip1Control at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,15 +60,21 @@ public class FeedBackControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        String id = request.getParameter("pid");
-        int pid = Integer.parseInt(id);
-        if (a == null) {
-            response.sendRedirect("login.jsp");
+        String inv = request.getParameter("input");
+        if (inv.isEmpty()) {
+            request.getRequestDispatcher("shippinginvoice").forward(request, response);
         } else {
-            request.setAttribute("pid", pid);
-            request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
+            if (a == null || a.getIsShip() != 1) {
+                response.sendRedirect("login.jsp");
+            } else {
+                List<InvoiceShipping> ListInvoiceShipping = dao.getListInvoiceShipping(inv);
+                request.setAttribute("inv", inv);
+                request.setAttribute("ListInvoiceShipping", ListInvoiceShipping);
+                request.getRequestDispatcher("ShipProduct.jsp").forward(request, response);
+            }
         }
     }
 
@@ -83,45 +89,7 @@ public class FeedBackControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
 
-        String id = request.getParameter("pid");
-        int pid = Integer.parseInt(id);
-        if (a == null) {
-            response.sendRedirect("login.jsp");
-        } else {
-            DAO dao = new DAO();
-            AccInfo aif = dao.getAccInfo(a.getuID());
-            String rate = request.getParameter("rate");
-            if (isnotNumber(rate)) {
-                String errorMessage = "Vui lòng nhập số nguyên";
-                request.setAttribute("pid", pid);
-                request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
-                return;
-            }
-            int ratep = Integer.parseInt(rate);
-            if (ratep < 1 || ratep > 5) {
-                String errorMessage = "Vui lòng nhập từ 1 đến 5";
-                request.setAttribute("pid", pid);
-                request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
-                return;
-            }
-            String message = request.getParameter("message");
-            dao.addFeedBack(a.getuID(), pid, message, aif.getAvatar(), ratep);
-            response.sendRedirect("order");
-        }
-    }
-
-    public static boolean isnotNumber(String s) {
-        try {
-            Integer.parseInt(s);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
-        }
     }
 
     /**

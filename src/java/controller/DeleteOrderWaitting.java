@@ -60,14 +60,13 @@ public class DeleteOrderWaitting extends HttpServlet {
             throws ServletException, IOException {
         DAO dao = new DAO();
         String invoiceId = request.getParameter("invoiceId");
+        int inv = Integer.parseInt(invoiceId);
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
-            dao.deleteOrderLine(invoiceId);
-            dao.deleteÌnorLine(invoiceId);
-            dao.deleteOrderWaitting(invoiceId);
+            dao.changeStatusOrder(inv);
             request.getRequestDispatcher("oderwaitting").forward(request, response);
         }
     }

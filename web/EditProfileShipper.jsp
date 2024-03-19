@@ -33,6 +33,7 @@
 
     </head>
     <body>
+
         <form action="UpdateProfileShipper">
             <div class="wrapper">
                 <jsp:include page="LeftShipper.jsp"></jsp:include>
@@ -72,6 +73,7 @@
                                 <div class="col-lg-8 col-md-7">
                                     <div class="card">
                                         <div class="header">
+                                            <h5 style="color: blue">${err}</h5>
                                             <h4 class="title">Edit Profile</h4>
                                         </div>
                                         <div class="content">

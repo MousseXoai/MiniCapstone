@@ -4,6 +4,8 @@
  */
 package dal;
 
+import dto.InvoiceDetailShip;
+import dto.InvoiceShipping;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
@@ -5105,6 +5107,151 @@ public class DAO extends DBContext {
         } catch (Exception e) {
             System.out.println("updateShipperProfile" + e.getMessage());
         }
+    }
+
+    public List<InvoiceShipping> getListInvoiceShipping() {
+        ArrayList<InvoiceShipping> list = new ArrayList<>();
+        String query = "select h.maHD, sp.image, sp.name, inf.address               	\n"
+                + "                from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD               \n"
+                + "                inner join SanPham sp on sp.id = o.productID  \n"
+                + "				inner join InfoLine inf on inf.invoiceID = h.maHD\n"
+                + "                where h.trangthaiid = 2 or h.trangthaiid=6";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new InvoiceShipping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListInvoiceShipping" + e.getMessage());
+        }
+        return list;
+    }
+
+    public void ChangeStatusInvoice(int invid) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET \n"
+                + "      [trangthaiid] = 3     \n"
+                + " WHERE maHD =?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("ChangeStatusInvoice" + e.getMessage());
+        }
+    }
+
+    public List<InvoiceShipping> getListInvoiceShipped() {
+        ArrayList<InvoiceShipping> list = new ArrayList<>();
+        String query = "select h.maHD, sp.image, sp.name, inf.address               	\n"
+                + "                from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD               \n"
+                + "                inner join SanPham sp on sp.id = o.productID  \n"
+                + "				inner join InfoLine inf on inf.invoiceID = h.maHD\n"
+                + "                where h.trangthaiid = 3";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new InvoiceShipping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListInvoiceShipping" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<InvoiceDetailShip> getInvoiceDetailShip(int invoiceId) {
+        ArrayList<InvoiceDetailShip> list = new ArrayList<>();
+        String query = "select h.maHD,th.trangthai, sp.image, sp.name,sp.color,o.quantity ,h.tongGia, inf.note,inf.name,inf.address,inf.email,inf.phonenumber               	\n"
+                + "                from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD               \n"
+                + "                inner join SanPham sp on sp.id = o.productID  \n"
+                + "				inner join InfoLine inf on inf.invoiceID = h.maHD\n"
+                + "				inner join TrangThai th on th.trangthaiid = h.trangthaiid\n"
+                + "				inner join PaymentMethod pm on pm.paymentid = h.paymentid\n"
+                + "                where h.maHD=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invoiceId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new InvoiceDetailShip(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getInvoiceDetailShip" + e.getMessage());
+        }
+        return list;
+    }
+
+    public void changeStatusOrder(int inv) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET \n"
+                + "      [trangthaiid] = 4     \n"
+                + " WHERE maHD =?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, inv);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("changeStatusOrder" + e.getMessage());
+        }
+
+    }
+
+    public List<InvoiceShipping> getListInvoiceShipping(String invoiceId) {
+        ArrayList<InvoiceShipping> list = new ArrayList<>();
+        String query = "select h.maHD, sp.image, sp.name, inf.address               	\n"
+                + "                from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD               \n"
+                + "                inner join SanPham sp on sp.id = o.productID  \n"
+                + "				inner join InfoLine inf on inf.invoiceID = h.maHD\n"
+                + "                where (h.trangthaiid = 2 or h.trangthaiid=6) and h.maHD=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, invoiceId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new InvoiceShipping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListInvoiceShipping" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<InvoiceShipping> getListInvoiceShipped(String inv) {
+        ArrayList<InvoiceShipping> list = new ArrayList<>();
+        String query = "select h.maHD, sp.image, sp.name, inf.address               	\n"
+                + "                from OrderLine o\n"
+                + "                inner join HoaDon h on o.invoiceID = h.maHD               \n"
+                + "                inner join SanPham sp on sp.id = o.productID  \n"
+                + "				inner join InfoLine inf on inf.invoiceID = h.maHD\n"
+                + "                where h.trangthaiid = 3 and h.maHD=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, inv);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new InvoiceShipping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListInvoiceShipping" + e.getMessage());
+        }
+        return list;
     }
 
 }

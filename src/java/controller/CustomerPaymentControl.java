@@ -273,9 +273,6 @@ public class CustomerPaymentControl extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-    public String getValue(){
-        return "aasdfasd";
-    }
+    }// </editor-fold>  
 
 }

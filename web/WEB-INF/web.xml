@@ -281,6 +281,30 @@
         <servlet-name>UpdateProfileShipper</servlet-name>
         <servlet-class>controller.UpdateProfileShipper</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShippingInvoice</servlet-name>
+        <servlet-class>controller.ShippingInvoice</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangSatusShip</servlet-name>
+        <servlet-class>controller.ChangSatusShip</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipDone</servlet-name>
+        <servlet-class>controller.ShipDone</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailShipInvoiceControl</servlet-name>
+        <servlet-class>controller.DetailShipInvoiceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShip1Control</servlet-name>
+        <servlet-class>controller.SearchShip1Control</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShip2Control</servlet-name>
+        <servlet-class>controller.SearchShip2Control</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -924,6 +948,30 @@
     <servlet-mapping>
         <servlet-name>UpdateProfileShipper</servlet-name>
         <url-pattern>/UpdateProfileShipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingInvoice</servlet-name>
+        <url-pattern>/shippinginvoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangSatusShip</servlet-name>
+        <url-pattern>/changestatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipDone</servlet-name>
+        <url-pattern>/shipdone</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailShipInvoiceControl</servlet-name>
+        <url-pattern>/shipdetailinvoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShip1Control</servlet-name>
+        <url-pattern>/searchship1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShip2Control</servlet-name>
+        <url-pattern>/searchship2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

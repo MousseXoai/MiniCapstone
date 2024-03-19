@@ -93,7 +93,8 @@
             <a  href="oderwaitting?trangthaiid=1"> <h5 class="pb-4 border-bottom" style="color: red">Order awaiting confirmation</h5></a>
             <a  href="orderdeliver?trangthaiid=2"><h5 class="pb-4 border-bottom" style="color: red" >Order is being delivered</h5></a>
             <a  href="orderdone?trangthaiid=3"> <h5 class="pb-4 border-bottom" style="color: red">Order done</h5></a>
-            <form action="searchdate">
+            <p style="color: red">${err}</p>
+            <form action="searchdate" >
                 <input type="hidden" name="trangthaiid" value="1">
                 <input type="date" name="date1" value="${datea}">
                 <input type="date" name="date2" value="${dateb}">
@@ -145,7 +146,7 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td><a href="deleteorder?trangthaiid=1&invoiceId=${c.maHD}"></span>Delete</td>
+                            <td><a href="deleteorder?trangthaiid=1&invoiceId=${c.maHD}"></span>Reomve</td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -154,3 +155,15 @@
     </body>
     <fmt:setBundle basename="path.to.your.resource.bundle" />
 </html>
+<script>
+    function validateDates() {
+        var date1 = new Date(document.getElementById("date1").value);
+        var date2 = new Date(document.getElementById("date2").value);
+
+        if (date1 > date2) {
+            alert("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.");
+            return false; // Ngăn chặn gửi biểu mẫu nếu có lỗi
+        }
+        return true; // Cho phép gửi biểu mẫu nếu không có lỗi
+    }
+</script>

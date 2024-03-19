@@ -66,6 +66,7 @@ public class SearchByDate1 extends HttpServlet {
             throws ServletException, IOException {
         DAO dao = new DAO();
         HttpSession session = request.getSession();
+        String err;
         Account a = (Account) session.getAttribute("acc");
         String trangthaiid1 = request.getParameter("trangthaiid");
         if (a == null) {
@@ -87,6 +88,11 @@ public class SearchByDate1 extends HttpServlet {
                 }
                 Date datea = Date.valueOf(date1);
                 Date dateb = Date.valueOf(date2);
+                if (datea.compareTo(dateb)>0) {
+                    err="Invalid date to seach";
+                    request.setAttribute("err", err);
+                    request.getRequestDispatcher("orderdeliver").forward(request, response);
+                }
                 List<SanPham> listAllSP = dao.getListAllSanPham();
                 List<HoaDon> listHoaDon = dao.listHoaDon(accountID, trangthaiid, datea, dateb);
                 List<OrderLine> ListOrderLine = dao.getListOrderLine();

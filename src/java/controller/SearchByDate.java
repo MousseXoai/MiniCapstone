@@ -67,6 +67,7 @@ public class SearchByDate extends HttpServlet {
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
+        String err;
         String trangthaiid1 = request.getParameter("trangthaiid");
         if (a == null) {
             response.sendRedirect("login.jsp");
@@ -87,6 +88,11 @@ public class SearchByDate extends HttpServlet {
                 }
                 Date datea = Date.valueOf(date1);
                 Date dateb = Date.valueOf(date2);
+                if (datea.compareTo(dateb)>0) {
+                    err="Invalid date to seach";
+                    request.setAttribute("err", err);
+                    request.getRequestDispatcher("oderwaitting").forward(request, response);
+                }
                 List<SanPham> listAllSP = dao.getListAllSanPham();
                 List<HoaDon> listHoaDon = dao.listHoaDon(accountID, trangthaiid, datea, dateb);
                 List<OrderLine> ListOrderLine = dao.getListOrderLine();

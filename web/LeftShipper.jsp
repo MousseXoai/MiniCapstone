@@ -88,23 +88,11 @@
                             </a>
                         </li>
                         <li>
-                            <a href="SellerOrderManagement">
+                            <a href="shippinginvoice">
                                 <i class="ti-map"></i>
                                 <p>Product Waiting Ship</p>
                             </a>    
                         </li>        
-                        <li>
-                            <a href="revenue">
-                                <i class="ti-bar-chart"></i>
-                                <p>Your Statistic</p>
-                            </a>    
-                        </li>        
-                        <li>
-                            <a href="LoyalCustomers">
-                                <i class="ti-heart"></i>
-                                <p>Loyal customer</p>
-                            </a> 
-                        </li>
                     </ul>
                 </div>
             </div>

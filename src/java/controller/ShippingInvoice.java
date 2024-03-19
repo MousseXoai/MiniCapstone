@@ -5,6 +5,7 @@
 package controller;
 
 import dal.DAO;
+import dto.InvoiceShipping;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +15,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
-import model.Brand;
-import model.PhanLoai;
-import model.SanPham;
 
 /**
  *
  * @author Acer
  */
-public class ShipperControl extends HttpServlet {
+public class ShippingInvoice extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +39,10 @@ public class ShipperControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShipperControl</title>");
+            out.println("<title>Servlet ShippingInvoice</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShipperControl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShippingInvoice at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,22 +60,16 @@ public class ShipperControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a == null || a.getIsShip() != 1) {
+        if (a == null || a.getIsShip()!=1) {
             response.sendRedirect("login.jsp");
         } else {
-
-            int accountID = a.getuID();
-            int shopID = dao.getShopIdByAccountId(accountID);
-            List<SanPham> getProduct = dao.getAllProductByShopID(shopID);
-            request.setAttribute("getProduct", getProduct);
-            List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
-            request.setAttribute("getCategory", getCategory);
-            List<Brand> getBrand = dao.getBrandByShopID(shopID);
-            request.setAttribute("getBrand", getBrand);
-            request.getRequestDispatcher("Shipper.jsp").forward(request, response);
+            List<InvoiceShipping> ListInvoiceShipping = dao.getListInvoiceShipping();
+            request.setAttribute("ListInvoiceShipping", ListInvoiceShipping);
+            request.getRequestDispatcher("ShipProduct.jsp").forward(request, response);
         }
     }
 
