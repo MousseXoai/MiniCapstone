@@ -44,6 +44,8 @@ import model.Contact;
 import model.DateNoti;
 import model.Noti;
 import model.NotiCate;
+import model.ReasonReport;
+import model.Report;
 import model.ShippingAddress;
 import model.SoLuongBan;
 import model.UserGoogleDto;
@@ -3574,7 +3576,7 @@ public class DAO extends DBContext {
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
-                + "join TrangThai tt on hd.trangthaiid = tt.trangthaiid\n"
+                + "join Tra6ngThai tt on hd.trangthaiid = tt.trangthaiid\n"
                 + "where sp.shopid = ? ";
         try {
             ps = connection.prepareStatement(sql);
@@ -4861,4 +4863,275 @@ public class DAO extends DBContext {
                 }
                 return null;
         }
+    public List<ReasonReport> getListReasonReport() {
+        List<ReasonReport> list = new ArrayList<>();
+        String query = "select * from ReasonReport";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ReasonReport(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void insertReport(int accountID, int shopId, int reasonId, String descrip, Part part) {
+        String query = "insert Report(shopID, accountID, reasonID, status, description, image1)\n" +
+"values(?,?,?,0,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+
+            
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[4096];
+
+            int bytesRead;
+
+            while ((bytesRead = is.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
+            ps.setInt(1, shopId);
+            ps.setInt(2, accountID);
+            ps.setInt(3, reasonId);
+            ps.setString(4, descrip);
+            ps.setString(5, base64);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Report> getListReportByShopId(int shopID) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where shopID=? and status!=0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public Report getReportByID(int reportID) {
+        String query = "select * from Report where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, reportID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void updateImageReport(int reportID, Part part) {
+        String query = "update Report set image2=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+
+            
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[4096];
+
+            int bytesRead;
+
+            while ((bytesRead = is.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
+            ps.setString(1, base64);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateStatusReport(int reportID, int status) {
+        String query = "update Report set status=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateAppealReport(int reportID, String refute) {
+        String query = "update Report set appeal=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, refute);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Report> getListAllReport() {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void deleteReport(int reportID) {
+        String query = "delete Report where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            ps.setInt(1, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void sendReportShop(int reportID) {
+        String query = "update Report set ngayReport=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updatePointShop(int shopID) {
+        String query = "update Shop set point=point-1 where shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Report> getListReportByStatus(int status) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where status=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Report> getListReportByShopIdAndStatus(int shopID, int status) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where status=? and shopID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+            ps.setInt(2, shopID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+
 }

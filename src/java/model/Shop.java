@@ -18,6 +18,9 @@ public class Shop {
     private Date dateThamGia;
     private String address;
     private String proof;
+    private String proof1;
+    private double shopBalance;
+    private int point;
 
 
     public Shop() {
@@ -32,6 +35,33 @@ public class Shop {
         this.address = address;
         this.proof = proof;
     }
+
+    public Shop(int shopId, String shopName, String avatar, int accountid, Date dateThamGia, String address, String proof, String proof1, double shopBalance) {
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.avatar = avatar;
+        this.accountid = accountid;
+        this.dateThamGia = dateThamGia;
+        this.address = address;
+        this.proof = proof;
+        this.proof1 = proof1;
+        this.shopBalance = shopBalance;
+    }
+
+    public Shop(int shopId, String shopName, String avatar, int accountid, Date dateThamGia, String address, String proof, String proof1, double shopBalance, int point) {
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.avatar = avatar;
+        this.accountid = accountid;
+        this.dateThamGia = dateThamGia;
+        this.address = address;
+        this.proof = proof;
+        this.proof1 = proof1;
+        this.shopBalance = shopBalance;
+        this.point = point;
+    }
+    
+    
 
     public int getShopId() {
         return shopId;
@@ -88,6 +118,30 @@ public class Shop {
 
     public void setProof(String proof) {
         this.proof = proof;
+    }
+
+    public String getProof1() {
+        return proof1;
+    }
+
+    public void setProof1(String proof1) {
+        this.proof1 = proof1;
+    }
+
+    public double getShopBalance() {
+        return shopBalance;
+    }
+
+    public void setShopBalance(double shopBalance) {
+        this.shopBalance = shopBalance;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
     
 }
