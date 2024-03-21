@@ -5,22 +5,29 @@
         <group>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/PaymentShop.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/dashboard.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/FollowShop.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SetTaxControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/DeletBillControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SearchControl.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/TaxList.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/WEB-INF/web.xml</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/TaxBillController.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/Checkout.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeStatusControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Follow.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/ShopDetailInfo.jsp</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Config.java</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/taxBill.jsp</file>
-            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/TaxListControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/about.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/FollowShop.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/DeletBillControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/IPNUrl.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/TaxList.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/RevenueControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/ConfigShop.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/taxBill.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/UpdateShopProfileControl.java</file>
             <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/NoBill.jsp</file>
         </group>
     </open-files>

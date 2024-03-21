@@ -334,6 +334,7 @@
                                 </div>
                                 <div class="print">
                                     <button type="submit" class="site-btn">Pay</button>
+                                    <a href="statistic" class="site-btn">Cancel</a>
                                 </div>
                             </div>
                         </div>

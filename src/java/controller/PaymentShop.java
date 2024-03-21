@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import model.Account;
-import model.Config;
+import model.ConfigShop;
 
 /**
  *
@@ -103,10 +103,10 @@ public class PaymentShop extends HttpServlet {
                     String orderType = "other";
                     long amount = (long) (fee * 100);
 
-                    String vnp_TxnRef = Config.getRandomNumber(8);
-                    String vnp_IpAddr = Config.getIpAddress(request);
+                    String vnp_TxnRef = ConfigShop.getRandomNumber(8);
+                    String vnp_IpAddr = ConfigShop.getIpAddress(request);
 
-                    String vnp_TmnCode = Config.vnp_TmnCode;
+                    String vnp_TmnCode = ConfigShop.vnp_TmnCode;
 
                     Map<String, String> vnp_Params = new HashMap<>();
                     vnp_Params.put("vnp_Version", vnp_Version);
@@ -128,7 +128,7 @@ public class PaymentShop extends HttpServlet {
                     } else {
                         vnp_Params.put("vnp_Locale", "vn");
                     }
-                    vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
+                    vnp_Params.put("vnp_ReturnUrl", ConfigShop.vnp_ReturnUrl);
                     vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
                     Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
@@ -164,9 +164,9 @@ public class PaymentShop extends HttpServlet {
                         }
                     }
                     String queryUrl = query.toString();
-                    String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
+                    String vnp_SecureHash = ConfigShop.hmacSHA512(ConfigShop.secretKey, hashData.toString());
                     queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
-                    String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
+                    String paymentUrl = ConfigShop.vnp_PayUrl + "?" + queryUrl;
                     com.google.gson.JsonObject job = new JsonObject();
                     job.addProperty("code", "00");
                     job.addProperty("message", "success");
