@@ -49,6 +49,7 @@ public class SanPham {
         this.trangthai = trangthai;
 
     }
+
     public SanPham(int id, String name, String image, double price, int quantity, String title, String description, int cateID, int branID, String color, String image2, String image3, String image4, int shopID, int sale, int trangthai, int totalRevenue) {
         this.id = id;
         this.name = name;

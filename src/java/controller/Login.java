@@ -104,7 +104,7 @@ public class Login extends HttpServlet {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
         String r = request.getParameter("rem");
-        
+        System.out.println(u);
         Cookie cu = new Cookie("cuser",u);
         Cookie cp = new Cookie("cpass",p);
         Cookie cr = new Cookie("crem",r);
@@ -133,6 +133,8 @@ public class Login extends HttpServlet {
             session.setAttribute("acc", a);
             if(a.getIsSell()==1){
                 response.sendRedirect("statistic");
+            }else if(a.getIsAdmin()==1){
+                response.sendRedirect("taxlist");
             }else{
                 response.sendRedirect("home");
             }
