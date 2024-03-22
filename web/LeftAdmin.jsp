@@ -124,6 +124,12 @@
                                 <p>Order Management</p>
                             </a>    
                         </li>        
+                        <li id="shoprefundconfirm">
+                            <a href="shoprefundconfirm">
+                                <i class="ti-map"></i>
+                                <p>Refund Confirm</p>
+                            </a>    
+                        </li>        
                         <li>
                             <a href="revenue">
                                 <i class="ti-bar-chart"></i>
@@ -156,10 +162,16 @@
                                 <p>Notification</p>
                             </a>
                         </li>
-                        <li class="active-pro">
-                            <a href="upgrade.html">
+                        <li >
+                            <a href="shopBalance">
                                 <i class="ti-export"></i>
-                                <p>Function</p>
+                                <p>Shop Balance</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="shopReport">
+                                <i class="ti-export"></i>
+                                <p>Report</p>
                             </a>
                         </li>
                     </ul>
@@ -198,6 +210,9 @@
         } 
         else if (currentPage.includes("ShopDetailInfoControl")) {
             document.getElementById("shopProfileMenuItem").classList.add("active");
+        }
+        else if (currentPage.includes("shoprefundconfirm")) {
+            document.getElementById("shoprefundconfirm").classList.add("active");
         }
         // Add similar conditions for other menu items
     </script>

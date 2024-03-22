@@ -26,6 +26,19 @@
         <link rel="stylesheet" href="css/1flaticon.css">
         <link rel="stylesheet" href="css/1icomoon.css">
         <link rel="stylesheet" href="css/1style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+              rel="stylesheet">
+
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body class="goto-here" onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
         <!-- Header Section Begin -->
@@ -124,23 +137,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
-                                <div class="block-18 text-center">
-                                    <div class="text">
+                                        <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                            <div class="block-18 text-center">
+                                                <div class="text">
 
-                                        <a href="event?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Events</h2></a>
+                                                    <a href="event?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Events</h2></a>
 
 
-                                    </div>
-                                </div>
-                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center counter-wrap ftco-animate">
+                                            <div class="block-18 text-center">
+                                                <div class="text">
+
+                                                    <a href="reasonReport?id=${lshop.shopId}"><h2 class="number" style="font-weight: bold"> Report Shop</h2></a>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <hr>
-        <%@include file="top6Spbanchay.jsp" %>
+        
         <!-- Footer Section Begin -->
 
         <footer class="footer">
