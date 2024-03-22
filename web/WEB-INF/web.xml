@@ -274,12 +274,56 @@
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>TaxBillController</servlet-name>
+        <servlet-class>controller.TaxBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TaxListControl</servlet-name>
+        <servlet-class>controller.TaxListControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetTaxControl</servlet-name>
+        <servlet-class>controller.SetTaxControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletBillControl</servlet-name>
+        <servlet-class>controller.DeletBillControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusControl</servlet-name>
+        <servlet-class>controller.ChangeStatusControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentShop</servlet-name>
+        <servlet-class>controller.PaymentShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FollowShop</servlet-name>
+        <servlet-class>controller.FollowShop</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AccountBalanceControl</servlet-name>
         <servlet-class>controller.AccountBalanceControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShopBalanceControl</servlet-name>
         <servlet-class>controller.ShopBalanceControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerRefundControl</servlet-name>
+        <servlet-class>controller.CustomerRefundControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundConfirm</servlet-name>
+        <servlet-class>controller.ShopRefundConfirm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundInfomation</servlet-name>
+        <servlet-class>controller.ShopRefundInfomation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundDecideControl</servlet-name>
+        <servlet-class>controller.ShopRefundDecideControl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddAccountBalanceControl</servlet-name>
@@ -994,12 +1038,56 @@
         <url-pattern>/choiceaddress</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>TaxBillController</servlet-name>
+        <url-pattern>/taxbill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaxListControl</servlet-name>
+        <url-pattern>/taxlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetTaxControl</servlet-name>
+        <url-pattern>/settax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletBillControl</servlet-name>
+        <url-pattern>/deletebill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusControl</servlet-name>
+        <url-pattern>/changeStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentShop</servlet-name>
+        <url-pattern>/paymentshop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowShop</servlet-name>
+        <url-pattern>/follow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AccountBalanceControl</servlet-name>
         <url-pattern>/accountBalance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ShopBalanceControl</servlet-name>
         <url-pattern>/shopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerRefundControl</servlet-name>
+        <url-pattern>/refund</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundConfirm</servlet-name>
+        <url-pattern>/shoprefundconfirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundInfomation</servlet-name>
+        <url-pattern>/refundinfomation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundDecideControl</servlet-name>
+        <url-pattern>/refunddecide</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddAccountBalanceControl</servlet-name>

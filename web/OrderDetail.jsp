@@ -58,7 +58,6 @@
                                     <div>
                                         <span class="me-3">${hoadon.getNgayXuat()}</span>
                                         <span class="me-3">#${hoadon.getMaHD()}</span>
-                                        <span class="me-3">Visa</span>
                                         <span class="">
                                             <c:if test="${trangthai.getTrangThaiId() == hoadon.getTrangThaiId()}">
                                             ${trangthai.getTrangThai()}  
@@ -129,12 +128,9 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <h3 class="h6">Payment Method</h3>
-                                        <p>Visa <br>
-                                            Total: 
-                                            <fmt:setLocale value="vi_VN"/>
-                                            <fmt:formatNumber type="currency" value="${sanpham.getPrice() * orderline.getQuantity()}" currencySymbol="₫"/> 
-                                        <span class="">PAID</span></p>
+                                        <h3 class="h6">I receive the product but it has problem</h3>
+                                        <a href="refund?invoiceID=${hoadon.getMaHD()}" class="btn btn-sm btn-primary">Make request</a>
+                                        
                                     </div>
                                     <div class="col-lg-6">
                                         <h3 class="h6">Billing address</h3>
