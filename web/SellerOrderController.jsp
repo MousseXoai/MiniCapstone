@@ -187,6 +187,7 @@
                 <div class="app-title2">
 
                     <ul class="app-breadcrumb breadcrumb side">
+                        <li class="breadcrumb-item active"><a href="statistic"><b>Home</b></a></li>
                         <li class="breadcrumb-item active"><a href="#"><b>Order Management</b></a></li>
                     </ul>
                     <div>
@@ -315,15 +316,6 @@
                                                             <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
                                                                 <option value="0"></option>
                                                                 <option value="2">Delivering</option>
-                                                                <option value="3">Completed</option>
-                                                            </select>
-                                                        </td>
-                                                    </c:if>
-                                                    <c:if test="${sl.trangthaiid == 2}">  
-                                                        <td>
-                                                            <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                                <option value="0"></option>
-                                                                <option value="3">Completed</option>
                                                             </select>
                                                         </td>
                                                     </c:if>

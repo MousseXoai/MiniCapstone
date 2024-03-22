@@ -3576,7 +3576,7 @@ public class DAO extends DBContext {
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
-                + "join Tra6ngThai tt on hd.trangthaiid = tt.trangthaiid\n"
+                + "join TrangThai tt on hd.trangthaiid = tt.trangthaiid\n"
                 + "where sp.shopid = ? ";
         try {
             ps = connection.prepareStatement(sql);

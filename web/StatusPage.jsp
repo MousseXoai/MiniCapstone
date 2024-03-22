@@ -187,6 +187,7 @@
                 <div class="app-title2">
 
                     <ul class="app-breadcrumb breadcrumb side">
+                        <li class="breadcrumb-item active"><a href="statistic"><b>Home</b></a></li>
                         <li class="breadcrumb-item active"><a href="#"><b>Order Management</b></a></li>
                     </ul>
                     <div>
@@ -310,33 +311,18 @@
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">
-                                                    <c:if test="${s1.trangthaiid == 0}">
-                                                    <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                        <option value="0"></option>
-                                                        <option value="1">Awaiting to confirm</option>
-                                                        <option value="2">Delivering</option>
-                                                        <option value="3">Completed</option>
-                                                    </select>
+                                                    <c:if test="${sl.trangthaiid == 1}">
+                                                        <td>
+                                                            <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
+                                                                <option value="0"></option>
+                                                                <option value="2">Delivering</option>
+                                                            </select>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${sl.trangthaiid == 3}">  
+                                                        
+                                                    </c:if>
                                                 </c:if>
-                                                <c:if test="${s1.trangthaiid == 1}">
-                                                    <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                        <option value="0"></option>
-                                                        <option value="2">Delivering</option>
-                                                        <option value="3">Completed</option>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${sl.trangthaiid == 2}">  
-                                                    <td>
-                                                        <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-                                                            <option value="0"></option>
-                                                            <option value="3">Completed</option>
-                                                        </select>
-                                                    </td>
-                                                </c:if>
-                                                <c:if test="${sl.trangthaiid == 3}">  
-                                                    
-                                                </c:if>
-                                            </c:if>
                                             </c:forEach> 
                                             <c:if test="${sid==3}">
                                                 <td>
