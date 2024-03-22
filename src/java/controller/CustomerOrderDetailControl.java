@@ -70,13 +70,13 @@ public class CustomerOrderDetailControl extends HttpServlet {
             response.sendRedirect("login.jsp");
         } else {
 
-            int accountID = a.getuID();
-            AccInfo acc = dao.getAccInfo(accountID);
+            int accountID = a.getuID();           
             InfoLine il = dao.getInfoLine(Integer.parseInt(invoiceID));
             HoaDon hd = dao.getHoaDon(Integer.parseInt(invoiceID));
             TrangThai tt = dao.getTrangThai(hd.getTrangThaiId());
             OrderLine ol = dao.getOrderLine(Integer.parseInt(invoiceID));
             SanPham sp = dao.getProductByID(String.valueOf(ol.getProductID()));
+            AccInfo acc = dao.getAccInfo(hd.getAccountID());
 
             request.setAttribute("sanpham", sp);
             request.setAttribute("orderline", ol);
