@@ -162,10 +162,16 @@
                                 <p>Notification</p>
                             </a>
                         </li>
-                        <li class="active-pro">
+                        <li >
                             <a href="shopBalance">
                                 <i class="ti-export"></i>
                                 <p>Shop Balance</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="shopReport">
+                                <i class="ti-export"></i>
+                                <p>Report</p>
                             </a>
                         </li>
                     </ul>

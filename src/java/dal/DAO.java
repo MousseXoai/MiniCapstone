@@ -49,6 +49,8 @@ import model.Noti;
 import model.NotiCate;
 import model.Reason;
 import model.RefundReason;
+import model.ReasonReport;
+import model.Report;
 import model.ShippingAddress;
 import model.ShopBalance;
 import model.SoLuongBan;
@@ -5473,7 +5475,6 @@ public class DAO extends DBContext {
                 int shopID = rs.getInt(14);
                 int sale = rs.getInt(15);
                 int trangthai = rs.getInt(16);
-
                 SanPham p = new SanPham(id, name, image, price, quantity, title, description, cateID, branID, color, image2, image3, image4, shopID, sale, trangthai);
                 list.add(p);
             }
@@ -5556,4 +5557,651 @@ public class DAO extends DBContext {
         }
     }
         
+    public List<AccountBalance> getAllAccBal12(int indexPage) {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc offset ? rows fetch next 1 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*1);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllAccountBalance12() {
+        
+        String query = "select count(*) from AccountBalance where loaiid=1 or loaiid=2";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<AccountBalance> getAllAccBal34(int indexPage) {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc offset ? rows fetch next 1 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*1);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllAccountBalance34() {
+        String query = "select count(*) from AccountBalance where loaiid=3 or loaiid=4";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<AccountBalance> getAllAccBal(int indexPage) {
+        List<AccountBalance> list = new ArrayList<>();
+        String query = "select * from AccountBalance order by accBalId desc offset ? rows fetch next 2 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*2);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AccountBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllAccountBalance() {
+        String query = "select count(*) from AccountBalance";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<ShopBalance> getAllShopBal123(int indexPage) {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc offset ? rows fetch next 1 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*1);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllShopBalance123() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select count(*) from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<ShopBalance> getAllShopBal45(int indexPage) {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc offset ? rows fetch next 1 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*1);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllShopBalance45() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select count(*) from ShopBalance where loaiid=4 or loaiid=5";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<ShopBalance> getAllShopBal(int indexPage) {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select * from ShopBalance order by shopBalId desc offset ? rows fetch next 2 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage-1)*2);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopBalance(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getDouble(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                rs.getInt(8)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countAllShopBalance() {
+        List<ShopBalance> list = new ArrayList<>();
+        String query = "select count(*) from ShopBalance";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public void editAccountBalance(int accountID, long vnp_Amount){
+        String query = "update Account set accountBalance=? where uID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, vnp_Amount);
+            ps.setInt(2, accountID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+    }
+    public void insertAccountBalance(int accountID, long vnp_Amount, int vnp_TxnRef) {
+        String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,3,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setDouble(2, vnp_Amount);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, vnp_TxnRef);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public long getAccBalByID(int accountID){
+        String query = "select accountBalance from Account where uID=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getLong(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public void insertAccountBalance1(int accountID, long vnp_Amount, int vnp_TxnRef) {
+        String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,4,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setDouble(2, vnp_Amount);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, vnp_TxnRef);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public void editShopBalance(int shopID, long vnp_Amount){
+        String query = "update Shop set shopBalance=? where shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, vnp_Amount);
+            ps.setInt(2, shopID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+    }
+    public void insertShopBalance(int shopID, long vnp_Amount, int vnp_TxnRef) {
+        String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,4,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDouble(2, vnp_Amount);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, vnp_TxnRef);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    public long getShopBalByID(int shopID){
+        String query = "select shopBalance from Shop where shopid=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getLong(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    public void insertShopBalance1(int shopID, long vnp_Amount, int vnp_TxnRef) {
+        String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,5,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDouble(2, vnp_Amount);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, vnp_TxnRef);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void insertHoaDon(int maHD, int accountID, long tonggia, String ngayXuat, int i, int i1, int paymentid) {
+        String sql = "SET IDENTITY_INSERT [dbo].[HoaDon] ON "
+                + "insert into HoaDon (maHD, accountID, tongGia, ngayXuat, trangthaiid, loaiid, paymentid) values (?, ?, ?, ? ,?, ?, ?) "
+                + "SET IDENTITY_INSERT [dbo].[HoaDon] OFF";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, maHD);
+            ps.setInt(2, accountID);
+            ps.setLong(3, tonggia);
+            ps.setString(4, ngayXuat);
+            ps.setInt(5, i);
+            ps.setInt(6, i);
+            ps.setInt(7, paymentid);
+            
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insertAccBal(int accountID, long tonggia, int i, int maHD) {
+        String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maHD) values(?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
+            ps.setDouble(2, tonggia);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, i);
+            ps.setInt(5, maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void insertShopBal(int shopID, long tonggia, int i, int maHD) {
+        String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maHD) values(?,?,?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+            ps.setDouble(2, tonggia);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, i);
+            ps.setInt(5, maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<ReasonReport> getListReasonReport() {
+        List<ReasonReport> list = new ArrayList<>();
+        String query = "select * from ReasonReport";
+        try {
+            ps = connection.prepareStatement(query);
+            
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ReasonReport(rs.getInt(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void insertReport(int accountID, int shopId, int reasonId, String descrip, Part part) {
+        String query = "insert Report(shopID, accountID, reasonID, status, description, image1)\n" +
+"values(?,?,?,0,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+
+            
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[4096];
+
+            int bytesRead;
+
+            while ((bytesRead = is.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
+            ps.setInt(1, shopId);
+            ps.setInt(2, accountID);
+            ps.setInt(3, reasonId);
+            ps.setString(4, descrip);
+            ps.setString(5, base64);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Report> getListReportByShopId(int shopID) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where shopID=? and status!=0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public Report getReportByID(int reportID) {
+        String query = "select * from Report where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, reportID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void updateImageReport(int reportID, Part part) {
+        String query = "update Report set image2=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            InputStream is = part.getInputStream();
+
+            
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[4096];
+
+            int bytesRead;
+
+            while ((bytesRead = is.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            String base64Image = Base64.getEncoder().encodeToString(outputStream.toByteArray());
+            String base64 = "data:image/png;base64," + base64Image;
+            ps.setString(1, base64);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateStatusReport(int reportID, int status) {
+        String query = "update Report set status=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateAppealReport(int reportID, String refute) {
+        String query = "update Report set appeal=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, refute);
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Report> getListAllReport() {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void deleteReport(int reportID) {
+        String query = "delete Report where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            ps.setInt(1, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void sendReportShop(int reportID) {
+        String query = "update Report set ngayReport=? where reportID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, getCurrentDate());
+            ps.setInt(2, reportID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updatePointShop(int shopID) {
+        String query = "update Shop set point=point-1 where shopid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
+
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Report> getListReportByStatus(int status) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where status=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Report> getListReportByShopIdAndStatus(int shopID, int status) {
+        List<Report> list = new ArrayList<>();
+        String query = "select * from Report where status=? and shopID=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, status);
+            ps.setInt(2, shopID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Report(rs.getInt(1),
+                        rs.getInt(2),
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getInt(5),
+                rs.getDate(6),
+                rs.getString(7),
+                rs.getString(8),
+                rs.getString(9),
+                rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
 }

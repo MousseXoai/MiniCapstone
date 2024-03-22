@@ -76,7 +76,7 @@ public class AccountBalanceControl extends HttpServlet {
             List<AccountBalance> listTopAccountBalance34= dao.getTopAccBal34();
             List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
             List<LoaiAccBal> listLoaiAccBal= dao.getAllLoaiAccBal();
-            System.out.println(listTopAccountBalance);
+            
             request.setAttribute("acc", acc);            
             request.setAttribute("accInfo", accInfo);
             request.setAttribute("listAccBalToday", listAccountBalanceToday);

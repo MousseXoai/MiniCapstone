@@ -44,7 +44,7 @@ public class AddCartControl extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             int accountID = a.getuID();
-            DAO dao = new DAO();
+            DAO dao = new DAO();          
             Cart cartExisted = dao.checkCartExist(accountID, productID);
             int amountExisted;
 

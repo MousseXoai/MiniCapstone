@@ -209,8 +209,45 @@ public class CustomerPaymentControl extends HttpServlet {
                     session.setAttribute("ssNote", note);
                     response.sendRedirect(paymentUrl);
                 }
-                if (payment_option.equals("momo")) {
+                if (payment_option.equals("accBal")) {
+                    long tonggia = Long.parseLong(request.getParameter("totalprice"));
+
+                    Calendar calender = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+                    SimpleDateFormat formatterCOD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String ngayXuat = formatterCOD.format(calender.getTime());
                     paymentid = 1;
+                    
+                    session.setAttribute("checkMaHoaDonTo", "none");
+                    session.setAttribute("checkMaThanhToanTrucTiep", "none");
+                    for (Cart cart : list) {
+                        for (SanPham sanPham : listSP) {
+                            if (cart.getProductID() == sanPham.getId()) {
+                                int maHD = Integer.parseInt(Config.getRandomNumber(8)); 
+                                int shopID= sanPham.getShopID();
+                                dao.insertHoaDon(maHD, accountID, tonggia, ngayXuat, 1, 1, paymentid);
+                                dao.insertInfoLine(fullname, email, address, phonenum, note);
+                                dao.insertAccBal(accountID, tonggia, 1, maHD);
+                                dao.insertShopBal(shopID, tonggia, 2, maHD);
+                                long accBal= dao.getAccBalByID(accountID);
+                                dao.editAccountBalance(accountID, accBal-tonggia);
+                                long shopBal=dao.getShopBalByID(shopID);
+                                dao.editShopBalance(shopID, shopBal+tonggia);
+                                SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
+                                dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());
+                                dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
+                                if (slb == null) {
+                                    dao.insertSoLuongBan(sanPham.getId(), cart.getAmount());
+                                } else {
+                                    dao.updateSoLuongBan(slb.getSoLuongDaBan() + cart.getAmount(), sanPham.getId());
+                                }
+                                dao.updateTongChiTieu(accInfo.getTongChiTieu() + (cart.getAmount()* (sanPham.getPrice()*(1-sanPham.getSale()/100.0))), accountID);
+                                dao.removeProductIdInCart(cart.getProductID(), accountID);
+                                break;
+                            }
+                        }
+                    }
+
+                    response.sendRedirect("thankyou");
                 }
 
                 if (payment_option.equals("cod")) {

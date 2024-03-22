@@ -52,15 +52,7 @@
           </ol>
           <h6 class="font-weight-bolder mb-0">Shop Balance</h6>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-          
-        </div>
+        
       </div>
     </nav>
     <!-- End Navbar -->
@@ -131,16 +123,17 @@
                   <div class="row">
                     <div class="col-md-6 mb-md-0 mb-4">
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img class="w-10 me-3 mb-0" src="../assets/img/logos/mastercard.png" alt="logo">
-                        <h6 class="mb-0">Nạp tiền</h6>
-                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
+                        <img class="w-10 me-3 mb-0" src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418196384.png" alt="logo">
+                        <h6 class="mb-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nạp tiền</h6>
+                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Recharge"><a href="InputAmount2.jsp">add</a></i>
+                        
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img class="w-10 me-3 mb-0" src="../assets/img/logos/visa.png" alt="logo">
-                        <h6 class="mb-0">Rút tiền</h6>
-                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
+                        <img class="w-10 me-3 mb-0" src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418196384.png" alt="logo">
+                        <h6 class="mb-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rút tiền</h6>
+                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdraw"><a href="InputAmount3.jsp">add</a></i>
                       </div>
                     </div>
                   </div>
@@ -157,7 +150,10 @@
                   <h6 class="mb-0">Invoices</h6>
                 </div>
                 <div class="col-6 text-end">
-                  <button class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    <form action="allInvoiceShopBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
                 </div>
               </div>
             </div>
@@ -188,7 +184,13 @@
                             </div>
                             <div class="d-flex align-items-center text-sm">
                                 <fmt:formatNumber type="currency" value="${i.amount}" />
-                                <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="material-icons text-lg position-relative me-1"></i> Detail</button>
+                                <c:if test="${i.loaiid==1}">
+                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="">Detail</a> </button>
+                                </c:if>
+                                <c:if test="${i.loaiid==2 || i.loaiid==3}">
+                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="SellerOrderManagement">Detail</a> </button>
+                                </c:if>
+                                
                             </div>
                         </li>       
                     </c:forEach>
@@ -204,6 +206,12 @@
             <div class="card-header pb-0 px-3">
               <h6 class="mb-0">Billing Information</h6>
             </div>
+              <div class="col-12 text-end">
+                    <form action="allBillShopBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
+                </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
                     <c:forEach items="${listTopShopBal45}" var="t">
@@ -242,7 +250,12 @@
                 <div class="col-md-6">
                   <h6 class="mb-0">Your Transaction's</h6>
                 </div>
-                
+                <div class="col-6 text-end">
+                    <form action="allTransShopBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
+                </div>
               </div>
             </div>
             <div class="card-body pt-4 p-3">
