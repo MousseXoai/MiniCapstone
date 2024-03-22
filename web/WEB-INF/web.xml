@@ -282,6 +282,22 @@
         <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CustomerRefundControl</servlet-name>
+        <servlet-class>controller.CustomerRefundControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundConfirm</servlet-name>
+        <servlet-class>controller.ShopRefundConfirm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundInfomation</servlet-name>
+        <servlet-class>controller.ShopRefundInfomation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopRefundDecideControl</servlet-name>
+        <servlet-class>controller.ShopRefundDecideControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddAccountBalanceControl</servlet-name>
         <servlet-class>controller.AddAccountBalanceControl</servlet-class>
     </servlet>
@@ -1000,6 +1016,22 @@
     <servlet-mapping>
         <servlet-name>ShopBalanceControl</servlet-name>
         <url-pattern>/shopBalance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerRefundControl</servlet-name>
+        <url-pattern>/refund</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundConfirm</servlet-name>
+        <url-pattern>/shoprefundconfirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundInfomation</servlet-name>
+        <url-pattern>/refundinfomation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopRefundDecideControl</servlet-name>
+        <url-pattern>/refunddecide</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddAccountBalanceControl</servlet-name>
