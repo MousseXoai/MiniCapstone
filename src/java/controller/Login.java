@@ -133,6 +133,8 @@ public class Login extends HttpServlet {
             session.setAttribute("acc", a);
             if(a.getIsSell()==1){
                 response.sendRedirect("statistic");
+            }else if(a.getIsAdmin()==1){
+                response.sendRedirect("taxlist");
             }else{
                 response.sendRedirect("home");
             }
