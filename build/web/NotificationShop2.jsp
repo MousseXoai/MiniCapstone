@@ -65,11 +65,7 @@
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new notifications</button>
                             </form>                         
                         </div>
-                        <div class="p-3">
-                            <form action="unreadNotiShop">
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View unread notifications</button>
-                            </form>                         
-                        </div>
+                       
                     </div>
 
                 </div>
@@ -78,6 +74,11 @@
                     <div class="box shadow-sm rounded bg-white mb-3">
                         <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Today</h6>
+                        </div>
+                         <div class="p-3">
+                            <form action="unreadNotiShop">
+                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View unread notifications</button>
+                            </form>                         
                         </div>
                         <c:forEach items="${listNotiToday}" var="a">
                             <div class="box-body p-0">

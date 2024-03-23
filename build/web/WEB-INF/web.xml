@@ -401,6 +401,18 @@
         <servlet-name>GetListReportByStatusControl1</servlet-name>
         <servlet-class>controller.GetListReportByStatusControl1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShipControl</servlet-name>
+        <servlet-class>controller.ShipControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckControl</servlet-name>
+        <servlet-class>controller.CheckControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeDeliveryControl</servlet-name>
+        <servlet-class>controller.ChangeDeliveryControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -1164,6 +1176,18 @@
     <servlet-mapping>
         <servlet-name>GetListReportByStatusControl1</servlet-name>
         <url-pattern>/getListReportByStatus1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipControl</servlet-name>
+        <url-pattern>/ship</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckControl</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeDeliveryControl</servlet-name>
+        <url-pattern>/changeDelivery</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

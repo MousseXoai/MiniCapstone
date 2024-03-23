@@ -164,13 +164,13 @@
                         </li>
                         <li >
                             <a href="shopBalance">
-                                <i class="ti-export"></i>
+                                <i class="ti-wallet"></i>
                                 <p>Shop Balance</p>
                             </a>
                         </li>
                         <li >
                             <a href="shopReport">
-                                <i class="ti-export"></i>
+                                <i class="ti-comment-alt"></i>
                                 <p>Report</p>
                             </a>
                         </li>

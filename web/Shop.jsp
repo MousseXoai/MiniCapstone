@@ -79,14 +79,7 @@
                         <div class="shop__sidebar">
                             <div class="sidebar__categories">
                                 <div class="section-title">
-                                    <h4>
-                                        <a  style="color: black; font-family: serif; font-size: 20px; cursor: pointer;" href="HotSell">Hot-sell</a> /
-                                        <a id="newestLink" style="color: black; font-family: serif; font-size: 20px; cursor: pointer;" href="#">Newest</a>
-                                    </h4>
-                                    <div id="productContainer"></div>
-
-
-
+                                    
                                     <h4>Search By Name</h4>
                                 </div>
                                 <form action="searchByName" method="post">
