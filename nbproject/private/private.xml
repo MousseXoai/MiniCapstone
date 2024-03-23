@@ -3,19 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddProduct.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/ShopDetailsAdmin.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddEventControl.java</file>
             <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/CheckAndShip.jsp</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddCheckAndShip.jsp</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddCheckerAndShipControl.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/UpdateProductControl.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddProductControl.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddEvent.jsp</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dto/CheckAndShipDTO.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/CheckAndShip.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/UpdateEventControl.java</file>
-            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/model/Account.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/ShopDetailInfoControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/TopRevenueShop.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Shop.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/ShopControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dto/AdminShopData.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/model/Shop.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/ListCustomerAdmin.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AdminRevenueShop.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Admin_design/css/DetailsShop.css</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Admin.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/ShopProfileAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>

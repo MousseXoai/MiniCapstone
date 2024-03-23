@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dto.AdminShopData;
 import dto.CheckAndShipDTO;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
@@ -44,6 +45,7 @@ import model.Account;
 import model.AccountBalance;
 import model.Contact;
 import model.DateNoti;
+import model.DoanhThu;
 import model.LoaiAccBal;
 import model.LoaiShopBal;
 import model.Noti;
@@ -675,9 +677,44 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+    
+     public List<AdminShopData> getShopByIndex(int indexPage) {
+        List<AdminShopData> lists = new ArrayList<>();
+        String query = "select * from Shop order by [shopid] offset ? rows fetch next 8 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage - 1) * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lists.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getInt(4),
+                        rs.getInt(5)
+                       
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return lists;
+    }
 
     public int countAllProduct() {
         String query = "select count(*) from SanPham";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+     public int countAllShop() {
+        String query = "select count(*) from Shop";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -1140,6 +1177,13 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+    
+    
+    
+
+     
+
+    
 
     public int countNumOfCmt(int shopID) {
         String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ?";
@@ -5541,7 +5585,43 @@ public class DAO extends DBContext {
         return list;
     }
     
-    public List<ShopHangCho> getAllShopHangCho() {
+          public List<AdminShopData> getAllShopRevenue(int indexPage) {
+        List<AdminShopData> list = new ArrayList<>();
+        String query = "SELECT\n" +
+"  SH.shopID,\n" +
+"  SH.shopName,\n" +
+"  SH.dateThamGia,\n" +
+"  COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n" +
+"  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n" +
+"FROM\n" +
+"  Shop SH\n" +
+"LEFT JOIN\n" +
+"  DoanhThu DT ON SH.shopID = DT.shopID\n" +
+"LEFT JOIN\n" +
+"  SoLuongBan SLB ON SH.shopID = SLB.productID\n" +
+"GROUP BY\n" +
+"  SH.shopID,\n" +
+"  SH.shopName,\n" +
+"  SH.dateThamGia\n" +
+"ORDER BY\n" +
+"  totalRevenue DESC offset ? rows fetch next 8 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+ps.setInt(1, (indexPage - 1) * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            System.out.println("getAllShopRevenue: " + e.getMessage());
+        }
+        return list;
+    } 
+          
+          
+          
+       public List<ShopHangCho> getAllShopHangCho() {
         List<ShopHangCho> list = new ArrayList<>();
         String query = "select * from ShopHangCho ";
         try {
@@ -5555,8 +5635,10 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
-    }
-
+    } 
+    
+    
+   
     public void AddShopHangChoToShop(String shopname, int accountid, String datethamgia, String address, String proof, String proof1) {
         try {
             String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance]) values (?,null,?, ?,?,?, ?,0 ) ";

@@ -107,7 +107,7 @@ public class ShopWaiting extends HttpServlet {
             String proof1 = request.getParameter("proof1");
             
             String approve = request.getParameter("approve");
-            String reject = request.getParameter("reject");
+
             System.out.println(id);
             System.out.println(uid);
             System.out.println(Name);
@@ -116,7 +116,7 @@ public class ShopWaiting extends HttpServlet {
             System.out.println(proof);
             System.out.println(proof1);
             System.out.println(approve);
-            System.out.println(reject);
+
             DAO dao = new DAO();
             HttpSession session = request.getSession();
             Account a = (Account) session.getAttribute("acc");
@@ -128,7 +128,7 @@ public class ShopWaiting extends HttpServlet {
                     dao.deleteShopHangCho(Integer.parseInt(id));
                     response.sendRedirect("ShopWaiting");
                 }
-                else if(reject.equals("reject")){
+                else if(approve.equals("reject")){
                     dao.deleteShopHangCho(Integer.parseInt(id));
                     response.sendRedirect("ShopWaiting");
                 }

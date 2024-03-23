@@ -301,6 +301,14 @@
         <servlet-name>ShopWaiting</servlet-name>
         <servlet-class>controller.ShopWaiting</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminRevenueShop</servlet-name>
+        <servlet-class>controller.AdminRevenueShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopDetailsAdmin</servlet-name>
+        <servlet-class>controller.ShopDetailsAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -964,6 +972,14 @@
     <servlet-mapping>
         <servlet-name>ShopWaiting</servlet-name>
         <url-pattern>/ShopWaiting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminRevenueShop</servlet-name>
+        <url-pattern>/AdminRevenueShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopDetailsAdmin</servlet-name>
+        <url-pattern>/ShopDetailsAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
