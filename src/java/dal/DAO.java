@@ -6398,5 +6398,28 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+    public void updateNullAccBalance(int invoiceID) {
+        String query = "update Account set accountBalance = 0 where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateNullAccBalance" + e.getMessage());
+        }
+    }
+    
+    public void updateAccBalance(double accountBalance, int invoiceID) {
+        String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, accountBalance);
+            ps.setInt(2, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateAccBalance" + e.getMessage());
+        }
+    }
 
 }

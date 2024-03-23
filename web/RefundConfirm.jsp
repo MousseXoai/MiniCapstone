@@ -148,8 +148,8 @@
                                                         </td>
                                                         <td><a href="refundinfomation?invoiceID=${listHD.getMaHD()}" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
                                                         <c:if test="${listHD.getTrangThaiId() == 1 && listHD.getLoaiid() == 2}">
-                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
-                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
+                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
+                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
                                                         </c:if>
                                                         <c:if test="${listHD.getTrangThaiId() == 6 && listHD.getLoaiid() == 2}">
                                                             <td>In delivery</td>
@@ -158,8 +158,8 @@
                                                             <td>Cancelled</td>
                                                         </c:if>
                                                         <c:if test="${listHD.getTrangThaiId() == 5 && listHD.getLoaiid() == 2}">
-                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=get" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
-                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
+                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
+                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
                                                         </c:if>
                                                     </tr> 
                                                 </c:forEach>
