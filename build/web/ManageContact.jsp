@@ -53,8 +53,8 @@
     <body>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
         <div class="container">
-            <a  style="margin-left: 100px" href="home">
-                <i style="font-size: 20px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back to home of shop</i>  
+            <a  style="margin-left: 100px" href="check">
+                <i style="font-size: 20px; margin-bottom: 10px; margin-left: -100px" class="fa fa-chevron-left">  Back to dashboard</i>  
             </a>
             <div class="row">
                 <div class="col-lg-3 left">

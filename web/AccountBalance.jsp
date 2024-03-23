@@ -128,13 +128,7 @@
                         
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img class="w-10 me-3 mb-0" src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418196384.png" alt="logo">
-                        <h6 class="mb-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rút tiền</h6>
-                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Withdraw"><a href="InputAmount1.jsp">add</a></i>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
