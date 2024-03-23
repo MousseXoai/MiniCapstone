@@ -4,8 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
-            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Report.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/dashboard.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Shop.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ChangeDeliveryControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ShipControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ShipperDashboard.jsp</file>
         </group>
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
         <group>
@@ -52,5 +57,7 @@
 >>>>>>> 0bf2a178e6f25919bc5e4e64d9a700fdce89d80e
 >>>>>>> c9b335cf7babb3978b66ecf93871ee097d655f20
 >>>>>>> fcc5ab3cde860baca99cc457f8441b672a5851cc
+=======
+>>>>>>> 6463e87181a0017ad7b27ddeb8bd9327080ddf64
     </open-files>
 </project-private>

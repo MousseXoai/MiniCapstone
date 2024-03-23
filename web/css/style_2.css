@@ -39,12 +39,7 @@ a:hover {
 :focus {
   outline: none; }
 
-.wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background: url("../images/bg-registration-form-7.jpg") no-repeat;
-  background-size: cover; }
+
 
 .inner {
   max-width: 758px;
@@ -195,8 +190,6 @@ button {
     -ms-box-shadow: none;
     -o-box-shadow: none; }
 
-  .wrapper {
-    background: #39459b;
-    border: 10px solid #0d99d7; } }
+}
 
 /*# sourceMappingURL=style.css.map */

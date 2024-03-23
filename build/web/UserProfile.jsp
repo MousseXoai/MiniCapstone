@@ -113,6 +113,28 @@
                         </form>
                     </div>
                 </div>
+                    <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                        <div>
+                            <b>Create Shop</b>
+                            <p>Create Shop</p>
+                        </div>
+                        <div class="ml-auto">
+                            <form action="createShop">
+                                <button type="submit" class="btn danger">Create Shop</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                        <div>
+                            <b>Account Balance</b>
+                            <p>View account Balance</p>
+                        </div>
+                        <div class="ml-auto">
+                            <form action="accountBalance">
+                                <button type="submit" class="btn danger">Account Balance</button>
+                            </form>
+                        </div>
+                    </div>
 
                 <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                     <div>
