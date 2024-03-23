@@ -4,7 +4,6 @@
  */
 package dal;
 
-import dto.AccInfoOrderDTO;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
@@ -3786,9 +3785,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithShopID(int shopID) {
-        List<AccInfoOrderDTO> list = new ArrayList<>();
-        String sql = "select ai.*,hd.maHD\n"
+    public List<AccInfo> getBuyerInfoByOrderWithShopID(int shopID) {
+        List<AccInfo> list = new ArrayList<>();
+        String sql = "select ai.*\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3800,7 +3799,13 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -3962,9 +3967,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithShopIDAndStatus(int shopID, int sid) {
-        List<AccInfoOrderDTO> list = new ArrayList<>();
-        String sql = "select ai.*,hd.maHD\n"
+    public List<AccInfo> getBuyerInfoByOrderWithShopIDAndStatus(int shopID, int sid) {
+        List<AccInfo> list = new ArrayList<>();
+        String sql = "select ai.*\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3977,7 +3982,13 @@ public class DAO extends DBContext {
             ps.setInt(2, sid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -4092,10 +4103,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithOrderID(int shopID, String input) {
-        List<AccInfoOrderDTO> list = new ArrayList<>();
+    public List<AccInfo> getBuyerInfoByOrderWithOrderID(int shopID, String input) {
+        List<AccInfo> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select ai.*,hd.maHD\n"
+        String sql = "select ai.*\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -4108,7 +4119,13 @@ public class DAO extends DBContext {
             ps.setInt(2, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderID: " + e.getMessage());
@@ -4227,10 +4244,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithOrderIDAndStatus(int shopID, int sid, String input) {
-        List<AccInfoOrderDTO> list = new ArrayList<>();
+    public List<AccInfo> getBuyerInfoByOrderWithOrderIDAndStatus(int shopID, int sid, String input) {
+        List<AccInfo> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select ai.*,hd.maHD\n"
+        String sql = "select ai.*\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -4244,7 +4261,13 @@ public class DAO extends DBContext {
             ps.setInt(3, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderIDAndStatus: " + e.getMessage());
@@ -5094,29 +5117,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public NhanXet getOrderFeedback(int accountID, int id) {
-        String sql = "select * from NhanXet where accountID = ? and productID = ?";
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, accountID);
-            ps.setInt(2, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-            NhanXet nx = new NhanXet(rs.getInt(1)
-                    , rs.getInt(2)
-                    , rs.getString(3)
-                    , rs.getDate(4)
-                    , rs.getString(5)
-                    , rs.getInt(6)
-                    , rs.getInt(7));
-            return nx;
-            }                
-        } catch (SQLException e) {
-                System.out.println("getOrderFeedback: " + e.getMessage());
-                }
-                return null;
-        }
-    
     public List<HoaDonShop> setTaxForShop(int month, int year, Date date) {
         List<HoaDonShop> list = new ArrayList<>();
         String query = "with tax as(\n"
@@ -6037,8 +6037,9 @@ public class DAO extends DBContext {
                         rs.getString(2)));
             }
         } catch (Exception e) {
-
+            
         }
+        
         return list;
     }
 

@@ -5,7 +5,6 @@
 package controller;
 
 import dal.DAO;
-import dto.AccInfoOrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
 import java.io.IOException;
@@ -103,7 +102,7 @@ public class SellerSearchOrderController extends HttpServlet {
                 List<TrangThai> statusCate = dao.getStatusCategory();
                 List<ShopOrderDTO> productList = dao.getProductOrderByOrderID(shopID, input);
                 List<OrderLine> orderLine = dao.getOrderLineByOrderID(shopID, input);
-                List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithOrderID(shopID, input);
+                List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithOrderID(shopID, input);
                 request.setAttribute("sid", sid);
                 request.setAttribute("statusCate", statusCate);
                 request.setAttribute("accInfo", accInfo);
@@ -118,7 +117,7 @@ public class SellerSearchOrderController extends HttpServlet {
                 List<TrangThai> statusCate = dao.getStatusCategory();
                 List<ShopOrderDTO> productList = dao.getProductOrderByOrderIDAndStatus(shopID, sid,input);
                 List<OrderLine> orderLine = dao.getOrderLineByOrderIDAndStatus(shopID, sid,input);
-                List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithOrderIDAndStatus(shopID, sid,input);
+                List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithOrderIDAndStatus(shopID, sid,input);
                 request.setAttribute("sid", sid);
                 request.setAttribute("statusCate", statusCate);
                 request.setAttribute("accInfo", accInfo);
