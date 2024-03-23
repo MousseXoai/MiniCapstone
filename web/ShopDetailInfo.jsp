@@ -38,7 +38,7 @@
 
     </head>
     <body>
-        <form action="UpdateShopProfileControl">
+        <form name="updateForm" action="UpdateShopProfileControl" onsubmit="return validateForm()">
             <div class="wrapper">
                 <jsp:include page="LeftAdmin.jsp"></jsp:include>
 
@@ -243,5 +243,24 @@
 
     <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/js/demo.js"></script>
+<script>
+    function validateForm() {
+        var name = document.forms["updateForm"]["name"].value;
+        var phoneNumber = document.forms["updateForm"]["phonenumber"].value;
+
+        var namePattern = /[0-9!@#$%^&*(),.?":{}|<>]/;
+        var phoneNumberPattern = /[a-zA-Z]/;
+
+        if (namePattern.test(name)) {
+            alert("Name cannot contain numbers or special characters.");
+            return false;
+        }
+
+        if (phoneNumberPattern.test(phoneNumber)) {
+            alert("Phone Number cannot contain alphabets.");
+            return false;
+        }
+    }
+</script>
 
 </html>

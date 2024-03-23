@@ -67,6 +67,7 @@
                         <div class="heading-section-bold mb-4 mt-md-5">
                             <div style="margin-bottom: 20px; margin-top: -30px; margin-left: 300px">
                                 <img style="width: 170px; border-radius: 40%" src="${lshop.avatar}">
+
                                 <h3 style="font-weight: bold">${lshop.shopName}</h3>
 
                             </div>
@@ -255,43 +256,43 @@
         <script src="js/1google-map.js"></script>
         <script src="js/1main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <script>
-        function loadAmountCart() {
-            $.ajax({
-                url: "/MiniCapstone/loadAmountCart",
-                type: "get",
-                data: {
+        <script>
+                                function loadAmountCart() {
+                                    $.ajax({
+                                        url: "/MiniCapstone/loadAmountCart",
+                                        type: "get",
+                                        data: {
 
-                },
-                success: function (responseData) {
-                    document.getElementById("amountCart").innerHTML = responseData;
-                }
-            });
-        }
-        function loadAmountWishList() {
-            $.ajax({
-                url: "/MiniCapstone/loadAmountWishList",
-                type: "get",
-                data: {
+                                        },
+                                        success: function (responseData) {
+                                            document.getElementById("amountCart").innerHTML = responseData;
+                                        }
+                                    });
+                                }
+                                function loadAmountWishList() {
+                                    $.ajax({
+                                        url: "/MiniCapstone/loadAmountWishList",
+                                        type: "get",
+                                        data: {
 
-                },
-                success: function (responseData) {
-                    document.getElementById("amountWishList").innerHTML = responseData;
-                }
-            });
-        }
-        function loadAmountNoti() {
-            $.ajax({
-                url: "/MiniCapstone/loadAmountNoti",
-                type: "get",
-                data: {
+                                        },
+                                        success: function (responseData) {
+                                            document.getElementById("amountWishList").innerHTML = responseData;
+                                        }
+                                    });
+                                }
+                                function loadAmountNoti() {
+                                    $.ajax({
+                                        url: "/MiniCapstone/loadAmountNoti",
+                                        type: "get",
+                                        data: {
 
-                },
-                success: function (responseData) {
-                    document.getElementById("amountNoti").innerHTML = responseData;
-                }
-            });
-        }
+                                        },
+                                        success: function (responseData) {
+                                            document.getElementById("amountNoti").innerHTML = responseData;
+                                        }
+                                    });
+                                }
         </script>
     </body>
 </html>

@@ -274,6 +274,34 @@
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>TaxBillController</servlet-name>
+        <servlet-class>controller.TaxBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TaxListControl</servlet-name>
+        <servlet-class>controller.TaxListControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetTaxControl</servlet-name>
+        <servlet-class>controller.SetTaxControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletBillControl</servlet-name>
+        <servlet-class>controller.DeletBillControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeStatusControl</servlet-name>
+        <servlet-class>controller.ChangeStatusControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentShop</servlet-name>
+        <servlet-class>controller.PaymentShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FollowShop</servlet-name>
+        <servlet-class>controller.FollowShop</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AccountBalanceControl</servlet-name>
         <servlet-class>controller.AccountBalanceControl</servlet-class>
     </servlet>
@@ -1008,6 +1036,34 @@
     <servlet-mapping>
         <servlet-name>CustomerChoiceAddressControl</servlet-name>
         <url-pattern>/choiceaddress</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaxBillController</servlet-name>
+        <url-pattern>/taxbill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TaxListControl</servlet-name>
+        <url-pattern>/taxlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetTaxControl</servlet-name>
+        <url-pattern>/settax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletBillControl</servlet-name>
+        <url-pattern>/deletebill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusControl</servlet-name>
+        <url-pattern>/changeStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentShop</servlet-name>
+        <url-pattern>/paymentshop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowShop</servlet-name>
+        <url-pattern>/follow</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountBalanceControl</servlet-name>
