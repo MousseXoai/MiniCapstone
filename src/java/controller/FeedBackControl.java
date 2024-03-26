@@ -63,11 +63,14 @@ public class FeedBackControl extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         String id = request.getParameter("pid");
+        String invoiceID= request.getParameter("maHD");
         int pid = Integer.parseInt(id);
+        int maHD= Integer.parseInt(invoiceID);
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
             request.setAttribute("pid", pid);
+            request.setAttribute("maHD", maHD);
             request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
         }
     }
@@ -87,7 +90,9 @@ public class FeedBackControl extends HttpServlet {
         Account a = (Account) session.getAttribute("acc");
 
         String id = request.getParameter("pid");
+        String invoiceID= request.getParameter("maHD");
         int pid = Integer.parseInt(id);
+        int maHD= Integer.parseInt(invoiceID);
         if (a == null) {
             response.sendRedirect("login.jsp");
         } else {
@@ -97,6 +102,7 @@ public class FeedBackControl extends HttpServlet {
             if (isnotNumber(rate)) {
                 String errorMessage = "Vui lòng nhập so nguyen";
                 request.setAttribute("pid", pid);
+                request.setAttribute("maHD", maHD);
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
                 return;
@@ -105,12 +111,13 @@ public class FeedBackControl extends HttpServlet {
             if (ratep < 1 || ratep > 5) {
                 String errorMessage = "Vui lòng nhập từ 1 đến 5";
                 request.setAttribute("pid", pid);
+                request.setAttribute("maHD", maHD);
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("FeedBack.jsp").forward(request, response);
                 return;
             }
             String message = request.getParameter("message");
-            dao.addFeedBack(a.getuID(), pid, message, aif.getAvatar(), ratep);
+            dao.addFeedBack(a.getuID(), pid, message, aif.getAvatar(), ratep, maHD);
             response.sendRedirect("order");
         }
     }

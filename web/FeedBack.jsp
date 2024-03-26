@@ -46,7 +46,8 @@
                                                         <input type="text" class="form-control" name="rate" id="subject" required placeholder="Vote (1* --> 5*)">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="pid" value="${pid}">
+                                                <input type="text" name="pid" value="${pid}" hidden>
+                                                <input type="text" name="maHD" value="${maHD}" hidden>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <textarea name="message" class="form-control" id="message" cols="30" rows="8" required placeholder="Message"></textarea>

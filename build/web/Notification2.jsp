@@ -52,6 +52,7 @@
                             <c:if test="${countNoti!=0}">
                                 <p  class="mb-0 text-muted">You have ${countNoti} new notifications unread.</p>
                             </c:if>
+                                
                         </div>
                         <div class="p-3">
                             <form action="noti">
@@ -63,11 +64,7 @@
                                 <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View new notifications</button>
                             </form>                         
                         </div>
-                        <div class="p-3">
-                            <form action="unreadNoti">
-                                <button type="submit" class="btn btn-outline-success btn-sm pl-4 pr-4">View unread notifications</button>
-                            </form>                         
-                        </div>
+                        
                     </div>
                     
                 </div>
@@ -76,6 +73,13 @@
                     <div class="box shadow-sm rounded bg-white mb-3">
                         <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Notifications</h6>
+                            
+                        </div>
+                        <div class="box-title border-bottom p-3">
+                            
+                            <form action="unreadNoti">
+                                <button type="submit">View unread notifications</button>
+                            </form> 
                         </div>
                         <c:forEach items="${listNoti}" var="a">
                             <div class="box-body p-0">

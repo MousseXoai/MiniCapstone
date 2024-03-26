@@ -35,19 +35,19 @@
 
     <body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()">
         <!-- Header Section Begin -->
-        <jsp:include page="Menu.jsp"></jsp:include>
-            <!-- Header Section End -->
+    <jsp:include page="Menu.jsp"></jsp:include>
+    <!-- Header Section End -->
 
-            <!-- Categories Section Begin -->
-            <section class="categories">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6 p-0">
-                            <div class="categories__item categories__large__item set-bg"
-                                 data-setbg="https://vcdn-sohoa.vnecdn.net/2021/01/21/HP-Elite-Folio-Front-Left-Forw-6107-5267-1611217952.jpg">
-                                <div class="categories__text">
-                                    <h1>Laptop</h1>
-                                    <p>${laptop} items</p>
+        <!-- Categories Section Begin -->
+        <section class="categories">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <div class="categories__item categories__large__item set-bg"
+                             data-setbg="https://vcdn-sohoa.vnecdn.net/2021/01/21/HP-Elite-Folio-Front-Left-Forw-6107-5267-1611217952.jpg">
+                            <div class="categories__text">
+                                <h1>Laptop</h1>
+                                <p>${laptop} items</p>
                                 <a href="searchCate?cid=1">Shop now</a>
                             </div>
                         </div>
@@ -106,66 +106,66 @@
                             <h4>New product</h4>
                         </div>
                     </div>
-
-
-
+                    
+                    
+                    
                 </div>
                 <div class="row property__gallery">
                     <c:forEach items="${listP}" var="p">
-                        <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="${p.image}">
-                                    <c:forEach items="${listN}" var="n">
-                                        <c:if test="${n.id==p.id}">
-                                            <div class="label new">New</div>
-                                        </c:if>
-
-
-
-                                    </c:forEach>
-                                    <c:forEach items="${listS}" var="s">
-                                        <c:if test="${p.id==s.id}">
-                                            <div class="label sale">Sale</div>
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:forEach items="${listO}" var="o">
-                                        <c:if test="${o.id==p.id}">
-                                            <div class="label stockout stockblue">Out Of Stock</div>
-                                        </c:if>
-                                    </c:forEach>
-
-                                    <ul class="product__hover">
-                                        <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="addWishList?pid=${p.id}"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="addCart?pid=${p.id}&&quantity=1"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
-                                    <div class="rating">
-                                        <c:forEach items="${star}" var="st">
-                                            <c:if test="${st.id==p.id}">
-                                                <c:forEach begin="1" end="${st.star}" step="1">
-                                                    <i class="fa fa-star"></i>
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+                        <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="${p.image}">
+                                        <c:forEach items="${listN}" var="n">
+                                            <c:if test="${n.id==p.id}">
+                                                <div class="label new">New</div>
+                                            </c:if>
+                                            
+                                                
+                                            
+                                        </c:forEach>
+                                        <c:forEach items="${listS}" var="s">
+                                                    <c:if test="${p.id==s.id}">
+                                                        <div class="label sale">Sale</div>
+                                                    </c:if>
                                                 </c:forEach>
+                                        <c:forEach items="${listO}" var="o">
+                                            <c:if test="${o.id==p.id}">
+                                                <div class="label stockout stockblue">Out Of Stock</div>
                                             </c:if>
                                         </c:forEach>
-
+                                        
+                                        <ul class="product__hover">
+                                            <li><a href="${p.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="addWishList?pid=${p.id}"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="addCart?pid=${p.id}&&quantity=1"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
                                     </div>
-                                    <fmt:setLocale value="vi_VN" />
-                                    <fmt:setBundle basename="path.to.your.resource.bundle" />
-                                    <c:if test="${p.sale==0}">
+                                    <div class="product__item__text">
+                                        <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
+                                        <div class="rating">
+                                            <c:forEach items="${star}" var="st">
+                                                <c:if test="${st.id==p.id}">
+                                                    <c:forEach begin="1" end="${st.star}" step="1">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:forEach>
+                                            
+                                        </div>
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:setBundle basename="path.to.your.resource.bundle" />
+                                        <c:if test="${p.sale==0}">
                                         <div class="product__details__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
-                                    </c:if>
-                                    <c:if test="${p.sale!=0}">
-                                        <div class="product__details__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
-                                    </c:if>
+                                        </c:if>
+                                        <c:if test="${p.sale!=0}">
+                                            <div class="product__details__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
+                                        </c:if>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                    </div>
                     </c:forEach>
-
-
+                    
+                    
 
                 </div>
             </div>
@@ -184,7 +184,7 @@
                                     <a  style="color: grey" href="shop">Shop now</a>
                                 </div>
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>
@@ -201,12 +201,12 @@
                             </div>
                             <c:forEach items="${listP}" var="p" begin="1" end="3" step="1">
                                 <div class="trend__item">
-                                    <div class="trend__item__pic">
-                                        <img style="width: 120px" src="${p.image}" alt="">
-                                    </div>
-                                    <div class="trend__item__text">
-                                        <h6>${p.title}</h6>
-                                        <div class="rating">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">
                                                     <c:forEach begin="1" end="${st.star}" step="1">
@@ -214,20 +214,20 @@
                                                     </c:forEach>
                                                 </c:if>
                                             </c:forEach>
-
+                                            
                                         </div>
-                                        <c:if test="${p.sale==0}">
-                                            <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                     <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
                                         </c:if>
                                         <c:if test="${p.sale!=0}">
                                             <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
                                         </c:if>
-
-                                    </div>
+                                    
                                 </div>
+                            </div>
                             </c:forEach>
-
-
+                            
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -237,12 +237,12 @@
                             </div>
                             <c:forEach items="${listBest}" var="p" begin="1" end="3" step="1">
                                 <div class="trend__item">
-                                    <div class="trend__item__pic">
-                                        <img style="width: 120px" src="${p.image}" alt="">
-                                    </div>
-                                    <div class="trend__item__text">
-                                        <h6>${p.title}</h6>
-                                        <div class="rating">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">
                                                     <c:forEach begin="1" end="${st.star}" step="1">
@@ -250,18 +250,18 @@
                                                     </c:forEach>
                                                 </c:if>
                                             </c:forEach>
-
+                                            
                                         </div>
-                                        <c:if test="${p.sale==0}">
-                                            <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                    <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
                                         </c:if>
                                         <c:if test="${p.sale!=0}">
                                             <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
                                         </c:if>
-                                    </div>
                                 </div>
+                            </div>
                             </c:forEach>
-
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -271,12 +271,12 @@
                             </div>
                             <c:forEach items="${listS}" var="p" begin="1" end="3" step="1">
                                 <div class="trend__item">
-                                    <div class="trend__item__pic">
-                                        <img style="width: 120px" src="${p.image}" alt="">
-                                    </div>
-                                    <div class="trend__item__text">
-                                        <h6>${p.title}</h6>
-                                        <div class="rating">
+                                <div class="trend__item__pic">
+                                    <img style="width: 120px" src="${p.image}" alt="">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6>${p.title}</h6>
+                                    <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">
                                                     <c:forEach begin="1" end="${st.star}" step="1">
@@ -284,18 +284,18 @@
                                                     </c:forEach>
                                                 </c:if>
                                             </c:forEach>
-
+                                            
                                         </div>
-                                        <c:if test="${p.sale==0}">
-                                            <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
+                                    <c:if test="${p.sale==0}">
+                                        <div class="product__price" style="font-size: 20px"> <fmt:formatNumber type="currency" value="${p.price}" /> </div>
                                         </c:if>
                                         <c:if test="${p.sale!=0}">
                                             <div class="product__price" style="font-size: 20px"><fmt:formatNumber type="currency" value="${p.price*(1-p.sale/100)}" />  <span><fmt:formatNumber type="currency" value="${p.price}" /></span></div>
                                         </c:if>
-                                    </div>
                                 </div>
+                            </div>
                             </c:forEach>
-
+                            
                         </div>
                     </div>
                 </div>
@@ -303,7 +303,7 @@
         </section>
         <!-- Trend Section End -->
 
-
+       
 
         <!-- Services Section Begin -->
         <section class="services spad">
@@ -343,12 +343,12 @@
         <!-- Services Section End -->
 
         <!-- Footer Section Begin -->
-
+    
         <jsp:include page="Footer.jsp"></jsp:include>
+    
+    <!-- Footer Section End -->
 
-        <!-- Footer Section End -->
-
-
+        
 
         <!-- Js Plugins -->
         <script src="js/jquery-3.3.1.min.js"></script>
@@ -362,60 +362,46 @@
         <script src="js/jquery.nicescroll.min.js"></script>
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            function loadAmountCart() {
-                $.ajax({
-                    url: "/MiniCapstone/loadAmountCart",
-                    type: "get",
-                    data: {
+    <script>
+        function loadAmountCart() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountCart",
+                                                    type: "get",
+                                                    data: {
 
-                    },
-                    success: function (responseData) {
-                        document.getElementById("amountCart").innerHTML = responseData;
-                    }
-                });
-            }
-            function loadAmountWishList() {
-                $.ajax({
-                    url: "/MiniCapstone/loadAmountWishList",
-                    type: "get",
-                    data: {
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountCart").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }
+        function loadAmountWishList() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountWishList",
+                                                    type: "get",
+                                                    data: {
 
-                    },
-                    success: function (responseData) {
-                        document.getElementById("amountWishList").innerHTML = responseData;
-                    }
-                });
-            }
-            function loadAmountNoti() {
-                $.ajax({
-                    url: "/MiniCapstone/loadAmountNoti",
-                    type: "get",
-                    data: {
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountWishList").innerHTML = responseData;
+                                                    }
+                                                });
+                                            } 
+        function loadAmountNoti() {
+                                                $.ajax({
+                                                    url: "/MiniCapstone/loadAmountNoti",
+                                                    type: "get",
+                                                    data: {
 
-                    },
-                    success: function (responseData) {
-                        document.getElementById("amountNoti").innerHTML = responseData;
-                    }
-                });
-            }
-
-        </script>
-        <!--Start of Tawk.to Script-->
-        <c:if test="${sessionScope.acc != null}">
-        <script type="text/javascript">
-            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-            (function () {
-                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-                s1.async = true;
-                s1.src = 'https://embed.tawk.to/65ede18f8d261e1b5f6b43ad/1hokji708';
-                s1.charset = 'UTF-8';
-                s1.setAttribute('crossorigin', '*');
-                s0.parentNode.insertBefore(s1, s0);
-            })();
-        </script>
-        </c:if>
-        <!--End of Tawk.to Script-->
+                                                    },
+                                                    success: function (responseData) {
+                                                        document.getElementById("amountNoti").innerHTML = responseData;
+                                                    }
+                                                });
+                                            }                                                  
+                                            
+    </script>
+    
     </body>
 
 </html>

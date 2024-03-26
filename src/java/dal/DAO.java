@@ -2923,7 +2923,7 @@ public class DAO extends DBContext {
         ArrayList<OrderDTO> list = new ArrayList<>();
         String query = "select \n"
                 + "	h.maHD, h.ngayXuat, sp.image, sp.name, h.tongGia, sp.sale, sp.id as productId ,\n"
-                + "	(select count(1) from NhanXet nx where nx.accountID = a.uID and nx.productID =o.productID) as countfb\n"
+                + "	(select count(1) from NhanXet nx where nx.maHD = h.maHD) as countfb\n"
                 + "from OrderLine o\n"
                 + "inner join HoaDon h on o.invoiceID = h.maHD\n"
                 + "inner join Account a on a.uID = h.accountID\n"
@@ -4707,16 +4707,17 @@ public class DAO extends DBContext {
         }
     }
 
-    public void addFeedBack(int accid, int pID, String message, String image, int rate) {
+    public void addFeedBack(int accid, int pID, String message, String image, int rate, int maHD) {
         String query = "INSERT INTO [dbo].[NhanXet]\n"
                 + "           ([accountID]\n"
                 + "           ,[productID]\n"
                 + "           ,[contentReview]\n"
                 + "           ,[dateReview]\n"
                 + "           ,[image]\n"
+                + "           ,[maHD]\n"
                 + "           ,[voteStar])\n"
                 + "     VALUES"
-                + "           (?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?)";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, accid);
@@ -4724,7 +4725,8 @@ public class DAO extends DBContext {
             ps.setString(3, message);
             ps.setDate(4, getCurrentDate());
             ps.setString(5, image);
-            ps.setInt(6, rate);
+            ps.setInt(6, maHD);
+            ps.setInt(7, rate);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("addFeedBack" + e.getMessage());
@@ -5094,29 +5096,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public NhanXet getOrderFeedback(int accountID, int id) {
-        String sql = "select * from NhanXet where accountID = ? and productID = ?";
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, accountID);
-            ps.setInt(2, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-            NhanXet nx = new NhanXet(rs.getInt(1)
-                    , rs.getInt(2)
-                    , rs.getString(3)
-                    , rs.getDate(4)
-                    , rs.getString(5)
-                    , rs.getInt(6)
-                    , rs.getInt(7));
-            return nx;
-            }                
-        } catch (SQLException e) {
-                System.out.println("getOrderFeedback: " + e.getMessage());
-                }
-                return null;
-        }
-    
     public List<HoaDonShop> setTaxForShop(int month, int year, Date date) {
         List<HoaDonShop> list = new ArrayList<>();
         String query = "with tax as(\n"
@@ -6037,8 +6016,9 @@ public class DAO extends DBContext {
                         rs.getString(2)));
             }
         } catch (Exception e) {
-
+            
         }
+        
         return list;
     }
 
@@ -6392,6 +6372,66 @@ public class DAO extends DBContext {
                 rs.getString(8),
                 rs.getString(9),
                 rs.getString(10)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public void updateNullAccBalance(int invoiceID) {
+        String query = "update Account set accountBalance = 0 where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateNullAccBalance" + e.getMessage());
+        }
+    }
+    
+    public void updateAccBalance(double accountBalance, int invoiceID) {
+        String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, accountBalance);
+            ps.setInt(2, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateAccBalance" + e.getMessage());
+        }
+    }
+
+    public List<HoaDon> getListHoaDonShip() {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        String query = "SELECT * from HoaDon where trangthaiid=2 or trangthaiid=6";
+        try {
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("listHoaDon" + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<InfoLine> getListInfoLine() {
+        ArrayList<InfoLine> list = new ArrayList<>();
+        try {
+            String strSQL = "select * from InfoLine";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int invoiceid = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String address = rs.getString(4);
+                String phonenumber = rs.getString(5);
+                String note = rs.getString(6);
+                InfoLine p = new InfoLine(invoiceid, name, email, address, phonenumber, note);
+                list.add(p);
             }
         } catch (Exception e) {
         }

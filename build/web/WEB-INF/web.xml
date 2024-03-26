@@ -274,34 +274,6 @@
         <servlet-class>controller.CustomerChoiceAddressControl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SellerOrderFeedback</servlet-name>
-        <servlet-class>controller.SellerOrderFeedback</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetListReportByStatusControl1</servlet-name>
-        <servlet-class>controller.GetListReportByStatusControl1</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetListReportByStatusControl</servlet-name>
-        <servlet-class>controller.GetListReportByStatusControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangeReportControl</servlet-name>
-        <servlet-class>controller.ChangeReportControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CheckReportControl</servlet-name>
-        <servlet-class>controller.CheckReportControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangeStatusReportControl</servlet-name>
-        <servlet-class>controller.ChangeStatusReportControl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DetailReportShopControl</servlet-name>
-        <servlet-class>controller.DetailReportShopControl</servlet-class>
-    </servlet>
-    <servlet> 
         <servlet-name>TaxBillController</servlet-name>
         <servlet-class>controller.TaxBillController</servlet-class>
     </servlet>
@@ -428,6 +400,18 @@
     <servlet>
         <servlet-name>GetListReportByStatusControl1</servlet-name>
         <servlet-class>controller.GetListReportByStatusControl1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipControl</servlet-name>
+        <servlet-class>controller.ShipControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckControl</servlet-name>
+        <servlet-class>controller.CheckControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeDeliveryControl</servlet-name>
+        <servlet-class>controller.ChangeDeliveryControl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
@@ -1066,34 +1050,6 @@
         <url-pattern>/choiceaddress</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SellerOrderFeedback</servlet-name>
-        <url-pattern>/SellerOrderFeedback</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetListReportByStatusControl1</servlet-name>
-        <url-pattern>/getListReportByStatus1</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetListReportByStatusControl</servlet-name>
-        <url-pattern>/getListReportByStatus</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeReportControl</servlet-name>
-        <url-pattern>/changeReport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CheckReportControl</servlet-name>
-        <url-pattern>/checkReport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeStatusReportControl</servlet-name>
-        <url-pattern>/changeStatusReport</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DetailReportShopControl</servlet-name>
-        <url-pattern>/detailReportShop</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>TaxBillController</servlet-name>
         <url-pattern>/taxbill</url-pattern>
     </servlet-mapping>
@@ -1220,6 +1176,18 @@
     <servlet-mapping>
         <servlet-name>GetListReportByStatusControl1</servlet-name>
         <url-pattern>/getListReportByStatus1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipControl</servlet-name>
+        <url-pattern>/ship</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckControl</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeDeliveryControl</servlet-name>
+        <url-pattern>/changeDelivery</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
