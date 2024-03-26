@@ -2467,6 +2467,32 @@ public class DAO extends DBContext {
         }
 
     }
+    
+    public void RegisterCheckerAndShipper(Account user) {
+
+        String sql = "  INSERT INTO Account ([user], pass, isSell, isAdmin, isCheck, isShip)" +
+"                         VALUES (?, ?, 0, 0, ?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getUser());
+            ps.setString(2, user.getPass());
+            if(user.getIsCheck() == 1){
+                ps.setInt(3, user.getIsCheck());
+                ps.setInt(4, 0);
+            }
+            if(user.getIsShip()== 1){
+                ps.setInt(3, 0);
+                ps.setInt(4, user.getIsShip());
+            }
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("RegisterCheckerAndShipper" + e.getMessage());
+        }
+
+    }
+    
+    
 // get id theo ten
 
     public int getIDByUsername(Account account) {
