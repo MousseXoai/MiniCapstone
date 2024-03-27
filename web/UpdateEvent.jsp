@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Event Name:</label>
-                        <input type="text" class="form-control"  name="ename" required value="${e.eventName}" >
+                        <input type="text" class="form-control"  name="ename" required value="${e.eventName}" maxlength="50" >
                     </div>
                    
                     <button type="submit" class="btn btn-primary">Update Event</button>

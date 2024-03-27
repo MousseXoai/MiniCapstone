@@ -134,7 +134,7 @@ public class Login extends HttpServlet {
             if (a.getIsSell() == 1) {
                 response.sendRedirect("statistic");
             } else if (a.getIsAdmin() == 1) {
-                response.sendRedirect("taxlist");
+                response.sendRedirect("Admin");
             } else if (a.getIsShip() == 1) {
                 response.sendRedirect("ship");
             } else if (a.getIsCheck()== 1) {

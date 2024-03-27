@@ -47,6 +47,7 @@ public class Account {
         this.user = user;
         this.pass = pass;
     }
+    
 
 
     public int getuID() {
