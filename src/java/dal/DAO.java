@@ -49,6 +49,7 @@ import model.DateNoti;
 import model.DoanhThu;
 import model.HoaDonShop;
 import model.LoaiAccBal;
+import model.LoaiOrder;
 import model.LoaiShopBal;
 import model.Noti;
 import model.NotiCate;
@@ -6643,7 +6644,7 @@ public class DAO extends DBContext {
     }
 
     public void updateAccBalance(double accountBalance, int invoiceID) {
-        String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
+        String query = "update Account set accountBalance = accountBalance+? where uID = (select accountID from HoaDon where maHD = ?) ";
         try {
             ps = connection.prepareStatement(query);
             ps.setDouble(1, accountBalance);
@@ -6888,6 +6889,43 @@ public class DAO extends DBContext {
         } catch (Exception e) {
             System.out.println("deleteShipAndCheck: " + e.getMessage());
 
+        }
+    }
+
+    public ArrayList<LoaiOrder> getAllLoaiOrder() {
+        ArrayList<LoaiOrder> list = new ArrayList<LoaiOrder>();
+        try {
+            String strSQL = "select * from LoaiOrder ";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int loaiid = rs.getInt(1);
+                String loai = rs.getString(2);
+
+                LoaiOrder p = new LoaiOrder(loaiid, loai);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllTrangThai: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public void addAccBalance(int accID, double tongGia, int i, int maHD) {
+        String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maHD)\n"
+                + "values(?,?,?,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, accID);
+            ps.setDouble(2, tongGia);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, i);
+            ps.setInt(5,maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
