@@ -91,13 +91,11 @@ public class ShopRefundDecideControl extends HttpServlet {
             } else if (getShipped.equals("done")) {
                 if (status.equals("approve")) {
                     dao.hoanTraThanhCong(Integer.parseInt(invoiceID));
-                    if(String.valueOf(a.getAccountBalance()).toLowerCase().equals("null") ){
-                        dao.updateNullAccBalance(Integer.parseInt(invoiceID));
-                        dao.updateAccBalance(a.getAccountBalance()+hd.getTongGia(), Integer.parseInt(invoiceID));
-                    }
-                    else{
-                        dao.updateAccBalance(a.getAccountBalance()+hd.getTongGia(), Integer.parseInt(invoiceID));
-                    }
+                    dao.addShopBalance(sp.getShopID(), hd.getTongGia(), 3, Integer.parseInt(invoiceID));
+                    dao.updateShopBalance(sp.getShopID(), 0-hd.getTongGia());
+                    dao.addAccBalance(hd.getAccountID(), hd.getTongGia(), 2, Integer.parseInt(invoiceID));
+                    dao.updateAccBalance(hd.getTongGia(), Integer.parseInt(invoiceID));
+                    
                     dao.updateSoLuongBan(slb.getSoLuongDaBan() - 1, sp.getId());
                     response.sendRedirect("shoprefundconfirm");
                 } else if (status.equals("decline")) {

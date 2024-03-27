@@ -49,6 +49,7 @@ import model.DateNoti;
 import model.DoanhThu;
 import model.HoaDonShop;
 import model.LoaiAccBal;
+import model.LoaiOrder;
 import model.LoaiShopBal;
 import model.Noti;
 import model.NotiCate;
@@ -5042,7 +5043,7 @@ public class DAO extends DBContext {
         ArrayList<OrderDTO> list = new ArrayList<>();
         String query = "select\n"
                 + "                	h.maHD, h.ngayXuat, sp.image, sp.name, h.tongGia, sp.sale, sp.id as productId ,\n"
-                + "                	(select count(1) from NhanXet nx where nx.accountID = a.uID and nx.productID =o.productID) as countfb\n"
+                + "                	(select count(1) from NhanXet nx where nx.maHD=h.maHD) as countfb\n"
                 + "              from OrderLine o\n"
                 + "                inner join HoaDon h on o.invoiceID = h.maHD\n"
                 + "               inner join Account a on a.uID = h.accountID\n"
@@ -6643,7 +6644,7 @@ public class DAO extends DBContext {
     }
 
     public void updateAccBalance(double accountBalance, int invoiceID) {
-        String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
+        String query = "update Account set accountBalance = accountBalance+? where uID = (select accountID from HoaDon where maHD = ?) ";
         try {
             ps = connection.prepareStatement(query);
             ps.setDouble(1, accountBalance);
@@ -6691,6 +6692,84 @@ public class DAO extends DBContext {
         return list;
     }
 
+
+    public SanPham getProductByID1(int productID) {
+        String query = "select * from SanPham where id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void addNotiOrder(int shopID, int accountID, int maHD, int cate) {
+         String query = "insert Noti(shopID, uID, trangthai, image, contentNoti, dateNoti, noticateid, maHD)\n"
+                + "values(?,?,?,?,?,?,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, shopID);
+            ps.setInt(2, accountID);
+            ps.setInt(3, 0);
+            ps.setString(4, "https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg");
+            ps.setString(5, "Đơn hàng đã được giao thành công. Hoàn thành đơn hàng!!!");
+            ps.setDate(6, getCurrentDate());
+            ps.setInt(7, cate);
+            ps.setInt(8,maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void addShopBalance(int shopID, double tongGia, int i, int maHD) {
+        String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maHD)\n"
+                + "values(?,?,?,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, shopID);
+            ps.setDouble(2, tongGia);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, i);
+            ps.setInt(5,maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void updateShopBalance(int shopID, double tongGia) {
+        String query = "update Shop set shopBalance = shopBalance+? where shopid=? ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, tongGia);
+            ps.setInt(2, shopID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateAccBalance" + e.getMessage());
+}}
     public List<AdminShopData> getAllShopRevenue(int indexPage) {
         List<AdminShopData> list = new ArrayList<>();
         String query = "SELECT\n"
@@ -6809,6 +6888,44 @@ public class DAO extends DBContext {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("deleteShipAndCheck: " + e.getMessage());
+
+        }
+    }
+
+    public ArrayList<LoaiOrder> getAllLoaiOrder() {
+        ArrayList<LoaiOrder> list = new ArrayList<LoaiOrder>();
+        try {
+            String strSQL = "select * from LoaiOrder ";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int loaiid = rs.getInt(1);
+                String loai = rs.getString(2);
+
+                LoaiOrder p = new LoaiOrder(loaiid, loai);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllTrangThai: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public void addAccBalance(int accID, double tongGia, int i, int maHD) {
+        String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maHD)\n"
+                + "values(?,?,?,?,?)";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, accID);
+            ps.setDouble(2, tongGia);
+            ps.setDate(3, getCurrentDate());
+            ps.setInt(4, i);
+            ps.setInt(5,maHD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

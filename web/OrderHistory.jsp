@@ -59,7 +59,8 @@
                         <th>MaHD</th>
                         <th>Product</th>
                         <th>Order Date</th>						
-                        <th>Status</th>						
+                        <th>Status</th>
+                        <th>Category</th>
                         <th>Total Price</th>
                         <th>Action</th>
                     </tr>
@@ -84,6 +85,13 @@
                                 <c:forEach items="${listTT}" var="listTT">  
                                     <c:if test="${listHD.getTrangThaiId() == listTT.getTrangThaiId()}">
                                         ${listTT.getTrangThai()}  
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td><span class="status text-success">&bull;</span>    
+                                <c:forEach items="${listL}" var="listL">  
+                                    <c:if test="${listHD.getLoaiid() == listL.getLoaiid()}">
+                                        ${listL.getLoai()}  
                                     </c:if>
                                 </c:forEach>
                             </td>
