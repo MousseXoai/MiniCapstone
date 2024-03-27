@@ -90,7 +90,7 @@ public class CustomerThankYouControll extends HttpServlet {
                     session.removeAttribute("maThanhToanTrucTiep");                    
                     request.getRequestDispatcher("thankyou.jsp").forward(request, response);
                 }
-                if(!maThanhToanTrucTiep.equals("none")){
+                else if(!maThanhToanTrucTiep.equals("none")){
                     ArrayList<HoaDon> listHoaDon = dao.getHoaDonByMaHoaDonCOD(Integer.parseInt(maThanhToanTrucTiep),accountID);
                     ArrayList<OrderLine> listOrderLine = dao.getAllOrderLine();
                     ArrayList<SanPham> listSP = dao.getAllProduct();

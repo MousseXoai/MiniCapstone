@@ -23,14 +23,15 @@
 
                     <div class="form-group">
                         <label for="eventName">Event Name:</label>
-                        <input type="text" class="form-control" id="eventName"  name="ename" required value="" >
+                        <input type="text" class="form-control" id="eventName"  name="ename" required value="" maxlength="50" >
                     </div>
                     <div class="form-group">
                         <label for="image">Image:</label><br>
                         <input required name="prd_image" type="file">
                     </div>
                     <button  type="submit" class="btn btn-primary">Add Event</button>
-                
+          
+
             </form>
 
         </div>
