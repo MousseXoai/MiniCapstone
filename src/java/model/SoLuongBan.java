@@ -10,6 +10,7 @@ package model;
  */
 public class SoLuongBan {
 	  private int productID;
+          
 	  private int soLuongDaBan;
 	public int getProductID() {
 		return productID;

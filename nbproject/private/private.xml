@@ -3,12 +3,98 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/SWP391/Project/MiniCapstone/web/HomePage.jsp</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/ShopRefundDecideControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/RefundConfirm.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/FeedBackControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DBContext.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/dto/AdminShopData.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/CheckAndShip.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/RegisterCustomerController.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/VerifyEmail.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/AddCheckAndShip.jsp</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/RegisterVerify.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/controller/AddCheckerAndShipControl.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/src/java/model/Account.java</file>
+            <file>file:/D:/Ky%205/SWP/project/MiniCapstone/web/Register.jsp</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/SWP391/Project/MiniCapstone/web/about.jsp</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/nbproject/build-impl.xml</file>
+>>>>>>> f0cf917c0d61b527778b2745e36fdb92e8b8659b
             <file>file:/D:/SWP391/Project/MiniCapstone/web/WEB-INF/web.xml</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dto/AccInfoOrderDTO.java</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dal/DAO.java</file>
+<<<<<<< HEAD
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/SellerOrderManagement.java</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/StatusPageController.java</file>
         </group>
+=======
+=======
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/dashboard.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Shop.jsp</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ChangeDeliveryControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ShipControl.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ShipperDashboard.jsp</file>
+>>>>>>> 5120872d34ba568c17cf6f750a177c895c54dde8
+>>>>>>> 96870744072bc8250e24028acdce10f4e8c69f6f
+        </group>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <group>
+<<<<<<< HEAD
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/PaymentShop.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/dashboard.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SetTaxControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/SearchControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/QuanLySanPhamControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/TaxBillController.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/Checkout.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/ChangeStatusControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Follow.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/ShopDetailInfo.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/Config.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/TaxListControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/about.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/FollowShop.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/DeletBillControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/IPNUrl.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/TaxList.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/RevenueControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/QuanLySanPham.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/model/ConfigShop.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/taxBill.jsp</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/src/java/controller/UpdateShopProfileControl.java</file>
+            <file>file:/D:/FULearning/Sem5/SWP391/GIT/MiniCapstone/web/NoBill.jsp</file>
+=======
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerPaymentControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/ShopRefundConfirm.java</file>
+>>>>>>> f1c041acee8f11d377e11f33d9a949a72dc0e2c4
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/ShopRefundInfomation.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerRefundControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CustomerThankYouControll.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/IPNUrl.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/CheckControl.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/model/Config.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/Login.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/thankyou1.jsp</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/src/java/controller/ShopRefundConfirm.java</file>
+            <file>file:/D:/FULearning/Sem%205/SWP/testmerge/MiniCapstone/web/thankyou.jsp</file>
+        </group>
+>>>>>>> f0cf917c0d61b527778b2745e36fdb92e8b8659b
     </open-files>
 </project-private>
