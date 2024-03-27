@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import model.AccInfo;
 import model.Account;
 import model.HoaDon;
+import model.LoaiOrder;
 import model.OrderLine;
 import model.SanPham;
 import model.TrangThai;
@@ -76,6 +77,7 @@ public class CustomerOrderControl extends HttpServlet {
                 ArrayList<OrderLine> listOL = dao.getAllOrderLine();
                 ArrayList<SanPham> listSP = dao.getAllProduct();
                 ArrayList<TrangThai> listTT = dao.getAllTrangThai();
+                ArrayList<LoaiOrder> listL = dao.getAllLoaiOrder();
                 AccInfo acc = dao.getAccInfo(accountID);
 
                 request.setAttribute("acc", acc);
@@ -83,6 +85,7 @@ public class CustomerOrderControl extends HttpServlet {
                 request.setAttribute("listOL", listOL);
                 request.setAttribute("listSP", listSP);
                 request.setAttribute("listTT", listTT);
+                request.setAttribute("listL", listL);
 
                 request.getRequestDispatcher("OrderHistory.jsp").forward(request, response);
 
