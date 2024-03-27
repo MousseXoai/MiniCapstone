@@ -149,10 +149,7 @@
   background-size: 100%;
 }
 
-.navbar-nav-scroll {
-  max-height: var(--#{$variable-prefix}scroll-height, 75vh);
-  overflow-y: auto;
-}
+
 
 // scss-docs-start navbar-expand-loop
 // Generate series of `.navbar-expand-*` responsive classes for configuring
