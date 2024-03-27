@@ -219,9 +219,9 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return 0;
-    }     
-    
- public List<Account> getuIDCustomer(){
+    }
+
+    public List<Account> getuIDCustomer() {
         List<Account> uIDCustomer = new ArrayList<>();
         String query = "SELECT uID FROM Account WHERE isCheck = 0 AND isShip = 0 and isSell = 0 and isAdmin = 0";
         try {
@@ -240,22 +240,18 @@ public class DAO extends DBContext {
         }
         return uIDCustomer;
     }
-    
-    public void updateAccountRole(int uID, int isCheck, int isShip)  {
+
+    public void updateAccountRole(int uID, int isCheck, int isShip) {
         String query = "UPDATE Account SET isCheck = ?, isShip = ? WHERE uID = ?";
         try {
             ps = connection.prepareStatement(query);
-          ps.setInt(1, isCheck);
+            ps.setInt(1, isCheck);
             ps.setInt(2, isShip);
             ps.setInt(3, uID);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-    
-    
-    
-    
 
     public List<CheckAndShipDTO> getCheckAndShip() {
         List<CheckAndShipDTO> CheckAndShip = new ArrayList<>();
@@ -632,6 +628,33 @@ public class DAO extends DBContext {
         return customerInfoList;
     }
 
+    public List<AccInfo> getTop3CustomerRevenue() {
+        List<AccInfo> customertop3 = new ArrayList<>();
+        String query = "SELECT top 3 ai.*, a.* \n"
+                + "                FROM [ShopTech].[dbo].[AccInfo] ai \n"
+                + "                JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID \n"
+                + "                WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0\n"
+                + "				order by TongChiTieu desc";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                customertop3.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+
+            }
+        } catch (Exception e) {
+
+        }
+        return customertop3;
+    }
+
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();
         String query = "select * from Brand";
@@ -677,9 +700,8 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
-    
-     public List<AdminShopData> getShopByIndex(int indexPage) {
+
+    public List<AdminShopData> getShopByIndex(int indexPage) {
         List<AdminShopData> lists = new ArrayList<>();
         String query = "select * from Shop order by [shopid] offset ? rows fetch next 8 rows only";
         try {
@@ -692,7 +714,6 @@ public class DAO extends DBContext {
                         rs.getDate(3),
                         rs.getInt(4),
                         rs.getInt(5)
-                       
                 ));
             }
         } catch (Exception e) {
@@ -712,8 +733,8 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    
-     public int countAllShop() {
+
+    public int countAllShop() {
         String query = "select count(*) from Shop";
         try {
             ps = connection.prepareStatement(query);
@@ -1177,13 +1198,6 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    
-    
-    
-
-     
-
-    
 
     public int countNumOfCmt(int shopID) {
         String query = "select count(*) from dbo.SanPham sp join dbo.NhanXet nx on sp.id = nx.productID where sp.shopid = ?";
@@ -1378,6 +1392,23 @@ public class DAO extends DBContext {
             e.printStackTrace();
         }
         return totalSeller;
+    }
+    
+       public int getTotalShipper() {
+        int totalShipper = 0;
+        String query = "SELECT COUNT(*) AS TotalShipper\n" +
+"                FROM [ShopTech].[dbo].[Account]\n" +
+"                WHERE isShip = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalShipper = rs.getInt("TotalShipper");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalShipper;
     }
 
     public int getTotalChecker() {
@@ -2467,20 +2498,20 @@ public class DAO extends DBContext {
         }
 
     }
-    
+
     public void RegisterCheckerAndShipper(Account user) {
 
-        String sql = "  INSERT INTO Account ([user], pass, isSell, isAdmin, isCheck, isShip)" +
-"                         VALUES (?, ?, 0, 0, ?, ?)";
+        String sql = "  INSERT INTO Account ([user], pass, isSell, isAdmin, isCheck, isShip)"
+                + "                         VALUES (?, ?, 0, 0, ?, ?)";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, user.getUser());
             ps.setString(2, user.getPass());
-            if(user.getIsCheck() == 1){
+            if (user.getIsCheck() == 1) {
                 ps.setInt(3, user.getIsCheck());
                 ps.setInt(4, 0);
             }
-            if(user.getIsShip()== 1){
+            if (user.getIsShip() == 1) {
                 ps.setInt(3, 0);
                 ps.setInt(4, user.getIsShip());
             }
@@ -2491,10 +2522,8 @@ public class DAO extends DBContext {
         }
 
     }
-    
-    
-// get id theo ten
 
+// get id theo ten
     public int getIDByUsername(Account account) {
 
         String sql = "select [uID] from Account Where [user] = ?";
@@ -3902,6 +3931,9 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    
+    
+
 
     public List<StatusOrderDTO> getOrderStatusByShopID(int shopID) {
         List<StatusOrderDTO> list = new ArrayList<>();
@@ -5610,44 +5642,73 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
-          public List<AdminShopData> getAllShopRevenue(int indexPage) {
+
+    public List<AdminShopData> getAllShopRevenue(int indexPage) {
         List<AdminShopData> list = new ArrayList<>();
-        String query = "SELECT\n" +
-"  SH.shopID,\n" +
-"  SH.shopName,\n" +
-"  SH.dateThamGia,\n" +
-"  COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n" +
-"  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n" +
-"FROM\n" +
-"  Shop SH\n" +
-"LEFT JOIN\n" +
-"  DoanhThu DT ON SH.shopID = DT.shopID\n" +
-"LEFT JOIN\n" +
-"  SoLuongBan SLB ON SH.shopID = SLB.productID\n" +
-"GROUP BY\n" +
-"  SH.shopID,\n" +
-"  SH.shopName,\n" +
-"  SH.dateThamGia\n" +
-"ORDER BY\n" +
-"  totalRevenue DESC offset ? rows fetch next 8 rows only";
+        String query = "SELECT\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia,\n"
+                + "  COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n"
+                + "  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n"
+                + "FROM\n"
+                + "  Shop SH\n"
+                + "LEFT JOIN\n"
+                + "  DoanhThu DT ON SH.shopID = DT.shopID\n"
+                + "LEFT JOIN\n"
+                + "  SoLuongBan SLB ON SH.shopID = SLB.productID\n"
+                + "GROUP BY\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia\n"
+                + "ORDER BY\n"
+                + "  totalRevenue DESC offset ? rows fetch next 8 rows only";
         try {
             ps = connection.prepareStatement(query);
-ps.setInt(1, (indexPage - 1) * 8);
+            ps.setInt(1, (indexPage - 1) * 8);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new AdminShopData(rs.getInt(1),
-                        rs.getString(2),rs.getDate(3),rs.getInt(4),rs.getInt(5)));
+                        rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5)));
             }
         } catch (Exception e) {
             System.out.println("getAllShopRevenue: " + e.getMessage());
         }
         return list;
-    } 
-          
-          
-          
-       public List<ShopHangCho> getAllShopHangCho() {
+    }
+
+    public List<AdminShopData> getTop3ShopRevenue() {
+        List<AdminShopData> list = new ArrayList<>();
+        String query = " SELECT top 3\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia,\n"
+                + " COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n"
+                + "  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n"
+                + "FROM\n"
+                + " Shop SH\n"
+                + "LEFT JOIN\n"
+                + "  DoanhThu DT ON SH.shopID = DT.shopID\n"
+                + "LEFT JOIN  SoLuongBan SLB ON SH.shopID = SLB.productID\n"
+                + "GROUP BY\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            System.out.println("getTop3ShopRevenue: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<ShopHangCho> getAllShopHangCho() {
         List<ShopHangCho> list = new ArrayList<>();
         String query = "select * from ShopHangCho ";
         try {
@@ -5656,15 +5717,13 @@ ps.setInt(1, (indexPage - 1) * 8);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new ShopHangCho(rs.getInt(1),
-                        rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getString(6),rs.getInt(7)));
+                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getInt(7)));
             }
         } catch (Exception e) {
         }
         return list;
-    } 
-    
-    
-   
+    }
+
     public void AddShopHangChoToShop(String shopname, int accountid, String datethamgia, String address, String proof, String proof1) {
         try {
             String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance]) values (?,null,?, ?,?,?, ?,0 ) ";
@@ -5692,6 +5751,17 @@ ps.setInt(1, (indexPage - 1) * 8);
             System.out.println("deleteShopHangCho: " + e.getMessage());
         }
     }
-    
 
+        public void deleteShipAndCheck(int uid) {
+        try {
+            String strSQL = "delete from [AccInfo] where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, uid);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShipAndCheck: " + e.getMessage());
+        }
+    }
+    
 }

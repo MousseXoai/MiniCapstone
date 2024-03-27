@@ -78,9 +78,9 @@ public class RegisterCustomerController extends HttpServlet {
 
         // Kiểm tra khoảng trắng
         if (user.isEmpty() || pass.isEmpty() || email.isEmpty() || re_pass.isEmpty()
-                || phonenumber.isEmpty() || address.isEmpty() || user.contains(" ")
+                || phonenumber.isEmpty()  || user.contains(" ")
                 || pass.contains(" ") || email.contains(" ") || re_pass.contains(" ")
-                || phonenumber.contains(" ") || address.contains(" ")) {
+                || phonenumber.contains(" ") ) {
             String errorMessage = "Các trường không được chứa khoảng trắng.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
@@ -109,7 +109,7 @@ public class RegisterCustomerController extends HttpServlet {
         System.out.println("First character is uppercase: " + Character.isUpperCase(pass.charAt(0)));
         System.out.println("Password matches regex: " + pass.matches("^[A-Za-z0-9!@#$%^&*()-=_+]+$"));
         if (pass.length() <= 8 || !(Character.isUpperCase(pass.charAt(0)) && pass.matches("^[A-Za-z0-9!@#$%^&*()-=_+]+$"))) {
-            String errorMessage = "Mật khẩu phải bắt đầu bằng chữ cái in hoa, chứa ít nhất một chữ cái và tối đa 8 ký tự.";
+            String errorMessage = "Mật khẩu phải bắt đầu bằng chữ cái in hoa, chứa ít nhất một số và tối thiểu 8 ký tự.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;

@@ -13,7 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta .servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 
 /**
  *
@@ -63,12 +65,24 @@ public class CheckAndShip extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
+           String uid = request.getParameter("uid");
+           
+        
+            
+            String delete= request.getParameter("delete");
+            
+             DAO dao = new DAO();
+           
+                if(delete.equals("delete")){  
+                    
+                    dao.deleteShipAndCheck(Integer.parseInt(uid));
+                    response.sendRedirect("CheckAndShip");
+
+    }
+    
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";

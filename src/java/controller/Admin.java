@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta .servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.AccInfo;
 import model.Account;
 
 
@@ -50,8 +51,12 @@ public class Admin extends HttpServlet {
             request.setAttribute("TotalSeller",TotalSeller);
             int TotalChecker = dao.getTotalChecker();
             request.setAttribute("TotalChecker",TotalChecker);
-            
-           
+            int TotalShipper = dao.getTotalShipper();
+            request.setAttribute("TotalShipper",TotalShipper);
+            List<AccInfo> customertop3 = dao.getTop3CustomerRevenue() ;
+           request.setAttribute("customertop3", customertop3 );
+           List<AdminShopData> list = dao.getTop3ShopRevenue();
+           request.setAttribute("list", list);
             
         
              request.getRequestDispatcher("Admin.jsp").forward(request, response);

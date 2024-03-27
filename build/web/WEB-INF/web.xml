@@ -309,6 +309,10 @@
         <servlet-name>ShopDetailsAdmin</servlet-name>
         <servlet-class>controller.ShopDetailsAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchShopAdmin</servlet-name>
+        <servlet-class>controller.SearchShopAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -980,6 +984,10 @@
     <servlet-mapping>
         <servlet-name>ShopDetailsAdmin</servlet-name>
         <url-pattern>/ShopDetailsAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopAdmin</servlet-name>
+        <url-pattern>/SearchShopAdmin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
