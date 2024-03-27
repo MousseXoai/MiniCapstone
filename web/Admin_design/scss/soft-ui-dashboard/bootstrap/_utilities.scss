@@ -426,11 +426,7 @@ $utilities: map-merge(
     // scss-docs-end utils-spacing
     // Text
     // scss-docs-start utils-text
-    "font-family": (
-      property: font-family,
-      class: font,
-      values: (monospace: var(--#{$variable-prefix}font-monospace))
-    ),
+
     "font-size": (
       rfs: true,
       property: font-size,
@@ -528,11 +524,7 @@ $utilities: map-merge(
       )
     ),
     // scss-docs-end utils-bg-color
-    "gradient": (
-      property: background-image,
-      class: bg,
-      values: (gradient: var(--#{$variable-prefix}gradient))
-    ),
+
     // scss-docs-start utils-interaction
     "user-select": (
       property: user-select,
