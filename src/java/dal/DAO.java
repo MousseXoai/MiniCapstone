@@ -6834,5 +6834,35 @@ public class DAO extends DBContext {
             System.out.println("deleteShipAndCheck: " + e.getMessage());
         }
     }
-
+    public List<SanPham> CheckerManageProduct(){
+        List<SanPham> list = new ArrayList<>();
+        try{
+            String strSQL = "select * from [SanPham] where [trangthai] = 0";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch(Exception e){
+            System.out.println("CheckerManageProduct: " + e.getMessage());
+        }
+        return list;
+    }
+    
 }
