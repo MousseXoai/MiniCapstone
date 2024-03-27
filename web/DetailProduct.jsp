@@ -294,7 +294,7 @@
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="productDetail?pid=${p.id}">${p.title}</a></h6>
+                                        <h6><a href="productDetail?pid=${p.id}">${p.name}</a></h6>
                                         <div class="rating">
                                             <c:forEach items="${star}" var="st">
                                                 <c:if test="${st.id==p.id}">

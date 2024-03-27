@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
+import model.HoaDon;
+import model.OrderLine;
+import model.SanPham;
 
 /**
  *
@@ -60,17 +63,26 @@ public class ChangeDeliveryControl extends HttpServlet {
         String id= request.getParameter("id");
         int maHD= Integer.parseInt(id);
         int status= Integer.parseInt(sta);
+        
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if (a == null || a.getIsShip() != 1) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             DAO dao = new DAO();
+            HoaDon hd= dao.getHoaDon(maHD);
+            OrderLine ol= dao.getOrderLine(maHD);
+            
+            SanPham sp= dao.getProductByID1(ol.getProductID());
             if(status==2){
                 dao.changeOrderStatus(maHD, 3);
+                dao.addNotiOrder(sp.getShopID(), hd.getAccountID(), maHD, 4);
+                dao.addShopBalance(sp.getShopID(), hd.getTongGia(), 2, maHD);
+                dao.updateShopBalance(sp.getShopID(),hd.getTongGia());
             }else{
                 dao.changeOrderStatus(maHD, 5);
-            }
+                
+                }
             request.getRequestDispatcher("ship").forward(request, response);
         }
     }
