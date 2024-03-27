@@ -20,6 +20,7 @@ public class Shop {
     private String proof;
     private String proof1;
     private double shopBalance;
+    private int point;
 
 
     public Shop() {
@@ -46,6 +47,20 @@ public class Shop {
         this.proof1 = proof1;
         this.shopBalance = shopBalance;
     }
+
+    public Shop(int shopId, String shopName, String avatar, int accountid, Date dateThamGia, String address, String proof, String proof1, double shopBalance, int point) {
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.avatar = avatar;
+        this.accountid = accountid;
+        this.dateThamGia = dateThamGia;
+        this.address = address;
+        this.proof = proof;
+        this.proof1 = proof1;
+        this.shopBalance = shopBalance;
+        this.point = point;
+    }
+    
     
 
     public int getShopId() {
@@ -119,6 +134,14 @@ public class Shop {
 
     public void setShopBalance(double shopBalance) {
         this.shopBalance = shopBalance;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
     
 }

@@ -28,6 +28,7 @@
                                   <c:if test="${sessionScope.acc.getIsAdmin()==1}">
         <li><a href="Admin">Admin Dashboard</a></li>
     </c:if>
+
                                 </c:if>
                                 
                             

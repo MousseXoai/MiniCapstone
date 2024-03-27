@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 
-<body class="g-sidenav-show  bg-gray-200">
+<body onload="loadAmountCart(); loadAmountWishList(); loadAmountNoti()" class="g-sidenav-show  bg-gray-200" >
   <jsp:include page="Menu.jsp"></jsp:include>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -51,15 +51,7 @@
           </ol>
           <h6 class="font-weight-bolder mb-0">Account Balance</h6>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-          
-        </div>
+        
       </div>
     </nav>
     <!-- End Navbar -->
@@ -130,18 +122,13 @@
                   <div class="row">
                     <div class="col-md-6 mb-md-0 mb-4">
                       <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img class="w-10 me-3 mb-0" src="../assets/img/logos/mastercard.png" alt="logo">
-                        <h6 class="mb-0">Nạp tiền</h6>
-                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
+                        <img class="w-10 me-3 mb-0" src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418196384.png" alt="logo">
+                        <h6 class="mb-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nạp tiền</h6>
+                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Recharge"><a href="InputAmount.jsp">add</a></i>
+                        
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img class="w-10 me-3 mb-0" src="../assets/img/logos/visa.png" alt="logo">
-                        <h6 class="mb-0">Rút tiền</h6>
-                        <i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -156,7 +143,10 @@
                   <h6 class="mb-0">Invoices</h6>
                 </div>
                 <div class="col-6 text-end">
-                  <button class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    <form action="allInvoiceAccBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
                 </div>
               </div>
             </div>
@@ -178,7 +168,7 @@
                             </div>
                             <div class="d-flex align-items-center text-sm">
                                 <fmt:formatNumber type="currency" value="${i.amount}" />
-                                <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="material-icons text-lg position-relative me-1"></i> Detail</button>
+                                <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="orderdetail?invoiceID=${i.maHD}">Detail</a> </button>
                             </div>
                         </li>       
                     </c:forEach>
@@ -194,6 +184,12 @@
             <div class="card-header pb-0 px-3">
               <h6 class="mb-0">Billing Information</h6>
             </div>
+              <div class="col-12 text-end">
+                    <form action="allBillAccBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
+                </div>
             <div class="card-body pt-4 p-3">
                 <ul class="list-group">
                     <c:forEach items="${listTopAccBal34}" var="t">
@@ -232,7 +228,12 @@
                 <div class="col-md-6">
                   <h6 class="mb-0">Your Transaction's</h6>
                 </div>
-                
+                <div class="col-6 text-end">
+                    <form action="allTransAccBal">
+                        <button type="submit" class="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    </form>
+                  
+                </div>
               </div>
             </div>
             <div class="card-body pt-4 p-3">
@@ -322,23 +323,49 @@
   </main>
   
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+       
+        function loadAmountCart() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountCart",
+                type: "get",
+                data: {
+
+                },
+                success: function (responseData) {
+                    document.getElementById("amountCart").innerHTML = responseData;
+                }
+            });
+        }
+        function loadAmountWishList() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountWishList",
+                type: "get",
+                data: {
+
+                },
+                success: function (responseData) {
+                    document.getElementById("amountWishList").innerHTML = responseData;
+                }
+            });
+        }
+        function loadAmountNoti() {
+            $.ajax({
+                url: "/MiniCapstone/loadAmountNoti",
+                type: "get",
+                data: {
+
+                },
+                success: function (responseData) {
+                    document.getElementById("amountNoti").innerHTML = responseData;
+                }
+            });
+        }
+        </script>
+  
+  
+  
 </body>
 
 </html>

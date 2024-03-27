@@ -131,11 +131,15 @@ public class Login extends HttpServlet {
 //co roi
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
-         if(a.getIsAdmin()==1){
-             response.sendRedirect("Admin");
-        }else if(a.getIsSell()==1){
+            if (a.getIsSell() == 1) {
                 response.sendRedirect("statistic");
-            }else{
+            } else if (a.getIsAdmin() == 1) {
+                response.sendRedirect("Admin");
+            } else if (a.getIsShip() == 1) {
+                response.sendRedirect("ship");
+            } else if (a.getIsCheck()== 1) {
+                response.sendRedirect("check");
+            } else {
                 response.sendRedirect("home");
             }
             

@@ -132,7 +132,7 @@
                                 <td>Submitted</td>
                             </c:if>
                             <c:if test="${lod.count == 0}"> 
-                                <td><a href="feedBack?pid=${lod.productId}">FeedBack</a></td>
+                                <td><a href="feedBack?pid=${lod.productId}&maHD=${lod.invoiceID}">FeedBack</a></td>
                             </c:if>
                         </tr>
                     </c:forEach>
