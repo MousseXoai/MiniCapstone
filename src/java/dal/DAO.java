@@ -4,6 +4,8 @@
  */
 package dal;
 
+import dto.AdminShopData;
+import dto.CheckAndShipDTO;
 import dto.AccInfoOrderDTO;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
@@ -44,6 +46,7 @@ import model.Account;
 import model.AccountBalance;
 import model.Contact;
 import model.DateNoti;
+import model.DoanhThu;
 import model.HoaDonShop;
 import model.LoaiAccBal;
 import model.LoaiShopBal;
@@ -55,6 +58,7 @@ import model.ReasonReport;
 import model.Report;
 import model.ShippingAddress;
 import model.ShopBalance;
+import model.ShopHangCho;
 import model.SoLuongBan;
 import model.ThanhToanVNPAY;
 import model.UserGoogleDto;
@@ -221,6 +225,66 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return 0;
+    }
+
+    public List<Account> getuIDCustomer() {
+        List<Account> uIDCustomer = new ArrayList<>();
+        String query = "SELECT uID FROM Account WHERE isCheck = 0 AND isShip = 0 and isSell = 0 and isAdmin = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                uIDCustomer.add(new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return uIDCustomer;
+    }
+
+    public void updateAccountRole(int uID, int isCheck, int isShip) {
+        String query = "UPDATE Account SET isCheck = ?, isShip = ? WHERE uID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, isCheck);
+            ps.setInt(2, isShip);
+            ps.setInt(3, uID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<CheckAndShipDTO> getCheckAndShip() {
+        List<CheckAndShipDTO> CheckAndShip = new ArrayList<>();
+        String query = "SELECT ai.uID, ai.name, ai.avatar, ai.address, ai.phonenumber, ai.email,\n"
+                + " CASE \n"
+                + " WHEN a.isCheck = 1 THEN 'Checker' \n"
+                + " WHEN a.isShip = 1 THEN 'Shipper' \n"
+                + "END AS Role \n"
+                + "FROM AccInfo ai  \n"
+                + "  INNER JOIN Account a ON ai.uID = a.uID\n"
+                + "  WHERE (a.isCheck = 1  or a.isShip = 1);";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CheckAndShip.add(new CheckAndShipDTO(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7)));
+            }
+        } catch (Exception e) {
+            System.out.println("getCheckAndShip" + e.getMessage());
+        }
+        return CheckAndShip;
     }
 
     public List<Blog> searchBlogByName(String txtSearch) {
@@ -544,6 +608,59 @@ public class DAO extends DBContext {
         return loyalCustomers;
     }
 
+    public List<AccInfo> getCustomerInfoList() {
+        List<AccInfo> customerInfoList = new ArrayList<>();
+        String query = "SELECT ai.*, a.* "
+                + "FROM [ShopTech].[dbo].[AccInfo] ai "
+                + "JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID "
+                + "WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                customerInfoList.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+
+            }
+        } catch (Exception e) {
+
+        }
+        return customerInfoList;
+    }
+
+    public List<AccInfo> getTop3CustomerRevenue() {
+        List<AccInfo> customertop3 = new ArrayList<>();
+        String query = "SELECT top 3 ai.*, a.* \n"
+                + "                FROM [ShopTech].[dbo].[AccInfo] ai \n"
+                + "                JOIN [ShopTech].[dbo].[Account] a ON ai.uID = a.uID \n"
+                + "                WHERE a.isSell = 0 AND a.isAdmin = 0 AND a.isCheck = 0 AND a.isShip = 0\n"
+                + "				order by TongChiTieu desc";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                customertop3.add(new AccInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDouble(7)));
+                System.out.println("ID: " + rs.getInt(1));
+
+            }
+        } catch (Exception e) {
+
+        }
+        return customertop3;
+    }
+
     public List<Brand> getAllBrand() {
         List<Brand> list = new ArrayList<>();
         String query = "select * from Brand";
@@ -590,8 +707,41 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<AdminShopData> getShopByIndex(int indexPage) {
+        List<AdminShopData> lists = new ArrayList<>();
+        String query = "select * from Shop order by [shopid] offset ? rows fetch next 8 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage - 1) * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lists.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getInt(4),
+                        rs.getInt(5)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return lists;
+    }
+
     public int countAllProduct() {
         String query = "select count(*) from SanPham";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countAllShop() {
+        String query = "select count(*) from Shop";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -1201,6 +1351,87 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public int getTotalUsers() {
+        int totalUsers = 0;
+        String query = "SELECT COUNT(uID) AS totalUsers FROM [ShopTech].[dbo].[Account] WHERE isAdmin = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalUsers = rs.getInt("totalUsers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalUsers;
+    }
+
+    public int getTotalCustomer() {
+        int totalCustomer = 0;
+        String query = "SELECT COUNT(*) AS TotalCustomers FROM [ShopTech].[dbo].[Account] WHERE isSell = 0 AND isAdmin = 0 AND isCheck = 0 AND isShip = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalCustomer = rs.getInt("TotalCustomers");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCustomer;
+    }
+
+    public int getTotalSeller() {
+        int totalSeller = 0;
+        String query = "SELECT COUNT(*) AS TotalSeller\n"
+                + "FROM [ShopTech].[dbo].[Account] \n"
+                + "WHERE isSell = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalSeller = rs.getInt("TotalSeller");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalSeller;
+    }
+
+    public int getTotalShipper() {
+        int totalShipper = 0;
+        String query = "SELECT COUNT(*) AS TotalShipper\n"
+                + "                FROM [ShopTech].[dbo].[Account]\n"
+                + "                WHERE isShip = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalShipper = rs.getInt("TotalShipper");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalShipper;
+    }
+
+    public int getTotalChecker() {
+        int totalChecker = 0;
+        String query = "SELECT COUNT(*) AS TotalChecker\n"
+                + "FROM [ShopTech].[dbo].[Account] \n"
+                + "WHERE isCheck = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalChecker = rs.getInt("TotalChecker");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalChecker;
     }
 
     public int getSoLuongDaBanById(String id) {
@@ -2273,8 +2504,32 @@ public class DAO extends DBContext {
         }
 
     }
-// get id theo ten
 
+    public void RegisterCheckerAndShipper(Account user) {
+
+        String sql = "  INSERT INTO Account ([user], pass, isSell, isAdmin, isCheck, isShip)"
+                + "                         VALUES (?, ?, 0, 0, ?, ?)";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getUser());
+            ps.setString(2, user.getPass());
+            if (user.getIsCheck() == 1) {
+                ps.setInt(3, user.getIsCheck());
+                ps.setInt(4, 0);
+            }
+            if (user.getIsShip() == 1) {
+                ps.setInt(3, 0);
+                ps.setInt(4, user.getIsShip());
+            }
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("RegisterCheckerAndShipper" + e.getMessage());
+        }
+
+    }
+
+// get id theo ten
     public int getIDByUsername(Account account) {
 
         String sql = "select [uID] from Account Where [user] = ?";
@@ -2707,7 +2962,7 @@ public class DAO extends DBContext {
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Noti(rs.getInt(1),
@@ -3800,7 +4055,7 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -3977,7 +4232,7 @@ public class DAO extends DBContext {
             ps.setInt(2, sid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -4108,7 +4363,7 @@ public class DAO extends DBContext {
             ps.setInt(2, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderID: " + e.getMessage());
@@ -4244,7 +4499,7 @@ public class DAO extends DBContext {
             ps.setInt(3, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderIDAndStatus: " + e.getMessage());
@@ -5118,6 +5373,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public Account getAccById(int accountID) {
         try {
             String strSQL = "select * from Account where uID = ? ";
@@ -5132,7 +5388,7 @@ public class DAO extends DBContext {
                 int isAdmin = rs.getInt(5);
                 int isCheck = rs.getInt(6);
                 int isShip = rs.getInt(7);
-                double accountBalance= rs.getInt(8);
+                double accountBalance = rs.getInt(8);
                 Account p = new Account(uid, user, pass, isSell, isAdmin, isCheck, isShip, accountBalance);
                 return p;
             }
@@ -5160,7 +5416,7 @@ public class DAO extends DBContext {
                         rs.getInt(7)));
             }
         } catch (Exception e) {
-             
+
         }
         return list;
     }
@@ -5184,13 +5440,12 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<AccountBalance> getTopAccBal12() {
         List<AccountBalance> list = new ArrayList<>();
         String query = "select top 4 * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5212,7 +5467,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5266,11 +5520,11 @@ public class DAO extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDate(7).toLocalDate(),
-                rs.getInt(8),
-                rs.getString(9),
-                rs.getInt(10),
-                rs.getString(11),
-                rs.getString(12)));
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getString(11),
+                        rs.getString(12)));
             }
         } catch (Exception e) {
         }
@@ -5300,7 +5554,7 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                return new Shop(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8),rs.getDouble(9));
+                return new Shop(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDouble(9));
             }
         } catch (SQLException e) {
             System.out.println("getShopById" + e.getMessage());
@@ -5313,7 +5567,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5324,7 +5577,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5336,7 +5589,6 @@ public class DAO extends DBContext {
         String query = "select top 4 * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5347,7 +5599,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5370,7 +5622,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5393,7 +5645,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5415,7 +5667,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public void traSanPham(int invoiceID) {
         String query = "update HoaDon set loaiid = 2, trangthaiid = 1 where maHD = ? ";
         try {
@@ -5426,8 +5678,8 @@ public class DAO extends DBContext {
             System.out.println("traSanPham" + e.getMessage());
         }
     }
-    
-     public ArrayList<Reason> getAllReason1() {
+
+    public ArrayList<Reason> getAllReason1() {
         ArrayList<Reason> list = new ArrayList<>();
         String query = "select * from Reason where reason_option = 1 ";
         try {
@@ -5442,7 +5694,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public void insertRefundReason(int maHD, int reasonID, String note) {
         String query = "INSERT INTO RefundReason (maHD, reasonID, note) VALUES (?, ?, ?) ";
         try {
@@ -5455,7 +5707,7 @@ public class DAO extends DBContext {
             System.out.println("insertRefundReason" + e.getMessage());
         }
     }
-    
+
     public ArrayList<HoaDon> listHoaDonRefund() {
         ArrayList<HoaDon> list = new ArrayList<>();
         String query = "select * from HoaDon where loaiid = 2 ";
@@ -5470,8 +5722,8 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
-        public ArrayList<SanPham> getAllShopProductByAccountId(int accountID) {
+
+    public ArrayList<SanPham> getAllShopProductByAccountId(int accountID) {
         ArrayList<SanPham> list = new ArrayList<SanPham>();
         try {
             String strSQL = "select sp.* from SanPham as sp join Shop as s on sp.shopid = s.shopid where s.accountID = ? ";
@@ -5503,7 +5755,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public Reason getReasonForRefund(int invoiceID) {
         try {
             String strSQL = "select reason.* from RefundReason as rr join Reason as reason on rr.reasonID = reason.reasonID where maHD = ? ";
@@ -5513,7 +5765,7 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 int reasonid = rs.getInt(1);
                 String reasonname = rs.getString(2);
-                int reason_option = rs.getInt(3);             
+                int reason_option = rs.getInt(3);
                 Reason p = new Reason(reasonid, reasonname, reason_option);
                 return p;
             }
@@ -5521,8 +5773,8 @@ public class DAO extends DBContext {
             System.out.println("getAccInfo: " + e.getMessage());
         }
         return null;
-    }   
-    
+    }
+
     public RefundReason getRefundReasonForRefund(int reasonID, int invoiceID) {
         try {
             String strSQL = "select * from RefundReason where reasonID = ? and maHD = ? ";
@@ -5533,7 +5785,7 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 int refundreason = rs.getInt(1);
                 int mahd = rs.getInt(2);
-                int reasonid = rs.getInt(3); 
+                int reasonid = rs.getInt(3);
                 String note = rs.getString(4);
                 RefundReason p = new RefundReason(refundreason, mahd, reasonid, note);
                 return p;
@@ -5542,8 +5794,8 @@ public class DAO extends DBContext {
             System.out.println("getAccInfo: " + e.getMessage());
         }
         return null;
-    }    
-    
+    }
+
     public void tuChoiHoanTra(int invoiceID) {
         String query = "update HoaDon set trangthaiid = 4 where maHD = ? ";
         try {
@@ -5554,7 +5806,7 @@ public class DAO extends DBContext {
             System.out.println("tuChoiHoanTra" + e.getMessage());
         }
     }
-    
+
     public void chapNhanHoanTra(int invoiceID) {
         String query = "update HoaDon set trangthaiid = 6 where maHD = ? ";
         try {
@@ -5565,7 +5817,7 @@ public class DAO extends DBContext {
             System.out.println("chapNhanHoanTra" + e.getMessage());
         }
     }
-    
+
     public void hoanTraThanhCong(int invoiceID) {
         String query = "update HoaDon set trangthaiid = 3 where maHD = ? ";
         try {
@@ -5576,13 +5828,13 @@ public class DAO extends DBContext {
             System.out.println("chapNhanHoanTra" + e.getMessage());
         }
     }
-        
+
     public List<AccountBalance> getAllAccBal12(int indexPage) {
         List<AccountBalance> list = new ArrayList<>();
         String query = "select * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc offset ? rows fetch next 1 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*1);
+            ps.setInt(1, (indexPage - 1) * 1);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5598,7 +5850,6 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
 
     public void deleteBill(int maShopHD) {
         try {
@@ -5648,12 +5899,12 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public int countAllAccountBalance12() {
-        
+
         String query = "select count(*) from AccountBalance where loaiid=1 or loaiid=2";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5669,7 +5920,7 @@ public class DAO extends DBContext {
         String query = "select * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc offset ? rows fetch next 1 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*1);
+            ps.setInt(1, (indexPage - 1) * 1);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5690,7 +5941,6 @@ public class DAO extends DBContext {
         String query = "select count(*) from AccountBalance where loaiid=3 or loaiid=4";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5706,7 +5956,7 @@ public class DAO extends DBContext {
         String query = "select * from AccountBalance order by accBalId desc offset ? rows fetch next 2 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*2);
+            ps.setInt(1, (indexPage - 1) * 2);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5727,7 +5977,6 @@ public class DAO extends DBContext {
         String query = "select count(*) from AccountBalance";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5743,7 +5992,7 @@ public class DAO extends DBContext {
         String query = "select * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc offset ? rows fetch next 1 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*1);
+            ps.setInt(1, (indexPage - 1) * 1);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5754,7 +6003,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5766,7 +6015,6 @@ public class DAO extends DBContext {
         String query = "select count(*) from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5782,7 +6030,7 @@ public class DAO extends DBContext {
         String query = "select * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc offset ? rows fetch next 1 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*1);
+            ps.setInt(1, (indexPage - 1) * 1);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5793,7 +6041,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5805,7 +6053,6 @@ public class DAO extends DBContext {
         String query = "select count(*) from ShopBalance where loaiid=4 or loaiid=5";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5821,7 +6068,7 @@ public class DAO extends DBContext {
         String query = "select * from ShopBalance order by shopBalId desc offset ? rows fetch next 2 rows only";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, (indexPage-1)*2);
+            ps.setInt(1, (indexPage - 1) * 2);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5832,7 +6079,7 @@ public class DAO extends DBContext {
                         rs.getInt(5),
                         rs.getInt(6),
                         rs.getInt(7),
-                rs.getInt(8)));
+                        rs.getInt(8)));
             }
         } catch (Exception e) {
         }
@@ -5844,7 +6091,6 @@ public class DAO extends DBContext {
         String query = "select count(*) from ShopBalance";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5854,7 +6100,8 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    public void editAccountBalance(int accountID, long vnp_Amount){
+
+    public void editAccountBalance(int accountID, long vnp_Amount) {
         String query = "update Account set accountBalance=? where uID=?";
         try {
             ps = connection.prepareStatement(query);
@@ -5862,10 +6109,11 @@ public class DAO extends DBContext {
             ps.setInt(2, accountID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
         }
     }
+
     public void insertAccountBalance(int accountID, long vnp_Amount, int vnp_TxnRef) {
         String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,3,?)";
         try {
@@ -5878,7 +6126,8 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    public long getAccBalByID(int accountID){
+
+    public long getAccBalByID(int accountID) {
         String query = "select accountBalance from Account where uID=? ";
         try {
             ps = connection.prepareStatement(query);
@@ -5892,6 +6141,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public void insertAccountBalance1(int accountID, long vnp_Amount, int vnp_TxnRef) {
         String query = "insert AccountBalance(accountID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,4,?)";
         try {
@@ -5904,7 +6154,8 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    public void editShopBalance(int shopID, long vnp_Amount){
+
+    public void editShopBalance(int shopID, long vnp_Amount) {
         String query = "update Shop set shopBalance=? where shopid=?";
         try {
             ps = connection.prepareStatement(query);
@@ -5912,10 +6163,11 @@ public class DAO extends DBContext {
             ps.setInt(2, shopID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
         }
     }
+
     public void insertShopBalance(int shopID, long vnp_Amount, int vnp_TxnRef) {
         String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,4,?)";
         try {
@@ -5928,7 +6180,8 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    public long getShopBalByID(int shopID){
+
+    public long getShopBalByID(int shopID) {
         String query = "select shopBalance from Shop where shopid=? ";
         try {
             ps = connection.prepareStatement(query);
@@ -5942,6 +6195,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public void insertShopBalance1(int shopID, long vnp_Amount, int vnp_TxnRef) {
         String query = "insert ShopBalance(shopID, amount, ngayXuat, loaiid, maThanhToan) values(?,?,?,5,?)";
         try {
@@ -5968,7 +6222,7 @@ public class DAO extends DBContext {
             ps.setInt(5, i);
             ps.setInt(6, i);
             ps.setInt(7, paymentid);
-            
+
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -6008,7 +6262,6 @@ public class DAO extends DBContext {
         String query = "select * from ReasonReport";
         try {
             ps = connection.prepareStatement(query);
-            
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -6016,9 +6269,9 @@ public class DAO extends DBContext {
                         rs.getString(2)));
             }
         } catch (Exception e) {
-            
+
         }
-        
+
         return list;
     }
 
@@ -6035,16 +6288,15 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
+
     public void insertReport(int accountID, int shopId, int reasonId, String descrip, Part part) {
-        String query = "insert Report(shopID, accountID, reasonID, status, description, image1)\n" +
-"values(?,?,?,0,?,?)";
+        String query = "insert Report(shopID, accountID, reasonID, status, description, image1)\n"
+                + "values(?,?,?,0,?,?)";
 
         try {
             ps = connection.prepareStatement(query);
             InputStream is = part.getInputStream();
 
-            
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[4096];
@@ -6078,14 +6330,14 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Report(rs.getInt(1),
                         rs.getInt(2),
-                rs.getInt(3),
-                rs.getInt(4),
-                rs.getInt(5),
-                rs.getDate(6),
-                rs.getString(7),
-                rs.getString(8),
-                rs.getString(9),
-                rs.getString(10)));
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)));
             }
         } catch (Exception e) {
         }
@@ -6102,14 +6354,14 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 return new Report(rs.getInt(1),
                         rs.getInt(2),
-                rs.getInt(3),
-                rs.getInt(4),
-                rs.getInt(5),
-                rs.getDate(6),
-                rs.getString(7),
-                rs.getString(8),
-                rs.getString(9),
-                rs.getString(10));
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10));
             }
         } catch (Exception e) {
         }
@@ -6178,6 +6430,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public int getStatusByShopID(int shopID) {
         List<HoaDonShop> list = new ArrayList<>();
         String query = " select status from HoaDonShop where shopID =? ";
@@ -6193,6 +6446,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
+
     public void followShop(int accountID, int shopID, Date date) {
         String query = "insert Cart(accountID, productID, amount) values(?,?,?)";
         try {
@@ -6204,14 +6458,13 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
+
     public void updateImageReport(int reportID, Part part) {
         String query = "update Report set image2=? where reportID=?";
         try {
             ps = connection.prepareStatement(query);
             InputStream is = part.getInputStream();
 
-            
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[4096];
@@ -6228,7 +6481,7 @@ public class DAO extends DBContext {
             ps.setInt(2, reportID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6242,7 +6495,7 @@ public class DAO extends DBContext {
             ps.setInt(2, reportID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6256,7 +6509,7 @@ public class DAO extends DBContext {
             ps.setInt(2, reportID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6272,14 +6525,14 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Report(rs.getInt(1),
                         rs.getInt(2),
-                rs.getInt(3),
-                rs.getInt(4),
-                rs.getInt(5),
-                rs.getDate(6),
-                rs.getString(7),
-                rs.getString(8),
-                rs.getString(9),
-                rs.getString(10)));
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)));
             }
         } catch (Exception e) {
         }
@@ -6290,11 +6543,11 @@ public class DAO extends DBContext {
         String query = "delete Report where reportID=?";
         try {
             ps = connection.prepareStatement(query);
-            
+
             ps.setInt(1, reportID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6308,7 +6561,7 @@ public class DAO extends DBContext {
             ps.setInt(2, reportID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6321,7 +6574,7 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
 
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -6338,14 +6591,14 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Report(rs.getInt(1),
                         rs.getInt(2),
-                rs.getInt(3),
-                rs.getInt(4),
-                rs.getInt(5),
-                rs.getDate(6),
-                rs.getString(7),
-                rs.getString(8),
-                rs.getString(9),
-                rs.getString(10)));
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)));
             }
         } catch (Exception e) {
         }
@@ -6364,20 +6617,20 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Report(rs.getInt(1),
                         rs.getInt(2),
-                rs.getInt(3),
-                rs.getInt(4),
-                rs.getInt(5),
-                rs.getDate(6),
-                rs.getString(7),
-                rs.getString(8),
-                rs.getString(9),
-                rs.getString(10)));
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getDate(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)));
             }
         } catch (Exception e) {
         }
         return list;
     }
-    
+
     public void updateNullAccBalance(int invoiceID) {
         String query = "update Account set accountBalance = 0 where uID = (select accountID from HoaDon where maHD = ?) ";
         try {
@@ -6388,7 +6641,7 @@ public class DAO extends DBContext {
             System.out.println("updateNullAccBalance" + e.getMessage());
         }
     }
-    
+
     public void updateAccBalance(double accountBalance, int invoiceID) {
         String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
         try {
@@ -6406,7 +6659,7 @@ public class DAO extends DBContext {
         String query = "SELECT * from HoaDon where trangthaiid=2 or trangthaiid=6";
         try {
             ps = connection.prepareStatement(query);
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new HoaDon(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getDate(4), rs.getInt(5), rs.getInt(6), rs.getInt(7)));
@@ -6436,6 +6689,127 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public List<AdminShopData> getAllShopRevenue(int indexPage) {
+        List<AdminShopData> list = new ArrayList<>();
+        String query = "SELECT\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia,\n"
+                + "  COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n"
+                + "  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n"
+                + "FROM\n"
+                + "  Shop SH\n"
+                + "LEFT JOIN\n"
+                + "  DoanhThu DT ON SH.shopID = DT.shopID\n"
+                + "LEFT JOIN\n"
+                + "  SoLuongBan SLB ON SH.shopID = SLB.productID\n"
+                + "GROUP BY\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia\n"
+                + "ORDER BY\n"
+                + "  totalRevenue DESC offset ? rows fetch next 8 rows only";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (indexPage - 1) * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            System.out.println("getAllShopRevenue: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<AdminShopData> getTop3ShopRevenue() {
+        List<AdminShopData> list = new ArrayList<>();
+        String query = " SELECT top 3\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia,\n"
+                + " COALESCE(SUM(DT.TongBanHang), 0) AS totalRevenue,\n"
+                + "  COALESCE(SUM(SLB.soLuongDaBan), 0) AS totalSales\n"
+                + "FROM\n"
+                + " Shop SH\n"
+                + "LEFT JOIN\n"
+                + "  DoanhThu DT ON SH.shopID = DT.shopID\n"
+                + "LEFT JOIN  SoLuongBan SLB ON SH.shopID = SLB.productID\n"
+                + "GROUP BY\n"
+                + "  SH.shopID,\n"
+                + "  SH.shopName,\n"
+                + "  SH.dateThamGia";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new AdminShopData(rs.getInt(1),
+                        rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            System.out.println("getTop3ShopRevenue: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<ShopHangCho> getAllShopHangCho() {
+        List<ShopHangCho> list = new ArrayList<>();
+        String query = "select * from ShopHangCho ";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ShopHangCho(rs.getInt(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getInt(7)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void AddShopHangChoToShop(String shopname, int accountid, String datethamgia, String address, String proof, String proof1) {
+        try {
+            String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance]) values (?,null,?, ?,?,?, ?,0 ) ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setString(1, shopname);
+            ps.setInt(2, accountid);
+            ps.setString(3, datethamgia);
+            ps.setString(4, address);
+            ps.setString(5, proof);
+            ps.setString(6, proof1);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("AddShopHangChoToShop: " + e.getMessage());
+        }
+    }
+
+    public void deleteShopHangCho(int id) {
+        try {
+            String strSQL = "delete from [ShopHangCho] where id = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShopHangCho: " + e.getMessage());
+        }
+    }
+
+    public void deleteShipAndCheck(int uid) {
+        try {
+            String strSQL = "delete from [AccInfo] where uID = ? ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, uid);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShipAndCheck: " + e.getMessage());
+        }
     }
 
 }

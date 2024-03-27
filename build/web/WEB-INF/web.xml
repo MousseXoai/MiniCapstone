@@ -310,6 +310,38 @@
         <servlet-class>controller.ShopBalanceControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>controller.Admin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCustomer</servlet-name>
+        <servlet-class>controller.ListCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckAndShip</servlet-name>
+        <servlet-class>controller.CheckAndShip</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCheckerAndShipControl</servlet-name>
+        <servlet-class>controller.AddCheckerAndShipControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopWaiting</servlet-name>
+        <servlet-class>controller.ShopWaiting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminRevenueShop</servlet-name>
+        <servlet-class>controller.AdminRevenueShop</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopDetailsAdmin</servlet-name>
+        <servlet-class>controller.ShopDetailsAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchShopAdmin</servlet-name>
+        <servlet-class>controller.SearchShopAdmin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CustomerRefundControl</servlet-name>
         <servlet-class>controller.CustomerRefundControl</servlet-class>
     </servlet>
@@ -1086,6 +1118,38 @@
         <url-pattern>/shopBalance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCustomer</servlet-name>
+        <url-pattern>/ListCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckAndShip</servlet-name>
+        <url-pattern>/CheckAndShip</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCheckerAndShipControl</servlet-name>
+        <url-pattern>/AddCheckerAndShipControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopWaiting</servlet-name>
+        <url-pattern>/ShopWaiting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminRevenueShop</servlet-name>
+        <url-pattern>/AdminRevenueShop</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopDetailsAdmin</servlet-name>
+        <url-pattern>/ShopDetailsAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchShopAdmin</servlet-name>
+        <url-pattern>/SearchShopAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CustomerRefundControl</servlet-name>
         <url-pattern>/refund</url-pattern>
     </servlet-mapping>
@@ -1187,7 +1251,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangeDeliveryControl</servlet-name>
-        <url-pattern>/changeDelivery</url-pattern>
+        <url-pattern>/changeDelivery</url-pattern>      
     </servlet-mapping>
     <session-config>
         <session-timeout>
