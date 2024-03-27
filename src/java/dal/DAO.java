@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dto.AccInfoOrderDTO;
 import dto.OrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
@@ -3785,9 +3786,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfo> getBuyerInfoByOrderWithShopID(int shopID) {
-        List<AccInfo> list = new ArrayList<>();
-        String sql = "select ai.*\n"
+    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithShopID(int shopID) {
+        List<AccInfoOrderDTO> list = new ArrayList<>();
+        String sql = "select ai.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3799,13 +3800,7 @@ public class DAO extends DBContext {
             ps.setInt(1, shopID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getDouble(7)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -3967,9 +3962,9 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfo> getBuyerInfoByOrderWithShopIDAndStatus(int shopID, int sid) {
-        List<AccInfo> list = new ArrayList<>();
-        String sql = "select ai.*\n"
+    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithShopIDAndStatus(int shopID, int sid) {
+        List<AccInfoOrderDTO> list = new ArrayList<>();
+        String sql = "select ai.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -3982,13 +3977,7 @@ public class DAO extends DBContext {
             ps.setInt(2, sid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getDouble(7)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getOrderLineByShopID: " + e.getMessage());
@@ -4103,10 +4092,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfo> getBuyerInfoByOrderWithOrderID(int shopID, String input) {
-        List<AccInfo> list = new ArrayList<>();
+    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithOrderID(int shopID, String input) {
+        List<AccInfoOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select ai.*\n"
+        String sql = "select ai.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -4119,13 +4108,7 @@ public class DAO extends DBContext {
             ps.setInt(2, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getDouble(7)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderID: " + e.getMessage());
@@ -4244,10 +4227,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccInfo> getBuyerInfoByOrderWithOrderIDAndStatus(int shopID, int sid, String input) {
-        List<AccInfo> list = new ArrayList<>();
+    public List<AccInfoOrderDTO> getBuyerInfoByOrderWithOrderIDAndStatus(int shopID, int sid, String input) {
+        List<AccInfoOrderDTO> list = new ArrayList<>();
         int i = Integer.parseInt(input);
-        String sql = "select ai.*\n"
+        String sql = "select ai.*,hd.maHD\n"
                 + "from  HoaDon hd\n"
                 + "join OrderLine ol on hd.maHD = ol.invoiceID\n"
                 + "join SanPham sp on ol.productID = sp.id\n"
@@ -4261,13 +4244,7 @@ public class DAO extends DBContext {
             ps.setInt(3, i);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new AccInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getDouble(7)));
+                list.add(new AccInfoOrderDTO(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(8)));
             }
         } catch (SQLException e) {
             System.out.println("getBuyerInfoByOrderWithOrderIDAndStatus: " + e.getMessage());
@@ -6399,6 +6376,29 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
         return list;
+    }
+    
+    public void updateNullAccBalance(int invoiceID) {
+        String query = "update Account set accountBalance = 0 where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateNullAccBalance" + e.getMessage());
+        }
+    }
+    
+    public void updateAccBalance(double accountBalance, int invoiceID) {
+        String query = "update Account set accountBalance = ? where uID = (select accountID from HoaDon where maHD = ?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, accountBalance);
+            ps.setInt(2, invoiceID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("updateAccBalance" + e.getMessage());
+        }
     }
 
     public List<HoaDon> getListHoaDonShip() {
