@@ -306,6 +306,11 @@
                                                                 Completed
                                                             </span>
                                                         </c:if>
+                                                        <c:if test="${s.trangThaiId == 4}">
+                                                            <span class="badge bg-danger">
+                                                                Cancel
+                                                            </span>
+                                                        </c:if>
                                                     </td>
                                                 </c:if>
                                             </c:forEach>
@@ -317,12 +322,16 @@
                                                             <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
                                                                 <option value="0"></option>
                                                                 <option value="2">Delivering</option>
+                                                                <option value="4">Cancel</option>
                                                             </select>
                                                         </td>
                                                     </c:if>
-                                                    <c:if test="${sl.trangthaiid == 3}">  
-                                                        
-                                                    </c:if>
+                                                    
+                                                    
+                                                    <c:if test="${sl.trangthaiid == 4}">  
+                                                        <td>                                                      
+                                                        </td>
+                                                    </c:if>    
                                                 </c:if>
                                             </c:forEach> 
                                             <c:if test="${sid==3}">

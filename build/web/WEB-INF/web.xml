@@ -413,6 +413,14 @@
         <servlet-name>ChangeDeliveryControl</servlet-name>
         <servlet-class>controller.ChangeDeliveryControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerOrderFeedback</servlet-name>
+        <servlet-class>controller.SellerOrderFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckerManageProduct</servlet-name>
+        <servlet-class>controller.CheckerManageProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManageWishlist</servlet-name>
         <url-pattern>/ManageWishlist</url-pattern>
@@ -1188,6 +1196,14 @@
     <servlet-mapping>
         <servlet-name>ChangeDeliveryControl</servlet-name>
         <url-pattern>/changeDelivery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderFeedback</servlet-name>
+        <url-pattern>/SellerOrderFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckerManageProduct</servlet-name>
+        <url-pattern>/CheckerManageProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

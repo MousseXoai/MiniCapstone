@@ -53,7 +53,7 @@
 
                     <ul class="nav">
                         <li id="dashboardMenuItem">
-                            <a href="statistic">
+                            <a href="CheckerManageProduct.jsp">
                                 <i class="ti-panel"></i>
                                 <p>Manage Product</p>
                             </a>

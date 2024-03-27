@@ -6437,5 +6437,27 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
+    public NhanXet getOrderFeedback(int accountID, int id,int invoiceID) {
+        String sql = "select * from NhanXet where accountID = ? and productID = ? and maHD = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountID);
+            ps.setInt(2, id);
+            ps.setInt(3, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            NhanXet nx = new NhanXet(rs.getInt(1)
+                    , rs.getInt(2)
+                    , rs.getString(3)
+                    , rs.getDate(4)
+                    , rs.getString(5)
+                    , rs.getInt(6)
+                    , rs.getInt(7));
+            return nx;
+            }                
+        } catch (SQLException e) {
+                System.out.println("getOrderFeedback: " + e.getMessage());
+                }
+                return null;
+        }
 }
