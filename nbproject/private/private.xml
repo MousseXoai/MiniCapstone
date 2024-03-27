@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/D:/SWP391/Project/MiniCapstone/web/about.jsp</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/nbproject/build-impl.xml</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/web/WEB-INF/web.xml</file>
+            <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dal/DAO.java</file>
+=======
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/web/dashboard.jsp</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/web/Shop.jsp</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ChangeDeliveryControl.java</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ShipControl.java</file>
             <file>file:/G:/javaweb/SWP391/MiniCapstone/web/ShipperDashboard.jsp</file>
+>>>>>>> 5120872d34ba568c17cf6f750a177c895c54dde8
         </group>
 <<<<<<< HEAD
 =======

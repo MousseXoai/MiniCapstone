@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -5,6 +6,7 @@
 package controller;
 
 import dal.DAO;
+import dto.AccInfoOrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
 import java.io.IOException;
@@ -84,7 +86,7 @@ public class SellerOrderManagement extends HttpServlet {
             List<TrangThai> statusCate = dao.getStatusCategory();
             List<ShopOrderDTO> productList = dao.getProductOrderByShopID(shopID);
             List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
+            List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
             request.setAttribute("sid", sid);
             request.setAttribute("statusCate", statusCate);
             request.setAttribute("accInfo", accInfo);
@@ -132,7 +134,7 @@ public class SellerOrderManagement extends HttpServlet {
             }
             if (changeStatus == 3) {
                 Noti noti = new Noti(shopID, uID, 0, "https://emax.thoitrang360.vn/wp-content/uploads/2021/06/icon-dat-hang-thanh-cong-09.jpg",
-                        "Đơn hàng ",
+                        "Đơn hàng đã được giao thành công. Hoàn thành đơn hàng!!! ",
                         getCurrentDate(), 4, 0, maHD);
                 dao.addNotiChangeStatus(noti);
             }
@@ -141,7 +143,7 @@ public class SellerOrderManagement extends HttpServlet {
             List<TrangThai> statusCate = dao.getStatusCategory();
             List<ShopOrderDTO> productList = dao.getProductOrderByShopID(shopID);
             List<OrderLine> orderLine = dao.getOrderLineByShopID(shopID);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
+            List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithShopID(shopID);
             request.setAttribute("sid", sid);
             request.setAttribute("statusCate", statusCate);
             request.setAttribute("accInfo", accInfo);

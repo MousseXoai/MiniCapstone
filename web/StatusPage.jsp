@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : QuanLySanPham
     Created on : Jan 15, 2024, 1:18:40 AM
@@ -187,6 +188,7 @@
                 <div class="app-title2">
 
                     <ul class="app-breadcrumb breadcrumb side">
+                        <li class="breadcrumb-item active"><a href="statistic"><b>Home</b></a></li>
                         <li class="breadcrumb-item active"><a href="#"><b>Order Management</b></a></li>
                     </ul>
                     <div>
@@ -260,7 +262,7 @@
                                                 <input type="hidden" name="maHD" value="${c.maHD}"/>
                                                 <span>${c.maHD}</span><br>
                                                 <c:forEach items="${accInfo}" var="a">
-                                                    <c:if test="${c.accountID == a.uID}">
+                                                    <c:if test="${c.maHD == a.invoiceID}">
                                                         <span>Buyer Name: ${a.name}</span><br>
                                                         <span>Address: ${a.address}</span>
                                                         <input type="hidden" name="uID" value="${a.uID}"/>
@@ -310,25 +312,22 @@
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">
-                                                <c:if test="${sl.trangthaiid != 3}">  
-                                                    <td>
-
-                                                        <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
-
-                                                            <option value="0">Change</option>
-                                                            <option value="1">Awaiting</option>
-                                                            <option value="2">Delivering</option>
-                                                            <option value="3">Completed</option>
-
-                                                        </select>
-
-                                                    </td>
-                                                </c:if>
+                                                    <c:if test="${sl.trangthaiid == 1}">
+                                                        <td>
+                                                            <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
+                                                                <option value="0"></option>
+                                                                <option value="2">Delivering</option>
+                                                            </select>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${sl.trangthaiid == 3}">  
+                                                        
+                                                    </c:if>
                                                 </c:if>
                                             </c:forEach> 
                                             <c:if test="${sid==3}">
                                                 <td>
-                                                    <a href="ViewFeedback">View Feedback</a>
+                                                    <a href="SellerOrderFeedback?invoiceID=${c.maHD}">View Feedback</a>
                                                 </td>
                                             </c:if>
 

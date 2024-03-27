@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -5,6 +6,7 @@
 package controller;
 
 import dal.DAO;
+import dto.AccInfoOrderDTO;
 import dto.ShopOrderDTO;
 import dto.StatusOrderDTO;
 import java.io.IOException;
@@ -84,7 +86,7 @@ public class StatusPageController extends HttpServlet {
             List<TrangThai> statusCate = dao.getStatusCategory();
             List<ShopOrderDTO> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
             List<OrderLine> orderLine = dao.getOrderLineByShopIDAndStatus(shopID,sid);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
+            List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
             request.setAttribute("sid",sid);
             request.setAttribute("statusCate", statusCate);
             request.setAttribute("accInfo", accInfo);
@@ -130,7 +132,7 @@ public class StatusPageController extends HttpServlet {
             List<TrangThai> statusCate = dao.getStatusCategory();
             List<ShopOrderDTO> productList = dao.getProductOrderByShopIDAndStatus(shopID,sid);
             List<OrderLine> orderLine = dao.getOrderLineByShopIDAndStatus(shopID,sid);
-            List<AccInfo> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
+            List<AccInfoOrderDTO> accInfo = dao.getBuyerInfoByOrderWithShopIDAndStatus(shopID,sid);
             request.setAttribute("sid",sid);
             request.setAttribute("statusCate", statusCate);
             request.setAttribute("accInfo", accInfo);
