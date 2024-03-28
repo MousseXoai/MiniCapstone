@@ -18,11 +18,11 @@
             Account Balance
         </title>
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-        <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-        <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+        <link id="pagestyle" href="assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
         <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
@@ -47,7 +47,7 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="statistic">DashBoard</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Shop Balance</li>
           </ol>
           <h6 class="font-weight-bolder mb-0">Shop Balance</h6>
@@ -184,13 +184,13 @@
                             </div>
                             <div class="d-flex align-items-center text-sm">
                                 <fmt:formatNumber type="currency" value="${i.amount}" />
-                                <c:if test="${i.loaiid==1}">
-                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="">Detail</a> </button>
-                                </c:if>
-                                <c:if test="${i.loaiid==2 || i.loaiid==3}">
+                                
+                                <c:if test="${i.loaiid==2}">
                                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="SellerOrderManagement">Detail</a> </button>
                                 </c:if>
-                                
+                                <c:if test="${i.loaiid==3}">
+                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><a href="shoprefundconfirm">Detail</a> </button>
+                                </c:if>
                             </div>
                         </li>       
                     </c:forEach>
