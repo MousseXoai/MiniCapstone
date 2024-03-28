@@ -94,7 +94,7 @@
                                     <div class="col-sm-2">
 
                                         <a class="btn btn-add btn-sm" href="settax" title="Thêm"><i class="fas fa-plus"></i>
-                                            Send Tax To All Shop</a>
+                                            Send Fee To All Shop</a>
                                     </div>
                                 </div> <!-- Empty column to create space on the left -->
 
@@ -107,9 +107,9 @@
                                 <thead>
                                     <tr>
                                         <!--                                        <th width="10"><input type="checkbox" id="all"></th>-->
-                                        <th>Tax ID</th>
+                                        <th>Fee ID</th>
                                         <th>Shop ID</th>
-                                        <th>Tax Money</th>
+                                        <th>Fee Money</th>
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
