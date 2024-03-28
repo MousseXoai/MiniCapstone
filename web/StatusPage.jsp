@@ -1,4 +1,5 @@
 
+
 <%-- 
     Document   : QuanLySanPham
     Created on : Jan 15, 2024, 1:18:40 AM
@@ -215,8 +216,11 @@
                             <ul class="main-nav nav navbar-nav-1">
                                 <li class="${sid==0?"active":""}"><a href="SellerOrderManagement">All</a></li>
                                     <c:forEach items="${statusCate}" var="sc">
-                                    <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>                                
-                                    </c:forEach>
+                                        <c:if test="${sc.trangThaiId!=5 && sc.trangThaiId!=6}">
+                                        <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>
+                                        </c:if>
+
+                                </c:forEach>
                             </ul>
                             <!-- /NAV -->
                         </div>
@@ -244,6 +248,7 @@
                                         <th>Image</th>
                                         <th>Product Name</th>
                                         <th>Order Status</th>
+                                        <th>Order Category</th>
                                             <c:if test="${sid!=3}">
                                             <th>Action</th>
                                             </c:if>
@@ -306,9 +311,20 @@
                                                                 Completed
                                                             </span>
                                                         </c:if>
+                                                        <c:if test="${s.trangThaiId == 4}">
+                                                            <span class="badge bg-danger">
+                                                                Cancel
+                                                            </span>
+                                                        </c:if>
                                                     </td>
                                                 </c:if>
                                             </c:forEach>
+                                            <c:if test="${c.loaiid==1}">
+                                                <td>Mua Hàng</td>
+                                            </c:if>
+                                            <c:if test="${c.loaiid==2}">
+                                                <td>Hoàn Trả</td>
+                                            </c:if>
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">
@@ -317,12 +333,16 @@
                                                             <select id="changeStatus" name="changeStatus" onchange="this.form.submit()">
                                                                 <option value="0"></option>
                                                                 <option value="2">Delivering</option>
+                                                                <option value="4">Cancel</option>
                                                             </select>
                                                         </td>
                                                     </c:if>
-                                                    <c:if test="${sl.trangthaiid == 3}">  
-                                                        
-                                                    </c:if>
+                                                    
+                                                    
+                                                    <c:if test="${sl.trangthaiid == 4}">  
+                                                        <td>                                                      
+                                                        </td>
+                                                    </c:if>    
                                                 </c:if>
                                             </c:forEach> 
                                             <c:if test="${sid==3}">

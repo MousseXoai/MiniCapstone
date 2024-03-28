@@ -74,12 +74,14 @@ public class ShopRefundConfirm extends HttpServlet {
                 ArrayList<OrderLine> listOL = dao.getAllOrderLine();
                 ArrayList<SanPham> listSP = dao.getAllShopProductByAccountId(accountID);
                 ArrayList<TrangThai> listTT = dao.getAllTrangThai();
+                int shopid = dao.getShopIdByAccountId(accountID);
 
                 request.setAttribute("listHD", listHD);
                 request.setAttribute("listOL", listOL);
                 request.setAttribute("listSP", listSP);
                 request.setAttribute("listTT", listTT);
-
+                request.setAttribute("shopid", shopid);
+                
                 request.getRequestDispatcher("RefundConfirm.jsp").forward(request, response);
 
             }
