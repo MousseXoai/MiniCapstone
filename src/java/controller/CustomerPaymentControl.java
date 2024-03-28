@@ -224,14 +224,14 @@ public class CustomerPaymentControl extends HttpServlet {
                             if (cart.getProductID() == sanPham.getId()) {
                                 int maHD = Integer.parseInt(Config.getRandomNumber(8)); 
                                 int shopID= sanPham.getShopID();
-                                dao.insertHoaDon(maHD, accountID, tonggia, ngayXuat, 1, 1, paymentid);
+                                dao.insertHoaDon(maHD, accountID, (long) sanPham.getPrice(), ngayXuat, 1, 1, paymentid);
                                 dao.insertInfoLine(fullname, email, address, phonenum, note);
-                                dao.insertAccBal(accountID, tonggia, 1, maHD);
-                                dao.insertShopBal(shopID, tonggia, 2, maHD);
+                                dao.insertAccBal(accountID, (long) sanPham.getPrice(), 1, maHD);
+                                dao.insertShopBal(shopID, (long) sanPham.getPrice(), 2, maHD);
                                 long accBal= dao.getAccBalByID(accountID);
-                                dao.editAccountBalance(accountID, accBal-tonggia);
+                                dao.editAccountBalance(accountID, accBal-(long) sanPham.getPrice());
                                 long shopBal=dao.getShopBalByID(shopID);
-                                dao.editShopBalance(shopID, shopBal+tonggia);
+                                dao.editShopBalance(shopID, shopBal+(long) sanPham.getPrice());
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
                                 dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());
                                 dao.updateQuantity(sanPham.getQuantity() - cart.getAmount(), sanPham.getId());
@@ -264,7 +264,7 @@ public class CustomerPaymentControl extends HttpServlet {
                     for (Cart cart : list) {
                         for (SanPham sanPham : listSP) {
                             if (cart.getProductID() == sanPham.getId()) {
-                                dao.insertBillCOD(accountID, tonggia, ngayXuat, 1, 1, paymentid, maHD);
+                                dao.insertBillCOD(accountID, (long) sanPham.getPrice(), ngayXuat, 1, 1, paymentid, maHD);
                                 dao.insertInfoLine(fullname, email, address, phonenum, note);
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
                                 dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());

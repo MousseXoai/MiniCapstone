@@ -111,15 +111,17 @@
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                <c:forEach items="${listHD}" var="listHD">                          
+                                                <tbody>            
+                                              
+                                                <c:forEach items="${listHD}" var="listHD">      
                                                     <tr>
-                                                        <td>${listHD.getMaHD()}</td>
+                                                        <td>${listHD.getMaHD()}                                                          
+                                                        </td>
                                                         <td>
                                                             <c:forEach items="${listOL}" var="listOL"> 
                                                                 <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
                                                                     <c:forEach items="${listSP}" var="listSP">
-                                                                        <c:if test="${listSP.getId() == listOL.getProductID()}">
+                                                                        <c:if test="${listSP.getId() == listOL.getProductID() }">
                                                                             <img style="max-width: 25%; height: auto;" src="${listSP.getImage()}" class="avatar">${listSP.getName()}
                                                                         </c:if>
                                                                     </c:forEach>                                   
@@ -161,8 +163,9 @@
                                                             <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
                                                             <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
                                                         </c:if>
-                                                    </tr> 
-                                                </c:forEach>
+                                                    </tr>  
+                                                </c:forEach>  
+                                                  
                                             </tbody>
                                         </table>
                                     </div>

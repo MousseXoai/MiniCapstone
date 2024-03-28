@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.AccInfo;
 import model.Account;
+import model.HoaDon;
 
 /**
  *
@@ -73,7 +74,10 @@ public class CustomerInfoControl extends HttpServlet {
 
                 int accountID = a.getuID();
                 AccInfo acc = dao.getAccInfo(accountID);
+                double hd = dao.getSumTongChiTieu(accountID);
+                System.out.println(hd);
                 request.setAttribute("acc", acc);
+                request.setAttribute("hd", hd);
                 request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
 
             }

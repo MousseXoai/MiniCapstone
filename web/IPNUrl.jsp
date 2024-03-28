@@ -124,7 +124,7 @@
                         for (Cart cart : list) {
                             for (SanPham sanPham : listSP) {
                                 if (cart.getProductID() == sanPham.getId()) {
-                                dao.insertBillVNPAY(accountID, vnp_Amount, vnp_PayDate, 1, 1, paymentid, vnp_TxnRef);
+                                dao.insertBillVNPAY(accountID, (long) sanPham.getPrice(), vnp_PayDate, 1, 1, paymentid, vnp_TxnRef);
                                 dao.insertInfoLine(fullname, email, address, phonenum, note);
                                 SoLuongBan slb = dao.getSoLuongBanByID(sanPham.getId());
                                 dao.insertOrderLine(cart.getProductID(), (float) (sanPham.getPrice()*(1-sanPham.getSale()/100.0)), cart.getAmount());
