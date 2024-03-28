@@ -45,7 +45,7 @@
                                 <input class="input--style-2" type="text" placeholder="Shop Name" required name="name">
                             </div>
                             <div class="row row-space">
-                                <input type="text" class="input--style-2" value="Upload citizen identification card" readonly>
+                                <input type="text" class="input--style-2" value="Upload proof" readonly>
                                 <div class="input-group">
                                     <input required name="proof1" type="file" >
                                 </div>
