@@ -679,7 +679,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductByIndex(int indexPage) {
         List<SanPham> list = new ArrayList<>();
-        String query = "select * from SanPham order by [id] offset ? rows fetch next 12 rows only";
+        String query = "select * from SanPham where trangthai=1 order by [id] offset ? rows fetch next 12 rows only";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, (indexPage - 1) * 12);
@@ -784,7 +784,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductNew() {
         List<SanPham> list = new ArrayList<>();
-        String query = "select top 5 * from   SanPham order by [id] desc ";
+        String query = "select top 5 * from SanPham where trangthai=1 order by [id] desc ";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -814,7 +814,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductSale() {
         List<SanPham> list = new ArrayList<>();
-        String query = "select * from SanPham where sale != 0 ";
+        String query = "select * from SanPham where sale != 0 and trangthai=1";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -844,7 +844,7 @@ public class DAO extends DBContext {
 
     public List<SanPham> getProductOutOfStock() {
         List<SanPham> list = new ArrayList<>();
-        String query = "select * from SanPham where quantity = 0 ";
+        String query = "select * from SanPham where quantity = 0 and trangthai=1 ";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
