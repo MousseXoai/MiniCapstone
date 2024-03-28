@@ -125,7 +125,10 @@ public class ShopWaiting extends HttpServlet {
             } else {
                 if(approve.equals("approve")){  
                     dao.AddShopHangChoToShop(Name,Integer.parseInt(uid),date,address,proof, proof1);
+                    dao.UpdateAccountIsSell(Integer.parseInt(uid));
+                    
                     dao.deleteShopHangCho(Integer.parseInt(id));
+                    
                     response.sendRedirect("ShopWaiting");
                 }
                 else if(approve.equals("reject")){

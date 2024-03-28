@@ -6787,6 +6787,19 @@ public class DAO extends DBContext {
             System.out.println("AddShopHangChoToShop: " + e.getMessage());
         }
     }
+    
+    
+     public void UpdateAccountIsSell(int uid) {
+        try {
+            String strSQL = "update Account set isSell = 1 where uID = ?";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, uid);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShopHangCho: " + e.getMessage());
+        }
+    }
 
     public void deleteShopHangCho(int id) {
         try {
