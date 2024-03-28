@@ -6879,6 +6879,19 @@ public class DAO extends DBContext {
             System.out.println("AddShopHangChoToShop: " + e.getMessage());
         }
     }
+    
+    
+     public void UpdateAccountIsSell(int uid) {
+        try {
+            String strSQL = "update Account set isSell = 1 where uID = ?";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, uid);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("deleteShopHangCho: " + e.getMessage());
+        }
+    }
 
     public void deleteShopHangCho(int id) {
         try {
@@ -6939,6 +6952,85 @@ public class DAO extends DBContext {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+    
+    public double getSumTongChiTieu(int accountID) {
+        double total = 0;
+        try {
+            String strSQL = "select sum(tongGia) from HoaDon where accountID =? and loaiid =1 and trangthaiid =3 ";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, accountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getSumTongChiTieu: " + e.getMessage());
+        }
+        return total;
+    }
+    public NhanXet getOrderFeedback(int accountID, int id,int invoiceID) {
+        String sql = "select * from NhanXet where accountID = ? and productID = ? and maHD = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, accountID);
+            ps.setInt(2, id);
+            ps.setInt(3, invoiceID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+            NhanXet nx = new NhanXet(rs.getInt(1)
+                    , rs.getInt(2)
+                    , rs.getString(3)
+                    , rs.getDate(4)
+                    , rs.getString(5)
+                    , rs.getInt(6)
+                    , rs.getInt(7));
+            return nx;
+            }                
+        } catch (SQLException e) {
+                System.out.println("getOrderFeedback: " + e.getMessage());
+                }
+                return null;
+        }  
+      public List<SanPham> CheckerManageProduct(){
+        List<SanPham> list = new ArrayList<>();
+        try{
+            String strSQL = "select * from [SanPham] where [trangthai] = 0";
+            ps = connection.prepareStatement(strSQL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new SanPham(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14),
+                        rs.getInt(15),
+                        rs.getInt(16)
+                ));
+            }
+        } catch(Exception e){
+            System.out.println("CheckerManageProduct: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public void approveProduct(int id) {
+        try {
+            String strSQL = "UPDATE [SanPham] SET [trangthai] = 1 where [id] = ?";
+            ps = connection.prepareStatement(strSQL);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("approveProduct: " + e.getMessage());
         }
     }
 
