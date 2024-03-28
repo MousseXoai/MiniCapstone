@@ -1193,7 +1193,12 @@ public class DAO extends DBContext {
     }
 
     public double calculateRevenue(int shopID) {
-        String query = "select SUM(sp.price*slb.soLuongDaBan) from dbo.SoLuongBan slb join dbo.SanPham sp on slb.productID = sp.id where sp.shopid = ?";
+        String query = "select sum(hd.tongGia) as revenue from Account a \n" +
+"                  join shop s on a.uID = s.accountid \n" +
+"                 join SanPham sp on s.shopid = sp.shopid \n" +
+"                  join OrderLine ol on sp.id = ol.productID \n" +
+"                  join HoaDon hd on hd.maHD = ol.invoiceID \n" +
+"				where a.isSell = 1 and sp.shopid=? and hd.trangthaiid = 3 group by s.shopid";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, shopID);
