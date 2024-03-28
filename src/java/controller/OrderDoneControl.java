@@ -75,9 +75,11 @@ public class OrderDoneControl extends HttpServlet {
             int trangthaiid = Integer.parseInt(trangthaiid1);
             int accountID = a.getuID();
             List<OrderDTO> ListOrderDone = dao.getListOrderDone(a.getuID(),trangthaiid);
+            List<HoaDon> hd= dao.getAllHoaDon(accountID);
             AccInfo acc = dao.getAccInfo(accountID);
             request.setAttribute("acc", acc);
             request.setAttribute("ListOrderDone", ListOrderDone);
+            request.setAttribute("hd", hd);
             request.getRequestDispatcher("OrderDone.jsp").forward(request, response);
         }
     }

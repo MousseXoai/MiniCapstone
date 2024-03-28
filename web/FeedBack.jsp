@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="feedbackform/css/style.css">
 
     </head>
-    <body>
+    <body style="background-color: white">
         <section class="ftco-section">
             <div class="container">
                 <div class="row justify-content-center">
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="contact-wrap">
-                                        <h3 class="mb-4 text-center">Feed Back</h3>
+                                        <h3 class="mb-4 text-center" style="color: gray; font-weight: bold">FEED BACK FOR ORDER</h3>
                                         <div id="form-message-warning" class="mb-4 w-100 text-center"></div> 
                                         <div id="form-message-success" class="mb-4 w-100 text-center">
                                             Your message was sent, thank you!
@@ -40,22 +40,22 @@
                                             <c:if test="${not empty errorMessage}">
                                                 <div style="color: red;">${errorMessage}</div>
                                             </c:if>
-                                            <div class="row">
+                                                <div  class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" name="rate" id="subject" required placeholder="Vote (1* --> 5*)">
+                                                        <input style="background-color: #d8d8d6" type="text" class="form-control" name="rate" id="subject" required placeholder="Vote (1* --> 5*)">
                                                     </div>
                                                 </div>
                                                 <input type="text" name="pid" value="${pid}" hidden>
                                                 <input type="text" name="maHD" value="${maHD}" hidden>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <textarea name="message" class="form-control" id="message" cols="30" rows="8" required placeholder="Message"></textarea>
+                                                        <textarea style="background-color: #d8d8d6" name="message" class="form-control" id="message" cols="30" rows="8" required placeholder="Message"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="submit" value="Submit" class="btn btn-primary">
+                                                        <input style="color: white" type="submit" value="Submit" class="btn btn-primary">
                                                         <div class="submitting"></div>
                                                     </div>
                                                 </div>
