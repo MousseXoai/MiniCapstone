@@ -70,11 +70,12 @@ public class ShopRefundConfirm extends HttpServlet {
             } else {
                 
                 int accountID = a.getuID();
+                int shopid = dao.getShopIdByAccountId(accountID);
                 ArrayList<HoaDon> listHD = dao.listHoaDonRefund();
                 ArrayList<OrderLine> listOL = dao.getAllOrderLine();
                 ArrayList<SanPham> listSP = dao.getAllShopProductByAccountId(accountID);
                 ArrayList<TrangThai> listTT = dao.getAllTrangThai();
-                int shopid = dao.getShopIdByAccountId(accountID);
+                
 
                 request.setAttribute("listHD", listHD);
                 request.setAttribute("listOL", listOL);

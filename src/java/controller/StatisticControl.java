@@ -54,19 +54,21 @@ public class StatisticControl extends HttpServlet {
 
             // Lấy thứ của ngày hiện tại
             Calendar calendar = Calendar.getInstance();
-            int currentDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK); 
-            double[] weeklyRevenue = new double[7]; 
-
-            for (int i = 0; i < 7; i++) {
-                int dayOfWeek = (currentDayOfWeek + i - 1) % 7 + 1; 
-                if (dayOfWeek == 0) {
-                    dayOfWeek = 7; 
-                }
-                weeklyRevenue[i] = dao.calculateRevenueDay(dayOfWeek, shopID); 
-            }
-            for (int i = 0; i < 7; i++) {
-                request.setAttribute("calculateRevenueDay" + (i), weeklyRevenue[i]); 
-            }
+            double calculateRevenueDay1 = dao.calculateRevenueDay(1, shopID);
+            double calculateRevenueDay2 = dao.calculateRevenueDay(2, shopID);
+            double calculateRevenueDay3 = dao.calculateRevenueDay(3, shopID);
+            double calculateRevenueDay4 = dao.calculateRevenueDay(4, shopID);
+            double calculateRevenueDay5 = dao.calculateRevenueDay(5, shopID);
+            double calculateRevenueDay6 = dao.calculateRevenueDay(6, shopID);
+            double calculateRevenueDay7 = dao.calculateRevenueDay(7, shopID);
+            
+request.setAttribute("calculateRevenueDay1", calculateRevenueDay1);
+request.setAttribute("calculateRevenueDay2", calculateRevenueDay2);
+request.setAttribute("calculateRevenueDay3", calculateRevenueDay3);
+request.setAttribute("calculateRevenueDay4", calculateRevenueDay4);
+request.setAttribute("calculateRevenueDay5", calculateRevenueDay5);
+request.setAttribute("calculateRevenueDay6", calculateRevenueDay6);
+request.setAttribute("calculateRevenueDay7", calculateRevenueDay7);
             
 
             // Lấy năm hiện tại

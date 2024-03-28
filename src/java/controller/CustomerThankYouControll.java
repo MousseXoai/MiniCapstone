@@ -80,11 +80,13 @@ public class CustomerThankYouControll extends HttpServlet {
                     ArrayList<OrderLine> listOrderLine = dao.getAllOrderLine();
                     ArrayList<SanPham> listSP = dao.getAllProduct();
                     HoaDon hd = dao.get1HoaDonto(Integer.parseInt(maHoaDonTo), accountID);
+                    double tongGia= dao.getTongGiaByMaHDTo(Integer.parseInt(maHoaDonTo));
                     InfoLine infoLine = dao.getInfoLineBill(hd.getMaHD());
                     request.setAttribute("listHoaDon", listHoaDon);  
                     request.setAttribute("listOrderLine", listOrderLine);  
                     request.setAttribute("listsanpham", listSP);
                     request.setAttribute("hd", hd);
+                    request.setAttribute("tongGia", tongGia);
                     request.setAttribute("infoLine", infoLine);
                     session.removeAttribute("maHoaDonTo");
                     session.removeAttribute("maThanhToanTrucTiep");                    
