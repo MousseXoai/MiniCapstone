@@ -68,7 +68,7 @@
                     <div class="arrow">
                         <p type="text" class="ml-auto" readonly>
                             <fmt:setLocale value="vi_VN"/>
-                            <fmt:formatNumber type="currency" value="${acc.getTongChiTieu()}" currencySymbol="₫"/>             
+                            <fmt:formatNumber type="currency" value="${hd}" currencySymbol="₫"/>             
                         </p>
                     </div>
                 </div>
