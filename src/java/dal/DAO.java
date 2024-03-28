@@ -1198,7 +1198,7 @@ public class DAO extends DBContext {
 "                 join SanPham sp on s.shopid = sp.shopid \n" +
 "                  join OrderLine ol on sp.id = ol.productID \n" +
 "                  join HoaDon hd on hd.maHD = ol.invoiceID \n" +
-"				where a.isSell = 1 and sp.shopid=? and hd.trangthaiid = 3 group by s.shopid";
+"				where a.isSell = 1 and sp.shopid=? and ((hd.loaiid =1 and hd.trangthaiid =3) or (hd.loaiid=2 and hd.trangthaiid!=3)) group by s.shopid";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, shopID);
@@ -1281,7 +1281,7 @@ public class DAO extends DBContext {
         String query = "select sum(ol.price * ol.quantity) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
-                + "where DATEPART(dw, [ngayXuat]) = ? and sp.shopid =? ";
+                + "where DATEPART(dw, [ngayXuat]) = ? and sp.shopid =? and ((hd.loaiid =1 and hd.trangthaiid =3) or (hd.loaiid=2 and hd.trangthaiid!=3))";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, day);
@@ -1299,7 +1299,7 @@ public class DAO extends DBContext {
         String query = "select sum(ol.price * ol.quantity) "
                 + "from OrderLine ol  join HoaDon hd on hd.maHD = ol.invoiceID "
                 + "join SanPham sp on ol.productID = sp.id "
-                + "where MONTH(ngayXuat) = ? and YEAR(ngayXuat)=? and sp.shopid =? ";
+                + "where MONTH(ngayXuat) = ? and YEAR(ngayXuat)=? and sp.shopid =? and ((hd.loaiid =1 and hd.trangthaiid =3) or (hd.loaiid=2 and hd.trangthaiid!=3))";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, month);
@@ -6866,7 +6866,7 @@ public class DAO extends DBContext {
 
     public void AddShopHangChoToShop(String shopname, int accountid, String datethamgia, String address, String proof, String proof1) {
         try {
-            String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance]) values (?,null,?, ?,?,?, ?,0 ) ";
+            String strSQL = "  insert into [Shop]([shopname],[avatar],[accountid],[dateThamGia],[address],[proof],[proof1],[shopBalance],[point]) values (?,null,?, ?,?,?, ?,0,10) ";
             ps = connection.prepareStatement(strSQL);
             ps.setString(1, shopname);
             ps.setInt(2, accountid);
@@ -6958,7 +6958,7 @@ public class DAO extends DBContext {
     public double getSumTongChiTieu(int accountID) {
         double total = 0;
         try {
-            String strSQL = "select sum(tongGia) from HoaDon where accountID =? and loaiid =1 and trangthaiid =3 ";
+            String strSQL = "select sum(tongGia) from HoaDon where accountID =? and ((loaiid =1 and trangthaiid =3) or (loaiid=2 and trangthaiid!=3))";
             ps = connection.prepareStatement(strSQL);
             ps.setInt(1, accountID);
             rs = ps.executeQuery();
@@ -7028,10 +7028,27 @@ public class DAO extends DBContext {
         try {
             String strSQL = "UPDATE [SanPham] SET [trangthai] = 1 where [id] = ?";
             ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("approveProduct: " + e.getMessage());
         }
+    }
+
+    public double getTongGiaByMaHDTo(int maHDTo) {
+        double total = 0;
+        try {
+            String strSQL = "select sum(tongGia) from HoaDon where maHoaDonTo=?";
+            ps = connection.prepareStatement(strSQL);
+            ps.setInt(1, maHDTo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            System.out.println("getSumTongChiTieu: " + e.getMessage());
+        }
+        return total;
     }
 
 }

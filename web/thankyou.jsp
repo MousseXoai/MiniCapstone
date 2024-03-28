@@ -145,7 +145,7 @@
                                         <td class="cart__price">
                                             Total Price:
                                             <fmt:setLocale value="vi_VN"/>
-                                            <fmt:formatNumber type="currency" value="${hd.getTongGia()}" currencySymbol="₫"/>                                             
+                                            <fmt:formatNumber type="currency" value="${tongGia}" currencySymbol="₫"/>                                             
                                         </td>
                                     </tr>
                                     <tr style="border: none;">

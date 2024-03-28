@@ -52,9 +52,9 @@ public class AddProductControl extends HttpServlet {
             int shopID = dao.getShopIdByAccountId(accountID);
             List<SanPham> getProduct = dao.getAllProductByShopID(shopID);
             request.setAttribute("getProduct", getProduct);
-            List<PhanLoai> getCategory = dao.getCategoryByShopID(shopID);
+            List<PhanLoai> getCategory = dao.getAllPhanLoai();
             request.setAttribute("getCategory", getCategory);
-            List<Brand> getBrand = dao.getBrandByShopID(shopID);
+            List<Brand> getBrand = dao.getAllBrand();
             request.setAttribute("getBrand", getBrand);
             request.getRequestDispatcher("AddProduct.jsp").forward(request, response);
         }

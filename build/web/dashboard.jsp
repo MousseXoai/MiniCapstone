@@ -254,17 +254,17 @@
                                     var ctxP = document.getElementById("pieChart").getContext('2d');
 
                                     var myPieChart = new Chart(ctxP, {
-                                        type: 'pie',
-                                        data: {
-                                            labels: ["Sunday", "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday"],
-                                            datasets: [{
-                                                    data: [${calculateRevenueDay1}, ${calculateRevenueDay7}, ${calculateRevenueDay6}, ${calculateRevenueDay5}, ${calculateRevenueDay4}, ${calculateRevenueDay3}, ${calculateRevenueDay2}],
-                                                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#1874CD", "#CDB5CD"],
-                                                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#1E90FF", "#FFE1FF"]
+                                        "type": 'pie',
+                                        "data": {
+                                            "labels": ["Sunday", "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday"],
+                                            "datasets": [{
+                                                    "data": [${calculateRevenueDay1}, ${calculateRevenueDay7}, ${calculateRevenueDay6}, ${calculateRevenueDay5}, ${calculateRevenueDay4}, ${calculateRevenueDay3}, ${calculateRevenueDay2}],
+                                                   "backgroundColor": ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#1874CD", "#CDB5CD"],
+                                                    "hoverBackgroundColor": ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#1E90FF", "#FFE1FF"]
                                                 }]
                                         },
-                                        options: {
-                                            responsive: true
+                                        "options": {
+                                            "responsive": true
                                         }
                                     });
 

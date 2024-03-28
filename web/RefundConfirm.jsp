@@ -113,57 +113,55 @@
                                                 </thead>
                                                 <tbody>            
                                               
-                                                <c:forEach items="${listHD}" var="listHD">      
-                                                    <tr>
-                                                        <td>${listHD.getMaHD()}                                                          
-                                                        </td>
-                                                        <td>
-                                                            <c:forEach items="${listOL}" var="listOL"> 
-                                                                <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
-                                                                    <c:forEach items="${listSP}" var="listSP">
-                                                                        <c:if test="${listSP.getId() == listOL.getProductID() }">
+                                                <c:forEach items="${listHD}" var="listHD">   
+                                                    <c:forEach items="${listOL}" var="listOL"> 
+                                                        <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
+                                                            <c:forEach items="${listSP}" var="listSP">
+                                                                <c:if test="${listSP.getId() == listOL.getProductID() }">
+                                                                    <tr>
+                                                                        <td>${listHD.getMaHD()}                                                          
+                                                                        </td>
+                                                                        <td>
+
+
                                                                             <img style="max-width: 25%; height: auto;" src="${listSP.getImage()}" class="avatar">${listSP.getName()}
-                                                                        </c:if>
-                                                                    </c:forEach>                                   
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </td>
-                                                        <td>${listHD.getNgayXuat()}</td>                        
-                                                        <td><span class="status text-success">&bull;</span>    
-                                                            <c:forEach items="${listTT}" var="listTT">  
-                                                                <c:if test="${listHD.getTrangThaiId() == listTT.getTrangThaiId()}">
-                                                                    ${listTT.getTrangThai()}  
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </td>
-                                                        <td> 
-                                                            <c:forEach items="${listOL}" var="listOL"> 
-                                                                <c:if test="${listOL.getInvoiceID() == listHD.getMaHD()}">
-                                                                    <c:forEach items="${listSP}" var="listSP">
-                                                                        <c:if test="${listSP.getId() == listOL.getProductID()}">
+
+
+                                                                        </td>
+                                                                        <td>${listHD.getNgayXuat()}</td>                        
+                                                                        <td><span class="status text-success">&bull;</span>    
+                                                                            <c:forEach items="${listTT}" var="listTT">  
+                                                                                <c:if test="${listHD.getTrangThaiId() == listTT.getTrangThaiId()}">
+                                                                                    ${listTT.getTrangThai()}  
+                                                                                </c:if>
+                                                                            </c:forEach>
+                                                                        </td>
+                                                                        <td> 
+
                                                                             <fmt:setLocale value="vi_VN"/>
                                                                             <fmt:formatNumber type="currency" value="${listSP.getPrice()*listOL.getQuantity()}" currencySymbol="₫"/>
+
+                                                                        </td>
+                                                                        <td><a href="refundinfomation?invoiceID=${listHD.getMaHD()}" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
+                                                                        <c:if test="${listHD.getTrangThaiId() == 1 && listHD.getLoaiid() == 2}">
+                                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
+                                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
                                                                         </c:if>
-                                                                    </c:forEach>                                   
+                                                                        <c:if test="${listHD.getTrangThaiId() == 6 && listHD.getLoaiid() == 2}">
+                                                                            <td>In delivery</td>
+                                                                        </c:if>
+                                                                        <c:if test="${listHD.getTrangThaiId() == 4 && listHD.getLoaiid() == 2}">
+                                                                            <td>Cancelled</td>
+                                                                        </c:if>
+                                                                        <c:if test="${listHD.getTrangThaiId() == 5 && listHD.getLoaiid() == 2}">
+                                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
+                                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
+                                                                        </c:if>
+                                                                    </tr> 
                                                                 </c:if>
                                                             </c:forEach>
-                                                        </td>
-                                                        <td><a href="refundinfomation?invoiceID=${listHD.getMaHD()}" class="view" title="View Details" data-toggle="tooltip">Details</a></td>
-                                                        <c:if test="${listHD.getTrangThaiId() == 1 && listHD.getLoaiid() == 2}">
-                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
-                                                        <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=shipping" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
                                                         </c:if>
-                                                        <c:if test="${listHD.getTrangThaiId() == 6 && listHD.getLoaiid() == 2}">
-                                                            <td>In delivery</td>
-                                                        </c:if>
-                                                        <c:if test="${listHD.getTrangThaiId() == 4 && listHD.getLoaiid() == 2}">
-                                                            <td>Cancelled</td>
-                                                        </c:if>
-                                                        <c:if test="${listHD.getTrangThaiId() == 5 && listHD.getLoaiid() == 2}">
-                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=approve&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Approve</a></td>
-                                                            <td><a href="refunddecide?invoiceID=${listHD.getMaHD()}&status=decline&getshipped=done" class="view" title="View Details" data-toggle="tooltip">Decline</a></td>
-                                                        </c:if>
-                                                    </tr>  
+                                                    </c:forEach>
                                                 </c:forEach>  
                                                   
                                             </tbody>
