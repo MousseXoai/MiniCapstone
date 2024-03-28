@@ -215,8 +215,11 @@
                             <ul class="main-nav nav navbar-nav-1">
                                 <li class="${sid==0?"active":""}"><a href="SellerOrderManagement">All</a></li>
                                     <c:forEach items="${statusCate}" var="sc">
-                                    <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>                                
-                                    </c:forEach>
+                                        <c:if test="${sc.trangThaiId!=5 && sc.trangThaiId!=6}">
+                                        <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>
+                                        </c:if>
+
+                                </c:forEach>
                             </ul>
                             <!-- /NAV -->
                         </div>
@@ -244,6 +247,7 @@
                                         <th>Image</th>
                                         <th>Product Name</th>
                                         <th>Order Status</th>
+                                        <th>Order Category</th>
                                             <c:if test="${sid!=3}">
                                             <th>Action</th>
                                             </c:if>
@@ -314,6 +318,12 @@
                                                     </td>
                                                 </c:if>
                                             </c:forEach>
+                                            <c:if test="${c.loaiid==1}">
+                                                <td>Mua Hàng</td>
+                                            </c:if>
+                                            <c:if test="${c.loaiid==2}">
+                                                <td>Hoàn Trả</td>
+                                            </c:if>
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">

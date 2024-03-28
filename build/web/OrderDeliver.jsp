@@ -33,7 +33,7 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
             body{
-                background-color: #eee;
+                background-color: white;
                 font-family: 'Roboto', sans-serif;
             }
             .main{
@@ -90,9 +90,9 @@
                 </div>
             </div>
 
-            <a  href="oderwaitting?trangthaiid=1"> <h5 class="pb-4 border-bottom" style="color: red">Order awaiting confirmation</h5></a>
-            <a  href="orderdeliver?trangthaiid=2"><h5 class="pb-4 border-bottom" style="color: red" >Order is being delivered</h5></a>
-            <a  href="orderdone?trangthaiid=3"> <h5 class="pb-4 border-bottom" style="color: red">Order done</h5></a>
+            <a  href="oderwaitting?trangthaiid=1"> <h5 class="pb-4 border-bottom" style="color: black">Order awaiting confirmation</h5></a>
+            <a  href="orderdeliver?trangthaiid=2"><h5 class="pb-4 border-bottom" style="color: black" >Order is being delivered</h5></a>
+            <a  href="orderdone?trangthaiid=3"> <h5 class="pb-4 border-bottom" style="color: black">Order done</h5></a>
             <form action="searchdate1">
                 <input type="hidden" name="trangthaiid" value="2">
                 <input type="date" name="date1" value="${datea}">
@@ -107,6 +107,7 @@
                         <th scope="col">Created</th>
                         <th scope="col">Product</th>
                         <th scope="col">Total Price</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Discount</th>
 
                     </tr>
@@ -133,6 +134,12 @@
 
                             </td>
                             <td><fmt:formatNumber type="currency" value="${c.tongGia}" /></td>
+                            <c:if test="${c.loaiid==1}">
+                                <td>Mua Hàng</td>
+                            </c:if>
+                            <c:if test="${c.loaiid==2}">
+                                <td>Hoàn Trả</td>
+                            </c:if>
                             <td> 
                                 <c:forEach items="${ListOrderLine}" var="d"> 
                                     <c:if test="${d.getInvoiceID() == c.getMaHD()}">

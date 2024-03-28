@@ -157,32 +157,7 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
 
-        <!-- Navbar-->
-        <!--        <header class="app-header">
-                     Sidebar toggle button<a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-                                                    aria-label="Hide Sidebar"></a>
-                     Navbar Right Menu
-                    <ul class="app-nav">
-        
-        
-                         User Menu
-                        <li><a class="app-nav__item" href="statistic"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-        
-                        </li>
-                    </ul>
-                </header>
-                 Sidebar menu
-                <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-                <aside class="app-sidebar">
-                    <div class="app-sidebar__user">
-                        <div>
-                            <p class="app-sidebar__user-name"><b>Manage Your Product</b></p>
-                            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-                        </div>
-                    </div>
-                    <hr>
-        
-                </aside>-->
+
         <main class="app-content-1">
             <div class="app-title1">
                 <div class="app-title2">
@@ -215,8 +190,11 @@
                             <ul class="main-nav nav navbar-nav-1">
                                 <li class="${sid==0?"active":""}"><a href="SellerOrderManagement">All</a></li>
                                     <c:forEach items="${statusCate}" var="sc">
-                                    <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>                                
-                                    </c:forEach>
+                                        <c:if test="${sc.trangThaiId!=5 && sc.trangThaiId!=6}">
+                                        <li class="${sc.trangThaiId==sid?"active":""}"><a href="statusPage?sid=${sc.trangThaiId}">${sc.trangThai}</a></li>
+                                        </c:if>
+
+                                </c:forEach>
                             </ul>
                             <!-- /NAV -->
                         </div>
@@ -244,6 +222,7 @@
                                         <th>Image</th>
                                         <th>Product Name</th>
                                         <th>Order Status</th>
+                                        <th>Order Category</th>
                                             <c:if test="${sid!=3}">
                                             <th>Action</th>
                                             </c:if>
@@ -314,6 +293,12 @@
                                                     </td>
                                                 </c:if>
                                             </c:forEach>
+                                            <c:if test="${c.loaiid==1}">
+                                                <td>Mua Hàng</td>
+                                            </c:if>
+                                            <c:if test="${c.loaiid==2}">
+                                                <td>Hoàn Trả</td>
+                                            </c:if>
 
                                             <c:forEach items="${statusList}" var="sl">
                                                 <c:if test="${c.maHD == sl.maHD}">

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -75,28 +76,31 @@
                         <div class="card mb-4">
                             <div class="card-body px-0 pt-0 pb-2">
                                 <div class="table-responsive p-0">
-                                    <form action="ShopWaiting" method="post">
+                                    <form action="CheckerManageProduct" method="post">
                                         <table class="table align-items-center mb-0">
                                             <thead>
                                                 <tr>
                                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Creation date</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quantity</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Color</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+                                                <c:forEach items="${listP}" var="p">
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex px-2 py-1">
 
                                                                 <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm"></h6>
-                                                                    <input type="hidden" name="id" value=""></input>
+                                                                    <h6 class="mb-0 text-sm">${p.getId()}</h6>
+                                                                    <input type="hidden" name="id" value="${p.getId()}"></input>
 
                                                                 </div>
                                                             </div>
@@ -105,26 +109,46 @@
                                                             <div class="d-flex px-2 py-1">
 
                                                                 <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm "></h6>
-                                                                    <input type="hidden" name="Name" value=""></input>
+                                                                    <h6 class="mb-0 text-sm ">${p.getName()}</h6>
+                                                                    <input type="hidden" name="Name" value="${p.getName()}"></input>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="align-middle text-center">
 
-                                                            <img src="${listshc.getProof1()}" class="avatar avatar-sm me-3" alt="">
-                                                            <input type="hidden" name="proof1" value="${listshc.getProof1()}"></input>
+                                                            <img src="${p.getImage()}" class="avatar avatar-sm me-3" alt="">
+                                                            <input type="hidden" name="proof1" value="${p.getImage()}"></input>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                            <p class="text-secondary text-xs font-weight-bold"></p>
-                                                             <input type="hidden" name="date" value=""></input>
+                                                            <p class="text-secondary text-xs font-weight-bold">${p.getPrice()}</p>
+                                                             <input type="hidden" name="date" value="${p.getPrice()}"></input>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                            <p class="text-xs font-weight-bold mb-0"></p>
-                                                             <input type="hidden" name="address" value=""></input>
+                                                            <p class="text-xs font-weight-bold mb-0">${p.getQuantity()}</p>
+                                                             <input type="hidden" name="address" value="${p.getQuantity()}"></input>
 
                                                         </td>
-                                                        
+                                                        <td class="align-middle text-center">
+                                                            <p class="text-xs font-weight-bold mb-0">${p.getColor()}</p>
+                                                             <input type="hidden" name="address" value="${p.getQuantity()}"></input>
+
+                                                        </td>
+                                                        <c:forEach items="${getCategory}" var="c">
+                                                            <c:if test="${c.cid==p.getCateID()}">
+                                                        <td class="align-middle text-center">
+                                                            <p class="text-xs font-weight-bold mb-0">${c.cname}</p>
+                                                             <input type="hidden" name="address" value="${c.cid}"></input>
+                                                        </td>
+                                                        </c:if>
+                                                        </c:forEach>
+                                                        <c:forEach items="${getBrand}" var="b">
+                                                            <c:if test="${b.bid==p.getBranID()}">
+                                                        <td class="align-middle text-center">
+                                                            <p class="text-xs font-weight-bold mb-0">${b.bname}</p>
+                                                             <input type="hidden" name="brand" value="${b.bid}"></input>
+                                                        </td>
+                                                        </c:if>
+                                                        </c:forEach>
                                                         <td class="align-middle text-center">
                                                             <button type="submit" value="approve" name="approve" class="btn btn-link text-dark px-3 mb-0" ><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Approve</button>
                                                             <button type="submit" value="reject" name="approve" class="btn btn-link text-danger text-gradient px-3 mb-0" ><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Reject</button>
@@ -136,7 +160,7 @@
 
                                                 </tr>
 
-                                            
+                                            </c:forEach>
                                             </tbody>
 
 

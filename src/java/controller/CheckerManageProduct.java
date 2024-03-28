@@ -4,12 +4,19 @@
  */
 package controller;
 
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Account;
+import model.Brand;
+import model.PhanLoai;
+import model.SanPham;
 
 /**
  *
@@ -55,6 +62,22 @@ public class CheckerManageProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAO dao = new DAO();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        if (a == null || a.getIsSell() != 1) {
+            response.sendRedirect("login.jsp");
+        } else {
+            List<SanPham> listP = dao.CheckerManageProduct();
+            List<PhanLoai> getCategory = dao.getAllPhanLoai();
+            List<Brand> getBrand = dao.getAllBrand();
+            request.setAttribute("getCategory", getCategory);
+            request.setAttribute("getBrand", getBrand);
+            request.setAttribute("listP", listP);
+            
+            request.getRequestDispatcher("CheckerManageProduct").forward(request, response);
+        }
+        
         
     }
 
@@ -69,7 +92,25 @@ public class CheckerManageProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        DAO dao = new DAO();
+        String approve = request.getParameter("approve");
+        HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            if (a == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+                if(approve.equals("approve")){  
+                    dao.approveProduct(Integer.parseInt(id));
+                    response.sendRedirect("CheckerManageProduct");
+                }
+                else if(approve.equals("reject")){
+                    dao.deleteProduct(Integer.parseInt(id));
+                    response.sendRedirect("CheckerManageProduct");
+                }
+            }
+        
+        
     }
 
     /**

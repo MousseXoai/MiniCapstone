@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/controller/Login.java</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/web/WEB-INF/web.xml</file>
             <file>file:/D:/SWP391/Project/MiniCapstone/src/java/dal/DAO.java</file>
+=======
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/dal/DAO.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/ShopRefundConfirm.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/src/java/controller/Login.java</file>
+            <file>file:/G:/javaweb/SWP391/MiniCapstone/web/login.jsp</file>
+>>>>>>> b04066e3c8c59b2a58f9897df2c46b5406da2eb9
         </group>
     </open-files>
 </project-private>
