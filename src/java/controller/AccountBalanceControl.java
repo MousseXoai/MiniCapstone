@@ -70,10 +70,10 @@ public class AccountBalanceControl extends HttpServlet {
             int accountID = a.getuID();
             AccInfo accInfo= dao.getAccInfo(accountID);
             Account acc= dao.getAccById(accountID);
-            List<AccountBalance> listAccountBalanceToday= dao.getAccBalToday();
-            List<AccountBalance> listTopAccountBalance= dao.getTopAccBal();
-            List<AccountBalance> listTopAccountBalance12= dao.getTopAccBal12();
-            List<AccountBalance> listTopAccountBalance34= dao.getTopAccBal34();
+            List<AccountBalance> listAccountBalanceToday= dao.getAccBalToday(accountID);
+            List<AccountBalance> listTopAccountBalance= dao.getTopAccBal(accountID);
+            List<AccountBalance> listTopAccountBalance12= dao.getTopAccBal12(accountID);
+            List<AccountBalance> listTopAccountBalance34= dao.getTopAccBal34(accountID);
             List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
             List<LoaiAccBal> listLoaiAccBal= dao.getAllLoaiAccBal();
             

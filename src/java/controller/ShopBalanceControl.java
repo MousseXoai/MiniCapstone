@@ -74,10 +74,10 @@ public class ShopBalanceControl extends HttpServlet {
             int shopID= dao.getShopIdByAccountId(accountID);
             Shop shop= dao.getShopById1(shopID);
             Account acc= dao.getAccById(accountID);
-            List<ShopBalance> listShopBalanceToday= dao.getShopBalToday();
-            List<ShopBalance> listTopShopBalance= dao.getTopShopBal();
-            List<ShopBalance> listTopShopBalance123= dao.getTopShopBal123();
-            List<ShopBalance> listTopShopBalance45= dao.getTopShopBal45();
+            List<ShopBalance> listShopBalanceToday= dao.getShopBalToday(shopID);
+            List<ShopBalance> listTopShopBalance= dao.getTopShopBal(shopID);
+            List<ShopBalance> listTopShopBalance123= dao.getTopShopBal123(shopID);
+            List<ShopBalance> listTopShopBalance45= dao.getTopShopBal45(shopID);
             List<ThanhToanVNPAY> thanhToan= dao.getAllThanhToan();
             List<LoaiShopBal> listLoaiShopBal= dao.getAllLoaiShopBal();
             

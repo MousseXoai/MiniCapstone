@@ -5399,12 +5399,13 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public List<AccountBalance> getAccBalToday() {
+    public List<AccountBalance> getAccBalToday(int accountID) {
         List<AccountBalance> list = new ArrayList<>();
-        String query = "select * from AccountBalance where ngayXuat=?";
+        String query = "select * from AccountBalance where ngayXuat=? and accountID=?";
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
+            ps.setInt(2, accountID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5442,11 +5443,12 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccountBalance> getTopAccBal12() {
+    public List<AccountBalance> getTopAccBal12(int accountID) {
         List<AccountBalance> list = new ArrayList<>();
-        String query = "select top 4 * from AccountBalance where loaiid=1 or loaiid=2 order by accBalId desc";
+        String query = "select top 4 * from AccountBalance where (loaiid=1 or loaiid=2) and accountID=? order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5463,11 +5465,12 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccountBalance> getTopAccBal34() {
+    public List<AccountBalance> getTopAccBal34(int accountID) {
         List<AccountBalance> list = new ArrayList<>();
-        String query = "select top 4 * from AccountBalance where loaiid=3 or loaiid=4 order by accBalId desc";
+        String query = "select top 4 * from AccountBalance where (loaiid=3 or loaiid=4) and accountID=? order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, accountID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5484,12 +5487,13 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<AccountBalance> getTopAccBal() {
+    public List<AccountBalance> getTopAccBal(int accountID) {
         List<AccountBalance> list = new ArrayList<>();
-        String query = "select top 4 * from AccountBalance where ngayXuat!=? order by accBalId desc";
+        String query = "select top 4 * from AccountBalance where ngayXuat!=? and accountID=? order by accBalId desc";
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
+            ps.setInt(2, accountID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5563,11 +5567,12 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public List<ShopBalance> getTopShopBal123() {
+    public List<ShopBalance> getTopShopBal123(int shopID) {
         List<ShopBalance> list = new ArrayList<>();
-        String query = "select top 4 * from ShopBalance where loaiid=1 or loaiid=2 or loaiid=3 order by shopBalId desc";
+        String query = "select top 4 * from ShopBalance where (loaiid=1 or loaiid=2 or loaiid=3) and shopID=? order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5585,11 +5590,12 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<ShopBalance> getTopShopBal45() {
+    public List<ShopBalance> getTopShopBal45(int shopID) {
         List<ShopBalance> list = new ArrayList<>();
-        String query = "select top 4 * from ShopBalance where loaiid=4 or loaiid=5 order by shopBalId desc";
+        String query = "select top 4 * from ShopBalance where (loaiid=4 or loaiid=5) and shopID=? order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
+            ps.setInt(1, shopID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5607,12 +5613,13 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<ShopBalance> getShopBalToday() {
+    public List<ShopBalance> getShopBalToday(int shopID) {
         List<ShopBalance> list = new ArrayList<>();
-        String query = "select * from ShopBalance where ngayXuat=?";
+        String query = "select * from ShopBalance where ngayXuat=? and shopID=?";
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -5630,12 +5637,13 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<ShopBalance> getTopShopBal() {
+    public List<ShopBalance> getTopShopBal(int shopID) {
         List<ShopBalance> list = new ArrayList<>();
-        String query = "select top 4 * from ShopBalance where ngayXuat!=? order by shopBalId desc";
+        String query = "select top 4 * from ShopBalance where ngayXuat!=? and shopID=? order by shopBalId desc";
         try {
             ps = connection.prepareStatement(query);
             ps.setDate(1, getCurrentDate());
+            ps.setInt(2, shopID);
 
             rs = ps.executeQuery();
             while (rs.next()) {
